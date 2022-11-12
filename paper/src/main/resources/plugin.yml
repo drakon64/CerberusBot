@@ -1,0 +1,7 @@
+name: Tempest
+version: 0.0.1
+main: cloud.drakon.tempest.Tempest
+description: An example plugin
+author: Drakon
+website: https://github.com/drakon64/Tempest
+api-version: 1.19
