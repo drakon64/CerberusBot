@@ -1,4 +1,4 @@
-rootProject.name = "Tempest"
+rootProject.name = "TempestBot"
 
 include("lib")
 include("discord")

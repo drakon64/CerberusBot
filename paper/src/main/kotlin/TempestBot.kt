@@ -1,4 +1,4 @@
-package cloud.drakon.tempest
+package cloud.drakon.tempestbot
 
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
@@ -7,7 +7,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
 
-class Tempest : JavaPlugin(), Listener {
+class TempestBot : JavaPlugin(), Listener {
     override fun onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this)
     }

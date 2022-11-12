@@ -1,6 +1,6 @@
-name: Tempest
+name: TempestBot
 version: 0.0.1
-main: cloud.drakon.tempest.Tempest
+main: cloud.drakon.tempestbot.TempestBot
 description: An example plugin
 author: Drakon
 website: https://github.com/drakon64/Tempest
