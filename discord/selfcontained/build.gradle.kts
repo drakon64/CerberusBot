@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.7.21"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.21"
 }
 
 group = "cloud.drakon"
@@ -26,10 +27,20 @@ kotlin {
     //    }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-server-core:2.1.3")
+                implementation("io.ktor:ktor-server-cio:2.1.3")
+                implementation("io.ktor:ktor-server-content-negotiation:2.1.3")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.3")
+                implementation("ch.qos.logback:logback-classic:1.4.5")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation("io.ktor:ktor-server-test-host:2.1.3")
+                implementation("org.jetbrains.kotlin:kotlin-test-junit:1.7.21")
             }
         }
         val jvmMain by getting
