@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.7.21"
+    id("io.ktor.plugin") version "2.1.3"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.21"
 }
 
@@ -30,6 +31,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-server-core:2.1.3")
+                implementation("io.ktor:ktor-server-config-yaml:2.1.3")
                 implementation("io.ktor:ktor-server-cio:2.1.3")
                 implementation("io.ktor:ktor-server-content-negotiation:2.1.3")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.3")
@@ -48,5 +50,15 @@ kotlin {
 
         //        val jsMain by getting
         //        val jsTest by getting
+    }
+}
+
+application {
+    mainClass.set("cloud.drakon.tempestbot.ApplicationKt")
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("TempestBot-selfcontained.jar")
     }
 }
