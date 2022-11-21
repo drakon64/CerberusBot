@@ -5,3 +5,16 @@ description: An example plugin
 author: Drakon
 website: https://github.com/drakon64/Tempest
 api-version: 1.19
+
+permissions:
+  translate:
+    description: "This is a permission node"
+    default: op
+
+commands:
+  translate:
+    description: "This is a command"
+    usage: "/translate <Text> <TargetLanguageCode> <SourceLanguageCode>"
+    aliases: [ translate ]
+    permission: translate
+    permission-message: "You do not have permission to use this command"

@@ -26,7 +26,11 @@ kotlin {
     //    }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("aws.sdk.kotlin:translate:0.17.12-beta")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
