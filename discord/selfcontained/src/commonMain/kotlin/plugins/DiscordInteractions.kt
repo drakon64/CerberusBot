@@ -1,9 +1,16 @@
 package cloud.drakon.tempestbot.plugins
 
 import cloud.drakon.tempest.TempestClient
+import cloud.drakon.tempest.interaction.response.InteractionCallbackType
+import cloud.drakon.tempest.interaction.response.InteractionResponse
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.createApplicationPlugin
 import io.ktor.server.request.receiveText
+import io.ktor.server.response.respond
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 const val pluginName: String = "DiscordInteractionsPlugin"
 
@@ -21,14 +28,17 @@ val DiscordInteractionsPlugin = createApplicationPlugin(name = pluginName) {
             )
         }
 
-        if (call.request.headers["X-Signature-Timestamp"] != null && call.request.headers["X-Signature-Ed25519"] != null) {
+        val timestamp: String? = call.request.headers["X-Signature-Timestamp"]
+        val ed25519: String? = call.request.headers["X-Signature-Ed25519"]
+
+        if (timestamp != null && ed25519 != null) {
             if (! tempestClient.validateRequest(
-                    call.request.headers["X-Signature-Timestamp"] !!,
-                    call.receiveText(),
-                    call.request.headers["X-Signature-Ed25519"] !!
+                    timestamp, call.receiveText(), ed25519
                 )
             ) {
                 invalidRequestSignature()
+            } else if (Json.parseToJsonElement(call.receiveText()).jsonObject["type"] !!.jsonPrimitive.int == 1) {
+                call.respond(InteractionResponse(InteractionCallbackType.PONG))
             }
         } else {
             invalidRequestSignature()
