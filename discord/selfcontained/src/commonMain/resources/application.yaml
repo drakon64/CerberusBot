@@ -4,3 +4,7 @@ ktor:
       - cloud.drakon.tempestbot.ApplicationKt.module
   deployment:
     port: 8080
+tempestbot:
+  application_id:
+  bot_token:
+  public_key:

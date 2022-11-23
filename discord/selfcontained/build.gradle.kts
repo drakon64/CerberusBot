@@ -9,12 +9,13 @@ version = "0.0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 kotlin {
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            kotlinOptions.jvmTarget = "17"
         }
         withJava()
         testRuns["test"].executionTask.configure {
@@ -36,6 +37,8 @@ kotlin {
                 implementation("io.ktor:ktor-server-content-negotiation:2.1.3")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.3")
                 implementation("ch.qos.logback:logback-classic:1.4.5")
+
+                implementation("cloud.drakon:tempest:0.0.1-SNAPSHOT")
             }
         }
         val commonTest by getting {
