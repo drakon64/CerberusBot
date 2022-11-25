@@ -12,13 +12,12 @@ import io.ktor.server.routing.routing
 fun Application.configureRouting() {
     routing {
         route("/") {
-            this@configureRouting.install(DiscordInteractionsPlugin)
             post {
-
+                this@configureRouting.install(DiscordInteractionsPlugin)
             }
-        }
-        get("/healthcheck") {
-            call.response.status(HttpStatusCode.OK)
+            get {
+                call.response.status(HttpStatusCode.OK)
+            }
         }
     }
 }
