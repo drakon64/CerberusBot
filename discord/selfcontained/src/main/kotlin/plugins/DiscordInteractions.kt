@@ -27,6 +27,7 @@ val DiscordInteractionsPlugin = createApplicationPlugin(name = pluginName) {
             call.response.status(
                 HttpStatusCode(401, "invalid request signature")
             )
+            println("Invalid request signature")
         }
 
         val timestamp: String? = call.request.headers["X-Signature-Timestamp"]
@@ -42,6 +43,7 @@ val DiscordInteractionsPlugin = createApplicationPlugin(name = pluginName) {
                 invalidRequestSignature()
             } else if (Json.parseToJsonElement(body).jsonObject["type"] !!.jsonPrimitive.int == InteractionType.PING.toInt()) {
                 call.respond(InteractionResponse(InteractionCallbackType.PONG))
+                println("Received PING")
             }
         } else {
             invalidRequestSignature()
