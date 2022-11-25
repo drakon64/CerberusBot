@@ -15,8 +15,6 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":common"))
-
     implementation("io.ktor:ktor-server-core:2.1.3")
     implementation("io.ktor:ktor-server-config-yaml:2.1.3")
     implementation("io.ktor:ktor-server-cio:2.1.3")
