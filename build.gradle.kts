@@ -31,12 +31,6 @@ application {
     mainClass.set("cloud.drakon.tempestbot.ApplicationKt")
 }
 
-ktor {
-    fatJar {
-        archiveFileName.set("TempestBot-selfcontained.jar")
-    }
-}
-
 tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "11"
