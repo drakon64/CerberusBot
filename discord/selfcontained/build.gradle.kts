@@ -41,7 +41,7 @@ ktor {
 
 tasks {
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions.jvmTarget = "11"
     }
     test {
         useJUnitPlatform()
