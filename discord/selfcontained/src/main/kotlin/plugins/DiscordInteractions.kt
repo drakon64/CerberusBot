@@ -1,13 +1,13 @@
 package cloud.drakon.tempestbot.plugins
 
 import cloud.drakon.tempest.TempestClient
+import cloud.drakon.tempest.interaction.InteractionType
 import cloud.drakon.tempest.interaction.response.InteractionCallbackType
 import cloud.drakon.tempest.interaction.response.InteractionResponse
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.createApplicationPlugin
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
@@ -40,15 +40,8 @@ val DiscordInteractionsPlugin = createApplicationPlugin(name = pluginName) {
                 )
             ) {
                 invalidRequestSignature()
-            } else {
-                if (Json.parseToJsonElement(body).jsonObject["type"] !!.jsonPrimitive.int == 1) {
-                    println(
-                        Json.encodeToString(
-                            InteractionResponse(InteractionCallbackType.PONG)
-                        )
-                    )
-                    call.respond(InteractionResponse(InteractionCallbackType.PONG))
-                }
+            } else if (Json.parseToJsonElement(body).jsonObject["type"] !!.jsonPrimitive.int == InteractionType.PING.toInt()) {
+                call.respond(InteractionResponse(InteractionCallbackType.PONG))
             }
         } else {
             invalidRequestSignature()
