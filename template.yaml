@@ -9,7 +9,7 @@ Resources:
   TempestBotDeferFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: Defer
+      CodeUri: sam/defer
       Handler: cloud.drakon.tempestbot.defer.Handler::handleRequest
       Runtime: java11
       Architectures:
@@ -19,9 +19,12 @@ Resources:
       Environment:
         Variables:
           APPLICATION_ID:
+            Ref: ApplicationIDParameter
           BOT_TOKEN:
+            Ref: BotTokenParameter
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
           PUBLIC_KEY:
+            Ref: PublicKeyParameter
       Events:
         DiscordInteraction:
           Type: Api
@@ -39,3 +42,14 @@ Outputs:
   TempestBotDeferFunctionIamRole:
     Description: "Implicit IAM Role created for TempestBot Defer function"
     Value: !GetAtt TempestBotDeferFunctionRole.Arn
+
+Parameters:
+  ApplicationIDParameter:
+    Type: String
+    NoEcho: True
+  BotTokenParameter:
+    Type: String
+    NoEcho: True
+  PublicKeyParameter:
+    Type: String
+    NoEcho: True
