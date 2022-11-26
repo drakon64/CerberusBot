@@ -37,19 +37,32 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
             logger.log("Invalid request signature")
 
             response.statusCode = 401
-        } else if (Json.parseToJsonElement(event.body).jsonObject["type"] !!.jsonPrimitive.int == InteractionType.PING.toInt()) {
-            logger.log("Received PING")
+        } else when (Json.parseToJsonElement(event.body).jsonObject["type"] !!.jsonPrimitive.int) {
+            InteractionType.PING.toInt() -> {
+                logger.log("Received PING")
 
-            response.body =
-                Json.encodeToString(InteractionResponse(InteractionCallbackType.PONG))
-            response.statusCode = 200
-        } else {
-            logger.log("Deferring channel message")
+                response.body =
+                    Json.encodeToString(InteractionResponse(InteractionCallbackType.PONG))
+                response.statusCode = 200
+            }
 
-            response.headers = mapOf("Content-Type" to "application/json")
-            response.body =
-                Json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE))
-            response.statusCode = 200
+            InteractionType.APPLICATION_COMMAND.toInt(), InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE.toInt() -> {
+                logger.log("Deferring channel message")
+
+                response.headers = mapOf("Content-Type" to "application/json")
+                response.body =
+                    Json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE))
+                response.statusCode = 200
+            }
+
+            InteractionType.MESSAGE_COMPONENT.toInt(), InteractionType.MODAL_SUBMIT.toInt() -> {
+                logger.log("Deferring update message")
+
+                response.headers = mapOf("Content-Type" to "application/json")
+                response.body =
+                    Json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_UPDATE_MESSAGE))
+                response.statusCode = 200
+            }
         }
 
         return response
