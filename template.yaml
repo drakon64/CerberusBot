@@ -13,7 +13,7 @@ Resources:
       Handler: cloud.drakon.tempestbot.defer.Handler::handleRequest
       Runtime: java11
       Architectures:
-        - x86_64
+        - arm64
       MemorySize: 512
       Timeout: 3
       Environment:
