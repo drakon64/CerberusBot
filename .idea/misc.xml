@@ -5,4 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/sam/commands/translate" />
     <file type="web" url="file://$PROJECT_DIR$/sam/defer" />
   </component>
+  <component name="ProjectRootManager" version="2" default="true">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
 </project>
