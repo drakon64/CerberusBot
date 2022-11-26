@@ -20,7 +20,7 @@ private val tempestClient = TempestClient(
     System.getenv("PUBLIC_KEY")
 )
 
-class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
+class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     override fun handleRequest(
         event: APIGatewayV2HTTPEvent,
         context: Context,
