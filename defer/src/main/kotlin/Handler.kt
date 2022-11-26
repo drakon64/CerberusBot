@@ -14,6 +14,12 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
+private val tempestClient = TempestClient(
+    System.getenv("APPLICATION_ID"),
+    System.getenv("BOT_TOKEN"),
+    System.getenv("PUBLIC_KEY")
+)
+
 class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     override fun handleRequest(
         event: APIGatewayV2HTTPEvent,
@@ -21,12 +27,6 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
     ): APIGatewayV2HTTPResponse {
         val logger = context.logger
         val response = APIGatewayV2HTTPResponse()
-
-        val tempestClient = TempestClient(
-            System.getenv("APPLICATION_ID"),
-            System.getenv("BOT_TOKEN"),
-            System.getenv("PUBLIC_KEY")
-        )
 
         if (! tempestClient.validateRequest(
                 event.headers["x-signature-timestamp"] !!,
