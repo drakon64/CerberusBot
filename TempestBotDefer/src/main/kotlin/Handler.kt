@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot
+package cloud.drakon.tempestbot.defer
 
 import cloud.drakon.tempest.TempestClient
 import cloud.drakon.tempest.interaction.InteractionType
