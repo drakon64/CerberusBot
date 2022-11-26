@@ -43,6 +43,13 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
             response.body =
                 Json.encodeToString(InteractionResponse(InteractionCallbackType.PONG))
             response.statusCode = 200
+        } else {
+            logger.log("Deferring channel message")
+
+            response.headers = mapOf("Content-Type" to "application/json")
+            response.body =
+                Json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE))
+            response.statusCode = 200
         }
 
         return response
