@@ -31,23 +31,6 @@ Resources:
           Properties:
             Path: /
             Method: post
-  TempestBotTranslateFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: sam/commands/translate
-      Handler: cloud.drakon.tempestbot.commands.translate.Handler::handleRequest
-      Runtime: java11
-      Architectures:
-        - arm64
-      MemorySize: 512
-      Environment:
-        Variables:
-          APPLICATION_ID:
-            Ref: ApplicationIDParameter
-          BOT_TOKEN:
-            Ref: BotTokenParameter
-          PUBLIC_KEY:
-            Ref: PublicKeyParameter
 
 Outputs:
   TempestBot:
