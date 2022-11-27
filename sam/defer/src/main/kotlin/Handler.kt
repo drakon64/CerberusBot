@@ -20,6 +20,7 @@ private val tempestClient = TempestClient(
     System.getenv("BOT_TOKEN"),
     System.getenv("PUBLIC_KEY")
 )
+private val headers = mapOf("Content-Type" to "application/json")
 
 class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     override fun handleRequest(
@@ -50,7 +51,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
             InteractionType.APPLICATION_COMMAND.toInt(), InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE.toInt() -> {
                 logger.log("Deferring channel message")
 
-                response.headers = mapOf("Content-Type" to "application/json")
+                response.headers = headers
                 response.body =
                     Json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE))
                 response.statusCode = 200
@@ -59,7 +60,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
             InteractionType.MESSAGE_COMPONENT.toInt(), InteractionType.MODAL_SUBMIT.toInt() -> {
                 logger.log("Deferring update message")
 
-                response.headers = mapOf("Content-Type" to "application/json")
+                response.headers = headers
                 response.body =
                     Json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_UPDATE_MESSAGE))
                 response.statusCode = 200
