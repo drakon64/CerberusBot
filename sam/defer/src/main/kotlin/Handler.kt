@@ -39,6 +39,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
             logger.log("Invalid request signature")
 
             response.statusCode = 401
+            return@runBlocking response
         } else when (Json.parseToJsonElement(event.body).jsonObject["type"] !!.jsonPrimitive.int) {
             InteractionType.PING.toInt() -> {
                 logger.log("Received PING")
