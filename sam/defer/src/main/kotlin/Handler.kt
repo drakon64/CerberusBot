@@ -8,6 +8,7 @@ import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.int
@@ -24,7 +25,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     override fun handleRequest(
         event: APIGatewayV2HTTPEvent,
         context: Context,
-    ): APIGatewayV2HTTPResponse {
+    ): APIGatewayV2HTTPResponse = runBlocking {
         val logger = context.logger
         val response = APIGatewayV2HTTPResponse()
 
@@ -65,6 +66,6 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
             }
         }
 
-        return response
+        return@runBlocking response
     }
 }
