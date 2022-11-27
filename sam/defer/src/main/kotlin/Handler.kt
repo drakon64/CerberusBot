@@ -1,5 +1,9 @@
 package cloud.drakon.tempestbot.defer
 
+import aws.sdk.kotlin.services.lambda.LambdaClient
+import aws.sdk.kotlin.services.lambda.model.InvocationType
+import aws.sdk.kotlin.services.lambda.model.InvokeRequest
+import aws.sdk.kotlin.services.lambda.model.LogType
 import cloud.drakon.tempest.TempestClient
 import cloud.drakon.tempest.interaction.InteractionType
 import cloud.drakon.tempest.interaction.response.InteractionCallbackType
@@ -22,6 +26,8 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
         System.getenv("PUBLIC_KEY")
     )
     private val headers = mapOf("Content-Type" to "application/json")
+    private val lambdaClient = LambdaClient { region = System.getenv("AWS_REGION") }
+    private val interactFunctionName = System.getenv("INTERACT_FUNCTION")
 
     override fun handleRequest(
         event: APIGatewayV2HTTPEvent,
@@ -67,6 +73,13 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
                 response.statusCode = 200
             }
         }
+
+        lambdaClient.invoke(InvokeRequest {
+            functionName = interactFunctionName
+            logType = LogType.None
+            payload = event.body.toByteArray()
+            invocationType = InvocationType.Event
+        })
 
         return@runBlocking response
     }

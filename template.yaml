@@ -22,6 +22,7 @@ Resources:
             Ref: ApplicationIDParameter
           BOT_TOKEN:
             Ref: BotTokenParameter
+          INTERACT_FUNCTION: !Ref TempestBotInteractFunction
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
           PUBLIC_KEY:
             Ref: PublicKeyParameter
@@ -31,17 +32,46 @@ Resources:
           Properties:
             Path: /
             Method: post
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: !Ref TempestBotInteractFunction
+  TempestBotInteractFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: sam/interact
+      Handler: cloud.drakon.tempestbot.interact.Handler::handleRequest
+      Runtime: java11
+      Architectures:
+        - arm64
+      MemorySize: 512
+      Timeout: 900
+      Environment:
+        Variables:
+          APPLICATION_ID:
+            Ref: ApplicationIDParameter
+          BOT_TOKEN:
+            Ref: BotTokenParameter
+          PUBLIC_KEY:
+            Ref: PublicKeyParameter
 
 Outputs:
   TempestBot:
     Description: "API Gateway endpoint URL for TempestBot Defer function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+
   TempestBotDeferFunction:
     Description: "TempestBot Defer Lambda Function ARN"
     Value: !GetAtt TempestBotDeferFunction.Arn
   TempestBotDeferFunctionIamRole:
     Description: "Implicit IAM Role created for TempestBot Defer function"
     Value: !GetAtt TempestBotDeferFunctionRole.Arn
+
+  TempestBotInteractFunction:
+    Description: "TempestBot Interact Lambda Function ARN"
+    Value: !GetAtt TempestBotInteractFunction.Arn
+  TempestBotInteractFunctionIamRole:
+    Description: "Implicit IAM Role created for TempestBot Interact function"
+    Value: !GetAtt TempestBotInteractFunctionRole.Arn
 
 Parameters:
   ApplicationIDParameter:

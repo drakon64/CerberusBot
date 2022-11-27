@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/sam/commands/translate" />
     <file type="web" url="file://$PROJECT_DIR$/sam/defer" />
+    <file type="web" url="file://$PROJECT_DIR$/sam/interact" />
   </component>
   <component name="ProjectRootManager" version="2" default="true">
     <output url="file://$PROJECT_DIR$/out" />
