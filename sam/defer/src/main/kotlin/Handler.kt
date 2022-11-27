@@ -15,14 +15,14 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-private val tempestClient = TempestClient(
-    System.getenv("APPLICATION_ID"),
-    System.getenv("BOT_TOKEN"),
-    System.getenv("PUBLIC_KEY")
-)
-private val headers = mapOf("Content-Type" to "application/json")
-
 class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
+    private val tempestClient = TempestClient(
+        System.getenv("APPLICATION_ID"),
+        System.getenv("BOT_TOKEN"),
+        System.getenv("PUBLIC_KEY")
+    )
+    private val headers = mapOf("Content-Type" to "application/json")
+
     override fun handleRequest(
         event: APIGatewayV2HTTPEvent,
         context: Context,
