@@ -53,6 +53,14 @@ Resources:
             Ref: BotTokenParameter
           PUBLIC_KEY:
             Ref: PublicKeyParameter
+      Policies:
+        - Statement:
+            - Sid: Translate
+              Effect: Allow
+              Action:
+                - translate:TranslateText
+                - comprehend:DetectDominantLanguage
+              Resource: "*"
 
 Outputs:
   TempestBot:

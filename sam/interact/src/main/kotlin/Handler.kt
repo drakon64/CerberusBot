@@ -2,40 +2,49 @@ package cloud.drakon.tempestbot.interact
 
 import cloud.drakon.tempest.TempestClient
 import cloud.drakon.tempest.interaction.Interaction
+import cloud.drakon.tempest.interaction.InteractionJsonSerializer
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.tempest.webbook.EditWebhookMessage
+import cloud.drakon.tempestbot.interact.commands.translate
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import java.io.InputStream
 import java.io.OutputStream
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromStream
 
 class Handler: RequestStreamHandler {
-    private val tempestClient = TempestClient(
-        System.getenv("APPLICATION_ID"),
-        System.getenv("BOT_TOKEN"),
-        System.getenv("PUBLIC_KEY")
-    )
+    companion object {
+        val tempestClient = TempestClient(
+            System.getenv("APPLICATION_ID"),
+            System.getenv("BOT_TOKEN"),
+            System.getenv("PUBLIC_KEY")
+        )
+        val region: String = System.getenv("AWS_REGION")
+    }
+
     private val json = Json {
         ignoreUnknownKeys = true
     }
-
-    //    private val translateClient =
-    //        TranslateClient { region = System.getenv("AWS_REGION") }
 
     override fun handleRequest(
         inputStream: InputStream,
         outputStream: OutputStream,
         context: Context,
-    ): Unit = runBlocking {
-        val event: Interaction<ApplicationCommandData> =
-            json.decodeFromStream(inputStream)
+    ) = runBlocking {
         val logger = context.logger
 
-        tempestClient.editOriginalInteractionResponse(
-            EditWebhookMessage(content = "test"), event.token
+        val event: Interaction<*> = json.decodeFromString(
+            InteractionJsonSerializer, inputStream.readAllBytes().decodeToString()
         )
+
+        when (event.data) {
+            is ApplicationCommandData -> {
+                val applicationCommand: Interaction<ApplicationCommandData> =
+                    event as Interaction<ApplicationCommandData>
+                when (applicationCommand.data !!.name) {
+                    "translate" -> translate(applicationCommand)
+                }
+            }
+        }
     }
 }
