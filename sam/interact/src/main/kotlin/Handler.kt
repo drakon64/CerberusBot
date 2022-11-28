@@ -18,6 +18,9 @@ class Handler: RequestStreamHandler {
         System.getenv("BOT_TOKEN"),
         System.getenv("PUBLIC_KEY")
     )
+    private val json = Json {
+        ignoreUnknownKeys = true
+    }
 
     //    private val translateClient =
     //        TranslateClient { region = System.getenv("AWS_REGION") }
@@ -27,9 +30,8 @@ class Handler: RequestStreamHandler {
         outputStream: OutputStream,
         context: Context,
     ): Unit = runBlocking {
-        val event: Interaction<ApplicationCommandData> = Json {
-            ignoreUnknownKeys = true
-        }.decodeFromStream(inputStream)
+        val event: Interaction<ApplicationCommandData> =
+            json.decodeFromStream(inputStream)
         val logger = context.logger
 
         tempestClient.editOriginalInteractionResponse(
