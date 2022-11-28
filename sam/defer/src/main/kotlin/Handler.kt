@@ -25,6 +25,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
         System.getenv("BOT_TOKEN"),
         System.getenv("PUBLIC_KEY")
     )
+    private val json = Json
     private val headers = mapOf("Content-Type" to "application/json")
     private val lambdaClient = LambdaClient { region = System.getenv("AWS_REGION") }
     private val interactFunctionName = System.getenv("INTERACT_FUNCTION")
@@ -46,12 +47,12 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
 
             response.statusCode = 401
             return@runBlocking response
-        } else when (Json.parseToJsonElement(event.body).jsonObject["type"] !!.jsonPrimitive.int) {
+        } else when (json.parseToJsonElement(event.body).jsonObject["type"] !!.jsonPrimitive.int) {
             InteractionType.PING.toInt() -> {
                 logger.log("Received PING")
 
                 response.body =
-                    Json.encodeToString(InteractionResponse(InteractionCallbackType.PONG))
+                    json.encodeToString(InteractionResponse(InteractionCallbackType.PONG))
                 response.statusCode = 200
             }
 
@@ -60,7 +61,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
 
                 response.headers = headers
                 response.body =
-                    Json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE))
+                    json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE))
                 response.statusCode = 200
             }
 
@@ -69,7 +70,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
 
                 response.headers = headers
                 response.body =
-                    Json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_UPDATE_MESSAGE))
+                    json.encodeToString(InteractionResponse(InteractionCallbackType.DEFERRED_UPDATE_MESSAGE))
                 response.statusCode = 200
             }
         }
