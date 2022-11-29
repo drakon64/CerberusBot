@@ -47,7 +47,7 @@ Resources:
       Runtime: java11
       Architectures:
         - arm64
-      MemorySize: 512
+      MemorySize: 1536
       Timeout: 900
       Environment:
         Variables:
