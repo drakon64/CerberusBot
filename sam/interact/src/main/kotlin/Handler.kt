@@ -22,9 +22,7 @@ class Handler: RequestStreamHandler {
         val region: String = System.getenv("AWS_REGION")
     }
 
-    private val json = Json {
-        ignoreUnknownKeys = true
-    }
+    private val json = Json
 
     override fun handleRequest(
         inputStream: InputStream,
