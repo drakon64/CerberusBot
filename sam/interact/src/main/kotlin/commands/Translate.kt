@@ -12,11 +12,22 @@ suspend fun translate(event: Interaction<ApplicationCommandData>) {
     lateinit var to: String
     var from = "auto"
 
-    for (i in event.data !!.options !!) {
-        when (i.name) {
-            "message" -> message = i.value !!
-            "to" -> to = i.value !!
-            "from" -> from = i.value !!
+    when (event.data !!.type.toInt()) {
+        1 -> {
+            for (i in event.data !!.options !!) {
+                when (i.name) {
+                    "message" -> message = i.value !!
+                    "to" -> to = i.value !!
+                    "from" -> from = i.value !!
+                }
+            }
+        }
+
+        3 -> {
+            for (i in event.data !!.resolved !!.messages !!) {
+                message = event.data !!.resolved !!.messages !![i.key] !!.content
+            }
+            to = event.locale !!
         }
     }
 
