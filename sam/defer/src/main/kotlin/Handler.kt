@@ -54,6 +54,8 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
                 response.body =
                     json.encodeToString(InteractionResponse(InteractionCallbackType.PONG))
                 response.statusCode = 200
+
+                return@runBlocking response
             }
 
             InteractionType.APPLICATION_COMMAND.toInt(), InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE.toInt() -> {
