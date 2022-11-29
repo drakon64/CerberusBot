@@ -10,7 +10,7 @@ import cloud.drakon.tempestbot.interact.Handler
 suspend fun translate(event: Interaction<ApplicationCommandData>) {
     lateinit var message: String
     lateinit var to: String
-    var from: String? = null
+    var from = "auto"
 
     for (i in event.data !!.options !!) {
         when (i.name) {
@@ -20,21 +20,12 @@ suspend fun translate(event: Interaction<ApplicationCommandData>) {
         }
     }
 
-    val translation: String = when {
-        from != null -> TranslateClient.invoke { region = Handler.region }
+    Handler.tempestClient.editOriginalInteractionResponse(
+        EditWebhookMessage(content = TranslateClient.invoke { region = Handler.region }
             .translateText {
                 text = message
                 targetLanguageCode = to
                 sourceLanguageCode = from
-            }.translatedText !!
-
-        else -> TranslateClient.invoke { }.translateText {
-            text = message
-            targetLanguageCode = to
-        }.translatedText !!
-    }
-
-    Handler.tempestClient.editOriginalInteractionResponse(
-        EditWebhookMessage(content = translation), event.token
+            }.translatedText), event.token
     )
 }
