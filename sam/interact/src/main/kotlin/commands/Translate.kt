@@ -31,12 +31,17 @@ suspend fun translate(event: Interaction<ApplicationCommandData>) {
         }
     }
 
+    val translation = TranslateClient.invoke { region = Handler.region }.translateText {
+        text = message
+        targetLanguageCode = to
+        sourceLanguageCode = from
+    }
+
+    val translatedMessage: String = if (from == "auto") {
+        "${translation.sourceLanguageCode}: ${translation.translatedText}"
+    } else (translation.translatedText !!)
+
     Handler.tempestClient.editOriginalInteractionResponse(
-        EditWebhookMessage(content = TranslateClient.invoke { region = Handler.region }
-            .translateText {
-                text = message
-                targetLanguageCode = to
-                sourceLanguageCode = from
-            }.translatedText), event.token
+        EditWebhookMessage(content = translatedMessage), event.token
     )
 }
