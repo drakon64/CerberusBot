@@ -33,8 +33,12 @@ Resources:
             Path: /
             Method: post
       Policies:
-        - LambdaInvokePolicy:
-            FunctionName: !Ref TempestBotInteractFunction
+        - Statement:
+            - Sid: Translate
+              Effect: Allow
+              Action:
+                - lambda:InvokeFunction
+              Resource: !GetAtt TempestBotInteractFunction.Arn
   TempestBotInteractFunction:
     Type: AWS::Serverless::Function
     Properties:
