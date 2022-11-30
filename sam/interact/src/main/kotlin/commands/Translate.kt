@@ -6,8 +6,14 @@ import cloud.drakon.tempest.interaction.Interaction
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempest.webbook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
+import com.amazonaws.services.lambda.runtime.LambdaLogger
 
-suspend fun translate(event: Interaction<ApplicationCommandData>) {
+suspend fun translate(
+    event: Interaction<ApplicationCommandData>,
+    logger: LambdaLogger,
+) {
+    logger.log("Responding to Translate command")
+
     lateinit var message: String
     lateinit var to: String
     var from = "auto"
@@ -25,6 +31,8 @@ suspend fun translate(event: Interaction<ApplicationCommandData>) {
             message = event.data !!.resolved !!.messages !!.values.first().content
             to = event.locale !!
         }
+
+        else -> logger.log("Unknown application command type: " + event.data !!.type)
     }
 
     val translation = TranslateClient.invoke { region = Handler.region }.translateText {

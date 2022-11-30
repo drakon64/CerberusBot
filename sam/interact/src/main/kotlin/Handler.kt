@@ -40,7 +40,7 @@ class Handler: RequestStreamHandler {
                 val applicationCommand: Interaction<ApplicationCommandData> =
                     event as Interaction<ApplicationCommandData>
                 when (applicationCommand.data !!.name) {
-                    "translate", "Translate" -> translate(applicationCommand)
+                    "translate", "Translate" -> translate(applicationCommand, logger)
                     else -> {
                         logger.log("Unknown command: " + event.data !!.name)
                     }
