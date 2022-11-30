@@ -13,13 +13,11 @@ suspend fun translate(event: Interaction<ApplicationCommandData>) {
     var from = "auto"
 
     when (event.data !!.type.toInt()) {
-        1 -> {
-            for (i in event.data !!.options !!) {
-                when (i.name) {
-                    "message" -> message = i.value !!
-                    "to" -> to = i.value !!
-                    "from" -> from = i.value !!
-                }
+        1 -> for (i in event.data !!.options !!) {
+            when (i.name) {
+                "message" -> message = i.value !!
+                "to" -> to = i.value !!
+                "from" -> from = i.value !!
             }
         }
 
