@@ -24,9 +24,7 @@ suspend fun translate(event: Interaction<ApplicationCommandData>) {
         }
 
         3 -> {
-            for (i in event.data !!.resolved !!.messages !!) {
-                message = event.data !!.resolved !!.messages !![i.key] !!.content
-            }
+            message = event.data !!.resolved !!.messages !!.values.first().content
             to = event.locale !!
         }
     }
