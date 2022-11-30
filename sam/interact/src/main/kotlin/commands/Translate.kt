@@ -43,7 +43,7 @@ suspend fun translate(
 
     val translatedMessage: String = if (from == "auto") {
         "${translation.sourceLanguageCode}: ${translation.translatedText}"
-    } else (translation.translatedText !!)
+    } else translation.translatedText !!
 
     Handler.tempestClient.editOriginalInteractionResponse(
         EditWebhookMessage(content = translatedMessage), event.token
