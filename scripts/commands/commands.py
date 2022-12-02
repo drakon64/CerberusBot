@@ -39,6 +39,32 @@ application_commands = (
         "dm_permission": False,
         "type": 3,
     },
+    {
+        "name": "universalis",
+        "description": "Get Final Fantasy XIV market board item information",
+        "default_member_permissions": 0,
+        "type": 1,
+        "options": [
+            {
+                "name": "item",
+                "description": "The item to search for",
+                "type": 3,
+                "required": True,
+            },
+            {
+                "name": "world",
+                "description": "The World/Data Center/Region to search",
+                "type": 3,
+                "required": True,
+            },
+            {
+                "name": "high quality",
+                "description": "Only show high quality items",
+                "type": 5,
+                "required": False,
+            },
+        ],
+    },
 )
 
 application_id = commands["application_id"]
