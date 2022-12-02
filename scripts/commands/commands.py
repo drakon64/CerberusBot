@@ -92,6 +92,32 @@ for command in application_commands:
                     "description_localizations"
                 ] = description_localizations
 
+        if "options" in sub_command_or_group:
+            for sub_command in sub_command_or_group["options"]:
+                name_localizations = {}
+                description_localizations = {}
+
+                for language in languages:
+                    name_localizations.update(
+                        {
+                            language["discord"]: translate_text(
+                                sub_command["name"], language["aws"]
+                            )
+                        }
+                    )
+                    if "description" in sub_command:
+                        description_localizations.update(
+                            {
+                                language["discord"]: translate_text(
+                                    sub_command["description"], language["aws"]
+                                )
+                            }
+                        )
+                sub_command["name_localizations"] = name_localizations
+
+                if "description" in sub_command:
+                    sub_command["description_localizations"] = description_localizations
+
 print(json.dumps(application_commands, indent=4))
 
 commands_put = requests.put(
