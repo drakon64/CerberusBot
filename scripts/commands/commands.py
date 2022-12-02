@@ -44,19 +44,53 @@ application_commands = (
 application_id = commands["application_id"]
 bot_token = commands["bot_token"]
 
-for i in application_commands:
+for command in application_commands:
     name_localizations = {}
     description_localizations = {}
-    for j in languages:
-        name_localizations.update({j["discord"]: translate_text(i["name"], j["aws"])})
-        if "description" in i:
+    for language in languages:
+        name_localizations.update(
+            {language["discord"]: translate_text(command["name"], language["aws"])}
+        )
+        if "description" in command:
             description_localizations.update(
-                {j["discord"]: translate_text(i["description"], j["aws"])}
+                {
+                    language["discord"]: translate_text(
+                        command["description"], language["aws"]
+                    )
+                }
             )
+    command["name_localizations"] = name_localizations
 
-    i["name_localizations"] = name_localizations
-    if "description" in i:
-        i["description_localizations"] = description_localizations
+    if "description" in command:
+        command["description_localizations"] = description_localizations
+
+    if "options" in command:
+        for sub_command_or_group in command["options"]:
+            name_localizations = {}
+            description_localizations = {}
+
+            for language in languages:
+                name_localizations.update(
+                    {
+                        language["discord"]: translate_text(
+                            sub_command_or_group["name"], language["aws"]
+                        )
+                    }
+                )
+                if "description" in sub_command_or_group:
+                    description_localizations.update(
+                        {
+                            language["discord"]: translate_text(
+                                sub_command_or_group["description"], language["aws"]
+                            )
+                        }
+                    )
+            sub_command_or_group["name_localizations"] = name_localizations
+
+            if "description" in sub_command_or_group:
+                sub_command_or_group[
+                    "description_localizations"
+                ] = description_localizations
 
 print(json.dumps(application_commands, indent=4))
 
