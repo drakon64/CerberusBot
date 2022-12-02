@@ -18,7 +18,7 @@ suspend fun translate(
     lateinit var to: String
     var from = "auto"
 
-    when (event.data !!.type.toInt()) {
+    when (event.data !!.type) {
         1 -> for (i in event.data !!.options !!) {
             when (i.name) {
                 "message" -> message = i.value !!
