@@ -4,6 +4,7 @@ import cloud.drakon.tempest.TempestClient
 import cloud.drakon.tempest.interaction.Interaction
 import cloud.drakon.tempest.interaction.InteractionJsonSerializer
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
 import cloud.drakon.tempestbot.interact.commands.translate
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
@@ -41,6 +42,7 @@ class Handler: RequestStreamHandler {
                     event as Interaction<ApplicationCommandData>
                 when (applicationCommand.data !!.name) {
                     "translate", "Translate" -> translate(applicationCommand, logger)
+                    "universalis" -> universalis(applicationCommand, logger)
                     else -> {
                         logger.log("Unknown command: " + event.data !!.name)
                     }
