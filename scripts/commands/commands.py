@@ -48,9 +48,27 @@ for command in application_commands:
     name_localizations = {}
     description_localizations = {}
     for language in languages:
-        name_localizations.update(
-            {language["discord"]: translate_text(command["name"], language["aws"])}
-        )
+        if command["type"] == 1:
+            name_localizations.update(
+                {
+                    language["discord"]: translate_text(
+                        command["name"], language["aws"]
+                    )
+                    .replace(" ", "_")
+                    .replace("...", "")
+                    .lower()
+                }
+            )
+        else:
+            name_localizations.update(
+                {
+                    language["discord"]: translate_text(
+                        command["name"], language["aws"]
+                    )
+                    .replace(" ", "_")
+                    .replace("...", "")
+                }
+            )
         if "description" in command:
             description_localizations.update(
                 {
@@ -60,6 +78,7 @@ for command in application_commands:
                 }
             )
     command["name_localizations"] = name_localizations
+    command["name"] = command["name"].replace(" ", "_")
 
     if "description" in command:
         command["description_localizations"] = description_localizations
@@ -75,6 +94,9 @@ for command in application_commands:
                         language["discord"]: translate_text(
                             sub_command_or_group["name"], language["aws"]
                         )
+                        .replace(" ", "_")
+                        .replace("...", "")
+                        .lower()
                     }
                 )
                 if "description" in sub_command_or_group:
@@ -86,6 +108,9 @@ for command in application_commands:
                         }
                     )
             sub_command_or_group["name_localizations"] = name_localizations
+            sub_command_or_group["name"] = sub_command_or_group["name"].replace(
+                " ", "_"
+            )
 
             if "description" in sub_command_or_group:
                 sub_command_or_group[
@@ -103,6 +128,9 @@ for command in application_commands:
                             language["discord"]: translate_text(
                                 sub_command["name"], language["aws"]
                             )
+                            .replace(" ", "_")
+                            .replace("...", "")
+                            .lower()
                         }
                     )
                     if "description" in sub_command:
@@ -114,15 +142,15 @@ for command in application_commands:
                             }
                         )
                 sub_command["name_localizations"] = name_localizations
+                sub_command["name"] = sub_command["name"].replace(" ", "_")
 
                 if "description" in sub_command:
                     sub_command["description_localizations"] = description_localizations
 
-print(json.dumps(application_commands, indent=4))
-
 commands_put = requests.put(
     f"https://discord.com/api/v10/applications/{application_id}/commands",
-    headers={"Authorization": f"Bot {bot_token}"},
-    json=application_commands,
+    headers={"Authorization": f"Bot {bot_token}", "Content-Type": "application/json"},
+    data=json.dumps(application_commands, ensure_ascii=False).encode("utf-8"),
 )
-print(commands_put.status_code, commands_put.content)
+discord = json.loads(bytes.decode(commands_put.content))
+print(json.dumps(discord, indent=4))
