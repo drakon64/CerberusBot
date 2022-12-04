@@ -19,7 +19,11 @@ dependencies {
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
     implementation("com.amazonaws:aws-lambda-java-events:3.11.0")
 
+    // Translate
     implementation("aws.sdk.kotlin:translate:0.18.0-beta")
+
+    //Universalis
+    implementation("org.jsoup:jsoup:1.15.3")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")

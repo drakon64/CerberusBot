@@ -16,6 +16,9 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.safety.Safelist
 
 suspend fun universalis(
     event: Interaction<ApplicationCommandData>,
@@ -51,12 +54,13 @@ suspend fun universalis(
 
     val canBeHighQuality: Boolean =
         xivApiItem.jsonObject["CanBeHq"] !!.jsonPrimitive.int == 1
-    val description: String? =
-        if (xivApiItem.jsonObject["Description"] !!.jsonPrimitive.isString) {
-            xivApiItem.jsonObject["Description"] !!.jsonPrimitive.content
-        } else {
-            null
-        }
+    val description: String =
+        Jsoup.clean(
+            xivApiItem.jsonObject["Description"] !!.jsonPrimitive.content,
+            "",
+            Safelist.none(),
+            Document.OutputSettings().prettyPrint(false)
+        )
 
     val embedField: EmbedField = if (canBeHighQuality) {
         when (highQuality) {
