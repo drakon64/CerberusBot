@@ -6,6 +6,10 @@
     <file type="web" url="file://$PROJECT_DIR$/sam/defer" />
     <file type="web" url="file://$PROJECT_DIR$/sam/interact" />
   </component>
+  <component name="PWA">
+    <option name="enabled" value="true" />
+    <option name="wasEnabledAtLeastOnce" value="true" />
+  </component>
   <component name="ProjectRootManager" version="2" default="true">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
