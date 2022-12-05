@@ -57,12 +57,12 @@ application_commands = (
                 "type": 3,
                 "required": True,
             },
-            # {
-            #     "name": "high quality",
-            #     "description": "Only show high quality items",
-            #     "type": 5,
-            #     "required": False,
-            # },
+            {
+                "name": "high quality",
+                "description": "Only show high quality items",
+                "type": 5,
+                "required": False,
+            },
         ],
     },
 )

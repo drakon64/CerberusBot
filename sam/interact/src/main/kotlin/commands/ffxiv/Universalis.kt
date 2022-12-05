@@ -39,7 +39,8 @@ suspend fun universalis(
             when (i.name) {
                 "item" -> item = i.value !!
                 "world" -> world = i.value !!
-                "high_quality" -> highQuality = i.value !!.toBooleanStrict()
+                "high_quality" -> highQuality =
+                    i.value !!.toBooleanStrict() // TODO https://github.com/TempestProject/Tempest/issues/3
             }
         }
 
