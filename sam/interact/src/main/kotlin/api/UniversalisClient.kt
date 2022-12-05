@@ -7,7 +7,7 @@ import io.ktor.client.statement.bodyAsText
 
 class UniversalisClient(private val ktorClient: HttpClient = HttpClient(Java)) {
     suspend fun getMarketBoardCurrentData(
-        itemIds: Short,
+        itemIds: Int,
         worldDcRegion: String,
         listings: Byte? = null,
         entries: Byte? = null,

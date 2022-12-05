@@ -1,5 +1,6 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv
 
+import aws.smithy.kotlin.runtime.util.length
 import cloud.drakon.tempest.channel.embed.Embed
 import cloud.drakon.tempest.channel.embed.EmbedField
 import cloud.drakon.tempest.channel.embed.EmbedThumbnail
@@ -7,11 +8,14 @@ import cloud.drakon.tempest.interaction.Interaction
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempest.webbook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
+import cloud.drakon.tempestbot.interact.api.UniversalisClient
 import cloud.drakon.tempestbot.interact.api.XivApiClient
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.float
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -35,7 +39,7 @@ suspend fun universalis(
             when (i.name) {
                 "item" -> item = i.value !!
                 "world" -> world = i.value !!
-                "high_quality" -> highQuality = i.value.toBoolean()
+                "high_quality" -> highQuality = i.value !!.toBooleanStrict()
             }
         }
 
@@ -44,6 +48,7 @@ suspend fun universalis(
 
     val ktorClient = HttpClient(Java)
     val xivApi = XivApiClient(ktorClient = ktorClient)
+    val universalisClient = UniversalisClient(ktorClient = ktorClient)
 
     val xivApiItemId = Json.parseToJsonElement(
         xivApi.search(
@@ -54,26 +59,63 @@ suspend fun universalis(
 
     val canBeHighQuality: Boolean =
         xivApiItem.jsonObject["CanBeHq"] !!.jsonPrimitive.int == 1
-    val description: String =
-        Jsoup.clean(
-            xivApiItem.jsonObject["Description"] !!.jsonPrimitive.content,
-            "",
-            Safelist.none(),
-            Document.OutputSettings().prettyPrint(false)
-        )
+    val description: String = Jsoup.clean(
+        xivApiItem.jsonObject["Description"] !!.jsonPrimitive.content,
+        "",
+        Safelist.none(),
+        Document.OutputSettings().prettyPrint(false)
+    )
 
-    val embedField: EmbedField = if (canBeHighQuality) {
-        when (highQuality) {
-            true -> EmbedField(name = "Current average price (HQ)", value = "listings")
-            false -> EmbedField(
-                name = "Current average price (NQ)", value = ""
+    val marketBoardCurrentData = Json.parseToJsonElement(
+        (if (highQuality == true && canBeHighQuality) {
+            universalisClient.getMarketBoardCurrentData(
+                xivApiItemId, world, entries = 5, listings = 5, hq = true
             )
+        } else if (highQuality == false) {
+            universalisClient.getMarketBoardCurrentData(
+                xivApiItemId, world, entries = 5, listings = 5, hq = false
+            )
+        } else {
+            universalisClient.getMarketBoardCurrentData(
+                xivApiItemId, world, entries = 5, listings = 5
+            )
+        }).toString()
+    )
+    val marketBoardListings = marketBoardCurrentData.jsonObject["listings"] !!.jsonArray
+    var listings = ""
+    var totalPrices = ""
+    val gil = "<:gil:235457032616935424>"
 
-            null -> EmbedField(name = "Current average price", value = "listings")
+    if (marketBoardListings.length > 0) {
+        for (i in marketBoardListings) {
+            listings += i.jsonObject["pricePerUnit"] !!.jsonPrimitive.int.toString()
+                .format("%,d") + " $gil x " + i.jsonObject["quantity"] !!.jsonPrimitive.int.toString() + " [" + i.jsonObject["worldName"] !!.jsonPrimitive.content + "]" + if (i.jsonObject["hq"] !!.jsonPrimitive.boolean) {
+                " <:hq:916051971063054406>\n"
+            } else {
+                "\n"
+            }
+            totalPrices += i.jsonObject["total"] !!.jsonPrimitive.int.toString()
+                .format("%,d") + " $gil\n"
         }
     } else {
-        EmbedField(name = "Current average price (NQ)", value = "listings")
+        listings = "None"
+        totalPrices = "N/A"
     }
+
+    val currentAveragePriceEmbedField: EmbedField =
+        if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.jsonObject["averagePriceHQ"] !!.jsonPrimitive.float > 0)) {
+            EmbedField(
+                name = "Current average price (HQ)", value = listings, inline = true
+            )
+        } else if (highQuality == false && (marketBoardCurrentData.jsonObject["averagePriceNQ"] !!.jsonPrimitive.float > 0)) {
+            EmbedField(
+                name = "Current average price (NQ)", value = listings, inline = true
+            )
+        } else if (highQuality == null && (marketBoardCurrentData.jsonObject["averagePrice"] !!.jsonPrimitive.float > 0)) {
+            EmbedField(name = "Current average price", value = listings, inline = true)
+        } else {
+            EmbedField(name = "Current average price", value = "N/A", inline = true)
+        }
 
     Handler.tempestClient.editOriginalInteractionResponse(
         EditWebhookMessage(
@@ -83,7 +125,13 @@ suspend fun universalis(
                     description = description,
                     url = "https://universalis.app/market/$xivApiItemId",
                     thumbnail = EmbedThumbnail("https://xivapi.com" + xivApiItem.jsonObject["IconHD"] !!.jsonPrimitive.content),
-                    fields = arrayOf(embedField)
+                    fields = arrayOf(
+                        EmbedField(
+                            name = "Listings", value = listings, inline = true
+                        ), EmbedField(
+                            name = "Total prices", value = totalPrices, inline = true
+                        )
+                    )
                 )
             )
         ), event.token
