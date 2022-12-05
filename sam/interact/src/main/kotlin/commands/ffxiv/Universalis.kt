@@ -15,7 +15,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.boolean
-import kotlinx.serialization.json.float
+import kotlinx.serialization.json.double
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -88,34 +88,17 @@ suspend fun universalis(
 
     if (marketBoardListings.length > 0) {
         for (i in marketBoardListings) {
-            listings += i.jsonObject["pricePerUnit"] !!.jsonPrimitive.int.toString()
-                .format("%,d") + " $gil x " + i.jsonObject["quantity"] !!.jsonPrimitive.int.toString() + " [" + i.jsonObject["worldName"] !!.jsonPrimitive.content + "]" + if (i.jsonObject["hq"] !!.jsonPrimitive.boolean) {
+            listings += i.jsonObject["pricePerUnit"] !!.jsonPrimitive.int.toString() + " $gil x " + i.jsonObject["quantity"] !!.jsonPrimitive.int.toString() + " [" + i.jsonObject["worldName"] !!.jsonPrimitive.content + "]" + if (i.jsonObject["hq"] !!.jsonPrimitive.boolean) {
                 " <:hq:916051971063054406>\n"
             } else {
                 "\n"
             }
-            totalPrices += i.jsonObject["total"] !!.jsonPrimitive.int.toString()
-                .format("%,d") + " $gil\n"
+            totalPrices += i.jsonObject["total"] !!.jsonPrimitive.int.toString() + " $gil\n"
         }
     } else {
         listings = "None"
         totalPrices = "N/A"
     }
-
-    val currentAveragePriceEmbedField: EmbedField =
-        if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.jsonObject["averagePriceHQ"] !!.jsonPrimitive.float > 0)) {
-            EmbedField(
-                name = "Current average price (HQ)", value = listings, inline = true
-            )
-        } else if (highQuality == false && (marketBoardCurrentData.jsonObject["averagePriceNQ"] !!.jsonPrimitive.float > 0)) {
-            EmbedField(
-                name = "Current average price (NQ)", value = listings, inline = true
-            )
-        } else if (highQuality == null && (marketBoardCurrentData.jsonObject["averagePrice"] !!.jsonPrimitive.float > 0)) {
-            EmbedField(name = "Current average price", value = listings, inline = true)
-        } else {
-            EmbedField(name = "Current average price", value = "N/A", inline = true)
-        }
 
     Handler.tempestClient.editOriginalInteractionResponse(
         EditWebhookMessage(
@@ -126,10 +109,61 @@ suspend fun universalis(
                     url = "https://universalis.app/market/$xivApiItemId",
                     thumbnail = EmbedThumbnail("https://xivapi.com" + xivApiItem.jsonObject["IconHD"] !!.jsonPrimitive.content),
                     fields = arrayOf(
+                        if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.jsonObject["currentAveragePriceHQ"] !!.jsonPrimitive.double > 0)) {
+                            EmbedField(
+                                name = "Current average price (HQ)",
+                                value = marketBoardCurrentData.jsonObject["currentAveragePriceHQ"] !!.jsonPrimitive.double.toString() + " $gil",
+                                inline = false
+                            )
+                        } else if (highQuality == false && (marketBoardCurrentData.jsonObject["currentAveragePriceNQ"] !!.jsonPrimitive.double > 0)) {
+                            EmbedField(
+                                name = "Current average price (NQ)",
+                                value = marketBoardCurrentData.jsonObject["currentAveragePriceNQ"] !!.jsonPrimitive.double.toString() + " $gil",
+                                inline = false
+                            )
+                        } else if (highQuality == null && (marketBoardCurrentData.jsonObject["currentAveragePrice"] !!.jsonPrimitive.double > 0)) {
+                            EmbedField(
+                                name = "Current average price",
+                                value = marketBoardCurrentData.jsonObject["currentAveragePrice"] !!.jsonPrimitive.double.toString() + " $gil",
+                                inline = false
+                            )
+                        } else {
+                            EmbedField(
+                                name = "Current average price",
+                                value = "N/A",
+                                inline = false
+                            )
+                        },
+                        if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.jsonObject["averagePriceHQ"] !!.jsonPrimitive.double > 0)) {
+                            EmbedField(
+                                name = "Historic average price (HQ)",
+                                value = marketBoardCurrentData.jsonObject["averagePriceHQ"] !!.jsonPrimitive.double.toString() + " $gil",
+                                inline = false
+                            )
+                        } else if (highQuality == false && (marketBoardCurrentData.jsonObject["averagePriceNQ"] !!.jsonPrimitive.double > 0)) {
+                            EmbedField(
+                                name = "Historic average price (NQ)",
+                                value = marketBoardCurrentData.jsonObject["averagePriceNQ"] !!.jsonPrimitive.double.toString() + " $gil",
+                                inline = false
+                            )
+                        } else if (highQuality == null && (marketBoardCurrentData.jsonObject["averagePrice"] !!.jsonPrimitive.double > 0)) {
+                            EmbedField(
+                                name = "Historic average price",
+                                value = marketBoardCurrentData.jsonObject["averagePrice"] !!.jsonPrimitive.double.toString() + " $gil",
+                                inline = false
+                            )
+                        } else {
+                            EmbedField(
+                                name = "Historic average price",
+                                value = "N/A",
+                                inline = false
+                            )
+                        },
                         EmbedField(
                             name = "Listings", value = listings, inline = true
-                        ), EmbedField(
-                            name = "Total prices", value = totalPrices, inline = true
+                        ),
+                        EmbedField(
+                            name = "Total price", value = totalPrices, inline = true
                         )
                     )
                 )
