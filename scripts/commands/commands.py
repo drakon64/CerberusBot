@@ -59,7 +59,7 @@ application_commands = (
             },
             {
                 "name": "high quality",
-                "description": "Only show high quality items",
+                "description": "Only show high quality item listings or vice versa",
                 "type": 5,
                 "required": False,
             },
