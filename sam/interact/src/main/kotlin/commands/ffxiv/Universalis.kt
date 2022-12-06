@@ -89,12 +89,16 @@ suspend fun universalis(
 
     if (marketBoardListings.length > 0) {
         for (i in marketBoardListings) {
-            listings += i.jsonObject["pricePerUnit"] !!.jsonPrimitive.int.toString() + " $gil x " + i.jsonObject["quantity"] !!.jsonPrimitive.int.toString() + " [" + i.jsonObject["worldName"] !!.jsonPrimitive.content + "]" + if (i.jsonObject["hq"] !!.jsonPrimitive.boolean) {
+            listings += String.format(
+                "%,d", i.jsonObject["pricePerUnit"] !!.jsonPrimitive.int
+            ) + " $gil x " + i.jsonObject["quantity"] !!.jsonPrimitive.int.toString() + " [" + i.jsonObject["worldName"] !!.jsonPrimitive.content + "]" + if (i.jsonObject["hq"] !!.jsonPrimitive.boolean) {
                 " <:hq:916051971063054406>\n"
             } else {
                 "\n"
             }
-            totalPrices += i.jsonObject["total"] !!.jsonPrimitive.int.toString() + " $gil\n"
+            totalPrices += String.format(
+                "%,d", i.jsonObject["total"] !!.jsonPrimitive.int
+            ) + " $gil\n"
         }
     } else {
         listings = "None"
@@ -113,20 +117,27 @@ suspend fun universalis(
                         if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.jsonObject["currentAveragePriceHQ"] !!.jsonPrimitive.double > 0)) {
                             EmbedField(
                                 name = "Current average price (HQ)",
-                                value = marketBoardCurrentData.jsonObject["currentAveragePriceHQ"] !!.jsonPrimitive.double.toString() + " $gil",
+                                value = String.format(
+                                    "%,f",
+                                    marketBoardCurrentData.jsonObject["currentAveragePriceHQ"] !!.jsonPrimitive.double
+                                ).trimEnd('0') + " $gil",
                                 inline = false
                             )
                         } else if (highQuality == false && (marketBoardCurrentData.jsonObject["currentAveragePriceNQ"] !!.jsonPrimitive.double > 0)) {
                             EmbedField(
                                 name = "Current average price (NQ)",
-                                value = marketBoardCurrentData.jsonObject["currentAveragePriceNQ"] !!.jsonPrimitive.double.toString() + " $gil",
+                                value = String.format(
+                                    "%,f",
+                                    marketBoardCurrentData.jsonObject["currentAveragePriceNQ"] !!.jsonPrimitive.double
+                                ).trimEnd('0') + " $gil",
                                 inline = false
                             )
                         } else if (highQuality == null && (marketBoardCurrentData.jsonObject["currentAveragePrice"] !!.jsonPrimitive.double > 0)) {
                             EmbedField(
-                                name = "Current average price",
-                                value = marketBoardCurrentData.jsonObject["currentAveragePrice"] !!.jsonPrimitive.double.toString() + " $gil",
-                                inline = false
+                                name = "Current average price", value = String.format(
+                                    "%,f",
+                                    marketBoardCurrentData.jsonObject["currentAveragePrice"] !!.jsonPrimitive.double
+                                ).trimEnd('0') + " $gil", inline = false
                             )
                         } else {
                             EmbedField(
@@ -138,20 +149,27 @@ suspend fun universalis(
                         if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.jsonObject["averagePriceHQ"] !!.jsonPrimitive.double > 0)) {
                             EmbedField(
                                 name = "Historic average price (HQ)",
-                                value = marketBoardCurrentData.jsonObject["averagePriceHQ"] !!.jsonPrimitive.double.toString() + " $gil",
+                                value = String.format(
+                                    "%,f",
+                                    marketBoardCurrentData.jsonObject["averagePriceHQ"] !!.jsonPrimitive.double
+                                ).trimEnd('0') + " $gil",
                                 inline = false
                             )
                         } else if (highQuality == false && (marketBoardCurrentData.jsonObject["averagePriceNQ"] !!.jsonPrimitive.double > 0)) {
                             EmbedField(
                                 name = "Historic average price (NQ)",
-                                value = marketBoardCurrentData.jsonObject["averagePriceNQ"] !!.jsonPrimitive.double.toString() + " $gil",
+                                value = String.format(
+                                    "%,f",
+                                    marketBoardCurrentData.jsonObject["averagePriceNQ"] !!.jsonPrimitive.double
+                                ).trimEnd('0') + " $gil",
                                 inline = false
                             )
                         } else if (highQuality == null && (marketBoardCurrentData.jsonObject["averagePrice"] !!.jsonPrimitive.double > 0)) {
                             EmbedField(
-                                name = "Historic average price",
-                                value = marketBoardCurrentData.jsonObject["averagePrice"] !!.jsonPrimitive.double.toString() + " $gil",
-                                inline = false
+                                name = "Historic average price", value = String.format(
+                                    "%,f",
+                                    marketBoardCurrentData.jsonObject["averagePrice"] !!.jsonPrimitive.double
+                                ).trimEnd('0') + " $gil", inline = false
                             )
                         } else {
                             EmbedField(
