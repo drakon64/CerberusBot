@@ -8,8 +8,8 @@ import cloud.drakon.tempest.interaction.response.InteractionResponse
 import cloud.drakon.tempest.interaction.response.interactioncallbackdata.MessageCallbackData
 import cloud.drakon.tempest.webbook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler.Companion.json
+import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.Handler.Companion.tempestClient
-import cloud.drakon.tempestbot.interact.mongoDatabase
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import com.mongodb.client.MongoCollection
 import com.mongodb.client.model.Filters

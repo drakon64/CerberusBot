@@ -9,6 +9,8 @@ import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
 import cloud.drakon.tempestbot.interact.commands.translate
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
+import com.mongodb.client.MongoClients
+import com.mongodb.client.MongoDatabase
 import java.io.InputStream
 import java.io.OutputStream
 import kotlinx.coroutines.runBlocking
@@ -22,11 +24,14 @@ class Handler: RequestStreamHandler {
             System.getenv("PUBLIC_KEY")
         )
         val region: String = System.getenv("AWS_REGION")
-    }
 
-    val json = Json {
-        isLenient = true
-    } // TODO https://github.com/TempestProject/Tempest/issues/3
+        val mongoDatabase: MongoDatabase =
+            MongoClients.create(System.getenv("MONGODB_URL")).getDatabase("TempestBot")
+
+        val json = Json {
+            isLenient = true
+        } // TODO https://github.com/TempestProject/Tempest/issues/3
+    }
 
     override fun handleRequest(
         inputStream: InputStream,
