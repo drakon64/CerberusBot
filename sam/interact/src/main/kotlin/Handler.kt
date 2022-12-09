@@ -23,7 +23,7 @@ class Handler: RequestStreamHandler {
         val region: String = System.getenv("AWS_REGION")
     }
 
-    private val json = Json {
+    val json = Json {
         isLenient = true
     } // TODO https://github.com/TempestProject/Tempest/issues/3
 
