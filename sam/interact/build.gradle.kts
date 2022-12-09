@@ -18,6 +18,9 @@ dependencies {
 
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
 
+    // Citations
+    implementation("org.mongodb:mongodb-driver-sync:4.8.1")
+
     // Translate
     implementation("aws.sdk.kotlin:translate:0.18.0-beta")
 
