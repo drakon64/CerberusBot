@@ -27,7 +27,7 @@ class Citation(
     private val event: Interaction<ApplicationCommandData>,
     private val logger: LambdaLogger,
 ) {
-    suspend fun citation() {
+    suspend fun citationHandler() {
         val options = event.data !!.options !![0]
         lateinit var userId: String
         val guildId: String = event.guild_id !!

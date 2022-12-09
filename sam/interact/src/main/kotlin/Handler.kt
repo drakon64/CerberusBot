@@ -4,6 +4,7 @@ import cloud.drakon.tempest.TempestClient
 import cloud.drakon.tempest.interaction.Interaction
 import cloud.drakon.tempest.interaction.InteractionJsonSerializer
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.tempestbot.interact.commands.citations.Citation
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
 import cloud.drakon.tempestbot.interact.commands.translate
 import com.amazonaws.services.lambda.runtime.Context
@@ -43,6 +44,7 @@ class Handler: RequestStreamHandler {
                 val applicationCommand: Interaction<ApplicationCommandData> =
                     event as Interaction<ApplicationCommandData>
                 when (applicationCommand.data !!.name) {
+                    "citation" -> Citation(applicationCommand, logger).citationHandler()
                     "translate", "Translate" -> translate(applicationCommand, logger)
                     "universalis" -> universalis(applicationCommand, logger)
                     else -> {
