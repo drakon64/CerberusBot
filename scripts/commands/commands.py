@@ -8,6 +8,57 @@ commands = json.load(open("commands.json", "r"))
 
 application_commands = (
     {
+        "name": "citation",
+        "description": "Citations",
+        "default_member_permissions": 0,
+        "dm_permission": False,
+        "type": 1,
+        "options": [
+            {
+                "name": "get",
+                "description": "Get citations",
+                "type": 1,
+                "options": [
+                    {
+                        "name": "user",
+                        "description": "The user to get a random citation from",
+                        "type": 6,
+                        "required": True,
+                    }
+                ],
+            },
+            {
+                "name": "add",
+                "description": "Add citations",
+                "type": 1,
+                "options": [
+                    {
+                        "name": "user",
+                        "description": "The user to add a citation to",
+                        "type": 6,
+                        "required": True,
+                    },
+                    {
+                        "name": "citation",
+                        "description": "The citation to add",
+                        "type": 3,
+                        "required": True,
+                    },
+                ],
+            },
+            {
+                "name": "opt-in",
+                "description": "Opt-in to citations",
+                "type": 1,
+            },
+            {
+                "name": "opt-out",
+                "description": "Opt-out of citations",
+                "type": 1,
+            },
+        ],
+    },
+    {
         "name": "translate",
         "description": "Translate to or from other languages",
         "default_member_permissions": 0,
