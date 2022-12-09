@@ -18,7 +18,7 @@ import org.bson.Document
 val mongoCollection: MongoCollection<Document> =
     mongoDatabase.getCollection("citations")
 
-class Citations(
+class Citation(
     private val userId: String,
     private val guildId: String,
     private val event: Interaction<ApplicationCommandData>,
