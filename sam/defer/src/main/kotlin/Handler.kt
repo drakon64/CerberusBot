@@ -48,7 +48,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
             response.statusCode = 401
             return@runBlocking response
         } else when (json.parseToJsonElement(event.body).jsonObject["type"] !!.jsonPrimitive.int) {
-            InteractionType.PING.toInt() -> {
+            InteractionType.PING -> {
                 logger.log("Received PING")
 
                 response.body =
@@ -58,7 +58,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
                 return@runBlocking response
             }
 
-            InteractionType.APPLICATION_COMMAND.toInt(), InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE.toInt() -> {
+            InteractionType.APPLICATION_COMMAND, InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE -> {
                 logger.log("Deferring channel message")
 
                 response.headers = headers
@@ -67,7 +67,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
                 response.statusCode = 200
             }
 
-            InteractionType.MESSAGE_COMPONENT.toInt(), InteractionType.MODAL_SUBMIT.toInt() -> {
+            InteractionType.MESSAGE_COMPONENT, InteractionType.MODAL_SUBMIT -> {
                 logger.log("Deferring update message")
 
                 response.headers = headers
