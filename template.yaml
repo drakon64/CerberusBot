@@ -14,7 +14,7 @@ Resources:
       Runtime: java11
       Architectures:
         - arm64
-      MemorySize: 1536
+      MemorySize: 2048
       Timeout: 3
       Environment:
         Variables:
@@ -47,7 +47,7 @@ Resources:
       Runtime: java11
       Architectures:
         - arm64
-      MemorySize: 1536
+      MemorySize: 2048
       Timeout: 900
       Environment:
         Variables:
