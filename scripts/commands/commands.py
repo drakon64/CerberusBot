@@ -46,11 +46,7 @@ application_commands = (
                     },
                 ),
             },
-            #     {
-            #         "name": "opt-in",
-            #         "description": "Opt-in to citations",
-            #         "type": 1,
-            #     },
+            {"name": "opt-in", "description": "Opt-in to citations", "type": 1},
             #     {
             #         "name": "opt-out",
             #         "description": "Opt-out of citations",
