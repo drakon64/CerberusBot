@@ -27,35 +27,35 @@ application_commands = (
                     }
                 ],
             },
-            {
-                "name": "add",
-                "description": "Add citations",
-                "type": 1,
-                "options": [
-                    {
-                        "name": "user",
-                        "description": "The user to add a citation to",
-                        "type": 6,
-                        "required": True,
-                    },
-                    {
-                        "name": "citation",
-                        "description": "The citation to add",
-                        "type": 3,
-                        "required": True,
-                    },
-                ],
-            },
-            {
-                "name": "opt-in",
-                "description": "Opt-in to citations",
-                "type": 1,
-            },
-            {
-                "name": "opt-out",
-                "description": "Opt-out of citations",
-                "type": 1,
-            },
+            #     {
+            #         "name": "add",
+            #         "description": "Add citations",
+            #         "type": 1,
+            #         "options": [
+            #             {
+            #                 "name": "user",
+            #                 "description": "The user to add a citation to",
+            #                 "type": 6,
+            #                 "required": True,
+            #             },
+            #             {
+            #                 "name": "citation",
+            #                 "description": "The citation to add",
+            #                 "type": 3,
+            #                 "required": True,
+            #             },
+            #         ],
+            #     },
+            #     {
+            #         "name": "opt-in",
+            #         "description": "Opt-in to citations",
+            #         "type": 1,
+            #     },
+            #     {
+            #         "name": "opt-out",
+            #         "description": "Opt-out of citations",
+            #         "type": 1,
+            #     },
         ],
     },
     {
