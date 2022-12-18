@@ -61,8 +61,8 @@ class Citation(
         ).first()
 
         if (citations != null) {
-            val citationsJson = json.parseToJsonElement(citations.toJson())
-            val messagesJson = citationsJson.jsonObject["messages"] !!.jsonArray
+            val messagesJson =
+                json.parseToJsonElement(citations.toJson()).jsonObject["messages"] !!.jsonArray
             val messages: MutableList<String> = emptyList<String>().toMutableList()
 
             if (messagesJson.isNotEmpty()) {
