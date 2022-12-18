@@ -24,6 +24,9 @@ suspend fun getCitation(
         Projections.fields(Projections.include("messages"), Projections.excludeId())
     ).first()
 
+    var error = true
+    lateinit var content: String
+
     if (citations != null) {
         val messagesJson =
             Handler.json.parseToJsonElement(citations.toJson()).jsonObject["messages"] !!.jsonArray
@@ -34,30 +37,22 @@ suspend fun getCitation(
                 messages.add(i.jsonObject["content"] !!.jsonPrimitive.content)
             }
 
-            Handler.tempestClient.editOriginalInteractionResponse(
-                EditWebhookMessage(
-                    content = "> " + messages.random()
-                        .replace("\n", "\n>") + "\n- <@$userId>"
-                ), interactionToken = event.token
-            )
+            error = false
+            content = "> " + messages.random().replace("\n", "\n>") + "\n- <@$userId>"
         } else {
-            Handler.tempestClient.editOriginalInteractionResponse(
-                EditWebhookMessage(
-                    content = "No citations saved for the user!"
-                ), interactionToken = event.token
-            )
-
-            delay(5000)
-
-            Handler.tempestClient.deleteOriginalInteractionResponse(event.token)
+            content = "No citations saved for the user!"
         }
     } else {
-        Handler.tempestClient.editOriginalInteractionResponse(
-            EditWebhookMessage(
-                content = "User has not opted-in to citations!"
-            ), interactionToken = event.token
-        )
+        content = "User has not opted-in to citations!"
+    }
 
+    Handler.tempestClient.editOriginalInteractionResponse(
+        EditWebhookMessage(
+            content = content
+        ), interactionToken = event.token
+    )
+
+    if (error) {
         delay(5000)
 
         Handler.tempestClient.deleteOriginalInteractionResponse(event.token)
