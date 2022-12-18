@@ -26,7 +26,7 @@ class Handler: RequestStreamHandler {
         val region: String = System.getenv("AWS_REGION")
 
         val mongoDatabase: MongoDatabase =
-            MongoClients.create(System.getenv("MONGODB_URL")).getDatabase("TempestBot")
+            MongoClients.create(System.getenv("MONGODB_URL")).getDatabase("lambdabot")
 
         val json = Json {
             isLenient = true
