@@ -11,7 +11,7 @@ _TempestBot_ is a Discord bot that runs on AWS Lambda.
 
 ## Features
 
-- ~~Citations: Save quotes from guild members and repost them. Requires users to opt-in.~~
+- Citations: Save quotes from guild members and repost them. Requires users to opt-in.
 - Translate: Translate messages using AWS Translate.
 - ~~Subject Access Request: The bot will DM you with all of the information that it holds on your Discord account.~~
 - Localisations: _TempestBot_ is fully localised for all Discord-supported locales.
