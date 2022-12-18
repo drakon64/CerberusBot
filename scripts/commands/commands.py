@@ -13,25 +13,25 @@ application_commands = (
         "default_member_permissions": 0,
         "dm_permission": False,
         "type": 1,
-        "options": [
+        "options": (
             {
                 "name": "get",
                 "description": "Get citations",
                 "type": 1,
-                "options": [
+                "options": (
                     {
                         "name": "user",
                         "description": "The user to get a random citation from",
                         "type": 6,
                         "required": True,
-                    }
-                ],
+                    },
+                ),
             },
             #     {
             #         "name": "add",
             #         "description": "Add citations",
             #         "type": 1,
-            #         "options": [
+            #         "options": (
             #             {
             #                 "name": "user",
             #                 "description": "The user to add a citation to",
@@ -44,7 +44,7 @@ application_commands = (
             #                 "type": 3,
             #                 "required": True,
             #             },
-            #         ],
+            #         ),
             #     },
             #     {
             #         "name": "opt-in",
@@ -56,7 +56,7 @@ application_commands = (
             #         "description": "Opt-out of citations",
             #         "type": 1,
             #     },
-        ],
+        ),
     },
     {
         "name": "Get citation",
@@ -69,7 +69,7 @@ application_commands = (
         "description": "Translate to or from other languages",
         "default_member_permissions": 0,
         "type": 1,
-        "options": [
+        "options": (
             {
                 "name": "message",
                 "description": "The text to translate",
@@ -88,7 +88,7 @@ application_commands = (
                 "type": 3,
                 "required": False,
             },
-        ],
+        ),
     },
     {
         "name": "Translate",
@@ -101,7 +101,7 @@ application_commands = (
         "description": "Get Final Fantasy XIV market board item information",
         "default_member_permissions": 0,
         "type": 1,
-        "options": [
+        "options": (
             {
                 "name": "item",
                 "description": "The item to search for",
@@ -120,7 +120,7 @@ application_commands = (
                 "type": 5,
                 "required": False,
             },
-        ],
+        ),
     },
 )
 
