@@ -230,10 +230,20 @@ for command in application_commands:
                 if "description" in sub_command:
                     sub_command["description_localizations"] = description_localizations
 
-commands_put = requests.put(
-    f"https://discord.com/api/v10/applications/{application_id}/commands",
-    headers={"Authorization": f"Bot {bot_token}", "Content-Type": "application/json"},
-    data=json.dumps(application_commands, ensure_ascii=False).encode("utf-8"),
+print(
+    json.dumps(
+        json.loads(
+            bytes.decode(
+                requests.put(
+                    f"https://discord.com/api/v10/applications/{application_id}/commands",
+                    headers={
+                        "Authorization": f"Bot {bot_token}",
+                        "Content-Type": "application/json",
+                    },
+                    data=json.dumps(application_commands),
+                ).content
+            )
+        ),
+        indent=4,
+    )
 )
-discord = json.loads(bytes.decode(commands_put.content))
-print(json.dumps(discord, indent=4))
