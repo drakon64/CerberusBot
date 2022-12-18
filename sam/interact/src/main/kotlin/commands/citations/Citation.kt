@@ -1,11 +1,7 @@
 package cloud.drakon.tempestbot.interact.commands.citations
 
-import cloud.drakon.tempest.channel.message.MessageFlags
 import cloud.drakon.tempest.interaction.Interaction
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.tempest.interaction.response.InteractionCallbackType
-import cloud.drakon.tempest.interaction.response.InteractionResponse
-import cloud.drakon.tempest.interaction.response.interactioncallbackdata.MessageCallbackData
 import cloud.drakon.tempest.webbook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler.Companion.json
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
@@ -15,6 +11,7 @@ import com.mongodb.client.MongoCollection
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Filters.eq
 import com.mongodb.client.model.Projections
+import kotlinx.coroutines.delay
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -65,11 +62,11 @@ class Citation(
 
         if (citations != null) {
             val citationsJson = json.parseToJsonElement(citations.toJson())
-            val messagesJson = citationsJson.jsonObject["messages"]
+            val messagesJson = citationsJson.jsonObject["messages"] !!.jsonArray
             val messages: MutableList<String> = emptyList<String>().toMutableList()
 
-            if (messagesJson != null) {
-                for (i in messagesJson.jsonArray) {
+            if (messagesJson.isNotEmpty()) {
+                for (i in messagesJson) {
                     messages.add(i.jsonObject["content"] !!.jsonPrimitive.content)
                 }
 
@@ -79,17 +76,27 @@ class Citation(
                             .replace("\n", "\n>") + "\n- <@$userId>"
                     ), interactionToken = event.token
                 )
+            } else {
+                tempestClient.editOriginalInteractionResponse(
+                    EditWebhookMessage(
+                        content = "No citations saved for the user!"
+                    ), interactionToken = event.token
+                )
+
+                delay(5000)
+
+                tempestClient.deleteOriginalInteractionResponse(event.token)
             }
         } else {
-            tempestClient.createInteractionResponse(
-                InteractionResponse(
-                    type = InteractionCallbackType.CHANNEL_MESSAGE_WITH_SOURCE,
-                    data = MessageCallbackData(
-                        content = "No citations saved for the user!",
-                        flags = MessageFlags.EPHEMERAL
-                    )
-                ), interactionId = event.id, interactionToken = event.token
+            tempestClient.editOriginalInteractionResponse(
+                EditWebhookMessage(
+                    content = "User has not opted-in to citations!"
+                ), interactionToken = event.token
             )
+
+            delay(5000)
+
+            tempestClient.deleteOriginalInteractionResponse(event.token)
         }
     }
 }
