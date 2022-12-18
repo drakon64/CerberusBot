@@ -23,8 +23,9 @@ suspend fun citationHandler(event: Interaction<ApplicationCommandData>) {
                 }
             }
 
-            if (options.name == "get") {
-                return getCitation(event, userId, guildId)
+            when (options.name) {
+                "add" -> return addCitation(event)
+                "get" -> return getCitation(event, userId, guildId)
             }
         }
 
@@ -33,5 +34,7 @@ suspend fun citationHandler(event: Interaction<ApplicationCommandData>) {
 
             return getCitation(event, userId, guildId)
         }
+
+        3 -> return addCitation(event)
     }
 }

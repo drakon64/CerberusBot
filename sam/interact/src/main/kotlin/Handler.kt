@@ -49,7 +49,10 @@ class Handler: RequestStreamHandler {
                 val applicationCommand: Interaction<ApplicationCommandData> =
                     event as Interaction<ApplicationCommandData>
                 when (applicationCommand.data !!.name) {
-                    "citation", "Get citation" -> citationHandler(applicationCommand)
+                    "citation", "Add citation", "Get citation" -> citationHandler(
+                        applicationCommand
+                    )
+
                     "translate", "Translate" -> translate(applicationCommand, logger)
                     "universalis" -> universalis(applicationCommand, logger)
                     else -> {
