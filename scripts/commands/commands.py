@@ -59,6 +59,12 @@ application_commands = (
         ],
     },
     {
+        "name": "Get citation",
+        "default_member_permissions": 0,
+        "dm_permission": False,
+        "type": 2,
+    },
+    {
         "name": "translate",
         "description": "Translate to or from other languages",
         "default_member_permissions": 0,
@@ -122,6 +128,9 @@ application_id = commands["application_id"]
 bot_token = commands["bot_token"]
 
 for command in application_commands:
+    if command["type"] == 1:
+        command["name"] = command["name"].replace(" ", "_")
+
     name_localizations = {}
     description_localizations = {}
     for language in languages:
@@ -141,9 +150,7 @@ for command in application_commands:
                 {
                     language["discord"]: translate_text(
                         command["name"], language["aws"]
-                    )
-                    .replace(" ", "_")
-                    .replace("...", "")
+                    ).replace("...", "")
                 }
             )
         if "description" in command:
@@ -155,7 +162,6 @@ for command in application_commands:
                 }
             )
     command["name_localizations"] = name_localizations
-    command["name"] = command["name"].replace(" ", "_")
 
     if "description" in command:
         command["description_localizations"] = description_localizations

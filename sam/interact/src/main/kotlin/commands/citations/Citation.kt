@@ -28,18 +28,29 @@ class Citation(
     private val logger: LambdaLogger,
 ) {
     suspend fun citationHandler() {
-        val options = event.data !!.options !![0]
         lateinit var userId: String
         val guildId: String = event.guild_id !!
 
-        for (i in options.options !!) {
-            if (i.name == "user") {
-                userId = i.value !!
-            }
-        }
+        when (event.data !!.type) {
+            1 -> {
+                val options = event.data !!.options !![0]
 
-        if (options.name == "get") {
-            return getCitation(userId, guildId)
+                for (i in options.options !!) {
+                    if (i.name == "user") {
+                        userId = i.value !!
+                    }
+                }
+
+                if (options.name == "get") {
+                    return getCitation(userId, guildId)
+                }
+            }
+
+            2 -> {
+                userId = event.data !!.resolved !!.users !!.keys.first()
+
+                return getCitation(userId, guildId)
+            }
         }
     }
 
