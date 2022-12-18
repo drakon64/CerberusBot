@@ -55,7 +55,7 @@ class Citation(
         if (citations != null) {
             val citationsJson = json.parseToJsonElement(citations.toJson())
             val messagesJson = citationsJson.jsonObject["messages"]
-            lateinit var messages: MutableList<String>
+            val messages: MutableList<String> = emptyList<String>().toMutableList()
 
             if (messagesJson != null) {
                 for (i in messagesJson.jsonArray) {
@@ -63,8 +63,10 @@ class Citation(
                 }
 
                 tempestClient.editOriginalInteractionResponse(
-                    EditWebhookMessage(content = messages.random()),
-                    interactionToken = event.token
+                    EditWebhookMessage(
+                        content = "> " + messages.random()
+                            .replace("\n", "\n>") + "\n- <@$userId>"
+                    ), interactionToken = event.token
                 )
             }
         } else {
