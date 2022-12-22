@@ -29,8 +29,10 @@ class Handler: RequestStreamHandler {
             MongoClients.create(System.getenv("MONGODB_URL")).getDatabase("lambdabot")
 
         val json = Json {
-            isLenient = true
-        } // TODO https://github.com/TempestProject/Tempest/issues/3
+            ignoreUnknownKeys =
+                true // Not all fields returned by the Discord API are documented
+            isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
+        }
     }
 
     override fun handleRequest(
