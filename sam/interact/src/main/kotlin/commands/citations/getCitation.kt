@@ -38,7 +38,7 @@ suspend fun getCitation(
             }
 
             error = false
-            content = "> " + messages.random().replace("\n", "\n>") + "\n- <@$userId>"
+            content = "> " + messages.random().replace("\n", "\n> ") + "\n- <@$userId>"
         } else {
             content = "No citations saved for the user!"
         }

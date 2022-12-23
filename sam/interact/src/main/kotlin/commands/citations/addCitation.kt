@@ -43,7 +43,7 @@ suspend fun addCitation(
     if (query != null && query.isNotEmpty()) {
         Handler.tempestClient.editOriginalInteractionResponse(
             EditWebhookMessage(
-                content = "> " + message.replace("\n", "\n>") + "\n- <@$userId>"
+                content = "> " + message.replace("\n", "\n> ") + "\n- <@$userId>"
             ), interactionToken = event.token
         )
     } else {
