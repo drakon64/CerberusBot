@@ -74,4 +74,13 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
             }
         }.bodyAsText())
     }
+
+    suspend fun characterSearch(name: String, server: String): JsonElement {
+        return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/character/search") {
+            url {
+                parameters.append("name", name.replace(" ", "+"))
+                parameters.append("server", server)
+            }
+        }.bodyAsText())
+    }
 }
