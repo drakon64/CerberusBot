@@ -7,6 +7,7 @@ import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.Handler.Companion.tempestClient
 import cloud.drakon.tempestbot.interact.api.XivApiClient
 import com.mongodb.client.model.Filters
+import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
@@ -33,12 +34,12 @@ suspend fun Link(
 
     when (characters.size) {
         1 -> {
-            mongoDatabase.getCollection("lodestone_link").findOneAndUpdate(
+            mongoDatabase.getCollection("lodestone_link").updateOne(
                 Filters.and(
                     Filters.eq("user_id", userId), Filters.eq("guild_id", guildId)
                 ), Updates.set(
                     "character_id", characters.jsonObject["ID"] !!.jsonPrimitive.int
-                )
+                ), UpdateOptions().upsert(true)
             )
 
             tempestClient.editOriginalInteractionResponse(
