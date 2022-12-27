@@ -4,6 +4,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 
 class UniversalisClient(private val ktorClient: HttpClient = HttpClient(Java)) {
     suspend fun getMarketBoardCurrentData(
@@ -16,8 +18,8 @@ class UniversalisClient(private val ktorClient: HttpClient = HttpClient(Java)) {
         statsWithin: ULong? = null,
         entriesWithin: ULong? = null,
         fields: String? = null,
-    ): String {
-        return ktorClient.get("https://universalis.app/api/v2/$worldDcRegion/$itemIds") {
+    ): JsonElement {
+        return Json.parseToJsonElement(ktorClient.get("https://universalis.app/api/v2/$worldDcRegion/$itemIds") {
             url {
                 if (listings != null) {
                     parameters.append("listings", listings.toString())
@@ -41,6 +43,6 @@ class UniversalisClient(private val ktorClient: HttpClient = HttpClient(Java)) {
                     parameters.append("fields", fields)
                 }
             }
-        }.bodyAsText()
+        }.bodyAsText())
     }
 }

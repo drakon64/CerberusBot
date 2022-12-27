@@ -4,6 +4,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 
 class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
     private fun Boolean.toBinaryString(): String {
@@ -26,8 +28,8 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
         language: String? = null,
         snakeCase: Boolean? = null,
         privateKey: String? = null,
-    ): String {
-        return ktorClient.get("https://xivapi.com/search") {
+    ): JsonElement {
+        return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/search") {
             url {
                 parameters.append("string", string)
 
@@ -49,7 +51,7 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
                     parameters.append("string_algo", stringAlgo)
                 }
             }
-        }.bodyAsText()
+        }.bodyAsText())
     }
 
     suspend fun item(
@@ -57,8 +59,8 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
         language: String? = null,
         snakeCase: Boolean? = null,
         privateKey: String? = null,
-    ): String {
-        return ktorClient.get("https://xivapi.com/item/$item") {
+    ): JsonElement {
+        return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/item/$item") {
             url { // Global parameters
                 if (language != null) {
                     parameters.append("language", language)
@@ -70,6 +72,6 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
                     parameters.append("private_key", privateKey)
                 }
             }
-        }.bodyAsText()
+        }.bodyAsText())
     }
 }

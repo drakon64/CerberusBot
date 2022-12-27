@@ -13,7 +13,6 @@ import cloud.drakon.tempestbot.interact.api.XivApiClient
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.double
 import kotlinx.serialization.json.int
@@ -51,12 +50,10 @@ suspend fun universalis(
     val xivApi = XivApiClient(ktorClient = ktorClient)
     val universalisClient = UniversalisClient(ktorClient = ktorClient)
 
-    val xivApiItemId = Json.parseToJsonElement(
-        xivApi.search(
-            item, "Item"
-        )
+    val xivApiItemId = xivApi.search(
+        item, "Item"
     ).jsonObject["Results"] !!.jsonArray[0].jsonObject["ID"] !!.jsonPrimitive.int
-    val xivApiItem = Json.parseToJsonElement(xivApi.item(xivApiItemId))
+    val xivApiItem = xivApi.item(xivApiItemId)
 
     val canBeHighQuality: Boolean =
         xivApiItem.jsonObject["CanBeHq"] !!.jsonPrimitive.int == 1
@@ -67,21 +64,19 @@ suspend fun universalis(
         Document.OutputSettings().prettyPrint(false)
     )
 
-    val marketBoardCurrentData = Json.parseToJsonElement(
-        (if (highQuality == true && canBeHighQuality) {
-            universalisClient.getMarketBoardCurrentData(
-                xivApiItemId, world, entries = 5, listings = 5, hq = true
-            )
-        } else if (highQuality == false) {
-            universalisClient.getMarketBoardCurrentData(
-                xivApiItemId, world, entries = 5, listings = 5, hq = false
-            )
-        } else {
-            universalisClient.getMarketBoardCurrentData(
-                xivApiItemId, world, entries = 5, listings = 5
-            )
-        }).toString()
-    )
+    val marketBoardCurrentData = if (highQuality == true && canBeHighQuality) {
+        universalisClient.getMarketBoardCurrentData(
+            xivApiItemId, world, entries = 5, listings = 5, hq = true
+        )
+    } else if (highQuality == false) {
+        universalisClient.getMarketBoardCurrentData(
+            xivApiItemId, world, entries = 5, listings = 5, hq = false
+        )
+    } else {
+        universalisClient.getMarketBoardCurrentData(
+            xivApiItemId, world, entries = 5, listings = 5
+        )
+    }
     val marketBoardListings = marketBoardCurrentData.jsonObject["listings"] !!.jsonArray
     var listings = ""
     var totalPrices = ""
