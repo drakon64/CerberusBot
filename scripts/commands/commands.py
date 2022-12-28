@@ -62,6 +62,34 @@ application_commands = (
         "type": 2,
     },
     {
+        "name": "lodestone",
+        "description": "Final Fantasy XIV Lodestone",
+        "default_member_permissions": 0,
+        "dm_permission": False,
+        "type": 1,
+        "options": (
+            {
+                "name": "link",
+                "description": "Link your Discord account to a Final Fantasy XIV character",
+                "type": 1,
+                "options": (
+                    {
+                        "name": "character",
+                        "description": "The name of the character to link your Discord account to",
+                        "type": 3,
+                        "required": True,
+                    },
+                    {
+                        "name": "world",
+                        "description": "The world of the character to link your Discord account to",
+                        "type": 3,
+                        "required": True,
+                    },
+                ),
+            },
+        ),
+    },
+    {
         "name": "translate",
         "description": "Translate to or from other languages",
         "default_member_permissions": 0,

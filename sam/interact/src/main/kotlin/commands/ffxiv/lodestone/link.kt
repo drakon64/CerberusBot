@@ -14,17 +14,16 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun link(
-    event: Interaction<ApplicationCommandData>,
-    characterName: String,
-    world: String,
-) {
-    lateinit var userId: String
+suspend fun link(event: Interaction<ApplicationCommandData>) {
+    val userId: String = event.member !!.user !!.id
     val guildId: String = event.guild_id !!
+    lateinit var characterName: String
+    lateinit var world: String
 
     for (i in event.data !!.options !![0].options !!) {
-        if (i.name == "user") {
-            userId = i.value !!
+        when (i.name) {
+            "character" -> characterName = i.value !!
+            "world" -> world = i.value !!
         }
     }
 

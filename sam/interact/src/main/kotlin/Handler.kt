@@ -5,6 +5,7 @@ import cloud.drakon.tempest.interaction.Interaction
 import cloud.drakon.tempest.interaction.InteractionJsonSerializer
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
+import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
 import cloud.drakon.tempestbot.interact.commands.translate
 import com.amazonaws.services.lambda.runtime.Context
@@ -54,6 +55,8 @@ class Handler: RequestStreamHandler {
                     "citation", "Add citation", "Get citation" -> citationHandler(
                         applicationCommand
                     )
+
+                    "lodestone" -> lodestoneHandler(applicationCommand)
 
                     "translate", "Translate" -> translate(applicationCommand, logger)
                     "universalis" -> universalis(applicationCommand, logger)
