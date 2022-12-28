@@ -20,10 +20,17 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import org.bson.types.Binary
 
 suspend fun portrait(event: Interaction<ApplicationCommandData>) {
-    val userId: String = event.member !!.user !!.id
+    lateinit var userId: String
     val guildId: String = event.guild_id !!
+
+    for (i in event.data !!.options !![0].options !!) {
+        when (i.name) {
+            "user" -> userId = i.value !!
+        }
+    }
 
     var characterId: Int? = null
     val characterIdDocument = mongoDatabase.getCollection("lodestone_link").find(
@@ -33,20 +40,35 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
     ).projection(
         Projections.fields(Projections.include("character_id"), Projections.excludeId())
     ).first()
+
     if (characterIdDocument != null) {
         characterId =
             Json.parseToJsonElement(characterIdDocument.toJson()).jsonObject["character_id"] !!.jsonPrimitive.int
 
-        val ktorClient = HttpClient(Java)
-        val portrait: ByteArray = ktorClient.get(
-            XivApiClient(ktorClient = ktorClient).profile(characterId).jsonObject["Character"] !!.jsonObject["Portrait"] !!.jsonPrimitive.content
-        ).body()
+        val mongoCollection = mongoDatabase.getCollection("lodestone")
 
-        mongoDatabase.getCollection("lodestone").updateOne(
-            Filters.eq("character_id", characterId), Updates.set(
-                "portrait", portrait
-            ), UpdateOptions().upsert(true)
-        )
+        val mongoPortrait =
+            mongoCollection.find(Filters.eq("character_id", characterId)).projection(
+                Projections.fields(
+                    Projections.include("portrait"), Projections.excludeId()
+                )
+            ).first()
+
+        lateinit var portrait: ByteArray
+        if (mongoPortrait != null) {
+            portrait = (mongoPortrait["portrait"] as Binary).data
+        } else {
+            val ktorClient = HttpClient(Java)
+            portrait = ktorClient.get(
+                XivApiClient(ktorClient = ktorClient).profile(characterId).jsonObject["Character"] !!.jsonObject["Portrait"] !!.jsonPrimitive.content
+            ).body()
+
+            mongoCollection.updateOne(
+                Filters.eq("character_id", characterId), Updates.set(
+                    "portrait", portrait
+                ), UpdateOptions().upsert(true)
+            )
+        }
 
         val filename = "${characterId}_portrait.jpg"
 
