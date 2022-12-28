@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.21"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.21"
+    kotlin("jvm") version "1.8.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.0"
 }
 
 group = "cloud.drakon"
@@ -31,7 +31,7 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:4.8.1")
 
     // Translate
-    implementation("aws.sdk.kotlin:translate:0.18.0-beta")
+    implementation("aws.sdk.kotlin:translate:0.19.2-beta")
 
     //Universalis
     implementation("org.jsoup:jsoup:1.15.3")
@@ -39,7 +39,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
-    implementation("io.ktor:ktor-client-core:2.1.3")
+    implementation("io.ktor:ktor-client-core:2.2.1")
     implementation("io.ktor:ktor-client-java:2.2.1")
 
     testImplementation(kotlin("test"))
