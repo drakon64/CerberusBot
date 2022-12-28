@@ -34,7 +34,6 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
         }
     }
 
-    var characterId: Int? = null
     val characterIdDocument = mongoDatabase.getCollection("lodestone_link").find(
         Filters.and(
             Filters.eq("user_id", userId), Filters.eq("guild_id", guildId)
@@ -44,7 +43,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
     ).first()
 
     if (characterIdDocument != null) {
-        characterId =
+        val characterId =
             Json.parseToJsonElement(characterIdDocument.toJson()).jsonObject["character_id"] !!.jsonPrimitive.int
 
         val mongoCollection = mongoDatabase.getCollection("lodestone")
