@@ -6,6 +6,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "**.kt"
+      - "**.kts"
+      - "**.py"
   workflow_dispatch:
 
 jobs:
