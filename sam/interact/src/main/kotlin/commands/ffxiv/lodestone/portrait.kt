@@ -65,12 +65,15 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
                 XivApiClient(ktorClient = ktorClient).profile(characterId).jsonObject["Character"] !!.jsonObject["Portrait"] !!.jsonPrimitive.content
             ).body()
 
+            val timestamp = LocalDateTime.now()
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
                     Updates.set(
                         "portrait.binary", portrait
                     ), Updates.set(
-                        "portrait.timestamp", LocalDateTime.now()
+                        "portrait.timestamp", timestamp
+                    ), Updates.set(
+                        "timestamp", timestamp
                     )
                 ), UpdateOptions().upsert(true)
             )

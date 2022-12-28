@@ -62,12 +62,15 @@ suspend fun card(event: Interaction<ApplicationCommandData>) {
                 HttpClient(Java).get("https://xiv-character-cards.drakon.cloud/characters/id/$characterId.png")
                     .body()
 
+            val timestamp = LocalDateTime.now()
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
                     Updates.set(
                         "card.binary", card
                     ), Updates.set(
                         "card.timestamp", LocalDateTime.now()
+                    ), Updates.set(
+                        "timestamp", timestamp
                     )
                 ), UpdateOptions().upsert(true)
             )
