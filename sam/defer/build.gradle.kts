@@ -13,6 +13,7 @@ repositories {
     mavenLocal()
 
     maven {
+        name = "GitHubPackages"
         url = uri("https://maven.pkg.github.com/TempestProject/Tempest")
         credentials {
             username = System.getenv("GITHUB_ACTOR")
