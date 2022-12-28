@@ -16,6 +16,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
+import java.time.LocalDateTime
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
@@ -65,8 +66,12 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
             ).body()
 
             mongoCollection.updateOne(
-                Filters.eq("character_id", characterId), Updates.set(
-                    "portrait.binary", portrait
+                Filters.eq("character_id", characterId), Updates.combine(
+                    Updates.set(
+                        "portrait.binary", portrait
+                    ), Updates.set(
+                        "portrait.timestamp", LocalDateTime.now()
+                    )
                 ), UpdateOptions().upsert(true)
             )
         }
