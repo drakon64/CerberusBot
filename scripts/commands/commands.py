@@ -69,6 +69,19 @@ application_commands = (
         "type": 1,
         "options": (
             {
+                "name": "card",
+                "description": "Get Lodestone card",
+                "type": 1,
+                "options": (
+                    {
+                        "name": "user",
+                        "description": "The user to get a Lodestone card for",
+                        "type": 6,
+                        "required": True,
+                    },
+                ),
+            },
+            {
                 "name": "link",
                 "description": "Link your Discord account to a Final Fantasy XIV character",
                 "type": 1,

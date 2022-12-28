@@ -7,7 +7,6 @@ import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandDat
 import cloud.drakon.tempest.webbook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.Handler.Companion.tempestClient
-import cloud.drakon.tempestbot.interact.api.XivApiClient
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
@@ -24,7 +23,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import org.bson.Document
 import org.bson.types.Binary
 
-suspend fun portrait(event: Interaction<ApplicationCommandData>) {
+suspend fun card(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
     val guildId: String = event.guild_id !!
 
@@ -48,35 +47,33 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
             Json.parseToJsonElement(characterIdDocument.toJson()).jsonObject["character_id"] !!.jsonPrimitive.int
 
         val mongoCollection = mongoDatabase.getCollection("lodestone")
-        val mongoPortrait =
+        val mongoCard =
             mongoCollection.find(Filters.eq("character_id", characterId)).projection(
                 Projections.fields(
-                    Projections.include("portrait.binary"), Projections.excludeId()
+                    Projections.include("card.binary"), Projections.excludeId()
                 )
             ).first()
 
-        lateinit var portrait: ByteArray
-        if (mongoPortrait != null && mongoPortrait["portrait"] != null) {
-            portrait =
-                ((mongoPortrait["portrait"] as Document)["binary"] as Binary).data
+        lateinit var card: ByteArray
+        if (mongoCard != null && mongoCard["card"] != null) {
+            card = ((mongoCard["card"] as Document)["binary"] as Binary).data
         } else {
-            val ktorClient = HttpClient(Java)
-            portrait = ktorClient.get(
-                XivApiClient(ktorClient = ktorClient).profile(characterId).jsonObject["Character"] !!.jsonObject["Portrait"] !!.jsonPrimitive.content
-            ).body()
+            card =
+                HttpClient(Java).get("https://xiv-character-cards.drakon.cloud/characters/id/$characterId.png")
+                    .body()
 
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
                     Updates.set(
-                        "portrait.binary", portrait
+                        "card.binary", card
                     ), Updates.set(
-                        "portrait.timestamp", LocalDateTime.now()
+                        "card.timestamp", LocalDateTime.now()
                     )
                 ), UpdateOptions().upsert(true)
             )
         }
 
-        val filename = "${characterId}_portrait.jpg"
+        val filename = "${characterId}_card.png"
 
         tempestClient.editOriginalInteractionResponse(
             EditWebhookMessage(
@@ -88,8 +85,8 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
                     File(
                         id = "0",
                         filename = filename,
-                        bytes = portrait,
-                        contentType = "image/jpeg"
+                        bytes = card,
+                        contentType = "image/png"
                     )
                 )
             ), event.token
