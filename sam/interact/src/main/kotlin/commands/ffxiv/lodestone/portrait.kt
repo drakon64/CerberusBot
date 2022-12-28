@@ -20,6 +20,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import org.bson.Document
 import org.bson.types.Binary
 
 suspend fun portrait(event: Interaction<ApplicationCommandData>) {
@@ -46,17 +47,17 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
             Json.parseToJsonElement(characterIdDocument.toJson()).jsonObject["character_id"] !!.jsonPrimitive.int
 
         val mongoCollection = mongoDatabase.getCollection("lodestone")
-
         val mongoPortrait =
             mongoCollection.find(Filters.eq("character_id", characterId)).projection(
                 Projections.fields(
-                    Projections.include("portrait"), Projections.excludeId()
+                    Projections.include("portrait.binary"), Projections.excludeId()
                 )
             ).first()
 
         lateinit var portrait: ByteArray
         if (mongoPortrait != null) {
-            portrait = (mongoPortrait["portrait"] as Binary).data
+            portrait =
+                ((mongoPortrait["portrait"] as Document)["binary"] as Binary).data
         } else {
             val ktorClient = HttpClient(Java)
             portrait = ktorClient.get(
@@ -65,7 +66,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
 
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.set(
-                    "portrait", portrait
+                    "portrait.binary", portrait
                 ), UpdateOptions().upsert(true)
             )
         }
