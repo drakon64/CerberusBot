@@ -3,12 +3,8 @@ on:
     branches:
       - main
     paths:
-      - "**.kt"
-      - "**.kts"
+      - scripts/commands/commands.py
   workflow_dispatch:
-
-permissions:
-  packages: read
 
 jobs:
   deploy:
@@ -17,21 +13,16 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
         with:
-          python-version: "3.7"
-      - uses: aws-actions/setup-sam@v2
+          python-version: "3.11"
+      - run: pip3 install requests boto3 --no-input
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
-      - run: sam build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - shell: bash
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
-          MONGODB_URL: ${{ secrets.MONGODB_URL }}
         run: |
-          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL"
+          python3 scripts/commands/commands.py

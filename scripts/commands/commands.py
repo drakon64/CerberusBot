@@ -1,10 +1,9 @@
 import json
+import os
 
 import requests
 
 from localizations import languages, translate_text
-
-commands = json.load(open("commands.json", "r"))
 
 application_commands = (
     {
@@ -122,8 +121,8 @@ application_commands = (
     },
 )
 
-application_id = commands["application_id"]
-bot_token = commands["bot_token"]
+application_id = os.environ["APPLICATION_ID"]
+bot_token = os.environ["BOT_TOKEN"]
 
 for command in application_commands:
     if command["type"] == 1:
