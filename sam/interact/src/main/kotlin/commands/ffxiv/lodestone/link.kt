@@ -37,7 +37,7 @@ suspend fun link(event: Interaction<ApplicationCommandData>) {
                 Filters.and(
                     Filters.eq("user_id", userId), Filters.eq("guild_id", guildId)
                 ), Updates.set(
-                    "character_id", characters.jsonObject["ID"] !!.jsonPrimitive.int
+                    "character_id", characters[0].jsonObject["ID"] !!.jsonPrimitive.int
                 ), UpdateOptions().upsert(true)
             )
 
