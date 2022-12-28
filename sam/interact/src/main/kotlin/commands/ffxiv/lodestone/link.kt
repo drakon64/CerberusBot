@@ -14,7 +14,7 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun Link(
+suspend fun link(
     event: Interaction<ApplicationCommandData>,
     characterName: String,
     world: String,
