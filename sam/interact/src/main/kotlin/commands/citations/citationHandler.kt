@@ -10,32 +10,15 @@ val mongoCollection: MongoCollection<Document> =
     mongoDatabase.getCollection("citations")
 
 suspend fun citationHandler(event: Interaction<ApplicationCommandData>) {
-    lateinit var userId: String
-    val guildId: String = event.guild_id !!
-
     when (event.data !!.type) {
-        1 -> {
-            val options = event.data !!.options !![0]
-
-            for (i in options.options !!) {
-                if (i.name == "user") {
-                    userId = i.value !!
-                }
-            }
-
-            when (options.name) {
-                "add" -> return addCitation(event)
-                "get" -> return getCitation(event, userId, guildId)
-                "opt-in" -> return optIn(event, guildId)
-                "opt-out" -> return optOut(event, guildId)
-            }
+        1 -> when (event.data !!.options !![0].name) {
+            "add" -> return addCitation(event)
+            "get" -> return getCitation(event)
+            "opt-in" -> return optIn(event)
+            "opt-out" -> return optOut(event)
         }
 
-        2 -> {
-            userId = event.data !!.resolved !!.users !!.keys.first()
-
-            return getCitation(event, userId, guildId)
-        }
+        2 -> return getCitation(event)
 
         3 -> return addCitation(event)
     }

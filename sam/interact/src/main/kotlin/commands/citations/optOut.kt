@@ -7,15 +7,17 @@ import cloud.drakon.tempestbot.interact.Handler
 import com.mongodb.client.model.Filters
 import org.bson.Document
 
-suspend fun optOut(event: Interaction<ApplicationCommandData>, guildId: String) {
+suspend fun optOut(event: Interaction<ApplicationCommandData>) {
+    val userId = event.member !!.user !!.id
+    val guildId = event.guild_id
+
     val document = Document()
-    document.append("user_id", event.member !!.user !!.id)
+    document.append("user_id", userId)
     document.append("guild_id", guildId)
 
     mongoCollection.deleteOne(
         Filters.and(
-            Filters.eq("user_id", event.member !!.user !!.id),
-            Filters.eq("guild_id", guildId)
+            Filters.eq("user_id", userId), Filters.eq("guild_id", guildId)
         )
     )
 

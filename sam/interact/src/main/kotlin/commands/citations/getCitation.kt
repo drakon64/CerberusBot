@@ -11,14 +11,22 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun getCitation(
-    event: Interaction<ApplicationCommandData>,
-    userId: String,
-    guildId: String,
-) {
+suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
+    lateinit var userId: String
+
+    when (event.data !!.type) {
+        1 -> for (i in event.data !!.options !![0].options !!) {
+            when (i.name) {
+                "user" -> userId = i.value !!
+            }
+        }
+
+        2 -> userId = event.data !!.resolved !!.users !!.keys.first()
+    }
+
     val citations = mongoCollection.find(
         Filters.and(
-            Filters.eq("user_id", userId), Filters.eq("guild_id", guildId)
+            Filters.eq("user_id", userId), Filters.eq("guild_id", event.guild_id)
         )
     ).projection(
         Projections.fields(Projections.include("messages"), Projections.excludeId())
