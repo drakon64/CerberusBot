@@ -19,7 +19,7 @@ _TempestBot_ is a Discord bot that runs on AWS Lambda.
 ### Final Fantasy XIV features
 
 - Lodestone: Link your Discord account to a Final Fantasy XIV character and display your characters
-  ~~card~~/portrait/~~profile~~. Uses XIVAPI ~~and https://github.com/xivapi/XIV-Character-Cards~~.
+  card/portrait/~~profile~~. Uses XIVAPI and https://github.com/xivapi/XIV-Character-Cards.
 - Universalis: Search the Final Fantasy XIV market board for an item in a given world, datacenter, or region.
   Uses https://github.com/Universalis-FFXIV/Universalis.
 
