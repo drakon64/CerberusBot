@@ -1,6 +1,11 @@
 version: 2
 updates:
   - package-ecosystem: "gradle" # See documentation for possible values
-    directory: [ "/sam/defer", "/sam/interact" ] # Location of package manifests
+    directory: "/sam/defer" # Location of package manifests
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gradle" # See documentation for possible values
+    directory: "/sam/interact" # Location of package manifests
     schedule:
       interval: "daily"
