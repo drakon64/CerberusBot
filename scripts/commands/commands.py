@@ -92,6 +92,19 @@ application_commands = (
                 "description": "Unlink your Discord account from a Final Fantasy XIV character",
                 "type": 1,
             },
+            {
+                "name": "portrait",
+                "description": "Get Lodestone portrait",
+                "type": 1,
+                "options": (
+                    {
+                        "name": "user",
+                        "description": "The user to get a Lodestone portrait for",
+                        "type": 6,
+                        "required": True,
+                    },
+                ),
+            },
         ),
     },
     {

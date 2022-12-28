@@ -83,4 +83,14 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
             }
         }.bodyAsText())
     }
+
+    suspend fun profile(lodestoneId: Int, extended: Boolean? = null): JsonElement {
+        return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/character/$lodestoneId") {
+            url {
+                if (extended != null) {
+                    parameters.append("extended", extended.toBinaryString())
+                }
+            }
+        }.bodyAsText())
+    }
 }

@@ -7,5 +7,6 @@ suspend fun lodestoneHandler(event: Interaction<ApplicationCommandData>) {
     when (event.data !!.options !![0].name) {
         "link" -> return link(event)
         "unlink" -> return unlink(event)
+        "portrait" -> return portrait(event)
     }
 }
