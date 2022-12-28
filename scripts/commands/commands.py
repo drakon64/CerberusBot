@@ -87,6 +87,11 @@ application_commands = (
                     },
                 ),
             },
+            {
+                "name": "unlink",
+                "description": "Unlink your Discord account from a Final Fantasy XIV character",
+                "type": 1,
+            },
         ),
     },
     {
@@ -204,6 +209,7 @@ for command in application_commands:
                         )
                         .replace(" ", "_")
                         .replace("...", "")
+                        .replace("'", "")
                         .lower()
                     }
                 )
@@ -257,6 +263,7 @@ for command in application_commands:
                             "description_localizations"
                         ] = description_localizations
 
+# json.dump(application_commands, open("discord.json", "w"), indent=4)
 print(
     json.dumps(
         json.loads(

@@ -6,5 +6,6 @@ import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandDat
 suspend fun lodestoneHandler(event: Interaction<ApplicationCommandData>) {
     when (event.data !!.options !![0].name) {
         "link" -> return link(event)
+        "unlink" -> return unlink(event)
     }
 }
