@@ -59,6 +59,8 @@ Resources:
             Ref: PublicKeyParameter
           MONGODB_URL:
             Ref: MongoDbUrl
+          MONGODB_DATABASE:
+            Ref: MongoDbDatabase
       Policies:
         - Statement:
             - Sid: Translate
@@ -100,3 +102,7 @@ Parameters:
   MongoDbUrl:
     Type: String
     NoEcho: True
+  MongoDbDatabase:
+    Type: String
+    NoEcho: True
+    Default: tempestbot

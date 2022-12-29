@@ -33,5 +33,6 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
           MONGODB_URL: ${{ secrets.MONGODB_URL }}
+          MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
         run: |
-          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL"
+          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL MongoDbDatabase=$MONGODB_DATABASE"

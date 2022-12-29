@@ -27,7 +27,8 @@ class Handler: RequestStreamHandler {
         val region: String = System.getenv("AWS_REGION")
 
         val mongoDatabase: MongoDatabase =
-            MongoClients.create(System.getenv("MONGODB_URL")).getDatabase("lambdabot")
+            MongoClients.create(System.getenv("MONGODB_URL"))
+                .getDatabase(System.getenv("MONGODB_DATABASE"))
 
         val json = Json {
             ignoreUnknownKeys =
