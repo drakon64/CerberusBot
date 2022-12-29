@@ -1,5 +1,4 @@
 .aws-sam
-canary.toml
 .DS_Store
 
 .idea/discord.xml
