@@ -63,14 +63,14 @@ application_commands = (
     },
     {
         "name": "lodestone",
-        "description": "Final Fantasy XIV Lodestone",
+        "description": "Final Fantasy XIV, The Lodestone",
         "default_member_permissions": 0,
         "dm_permission": False,
         "type": 1,
         "options": (
             {
                 "name": "card",
-                "description": "Get Lodestone card",
+                "description": "Get a character card of a users Final Fantasy XIV character",
                 "type": 1,
                 "options": (
                     {
@@ -107,7 +107,7 @@ application_commands = (
             },
             {
                 "name": "portrait",
-                "description": "Get Lodestone portrait",
+                "description": "Get a portrait of a users Final Fantasy XIV character",
                 "type": 1,
                 "options": (
                     {
@@ -120,7 +120,7 @@ application_commands = (
             },
             {
                 "name": "profile",
-                "description": "Get Lodestone profile",
+                "description": "Get a profile of a users Final Fantasy XIV character",
                 "type": 1,
                 "options": (
                     {
