@@ -67,7 +67,7 @@ suspend fun card(event: Interaction<ApplicationCommandData>) {
                     Updates.set(
                         "card.binary", card
                     ), Updates.set(
-                        "card.timestamp", LocalDateTime.now()
+                        "card.timestamp", timestamp
                     ), Updates.set(
                         "timestamp", timestamp
                     )
