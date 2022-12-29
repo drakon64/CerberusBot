@@ -125,7 +125,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
                 embeds = arrayOf(
                     Embed(
                         title = characterName,
-                        description = characterTitle,
+                        description = "*$characterTitle*",
                         url = "https://eu.finalfantasyxiv.com/lodestone/character/$characterId",
                         thumbnail = EmbedThumbnail(url = "attachment://${filename}"),
                         fields = arrayOf(
