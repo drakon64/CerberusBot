@@ -1,7 +1,10 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
 
+import cloud.drakon.tempest.File
+import cloud.drakon.tempest.channel.Attachment
 import cloud.drakon.tempest.channel.embed.Embed
 import cloud.drakon.tempest.channel.embed.EmbedField
+import cloud.drakon.tempest.channel.embed.EmbedThumbnail
 import cloud.drakon.tempest.interaction.Interaction
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempest.webbook.EditWebhookMessage
@@ -124,9 +127,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
                         title = characterName,
                         description = characterTitle,
                         url = "https://eu.finalfantasyxiv.com/lodestone/character/$characterId",
-
-                        //                        thumbnail = EmbedThumbnail(url = "attachment://${filename}"),
-
+                        thumbnail = EmbedThumbnail(url = "attachment://${filename}"),
                         fields = arrayOf(
                             EmbedField(
                                 name = "World (Datacenter)",
@@ -138,21 +139,18 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
                             )
                         )
                     )
+                ), files = arrayOf(
+                    File(
+                        id = "0",
+                        filename = filename,
+                        contentType = "image/jpeg",
+                        bytes = characterAvatar
+                    )
+                ), attachments = arrayOf(
+                    Attachment(
+                        id = "0", filename = filename, description = characterName
+                    )
                 )
-
-                //                , files = arrayOf(
-                //                    File(
-                //                        id = "0",
-                //                        filename = filename,
-                //                        contentType = "image/jpeg",
-                //                        bytes = characterAvatar
-                //                    )
-                //                ), attachments = arrayOf(
-                //                    Attachment(
-                //                        id = "0", filename = filename, description = characterName
-                //                    )
-                //                )
-
             ), event.token
         )
     } else {
