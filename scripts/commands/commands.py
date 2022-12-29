@@ -118,6 +118,19 @@ application_commands = (
                     },
                 ),
             },
+            {
+                "name": "profile",
+                "description": "Get Lodestone profile",
+                "type": 1,
+                "options": (
+                    {
+                        "name": "user",
+                        "description": "The user to get a Lodestone profile for",
+                        "type": 6,
+                        "required": True,
+                    },
+                ),
+            },
         ),
     },
     {

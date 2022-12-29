@@ -9,5 +9,6 @@ suspend fun lodestoneHandler(event: Interaction<ApplicationCommandData>) {
         "link" -> return link(event)
         "unlink" -> return unlink(event)
         "portrait" -> return portrait(event)
+        "profile" -> return profile(event)
     }
 }
