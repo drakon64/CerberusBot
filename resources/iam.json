@@ -1,0 +1,79 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:GetTemplateSummary",
+        "sts:GetCallerIdentity",
+        "translate:TranslateText"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:CreateChangeSet",
+        "cloudformation:DescribeChangeSet",
+        "cloudformation:DescribeStackEvents",
+        "cloudformation:DescribeStacks",
+        "cloudformation:ExecuteChangeSet"
+      ],
+      "Resource": [
+        "arn:aws:cloudformation:eu-west-2:***:stack/aws-sam-cli-managed-default/${StackId}",
+        "arn:aws:cloudformation:eu-west-2:***:stack/TempestBot/${StackId}",
+        "arn:aws:cloudformation:eu-west-2:aws:transform/Serverless-2016-10-31"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:AttachRolePolicy",
+        "iam:CreateRole",
+        "iam:CreateServiceLinkedRole",
+        "iam:GetRole",
+        "iam:GetRolePolicy",
+        "iam:PassRole",
+        "iam:PutRolePolicy"
+      ],
+      "Resource": [
+        "arn:aws:iam::***:role/TempestBot-TempestBotDeferFunctionRole",
+        "arn:aws:iam::***:role/TempestBot-TempestBotInteractFunctionRole"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt"
+      ],
+      "Resource": "arn:aws:kms:eu-west-2:***:key/${KeyId}"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "lambda:AddPermission",
+        "lambda:CreateFunction",
+        "lambda:GetFunction",
+        "lambda:GetFunctionCodeSigningConfig",
+        "lambda:ListTags",
+        "lambda:UpdateFunctionCode",
+        "lambda:UpdateFunctionConfiguration"
+      ],
+      "Resource": [
+        "arn:aws:lambda:eu-west-2:***:function:TempestBot-TempestBotInteractFunction",
+        "arn:aws:lambda:eu-west-2:***:function:TempestBot-TempestBotDeferFunction"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::aws-sam-cli-managed-default-samclisourcebucket/*"
+    }
+  ]
+}
