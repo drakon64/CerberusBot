@@ -16,7 +16,7 @@ import kotlinx.serialization.json.jsonPrimitive
 
 suspend fun link(event: Interaction<ApplicationCommandData>) {
     val userId: String = event.member !!.user !!.id
-    val guildId: String = event.guild_id !!
+    val guildId: String = event.guildId !!
     lateinit var characterName: String
     lateinit var world: String
 

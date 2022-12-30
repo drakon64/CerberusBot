@@ -9,7 +9,7 @@ import com.mongodb.client.model.Filters
 
 suspend fun unlink(event: Interaction<ApplicationCommandData>) {
     val userId: String = event.member !!.user !!.id
-    val guildId: String = event.guild_id !!
+    val guildId: String = event.guildId !!
 
     mongoDatabase.getCollection("lodestone_link").deleteOne(
         Filters.and(

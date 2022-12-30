@@ -14,7 +14,7 @@ suspend fun addCitation(
 ) {
     lateinit var message: String
     lateinit var userId: String
-    val guildId = event.guild_id
+    val guildId = event.guildId
 
     when (event.data !!.type) {
         1 -> for (i in event.data !!.options !![0].options !!) {

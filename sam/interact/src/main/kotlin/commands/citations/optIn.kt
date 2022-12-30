@@ -10,7 +10,7 @@ import org.bson.Document
 suspend fun optIn(event: Interaction<ApplicationCommandData>) {
     val document = Document()
     document.append("user_id", event.member !!.user !!.id)
-    document.append("guild_id", event.guild_id)
+    document.append("guild_id", event.guildId)
 
     val content: String = try {
         mongoCollection.insertOne(document)

@@ -26,7 +26,7 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
 
     val citations = mongoCollection.find(
         Filters.and(
-            Filters.eq("user_id", userId), Filters.eq("guild_id", event.guild_id)
+            Filters.eq("user_id", userId), Filters.eq("guild_id", event.guildId)
         )
     ).projection(
         Projections.fields(Projections.include("messages"), Projections.excludeId())

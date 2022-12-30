@@ -30,7 +30,7 @@ import org.bson.types.Binary
 
 suspend fun profile(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
-    val guildId: String = event.guild_id !!
+    val guildId: String = event.guildId !!
 
     for (i in event.data !!.options !![0].options !!) {
         when (i.name) {

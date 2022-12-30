@@ -9,7 +9,7 @@ import org.bson.Document
 
 suspend fun optOut(event: Interaction<ApplicationCommandData>) {
     val userId = event.member !!.user !!.id
-    val guildId = event.guild_id
+    val guildId = event.guildId
 
     val document = Document()
     document.append("user_id", userId)
