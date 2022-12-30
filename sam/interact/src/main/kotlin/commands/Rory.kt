@@ -10,9 +10,11 @@ import cloud.drakon.tempestbot.interact.api.rory.RoryClient
 suspend fun rory(event: Interaction<ApplicationCommandData>) {
     var id: Byte? = null
 
-    for (i in event.data !!.options !!) {
-        when (i.name) {
-            "id" -> id = i.value !!.toByte()
+    if (event.data !!.options != null) {
+        for (i in event.data !!.options !!) {
+            when (i.name) {
+                "id" -> id = i.value !!.toByte()
+            }
         }
     }
 
