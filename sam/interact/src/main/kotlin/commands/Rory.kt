@@ -7,9 +7,10 @@ import cloud.drakon.tempestbot.interact.Handler
 import cloud.drakon.tempestbot.interact.api.rory.RoryClient
 
 suspend fun rory(event: Interaction<ApplicationCommandData>) {
+    val rory = RoryClient().getRory()
+
     Handler.ktDiscordClient.editOriginalInteractionResponse(
-        EditWebhookMessage(
-            RoryClient().getRory().url
-        ), event.token
+        EditWebhookMessage(content = "https://rory.cat/id/${rory.id}"),
+        event.token
     )
 }
