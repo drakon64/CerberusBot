@@ -1,3 +1,4 @@
+name: Put application commands
 on:
   push:
     branches:
