@@ -134,6 +134,13 @@ application_commands = (
         ),
     },
     {
+        "name": "rory",
+        "description": "cat",
+        "default_member_permissions": 0,
+        "dm_permission": True,
+        "type": 1,
+    },
+    {
         "name": "translate",
         "description": "Translate to or from other languages",
         "default_member_permissions": 0,

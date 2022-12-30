@@ -7,6 +7,7 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
+import cloud.drakon.tempestbot.interact.commands.rory
 import cloud.drakon.tempestbot.interact.commands.translate
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
@@ -58,7 +59,7 @@ class Handler: RequestStreamHandler {
                     )
 
                     "lodestone" -> lodestoneHandler(applicationCommand)
-
+                    "rory" -> rory(applicationCommand)
                     "translate", "Translate" -> translate(applicationCommand, logger)
                     "universalis" -> universalis(applicationCommand, logger)
                     else -> {
