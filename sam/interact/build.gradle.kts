@@ -30,6 +30,11 @@ dependencies {
     // Citations
     implementation("org.mongodb:mongodb-driver-sync:4.8.1")
 
+    // Rory
+    val ktorVersion = "2.2.1"
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
     // Translate
     implementation("aws.sdk.kotlin:translate:0.19.2-beta")
 
