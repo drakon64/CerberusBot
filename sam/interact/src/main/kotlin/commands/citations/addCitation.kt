@@ -1,8 +1,8 @@
 package cloud.drakon.tempestbot.interact.commands.citations
 
-import cloud.drakon.discordkt.interaction.Interaction
-import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.discordkt.webbook.EditWebhookMessage
+import cloud.drakon.ktdiscord.interaction.Interaction
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
@@ -41,13 +41,13 @@ suspend fun addCitation(
     )
 
     if (query != null && query.isNotEmpty()) {
-        Handler.discordKtClient.editOriginalInteractionResponse(
+        Handler.ktDiscordClient.editOriginalInteractionResponse(
             EditWebhookMessage(
                 content = "> " + message.replace("\n", "\n> ") + "\n- <@$userId>"
             ), interactionToken = event.token
         )
     } else {
-        Handler.discordKtClient.editOriginalInteractionResponse(
+        Handler.ktDiscordClient.editOriginalInteractionResponse(
             EditWebhookMessage(
                 content = "User has not opted-in to citations!"
             ), interactionToken = event.token
@@ -55,6 +55,6 @@ suspend fun addCitation(
 
         delay(5000)
 
-        Handler.discordKtClient.deleteOriginalInteractionResponse(event.token)
+        Handler.ktDiscordClient.deleteOriginalInteractionResponse(event.token)
     }
 }

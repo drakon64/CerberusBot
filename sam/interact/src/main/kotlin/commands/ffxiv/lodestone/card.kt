@@ -1,11 +1,11 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
 
-import cloud.drakon.discordkt.channel.Attachment
-import cloud.drakon.discordkt.file.File
-import cloud.drakon.discordkt.interaction.Interaction
-import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.discordkt.webbook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler.Companion.discordKtClient
+import cloud.drakon.ktdiscord.channel.Attachment
+import cloud.drakon.ktdiscord.file.File
+import cloud.drakon.ktdiscord.interaction.Interaction
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
@@ -77,7 +77,7 @@ suspend fun card(event: Interaction<ApplicationCommandData>) {
 
         val filename = "${characterId}_card.png"
 
-        discordKtClient.editOriginalInteractionResponse(
+        ktDiscordClient.editOriginalInteractionResponse(
             EditWebhookMessage(
                 attachments = arrayOf(
                     Attachment(
@@ -94,7 +94,7 @@ suspend fun card(event: Interaction<ApplicationCommandData>) {
             ), event.token
         )
     } else {
-        discordKtClient.editOriginalInteractionResponse(
+        ktDiscordClient.editOriginalInteractionResponse(
             EditWebhookMessage(
                 "User does not have a linked Lodestone character!"
             ), event.token

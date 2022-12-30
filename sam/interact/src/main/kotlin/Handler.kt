@@ -1,9 +1,9 @@
 package cloud.drakon.tempestbot.interact
 
-import cloud.drakon.discordkt.DiscordKtClient
-import cloud.drakon.discordkt.interaction.Interaction
-import cloud.drakon.discordkt.interaction.InteractionJsonSerializer
-import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.KtDiscordClient
+import cloud.drakon.ktdiscord.interaction.Interaction
+import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
@@ -19,7 +19,7 @@ import kotlinx.serialization.json.Json
 
 class Handler: RequestStreamHandler {
     companion object {
-        val discordKtClient = DiscordKtClient(
+        val ktDiscordClient = KtDiscordClient(
             System.getenv("APPLICATION_ID"),
             System.getenv("BOT_TOKEN"),
             System.getenv("PUBLIC_KEY")

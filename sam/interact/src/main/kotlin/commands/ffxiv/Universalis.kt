@@ -1,12 +1,12 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv
 
 import aws.smithy.kotlin.runtime.util.length
-import cloud.drakon.discordkt.channel.embed.Embed
-import cloud.drakon.discordkt.channel.embed.EmbedField
-import cloud.drakon.discordkt.channel.embed.EmbedThumbnail
-import cloud.drakon.discordkt.interaction.Interaction
-import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.discordkt.webbook.EditWebhookMessage
+import cloud.drakon.ktdiscord.channel.embed.Embed
+import cloud.drakon.ktdiscord.channel.embed.EmbedField
+import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
+import cloud.drakon.ktdiscord.interaction.Interaction
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
 import cloud.drakon.tempestbot.interact.api.UniversalisClient
 import cloud.drakon.tempestbot.interact.api.XivApiClient
@@ -100,7 +100,7 @@ suspend fun universalis(
         totalPrices = "N/A"
     }
 
-    Handler.discordKtClient.editOriginalInteractionResponse(
+    Handler.ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             embeds = arrayOf(
                 Embed(

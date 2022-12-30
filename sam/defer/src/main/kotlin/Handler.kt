@@ -4,10 +4,10 @@ import aws.sdk.kotlin.services.lambda.LambdaClient
 import aws.sdk.kotlin.services.lambda.model.InvocationType
 import aws.sdk.kotlin.services.lambda.model.InvokeRequest
 import aws.sdk.kotlin.services.lambda.model.LogType
-import cloud.drakon.discordkt.DiscordKtClient
-import cloud.drakon.discordkt.interaction.InteractionType
-import cloud.drakon.discordkt.interaction.response.InteractionCallbackType
-import cloud.drakon.discordkt.interaction.response.InteractionResponse
+import cloud.drakon.ktdiscord.KtDiscordClient
+import cloud.drakon.ktdiscord.interaction.InteractionType
+import cloud.drakon.ktdiscord.interaction.response.InteractionCallbackType
+import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent
@@ -20,7 +20,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
 class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
-    private val discordKtClient = DiscordKtClient(
+    private val discordKtClient = KtDiscordClient(
         System.getenv("APPLICATION_ID"),
         System.getenv("BOT_TOKEN"),
         System.getenv("PUBLIC_KEY")

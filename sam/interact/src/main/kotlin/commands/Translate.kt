@@ -2,9 +2,9 @@ package cloud.drakon.tempestbot.interact.commands
 
 import aws.sdk.kotlin.services.translate.TranslateClient
 import aws.sdk.kotlin.services.translate.translateText
-import cloud.drakon.discordkt.interaction.Interaction
-import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.discordkt.webbook.EditWebhookMessage
+import cloud.drakon.ktdiscord.interaction.Interaction
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 
@@ -45,7 +45,7 @@ suspend fun translate(
         "${translation.sourceLanguageCode}: ${translation.translatedText}"
     } else translation.translatedText !!
 
-    Handler.discordKtClient.editOriginalInteractionResponse(
+    Handler.ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(content = translatedMessage), event.token
     )
 }

@@ -1,14 +1,14 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
 
-import cloud.drakon.discordkt.channel.Attachment
-import cloud.drakon.discordkt.channel.embed.Embed
-import cloud.drakon.discordkt.channel.embed.EmbedField
-import cloud.drakon.discordkt.channel.embed.EmbedThumbnail
-import cloud.drakon.discordkt.file.File
-import cloud.drakon.discordkt.interaction.Interaction
-import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.discordkt.webbook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler.Companion.discordKtClient
+import cloud.drakon.ktdiscord.channel.Attachment
+import cloud.drakon.ktdiscord.channel.embed.Embed
+import cloud.drakon.ktdiscord.channel.embed.EmbedField
+import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
+import cloud.drakon.ktdiscord.file.File
+import cloud.drakon.ktdiscord.interaction.Interaction
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.api.XivApiClient
 import com.mongodb.client.model.Filters
@@ -120,7 +120,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
 
         val filename = "${characterId}_avatar.jpg"
 
-        discordKtClient.editOriginalInteractionResponse(
+        ktDiscordClient.editOriginalInteractionResponse(
             EditWebhookMessage(
                 embeds = arrayOf(
                     Embed(
@@ -154,7 +154,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             ), event.token
         )
     } else {
-        discordKtClient.editOriginalInteractionResponse(
+        ktDiscordClient.editOriginalInteractionResponse(
             EditWebhookMessage(
                 "User does not have a linked Lodestone character!"
             ), event.token
