@@ -21,7 +21,7 @@ suspend fun optOut(event: Interaction<ApplicationCommandData>) {
         )
     )
 
-    Handler.tempestClient.editOriginalInteractionResponse(
+    Handler.discordKtClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             content = "Opted out of citations!"
         ), interactionToken = event.token

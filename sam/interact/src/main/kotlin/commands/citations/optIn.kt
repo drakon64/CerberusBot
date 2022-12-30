@@ -19,7 +19,7 @@ suspend fun optIn(event: Interaction<ApplicationCommandData>) {
         "Already opted-in to citations!"
     }
 
-    Handler.tempestClient.editOriginalInteractionResponse(
+    Handler.discordKtClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             content = content
         ), interactionToken = event.token

@@ -100,7 +100,7 @@ suspend fun universalis(
         totalPrices = "N/A"
     }
 
-    Handler.tempestClient.editOriginalInteractionResponse(
+    Handler.discordKtClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             embeds = arrayOf(
                 Embed(

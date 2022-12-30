@@ -45,7 +45,7 @@ suspend fun translate(
         "${translation.sourceLanguageCode}: ${translation.translatedText}"
     } else translation.translatedText !!
 
-    Handler.tempestClient.editOriginalInteractionResponse(
+    Handler.discordKtClient.editOriginalInteractionResponse(
         EditWebhookMessage(content = translatedMessage), event.token
     )
 }

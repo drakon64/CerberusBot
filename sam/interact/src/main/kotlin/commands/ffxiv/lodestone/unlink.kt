@@ -3,8 +3,8 @@ package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
 import cloud.drakon.discordkt.interaction.Interaction
 import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.discordkt.webbook.EditWebhookMessage
+import cloud.drakon.tempestbot.interact.Handler.Companion.discordKtClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
-import cloud.drakon.tempestbot.interact.Handler.Companion.tempestClient
 import com.mongodb.client.model.Filters
 
 suspend fun unlink(event: Interaction<ApplicationCommandData>) {
@@ -17,7 +17,7 @@ suspend fun unlink(event: Interaction<ApplicationCommandData>) {
         )
     )
 
-    tempestClient.editOriginalInteractionResponse(
+    discordKtClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             "Removed Lodestone character link."
         ), event.token

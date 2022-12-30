@@ -54,7 +54,7 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
         content = "User has not opted-in to citations!"
     }
 
-    Handler.tempestClient.editOriginalInteractionResponse(
+    Handler.discordKtClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             content = content
         ), interactionToken = event.token
@@ -63,6 +63,6 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
     if (error) {
         delay(5000)
 
-        Handler.tempestClient.deleteOriginalInteractionResponse(event.token)
+        Handler.discordKtClient.deleteOriginalInteractionResponse(event.token)
     }
 }

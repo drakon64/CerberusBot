@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    implementation("cloud.drakon:discordkt:0.0.1-SNAPSHOT")
+    implementation("cloud.drakon:discordkt:0.0.1")
 
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
 

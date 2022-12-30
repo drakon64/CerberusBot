@@ -41,13 +41,13 @@ suspend fun addCitation(
     )
 
     if (query != null && query.isNotEmpty()) {
-        Handler.tempestClient.editOriginalInteractionResponse(
+        Handler.discordKtClient.editOriginalInteractionResponse(
             EditWebhookMessage(
                 content = "> " + message.replace("\n", "\n> ") + "\n- <@$userId>"
             ), interactionToken = event.token
         )
     } else {
-        Handler.tempestClient.editOriginalInteractionResponse(
+        Handler.discordKtClient.editOriginalInteractionResponse(
             EditWebhookMessage(
                 content = "User has not opted-in to citations!"
             ), interactionToken = event.token
@@ -55,6 +55,6 @@ suspend fun addCitation(
 
         delay(5000)
 
-        Handler.tempestClient.deleteOriginalInteractionResponse(event.token)
+        Handler.discordKtClient.deleteOriginalInteractionResponse(event.token)
     }
 }
