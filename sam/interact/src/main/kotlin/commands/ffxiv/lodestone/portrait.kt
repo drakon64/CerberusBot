@@ -1,7 +1,7 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
 
-import cloud.drakon.tempest.File
 import cloud.drakon.tempest.channel.Attachment
+import cloud.drakon.tempest.file.File
 import cloud.drakon.tempest.interaction.Interaction
 import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempest.webbook.EditWebhookMessage
