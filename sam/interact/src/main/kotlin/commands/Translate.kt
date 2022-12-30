@@ -2,9 +2,9 @@ package cloud.drakon.tempestbot.interact.commands
 
 import aws.sdk.kotlin.services.translate.TranslateClient
 import aws.sdk.kotlin.services.translate.translateText
-import cloud.drakon.tempest.interaction.Interaction
-import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.tempest.webbook.EditWebhookMessage
+import cloud.drakon.discordkt.interaction.Interaction
+import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.discordkt.webbook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 

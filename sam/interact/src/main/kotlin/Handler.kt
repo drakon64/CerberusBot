@@ -1,9 +1,9 @@
 package cloud.drakon.tempestbot.interact
 
-import cloud.drakon.tempest.TempestClient
-import cloud.drakon.tempest.interaction.Interaction
-import cloud.drakon.tempest.interaction.InteractionJsonSerializer
-import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.discordkt.TempestClient
+import cloud.drakon.discordkt.interaction.Interaction
+import cloud.drakon.discordkt.interaction.InteractionJsonSerializer
+import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis

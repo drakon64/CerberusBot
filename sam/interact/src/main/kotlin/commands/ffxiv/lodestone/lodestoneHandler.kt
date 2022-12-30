@@ -1,7 +1,7 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
 
-import cloud.drakon.tempest.interaction.Interaction
-import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.discordkt.interaction.Interaction
+import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
 
 suspend fun lodestoneHandler(event: Interaction<ApplicationCommandData>) {
     when (event.data !!.options !![0].name) {

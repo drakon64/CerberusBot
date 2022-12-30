@@ -1,10 +1,10 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
 
-import cloud.drakon.tempest.channel.Attachment
-import cloud.drakon.tempest.file.File
-import cloud.drakon.tempest.interaction.Interaction
-import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.tempest.webbook.EditWebhookMessage
+import cloud.drakon.discordkt.channel.Attachment
+import cloud.drakon.discordkt.file.File
+import cloud.drakon.discordkt.interaction.Interaction
+import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.discordkt.webbook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.Handler.Companion.tempestClient
 import com.mongodb.client.model.Filters

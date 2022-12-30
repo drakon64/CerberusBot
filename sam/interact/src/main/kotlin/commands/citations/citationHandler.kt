@@ -1,7 +1,7 @@
 package cloud.drakon.tempestbot.interact.commands.citations
 
-import cloud.drakon.tempest.interaction.Interaction
-import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.discordkt.interaction.Interaction
+import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import com.mongodb.client.MongoCollection
 import org.bson.Document

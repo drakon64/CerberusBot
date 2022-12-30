@@ -4,10 +4,10 @@ import aws.sdk.kotlin.services.lambda.LambdaClient
 import aws.sdk.kotlin.services.lambda.model.InvocationType
 import aws.sdk.kotlin.services.lambda.model.InvokeRequest
 import aws.sdk.kotlin.services.lambda.model.LogType
-import cloud.drakon.tempest.TempestClient
-import cloud.drakon.tempest.interaction.InteractionType
-import cloud.drakon.tempest.interaction.response.InteractionCallbackType
-import cloud.drakon.tempest.interaction.response.InteractionResponse
+import cloud.drakon.discordkt.TempestClient
+import cloud.drakon.discordkt.interaction.InteractionType
+import cloud.drakon.discordkt.interaction.response.InteractionCallbackType
+import cloud.drakon.discordkt.interaction.response.InteractionResponse
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent

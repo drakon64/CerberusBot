@@ -1,8 +1,8 @@
 package cloud.drakon.tempestbot.interact.commands.citations
 
-import cloud.drakon.tempest.interaction.Interaction
-import cloud.drakon.tempest.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.tempest.webbook.EditWebhookMessage
+import cloud.drakon.discordkt.interaction.Interaction
+import cloud.drakon.discordkt.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.discordkt.webbook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
 import com.mongodb.MongoWriteException
 import org.bson.Document
