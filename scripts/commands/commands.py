@@ -139,6 +139,15 @@ application_commands = (
         "default_member_permissions": 0,
         "dm_permission": True,
         "type": 1,
+        "options": (
+            {
+                "name": "id",
+                "description": "Rory ID",
+                "type": 10,
+                "max_value": 127,
+                "required": True,
+            },
+        ),
     },
     {
         "name": "translate",
