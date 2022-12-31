@@ -143,7 +143,7 @@ application_commands = (
                 "name": "id",
                 "description": "Rory ID",
                 "type": 4,
-                "max_value": 127,
+                "max_value": 123,
                 "required": False,
             },
         ),
