@@ -137,7 +137,6 @@ application_commands = (
         "name": "rory",
         "description": "cat",
         "default_member_permissions": 0,
-        "dm_permission": True,
         "type": 1,
         "options": (
             {
@@ -178,7 +177,6 @@ application_commands = (
     {
         "name": "Translate",
         "default_member_permissions": 0,
-        "dm_permission": False,
         "type": 3,
     },
     {
