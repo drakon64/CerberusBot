@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    implementation("cloud.drakon:ktdiscord:0.0.1")
+    implementation("cloud.drakon:ktdiscord:1.0.3")
 
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
     implementation("com.amazonaws:aws-lambda-java-events:3.11.0")
