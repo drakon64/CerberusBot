@@ -5,6 +5,7 @@ import aws.sdk.kotlin.services.lambda.model.InvocationType
 import aws.sdk.kotlin.services.lambda.model.InvokeRequest
 import aws.sdk.kotlin.services.lambda.model.LogType
 import cloud.drakon.ktdiscord.KtDiscordClient
+import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.InteractionType
 import cloud.drakon.ktdiscord.interaction.response.InteractionCallbackType
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
@@ -15,9 +16,6 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 
 class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     private val discordKtClient = KtDiscordClient(
@@ -45,7 +43,9 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
 
             response.statusCode = 401
             return@runBlocking response
-        } else when (json.parseToJsonElement(event.body).jsonObject["type"] !!.jsonPrimitive.int) {
+        } else when (json.decodeFromString(
+            InteractionJsonSerializer, event.body
+        ).type) {
             InteractionType.PING -> {
                 logger.log("Received PING")
 
