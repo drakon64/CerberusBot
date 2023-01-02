@@ -20,11 +20,11 @@ import kotlinx.serialization.json.Json
 
 class Handler: RequestStreamHandler {
     companion object {
-        val ktDiscordClient = KtDiscordClient(
-            System.getenv("APPLICATION_ID"),
-            System.getenv("BOT_TOKEN"),
-            System.getenv("PUBLIC_KEY")
-        )
+        val ktDiscordClient =
+            KtDiscordClient(
+                System.getenv("APPLICATION_ID"),
+                System.getenv("BOT_TOKEN")
+            ).Interaction(System.getenv("PUBLIC_KEY"))
         val region: String = System.getenv("AWS_REGION")
 
         val mongoDatabase: MongoDatabase =

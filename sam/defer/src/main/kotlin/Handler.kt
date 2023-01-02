@@ -21,10 +21,8 @@ import kotlinx.serialization.json.jsonPrimitive
 
 class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     private val discordKtClient = KtDiscordClient(
-        System.getenv("APPLICATION_ID"),
-        System.getenv("BOT_TOKEN"),
-        System.getenv("PUBLIC_KEY")
-    )
+        System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
+    ).Interaction(System.getenv("PUBLIC_KEY"))
     private val json = Json
     private val headers = mapOf("Content-Type" to "application/json")
     private val lambdaClient = LambdaClient { region = System.getenv("AWS_REGION") }
