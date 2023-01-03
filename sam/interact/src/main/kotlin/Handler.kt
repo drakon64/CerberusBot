@@ -20,11 +20,9 @@ import kotlinx.serialization.json.Json
 
 class Handler: RequestStreamHandler {
     companion object {
-        val ktDiscordClient =
-            KtDiscordClient(
-                System.getenv("APPLICATION_ID"),
-                System.getenv("BOT_TOKEN")
-            ).Interaction(System.getenv("PUBLIC_KEY"))
+        val ktDiscordClient = KtDiscordClient(
+            System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
+        ).Interaction(System.getenv("PUBLIC_KEY"))
         val region: String = System.getenv("AWS_REGION")
 
         val mongoDatabase: MongoDatabase =
@@ -51,8 +49,7 @@ class Handler: RequestStreamHandler {
 
         when (event.data) {
             is ApplicationCommandData -> {
-                val applicationCommand: Interaction<ApplicationCommandData> =
-                    event as Interaction<ApplicationCommandData>
+                val applicationCommand = event as Interaction<ApplicationCommandData>
                 when (applicationCommand.data !!.name) {
                     "citation", "Add citation", "Get citation" -> citationHandler(
                         applicationCommand
