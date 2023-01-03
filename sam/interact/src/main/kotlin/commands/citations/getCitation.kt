@@ -17,7 +17,7 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
     when (event.data !!.type) {
         1 -> for (i in event.data !!.options !![0].options !!) {
             when (i.name) {
-                "user" -> userId = i.value !!
+                "user" -> userId = i.value !! as String
             }
         }
 

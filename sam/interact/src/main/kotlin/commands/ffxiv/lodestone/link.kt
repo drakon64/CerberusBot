@@ -22,8 +22,8 @@ suspend fun link(event: Interaction<ApplicationCommandData>) {
 
     for (i in event.data !!.options !![0].options !!) {
         when (i.name) {
-            "character" -> characterName = i.value !!
-            "world" -> world = i.value !!
+            "character" -> characterName = i.value !! as String
+            "world" -> world = i.value !! as String
         }
     }
 

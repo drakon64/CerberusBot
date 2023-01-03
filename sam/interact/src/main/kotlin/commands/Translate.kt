@@ -21,9 +21,9 @@ suspend fun translate(
     when (event.data !!.type) {
         1 -> for (i in event.data !!.options !!) {
             when (i.name) {
-                "message" -> message = i.value !!
-                "to" -> to = i.value !!
-                "from" -> from = i.value !!
+                "message" -> message = i.value !! as String
+                "to" -> to = i.value !! as String
+                "from" -> from = i.value !! as String
             }
         }
 

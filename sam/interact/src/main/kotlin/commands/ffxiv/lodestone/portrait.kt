@@ -30,7 +30,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
 
     for (i in event.data !!.options !![0].options !!) {
         when (i.name) {
-            "user" -> userId = i.value !!
+            "user" -> userId = i.value !! as String
         }
     }
 
