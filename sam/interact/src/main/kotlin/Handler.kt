@@ -52,7 +52,7 @@ class Handler: RequestStreamHandler {
                 val applicationCommand = event as Interaction<ApplicationCommandData>
                 when (applicationCommand.data !!.name) {
                     "citation", "Add citation", "Get citation" -> citationHandler(
-                        applicationCommand
+                        applicationCommand, logger
                     )
 
                     "lodestone" -> lodestoneHandler(applicationCommand)
