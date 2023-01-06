@@ -19,8 +19,8 @@ suspend fun addCitation(
     when (event.data !!.type) {
         1 -> for (i in event.data !!.options !![0].options !!) {
             when (i.name) {
-                "citation" -> message = i.value !! as String
-                "user" -> userId = i.value !! as String
+                "citation" -> message = i.value !!
+                "user" -> userId = i.value !!
             }
         }
 

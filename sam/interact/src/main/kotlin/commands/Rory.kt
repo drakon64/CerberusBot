@@ -13,7 +13,7 @@ suspend fun rory(event: Interaction<ApplicationCommandData>) {
     if (event.data !!.options != null) {
         for (i in event.data !!.options !!) {
             when (i.name) {
-                "id" -> id = i.value !! as Byte
+                "id" -> id = i.value !!.toByte()
             }
         }
     }

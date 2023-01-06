@@ -21,7 +21,7 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     private val discordKtClient = KtDiscordClient(
         System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
     ).Interaction(System.getenv("PUBLIC_KEY"))
-    private val json = Json { ignoreUnknownKeys = true }
+    private val json = Json { ignoreUnknownKeys = true; isLenient = true }
     private val headers = mapOf("Content-Type" to "application/json")
     private val lambdaClient = LambdaClient { region = System.getenv("AWS_REGION") }
     private val interactFunctionName = System.getenv("INTERACT_FUNCTION")

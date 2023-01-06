@@ -36,9 +36,9 @@ suspend fun universalis(
     when (event.data !!.type) {
         1 -> for (i in event.data !!.options !!) {
             when (i.name) {
-                "item" -> item = i.value !! as String
-                "world" -> world = i.value !! as String
-                "high_quality" -> highQuality = i.value !! as Boolean
+                "item" -> item = i.value !!
+                "world" -> world = i.value !!
+                "high_quality" -> highQuality = i.value !!.toBooleanStrict()
             }
         }
 
