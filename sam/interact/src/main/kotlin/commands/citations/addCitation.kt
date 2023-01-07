@@ -89,7 +89,11 @@ suspend fun addCitation(event: Interaction<ApplicationCommandData>) {
                         HttpClient(Java).get(i.url !!).body() as ByteArray
                     )
                 )
-                webhookAttachments.add(Attachment(i.id, i.filename, i.contentType))
+                webhookAttachments.add(
+                    Attachment(
+                        i.id, i.filename, i.contentType, ephemeral = true
+                    )
+                )
             }
         }
         if (message.isNotEmpty()) {
