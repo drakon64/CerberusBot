@@ -22,10 +22,12 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
-      - run: sam build
+      - name: sam build
+        run: sam build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - shell: bash
+      - name: sam deploy
+        shell: bash
         env:
           APPLICATION_ID: ${{ secrets.CANARY_APPLICATION_ID }}
           BOT_TOKEN: ${{ secrets.CANARY_BOT_TOKEN }}
