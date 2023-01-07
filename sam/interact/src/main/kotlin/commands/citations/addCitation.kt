@@ -6,7 +6,6 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
 import cloud.drakon.tempestbot.interact.Handler.Companion.json
-import com.amazonaws.services.lambda.runtime.LambdaLogger
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
 import kotlinx.coroutines.delay
@@ -15,10 +14,7 @@ import org.bson.BsonArray
 import org.bson.BsonDocument
 import org.bson.Document
 
-suspend fun addCitation(
-    event: Interaction<ApplicationCommandData>,
-    logger: LambdaLogger,
-) {
+suspend fun addCitation(event: Interaction<ApplicationCommandData>) {
     var attachments: Array<Attachment>? = null
     lateinit var message: String
     lateinit var userId: String
