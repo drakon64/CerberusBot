@@ -45,7 +45,18 @@ suspend fun addCitation(event: Interaction<ApplicationCommandData>) {
     } else {
         val array = BsonArray()
         for (i in attachments) {
-            array.add(BsonDocument.parse(json.encodeToString(i)))
+            array.add(
+                BsonDocument.parse(
+                    json.encodeToString(
+                        Attachment(
+                            id = i.id,
+                            filename = i.filename,
+                            url = i.url,
+                            proxyUrl = i.proxyUrl
+                        )
+                    )
+                )
+            )
         }
         document.append("attachments", array)
     }
