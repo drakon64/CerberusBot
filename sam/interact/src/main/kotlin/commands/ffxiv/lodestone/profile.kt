@@ -20,12 +20,10 @@ import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
 import java.time.LocalDateTime
-import kotlin.properties.Delegates
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import org.bson.Document
 import org.bson.types.Binary
 
 suspend fun profile(event: Interaction<ApplicationCommandData>) {
@@ -50,39 +48,37 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
         val characterId =
             Json.parseToJsonElement(characterIdDocument.toJson()).jsonObject["character_id"] !!.jsonPrimitive.int
 
-        val mongoCollection = mongoDatabase.getCollection("lodestone")
+        val mongoCollection = mongoDatabase.getCollection("lodestone_profile")
         val mongoProfile =
             mongoCollection.find(Filters.eq("character_id", characterId)).projection(
                 Projections.fields(
-                    Projections.include("profile.character_name"),
-                    Projections.include("profile.title"),
-                    Projections.include("profile.server"),
-                    Projections.include("profile.datacenter"),
-                    Projections.include("profile.avatar"),
-                    Projections.include("profile.class"),
-                    Projections.include("profile.level"),
+                    Projections.include("character_name"),
+                    Projections.include("title"),
+                    Projections.include("server"),
+                    Projections.include("datacenter"),
+                    Projections.include("avatar"),
+                    Projections.include("class"),
+                    Projections.include("level"),
                     Projections.excludeId()
                 )
             ).first()
 
-        lateinit var characterName: String
-        lateinit var characterTitle: String
-        lateinit var characterServer: String
-        lateinit var characterDatacenter: String
-        lateinit var characterAvatar: ByteArray
-        lateinit var characterClass: String
-        var characterLevel by Delegates.notNull<Int>()
+        val characterName: String
+        val characterTitle: String
+        val characterServer: String
+        val characterDatacenter: String
+        val characterAvatar: ByteArray
+        val characterClass: String
+        val characterLevel: Int
 
-        if (mongoProfile != null && mongoProfile["profile"] != null) {
-            val profile = mongoProfile["profile"] as Document
-
-            characterName = profile["character_name"] as String
-            characterTitle = profile["title"] as String
-            characterServer = profile["server"] as String
-            characterDatacenter = profile["datacenter"] as String
-            characterAvatar = (profile["avatar"] as Binary).data
-            characterClass = profile["class"] as String
-            characterLevel = profile["level"] as Int
+        if (mongoProfile != null) {
+            characterName = mongoProfile["character_name"] as String
+            characterTitle = mongoProfile["title"] as String
+            characterServer = mongoProfile["server"] as String
+            characterDatacenter = mongoProfile["datacenter"] as String
+            characterAvatar = (mongoProfile["avatar"] as Binary).data
+            characterClass = mongoProfile["class"] as String
+            characterLevel = mongoProfile["level"] as Int
         } else {
             val ktorClient = HttpClient(Java)
             val profile = XivApiClient(ktorClient = ktorClient).profile(
@@ -100,20 +96,18 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             characterClass =
                 profile.jsonObject["ActiveClassJob"] !!.jsonObject["UnlockedState"] !!.jsonObject["Name"] !!.jsonPrimitive.content
             characterLevel =
-                profile.jsonObject["ActiveClassJob"] !!.jsonObject["Level"] !!.jsonPrimitive.content.toInt()
+                profile.jsonObject["ActiveClassJob"] !!.jsonObject["Level"] !!.jsonPrimitive.int
 
-            val timestamp = LocalDateTime.now()
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
-                    Updates.set("profile.character_name", characterName),
-                    Updates.set("profile.title", characterTitle),
-                    Updates.set("profile.server", characterServer),
-                    Updates.set("profile.datacenter", characterDatacenter),
-                    Updates.set("profile.avatar", characterAvatar),
-                    Updates.set("profile.class", characterClass),
-                    Updates.set("profile.level", characterLevel),
-                    Updates.set("profile.timestamp", timestamp),
-                    Updates.set("timestamp", timestamp)
+                    Updates.set("character_name", characterName),
+                    Updates.set("title", characterTitle),
+                    Updates.set("server", characterServer),
+                    Updates.set("datacenter", characterDatacenter),
+                    Updates.set("avatar", characterAvatar),
+                    Updates.set("class", characterClass),
+                    Updates.set("level", characterLevel),
+                    Updates.set("timestamp", LocalDateTime.now())
                 ), UpdateOptions().upsert(true)
             )
         }

@@ -20,7 +20,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import org.bson.Document
 import org.bson.types.Binary
 
 suspend fun card(event: Interaction<ApplicationCommandData>) {
@@ -45,32 +44,26 @@ suspend fun card(event: Interaction<ApplicationCommandData>) {
         val characterId =
             Json.parseToJsonElement(characterIdDocument.toJson()).jsonObject["character_id"] !!.jsonPrimitive.int
 
-        val mongoCollection = mongoDatabase.getCollection("lodestone")
+        val mongoCollection = mongoDatabase.getCollection("lodestone_card")
         val mongoCard =
             mongoCollection.find(Filters.eq("character_id", characterId)).projection(
                 Projections.fields(
-                    Projections.include("card.binary"), Projections.excludeId()
+                    Projections.include("binary"), Projections.excludeId()
                 )
             ).first()
 
         lateinit var card: ByteArray
-        if (mongoCard != null && mongoCard["card"] != null) {
-            card = ((mongoCard["card"] as Document)["binary"] as Binary).data
+        if (mongoCard != null) {
+            card = (mongoCard["binary"] as Binary).data
         } else {
             card =
                 HttpClient(Java).get("https://xiv-character-cards.drakon.cloud/characters/id/$characterId.png")
                     .body()
 
-            val timestamp = LocalDateTime.now()
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
-                    Updates.set(
-                        "card.binary", card
-                    ), Updates.set(
-                        "card.timestamp", timestamp
-                    ), Updates.set(
-                        "timestamp", timestamp
-                    )
+                    Updates.set("binary", card),
+                    Updates.set("timestamp", LocalDateTime.now())
                 ), UpdateOptions().upsert(true)
             )
         }

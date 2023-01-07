@@ -21,7 +21,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import org.bson.Document
 import org.bson.types.Binary
 
 suspend fun portrait(event: Interaction<ApplicationCommandData>) {
@@ -46,34 +45,27 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
         val characterId =
             Json.parseToJsonElement(characterIdDocument.toJson()).jsonObject["character_id"] !!.jsonPrimitive.int
 
-        val mongoCollection = mongoDatabase.getCollection("lodestone")
+        val mongoCollection = mongoDatabase.getCollection("lodestone_portrait")
         val mongoPortrait =
             mongoCollection.find(Filters.eq("character_id", characterId)).projection(
                 Projections.fields(
-                    Projections.include("portrait.binary"), Projections.excludeId()
+                    Projections.include("binary"), Projections.excludeId()
                 )
             ).first()
 
         lateinit var portrait: ByteArray
-        if (mongoPortrait != null && mongoPortrait["portrait"] != null) {
-            portrait =
-                ((mongoPortrait["portrait"] as Document)["binary"] as Binary).data
+        if (mongoPortrait != null) {
+            portrait = (mongoPortrait["binary"] as Binary).data
         } else {
             val ktorClient = HttpClient(Java)
             portrait = ktorClient.get(
                 XivApiClient(ktorClient = ktorClient).profile(characterId).jsonObject["Character"] !!.jsonObject["Portrait"] !!.jsonPrimitive.content
             ).body()
 
-            val timestamp = LocalDateTime.now()
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
-                    Updates.set(
-                        "portrait.binary", portrait
-                    ), Updates.set(
-                        "portrait.timestamp", timestamp
-                    ), Updates.set(
-                        "timestamp", timestamp
-                    )
+                    Updates.set("binary", portrait),
+                    Updates.set("timestamp", LocalDateTime.now())
                 ), UpdateOptions().upsert(true)
             )
         }
