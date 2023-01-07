@@ -53,7 +53,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
                 )
             ).first()
 
-        lateinit var portrait: ByteArray
+        val portrait: ByteArray
         if (mongoPortrait != null) {
             portrait = (mongoPortrait["binary"] as Binary).data
         } else {

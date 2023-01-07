@@ -52,7 +52,7 @@ suspend fun card(event: Interaction<ApplicationCommandData>) {
                 )
             ).first()
 
-        lateinit var card: ByteArray
+        val card: ByteArray
         if (mongoCard != null) {
             card = (mongoCard["binary"] as Binary).data
         } else {
