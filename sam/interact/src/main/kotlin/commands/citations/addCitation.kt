@@ -80,6 +80,7 @@ suspend fun addCitation(event: Interaction<ApplicationCommandData>) {
     if (query != null && query.isNotEmpty()) {
         val files = ArrayList<File>()
         val webhookAttachments = ArrayList<Attachment>()
+
         if (attachments != null) {
             for (i in attachments) {
                 files.add(
@@ -97,37 +98,24 @@ suspend fun addCitation(event: Interaction<ApplicationCommandData>) {
                 )
             }
         }
-        if (message.isNotEmpty()) {
-            Handler.ktDiscordClient.editOriginalInteractionResponse(
-                EditWebhookMessage(
-                    content = "> " + message.replace("\n", "\n> ") + "\n- <@$userId>",
-                    files = if (files.isNotEmpty()) {
-                        files.toTypedArray()
-                    } else {
-                        null
-                    },
-                    attachments = if (webhookAttachments.isNotEmpty()) {
-                        webhookAttachments.toTypedArray()
-                    } else {
-                        null
-                    }
-                ), interactionToken = event.token
-            )
-        } else {
-            Handler.ktDiscordClient.editOriginalInteractionResponse(
-                EditWebhookMessage(
-                    content = "- <@$userId>", files = if (files.isNotEmpty()) {
-                        files.toTypedArray()
-                    } else {
-                        null
-                    }, attachments = if (webhookAttachments.isNotEmpty()) {
-                        webhookAttachments.toTypedArray()
-                    } else {
-                        null
-                    }
-                ), interactionToken = event.token
-            )
-        }
+
+        Handler.ktDiscordClient.editOriginalInteractionResponse(
+            EditWebhookMessage(
+                content = if (message.isNotEmpty()) {
+                    "> " + message.replace("\n", "\n> ") + "\n- <@$userId>"
+                } else {
+                    "- <@$userId>"
+                }, files = if (files.isNotEmpty()) {
+                    files.toTypedArray()
+                } else {
+                    null
+                }, attachments = if (webhookAttachments.isNotEmpty()) {
+                    webhookAttachments.toTypedArray()
+                } else {
+                    null
+                }
+            ), interactionToken = event.token
+        )
     } else {
         Handler.ktDiscordClient.editOriginalInteractionResponse(
             EditWebhookMessage(
