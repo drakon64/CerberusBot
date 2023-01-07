@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.api
+package cloud.drakon.tempestbot.interact.api.xivapi
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java

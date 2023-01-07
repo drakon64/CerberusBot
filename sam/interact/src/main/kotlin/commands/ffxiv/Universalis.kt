@@ -8,8 +8,8 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
-import cloud.drakon.tempestbot.interact.api.UniversalisClient
-import cloud.drakon.tempestbot.interact.api.XivApiClient
+import cloud.drakon.tempestbot.interact.api.universalis.UniversalisClient
+import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
