@@ -111,7 +111,7 @@ suspend fun addCitation(event: Interaction<ApplicationCommandData>) {
         } else {
             Handler.ktDiscordClient.editOriginalInteractionResponse(
                 EditWebhookMessage(
-                    files = if (files.isNotEmpty()) {
+                    content = "- <@$userId>", files = if (files.isNotEmpty()) {
                         files.toTypedArray()
                     } else {
                         null
