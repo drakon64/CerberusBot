@@ -55,13 +55,14 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
                         i.jsonObject["content"] !!.jsonPrimitive.content
                     )
                 }
-                if (i.jsonObject["attachments"] !!.jsonObject.isNotEmpty()) {
-                    attachments.add(
-                        Json.decodeFromJsonElement(
-                            Attachment.serializer(),
-                            i.jsonObject["attachments"] !!.jsonObject
+                if (i.jsonObject["attachments"] !!.jsonArray.isNotEmpty()) {
+                    for (j in i.jsonObject["attachments"] !!.jsonArray) {
+                        attachments.add(
+                            Json.decodeFromJsonElement(
+                                Attachment.serializer(), j.jsonObject
+                            )
                         )
-                    )
+                    }
                 }
             }
 
