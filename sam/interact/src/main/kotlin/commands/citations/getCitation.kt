@@ -50,7 +50,7 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
 
         if (messagesJson.isNotEmpty()) {
             for (i in messagesJson) {
-                if (i.jsonObject["content"] !!.jsonPrimitive.content.isNotEmpty() && i.jsonObject["content"] !!.jsonPrimitive.content != "null") {
+                if (i.jsonObject["content"] !!.jsonPrimitive.content.isNotEmpty() && i.jsonObject["content"] !!.jsonPrimitive.content != "null") { // TODO: Serialise to a class so we don't have this ugly null check
                     messages.add(
                         i.jsonObject["content"] !!.jsonPrimitive.content
                     )
