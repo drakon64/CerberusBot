@@ -40,7 +40,7 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
     ).first()
 
     var error = true
-    lateinit var content: String
+    val content: String
     val attachments = ArrayList<Attachment>()
 
     if (citations != null) {
@@ -50,7 +50,7 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
 
         if (messagesJson.isNotEmpty()) {
             for (i in messagesJson) {
-                if (i.jsonObject["content"] !!.jsonPrimitive.content.isNotEmpty()) {
+                if (i.jsonObject["content"] !!.jsonPrimitive.content.isNotEmpty() && i.jsonObject["content"] !!.jsonPrimitive.content != "null") {
                     messages.add(
                         i.jsonObject["content"] !!.jsonPrimitive.content
                     )
