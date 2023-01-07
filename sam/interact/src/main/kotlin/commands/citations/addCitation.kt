@@ -56,6 +56,7 @@ suspend fun addCitation(event: Interaction<ApplicationCommandData>) {
                         Attachment(
                             id = i.id,
                             filename = i.filename,
+                            contentType = i.contentType,
                             url = i.url,
                             proxyUrl = i.proxyUrl
                         )
