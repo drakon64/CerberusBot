@@ -26,8 +26,6 @@ dependencies {
     implementation("cloud.drakon:ktdiscord:5.0.1")
 
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
-
-    // Citations
     implementation("org.mongodb:mongodb-driver-sync:4.8.1")
 
     // Rory
@@ -38,7 +36,7 @@ dependencies {
     // Translate
     implementation("aws.sdk.kotlin:translate:0.19.2-beta")
 
-    //Universalis
+    // Universalis
     implementation("org.jsoup:jsoup:1.15.3")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
