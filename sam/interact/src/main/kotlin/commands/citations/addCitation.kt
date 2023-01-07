@@ -12,6 +12,7 @@ import com.mongodb.client.model.Updates
 import kotlinx.coroutines.delay
 import kotlinx.serialization.encodeToString
 import org.bson.BsonArray
+import org.bson.BsonDocument
 import org.bson.Document
 
 suspend fun addCitation(
@@ -46,10 +47,11 @@ suspend fun addCitation(
     if (attachments == null) {
         document.append("attachments", null)
     } else {
-        document.append("attachments", BsonArray())
+        val array = BsonArray()
         for (i in attachments) {
-            document.append("attachments", Document.parse(json.encodeToString(i)))
+            array.add(BsonDocument.parse(json.encodeToString(i)))
         }
+        document.append("attachments", array)
     }
     if (message.isNotEmpty()) {
         document.append("content", message)
