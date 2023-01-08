@@ -13,8 +13,17 @@ repositories {
     mavenLocal()
 
     maven {
-        name = "GitHubPackages"
+        name = "KtDiscord"
         url = uri("https://maven.pkg.github.com/TempestProject/KtDiscord")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
+
+    maven {
+        name = "KtUniversalis"
+        url = uri("https://maven.pkg.github.com/drakon64/KtUniversalis")
         credentials {
             username = System.getenv("GITHUB_ACTOR")
             password = System.getenv("GITHUB_TOKEN")
@@ -37,6 +46,7 @@ dependencies {
     implementation("aws.sdk.kotlin:translate:0.19.2-beta")
 
     // Universalis
+    implementation("cloud.drakon:ktuniversalis:0.0.1-SNAPSHOT")
     implementation("org.jsoup:jsoup:1.15.3")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
