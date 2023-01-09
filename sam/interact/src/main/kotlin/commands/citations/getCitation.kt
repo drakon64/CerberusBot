@@ -44,11 +44,11 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
         val messagesJson: Citations =
             json.decodeFromString(Citations.serializer(), citations.toJson())
 
-        if (messagesJson.messages.isNotEmpty()) {
+        if (messagesJson.messages != null) {
             error = false
             val randomCitation = messagesJson.messages.random()
 
-            content = if (! randomCitation.content.isNullOrEmpty()) {
+            content = if (randomCitation.content != null) {
                 "> " + randomCitation.content.replace(
                     "\n", "\n> "
                 ) + "\n- <@$userId>"

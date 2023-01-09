@@ -4,7 +4,7 @@ import cloud.drakon.ktdiscord.channel.Attachment
 import kotlinx.serialization.Serializable
 
 @Serializable class Citations(
-    val messages: Array<Citation>,
+    val messages: Array<Citation>? = null,
 )
 
 @Serializable class Citation(
