@@ -46,7 +46,7 @@ dependencies {
     implementation("aws.sdk.kotlin:translate:0.19.2-beta")
 
     // Universalis
-    implementation("cloud.drakon:ktuniversalis:0.0.1-SNAPSHOT")
+    implementation("cloud.drakon:ktuniversalis:0.0.2")
     implementation("org.jsoup:jsoup:1.15.3")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
