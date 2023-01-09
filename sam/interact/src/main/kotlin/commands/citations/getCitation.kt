@@ -80,15 +80,18 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
     }
 
     val files = ArrayList<File>()
-    for (i in attachments) {
-        files.add(
-            File(
-                i.id,
-                i.filename,
-                i.contentType !!,
-                HttpClient(Java).get(i.url !!).body() as ByteArray
+    if (attachments.isNotEmpty()) {
+        val httpClient = HttpClient(Java)
+        for (i in attachments) {
+            files.add(
+                File(
+                    i.id,
+                    i.filename,
+                    i.contentType !!,
+                    httpClient.get(i.url !!).body() as ByteArray
+                )
             )
-        )
+        }
     }
 
     Handler.ktDiscordClient.editOriginalInteractionResponse(
