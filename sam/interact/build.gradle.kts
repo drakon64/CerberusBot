@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.0"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.0"
+    kotlin("jvm") version "1.8.10"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
 group = "cloud.drakon"
@@ -38,12 +38,12 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:4.8.2")
 
     // Rory
-    val ktorVersion = "2.2.2"
+    val ktorVersion = "2.2.3"
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
     // Translate
-    implementation("aws.sdk.kotlin:translate:0.19.5-beta")
+    implementation("aws.sdk.kotlin:translate:0.20.0-beta")
 
     // Universalis
     implementation("cloud.drakon:ktuniversalis:1.0.1")
