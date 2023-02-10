@@ -24,16 +24,19 @@ def lambda_handler(event, context):
     body = json.loads(raw_body)
 
     if body["type"] == InteractionType.PING:
+        print("Received PING")
         return {"type": InteractionResponseType.PONG}
     elif body["type"] in (
         InteractionType.APPLICATION_COMMAND,
         InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE,
     ):
+        print("Deferring channel message")
         response = InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
     elif body["type"] in (
         InteractionType.MESSAGE_COMPONENT,
         InteractionType.MODAL_SUBMIT,
     ):
+        print("Deferring update message")
         response = InteractionResponseType.DEFERRED_UPDATE_MESSAGE
 
     lambda_client.invoke(
