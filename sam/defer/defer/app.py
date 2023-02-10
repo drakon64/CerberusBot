@@ -4,6 +4,10 @@ import os
 import boto3
 from discord_interactions import InteractionResponseType, InteractionType, verify_key
 
+lambda_client = boto3.client("lambda")
+public_key = os.environ["PUBLIC_KEY"]
+interact_function = os.environ["INTERACT_FUNCTION"]
+
 
 def lambda_handler(event, context):
     headers = event["headers"]
@@ -13,7 +17,7 @@ def lambda_handler(event, context):
         raw_body,
         headers["x-signature-ed25519"],
         headers["x-signature-timestamp"],
-        os.environ["PUBLIC_KEY"],
+        public_key,
     ):
         return {"statusCode": 401}
 
@@ -32,10 +36,8 @@ def lambda_handler(event, context):
     ):
         response = InteractionResponseType.DEFERRED_UPDATE_MESSAGE
 
-    boto3.client("lambda").invoke(
-        FunctionName=os.environ["INTERACT_FUNCTION"],
-        InvocationType="Event",
-        Payload=raw_body,
+    lambda_client.invoke(
+        FunctionName=interact_function, InvocationType="Event", Payload=raw_body
     )
 
     return response
