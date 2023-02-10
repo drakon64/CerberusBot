@@ -11,16 +11,16 @@ import cloud.drakon.tempestbot.commands.ffxiv.universalis
 import cloud.drakon.tempestbot.commands.rory
 import cloud.drakon.tempestbot.commands.translate
 import com.amazonaws.services.lambda.runtime.Context
-import com.amazonaws.services.lambda.runtime.RequestStreamHandler
+import com.amazonaws.services.lambda.runtime.RequestHandler
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
-import java.io.InputStream
-import java.io.OutputStream
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 
-class Handler: RequestStreamHandler {
+class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     companion object {
         val ktDiscordClient = KtDiscordClient(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
@@ -39,28 +39,38 @@ class Handler: RequestStreamHandler {
     }
 
     override fun handleRequest(
-        inputStream: InputStream,
-        outputStream: OutputStream,
+        event: APIGatewayV2HTTPEvent,
         context: Context,
-    ) = runBlocking {
+    ): APIGatewayV2HTTPResponse = runBlocking {
         val logger = context.logger
+        val response = APIGatewayV2HTTPResponse()
 
-        val event: Interaction<*> = json.decodeFromString(
-            InteractionJsonSerializer, inputStream.readAllBytes().decodeToString()
-        )
+        if (! ktDiscordClient.validateRequest(
+                event.headers["x-signature-timestamp"] !!,
+                event.body,
+                event.headers["x-signature-ed25519"] !!
+            )
+        ) {
+            response.statusCode = 401
 
-        when (event.data) {
+            return@runBlocking response
+        }
+
+        val interaction: Interaction<*> =
+            json.decodeFromString(InteractionJsonSerializer, event.body)
+
+        when (interaction.data) {
             is ApplicationCommandData -> {
-
                 async {
                     ktDiscordClient.createInteractionResponse(
-                        interactionId = event.id,
-                        interactionToken = event.token,
+                        interactionId = interaction.id,
+                        interactionToken = interaction.token,
                         interactionResponse = InteractionResponse(type = 5)
                     )
                 }
 
-                val applicationCommand = event as Interaction<ApplicationCommandData>
+                val applicationCommand =
+                    interaction as Interaction<ApplicationCommandData>
                 when (applicationCommand.data !!.name) {
                     "citation", "Add citation", "Get citation" -> citationHandler(
                         applicationCommand
@@ -71,14 +81,17 @@ class Handler: RequestStreamHandler {
                     "translate", "Translate" -> translate(applicationCommand, logger)
                     "universalis" -> universalis(applicationCommand, logger)
                     else -> {
-                        logger.log("Unknown command: " + event.data !!.name)
+                        logger.log("Unknown command: " + interaction.data !!.name)
                     }
                 }
             }
 
             else -> {
-                logger.log("Unknown command type: " + event.javaClass)
+                logger.log("Unknown command type: " + interaction.javaClass)
             }
         }
+
+        response.statusCode = 200
+        return@runBlocking response
     }
 }
