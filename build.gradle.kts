@@ -11,28 +11,10 @@ version = "0.0.1-SNAPSHOT"
 repositories {
     mavenCentral()
     mavenLocal()
-
-    maven {
-        name = "KtDiscord"
-        url = uri("https://maven.pkg.github.com/TempestProject/KtDiscord")
-        credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
-        }
-    }
-
-    maven {
-        name = "KtUniversalis"
-        url = uri("https://maven.pkg.github.com/drakon64/KtUniversalis")
-        credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
-        }
-    }
 }
 
 dependencies {
-    implementation("cloud.drakon:ktdiscord:5.0.1")
+    implementation("cloud.drakon:ktdiscord:5.1.0")
 
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
     implementation("com.amazonaws:aws-lambda-java-events:3.11.0")

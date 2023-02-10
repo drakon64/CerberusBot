@@ -3,7 +3,9 @@ package cloud.drakon.tempestbot
 import cloud.drakon.ktdiscord.KtDiscordClient
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
+import cloud.drakon.ktdiscord.interaction.InteractionType
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.interaction.response.InteractionCallbackType
 import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
 import cloud.drakon.tempestbot.commands.citations.citationHandler
 import cloud.drakon.tempestbot.commands.ffxiv.lodestone.lodestoneHandler
@@ -18,6 +20,7 @@ import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
@@ -58,6 +61,14 @@ class Handler: RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
 
         val interaction: Interaction<*> =
             json.decodeFromString(InteractionJsonSerializer, event.body)
+
+        if (interaction.type == InteractionType.PING) {
+            response.body =
+                json.encodeToString(InteractionResponse(type = InteractionCallbackType.PONG))
+            response.statusCode = 200
+
+            return@runBlocking response
+        }
 
         when (interaction.data) {
             is ApplicationCommandData -> {
