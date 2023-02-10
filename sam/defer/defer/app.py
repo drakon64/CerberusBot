@@ -42,13 +42,18 @@ def lambda_handler(event, context):
         print("Deferring update message")
         response = {"type": InteractionResponseType.DEFERRED_UPDATE_MESSAGE}
 
-    lambda_client.invoke(
-        FunctionName=interact_function, InvocationType="Event", Payload=raw_body
+    defer = requests.post(
+        f"https://discord.com/api/v10/interactions/{body['id']}/{body['token']}/callback",
+        json=response,
     )
 
-    print(
-        requests.post(
-            f"https://discord.com/api/v10/interactions/{body['id']}/{body['token']}/callback",
-            json=response,
-        ).content
-    )
+    if defer.status_code == 204:
+        lambda_client.invoke(
+            FunctionName=interact_function, InvocationType="Event", Payload=raw_body
+        )
+
+        return True
+    else:
+        print(str(defer.content))
+
+        return False
