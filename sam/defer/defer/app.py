@@ -2,6 +2,7 @@ import json
 import os
 
 import boto3
+import requests
 from discord_interactions import InteractionResponseType, InteractionType, verify_key
 
 lambda_client = boto3.client("lambda")
@@ -45,4 +46,9 @@ def lambda_handler(event, context):
         FunctionName=interact_function, InvocationType="Event", Payload=raw_body
     )
 
-    return response
+    print(
+        requests.post(
+            f"https://discord.com/api/v10/interactions/{body['id']}/{body['token']}/callback",
+            json=response,
+        ).content
+    )
