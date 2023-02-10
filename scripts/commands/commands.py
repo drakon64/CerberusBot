@@ -70,7 +70,9 @@ application_commands = (
         "options": (
             {
                 "name": "card",
-                "description": "Get a character card of a users Final Fantasy XIV character",
+                "description": (
+                    "Get a character card of a users Final Fantasy XIV character"
+                ),
                 "type": 1,
                 "options": (
                     {
@@ -83,18 +85,24 @@ application_commands = (
             },
             {
                 "name": "link",
-                "description": "Link your Discord account to a Final Fantasy XIV character",
+                "description": (
+                    "Link your Discord account to a Final Fantasy XIV character"
+                ),
                 "type": 1,
                 "options": (
                     {
                         "name": "character",
-                        "description": "The name of the character to link your Discord account to",
+                        "description": (
+                            "The name of the character to link your Discord account to"
+                        ),
                         "type": 3,
                         "required": True,
                     },
                     {
                         "name": "world",
-                        "description": "The world of the character to link your Discord account to",
+                        "description": (
+                            "The world of the character to link your Discord account to"
+                        ),
                         "type": 3,
                         "required": True,
                     },
@@ -102,7 +110,9 @@ application_commands = (
             },
             {
                 "name": "unlink",
-                "description": "Unlink your Discord account from a Final Fantasy XIV character",
+                "description": (
+                    "Unlink your Discord account from a Final Fantasy XIV character"
+                ),
                 "type": 1,
             },
             {
@@ -174,11 +184,7 @@ application_commands = (
             },
         ),
     },
-    {
-        "name": "Translate",
-        "default_member_permissions": 0,
-        "type": 3,
-    },
+    {"name": "Translate", "default_member_permissions": 0, "type": 3},
     {
         "name": "universalis",
         "description": "Get Final Fantasy XIV market board item information",
@@ -220,12 +226,12 @@ for command in application_commands:
         if command["type"] == 1:
             name_localizations.update(
                 {
-                    language["discord"]: translate_text(
-                        command["name"], language["aws"]
+                    language["discord"]: (
+                        translate_text(command["name"], language["aws"])
+                        .replace(" ", "_")
+                        .replace("...", "")
+                        .lower()
                     )
-                    .replace(" ", "_")
-                    .replace("...", "")
-                    .lower()
                 }
             )
         else:
@@ -257,13 +263,15 @@ for command in application_commands:
             for language in languages:
                 name_localizations.update(
                     {
-                        language["discord"]: translate_text(
-                            sub_command_or_group["name"], language["aws"]
+                        language["discord"]: (
+                            translate_text(
+                                sub_command_or_group["name"], language["aws"]
+                            )
+                            .replace(" ", "_")
+                            .replace("...", "")
+                            .replace("'", "")
+                            .lower()
                         )
-                        .replace(" ", "_")
-                        .replace("...", "")
-                        .replace("'", "")
-                        .lower()
                     }
                 )
                 if "description" in sub_command_or_group:
@@ -280,9 +288,9 @@ for command in application_commands:
             )
 
             if "description" in sub_command_or_group:
-                sub_command_or_group[
-                    "description_localizations"
-                ] = description_localizations
+                sub_command_or_group["description_localizations"] = (
+                    description_localizations
+                )
 
             if "options" in sub_command_or_group:
                 for sub_command in sub_command_or_group["options"]:
@@ -292,12 +300,12 @@ for command in application_commands:
                     for language in languages:
                         name_localizations.update(
                             {
-                                language["discord"]: translate_text(
-                                    sub_command["name"], language["aws"]
+                                language["discord"]: (
+                                    translate_text(sub_command["name"], language["aws"])
+                                    .replace(" ", "_")
+                                    .replace("...", "")
+                                    .lower()
                                 )
-                                .replace(" ", "_")
-                                .replace("...", "")
-                                .lower()
                             }
                         )
                         if "description" in sub_command:
@@ -312,9 +320,9 @@ for command in application_commands:
                     sub_command["name"] = sub_command["name"].replace(" ", "_")
 
                     if "description" in sub_command:
-                        sub_command[
-                            "description_localizations"
-                        ] = description_localizations
+                        sub_command["description_localizations"] = (
+                            description_localizations
+                        )
 
 # json.dump(application_commands, open("discord.json", "w"), indent=4)
 print(
