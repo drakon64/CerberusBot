@@ -3,27 +3,22 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   TempestBot
 
-  Discord Interactions bot written in Kotlin
+  Discord Interactions bot written in Kotlin and Python
 
 Resources:
   TempestBotDeferFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: sam/defer
-      Handler: cloud.drakon.tempestbot.defer.Handler::handleRequest
-      Runtime: java11
+      CodeUri: sam/defer/defer
+      Handler: app.lambda_handler
+      Runtime: python3.9
       Architectures:
         - arm64
-      MemorySize: 2048
+      MemorySize: 512
       Timeout: 3
       Environment:
         Variables:
-          APPLICATION_ID:
-            Ref: ApplicationIDParameter
-          BOT_TOKEN:
-            Ref: BotTokenParameter
           INTERACT_FUNCTION: !Ref TempestBotInteractFunction
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
           PUBLIC_KEY:
             Ref: PublicKeyParameter
       Events:
