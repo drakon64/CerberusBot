@@ -14,7 +14,7 @@ Resources:
       Runtime: java11
       Architectures:
         - arm64
-      MemorySize: 4096
+      MemorySize: 2048
       Timeout: 900
       Environment:
         Variables:
@@ -22,6 +22,7 @@ Resources:
             Ref: ApplicationIDParameter
           BOT_TOKEN:
             Ref: BotTokenParameter
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
           PUBLIC_KEY:
             Ref: PublicKeyParameter
           MONGODB_URL:
