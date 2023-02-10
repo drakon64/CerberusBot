@@ -34,7 +34,7 @@ Resources:
             Method: post
       Policies:
         - Statement:
-            - Sid: Translate
+            - Sid: Interact
               Effect: Allow
               Action:
                 - lambda:InvokeFunction
