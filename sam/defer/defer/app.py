@@ -31,13 +31,15 @@ def lambda_handler(event, context):
         InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE,
     ):
         print("Deferring channel message")
-        response = InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
+        response = {
+            "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
+        }
     elif body["type"] in (
         InteractionType.MESSAGE_COMPONENT,
         InteractionType.MODAL_SUBMIT,
     ):
         print("Deferring update message")
-        response = InteractionResponseType.DEFERRED_UPDATE_MESSAGE
+        response = {"type": InteractionResponseType.DEFERRED_UPDATE_MESSAGE}
 
     lambda_client.invoke(
         FunctionName=interact_function, InvocationType="Event", Payload=raw_body
