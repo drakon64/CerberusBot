@@ -4,6 +4,7 @@ import cloud.drakon.ktdiscord.KtDiscordClient
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.interaction.response.InteractionResponse
 import cloud.drakon.tempestbot.commands.citations.citationHandler
 import cloud.drakon.tempestbot.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.commands.ffxiv.universalis
@@ -15,6 +16,7 @@ import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
 import java.io.InputStream
 import java.io.OutputStream
+import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 
@@ -49,6 +51,15 @@ class Handler: RequestStreamHandler {
 
         when (event.data) {
             is ApplicationCommandData -> {
+
+                async {
+                    ktDiscordClient.createInteractionResponse(
+                        interactionId = event.id,
+                        interactionToken = event.token,
+                        interactionResponse = InteractionResponse(type = 5)
+                    )
+                }
+
                 val applicationCommand = event as Interaction<ApplicationCommandData>
                 when (applicationCommand.data !!.name) {
                     "citation", "Add citation", "Get citation" -> citationHandler(
