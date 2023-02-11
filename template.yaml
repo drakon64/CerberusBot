@@ -3,18 +3,46 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   TempestBot
 
-  Discord Interactions bot written in Kotlin
+  Discord Interactions bot written in Kotlin and Python
 
 Resources:
-  TempestBotFunction:
+  TempestBotDeferFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: .
-      Handler: cloud.drakon.tempestbot.Handler::handleRequest
+      CodeUri: sam/defer/defer
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - arm64
+      MemorySize: 512
+      Timeout: 3
+      Environment:
+        Variables:
+          INTERACT_FUNCTION: !Ref TempestBotInteractFunction
+          PUBLIC_KEY:
+            Ref: PublicKeyParameter
+      Events:
+        DiscordInteraction:
+          Type: Api
+          Properties:
+            Path: /
+            Method: post
+      Policies:
+        - Statement:
+            - Sid: Interact
+              Effect: Allow
+              Action:
+                - lambda:InvokeFunction
+              Resource: !GetAtt TempestBotInteractFunction.Arn
+  TempestBotInteractFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: sam/interact
+      Handler: cloud.drakon.tempestbot.interact.Handler::handleRequest
       Runtime: java11
       Architectures:
         - arm64
-      MemorySize: 4096
+      MemorySize: 2048
       Timeout: 900
       Environment:
         Variables:
@@ -29,12 +57,6 @@ Resources:
             Ref: MongoDbUrl
           MONGODB_DATABASE:
             Ref: MongoDbDatabase
-      Events:
-        DiscordInteraction:
-          Type: Api
-          Properties:
-            Path: /
-            Method: post
       Policies:
         - Statement:
             - Sid: Translate
@@ -46,15 +68,22 @@ Resources:
 
 Outputs:
   TempestBot:
-    Description: "API Gateway endpoint URL for TempestBot function"
+    Description: "API Gateway endpoint URL for TempestBot Defer function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
 
-  TempestBotFunction:
-    Description: "TempestBot Lambda Function ARN"
-    Value: !GetAtt TempestBotFunction.Arn
-  TempestBotFunctionIamRole:
-    Description: "Implicit IAM Role created for TempestBot function"
-    Value: !GetAtt TempestBotFunctionRole.Arn
+  TempestBotDeferFunction:
+    Description: "TempestBot Defer Lambda Function ARN"
+    Value: !GetAtt TempestBotDeferFunction.Arn
+  TempestBotDeferFunctionIamRole:
+    Description: "Implicit IAM Role created for TempestBot Defer function"
+    Value: !GetAtt TempestBotDeferFunctionRole.Arn
+
+  TempestBotInteractFunction:
+    Description: "TempestBot Interact Lambda Function ARN"
+    Value: !GetAtt TempestBotInteractFunction.Arn
+  TempestBotInteractFunctionIamRole:
+    Description: "Implicit IAM Role created for TempestBot Interact function"
+    Value: !GetAtt TempestBotInteractFunctionRole.Arn
 
 Parameters:
   ApplicationIDParameter:
