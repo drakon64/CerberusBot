@@ -9,6 +9,7 @@ import cloud.drakon.tempestbot.interact.Handler
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import kotlinx.coroutines.delay
+import org.bson.types.ObjectId
 
 suspend fun stats(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
@@ -28,12 +29,11 @@ suspend fun stats(event: Interaction<ApplicationCommandData>) {
         Filters.and(
             Filters.eq("user_id", userId), Filters.eq("guild_id", event.guildId)
         )
-    ).projection(
-        Projections.fields(Projections.include("messages"), Projections.excludeId())
-    ).first()
+    ).projection(Projections.include("messages")).first()
 
     var error = true
     lateinit var citationCount: String
+    lateinit var since: String
     lateinit var errorString: String
 
     if (citations != null) {
@@ -44,6 +44,7 @@ suspend fun stats(event: Interaction<ApplicationCommandData>) {
             error = false
 
             citationCount = messagesJson.messages.count().toString()
+            since = (citations["_id"] as ObjectId).timestamp.toString()
         } else {
             errorString = "No citations saved for the user!"
         }
@@ -56,10 +57,10 @@ suspend fun stats(event: Interaction<ApplicationCommandData>) {
             EditWebhookMessage(
                 embeds = arrayOf(
                     Embed(
-                        "Citation stats",
-                        fields = arrayOf(
+                        "Citation stats", fields = arrayOf(
                             EmbedField("User", "<@${userId}>"),
-                            EmbedField("Count", citationCount)
+                            EmbedField("Count", citationCount, inline = true),
+                            EmbedField("Since", "<t:${since}:D>", inline = true)
                         )
                     )
                 )
