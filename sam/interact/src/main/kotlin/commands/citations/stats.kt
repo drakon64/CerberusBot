@@ -12,6 +12,7 @@ import kotlinx.coroutines.delay
 
 suspend fun stats(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
+    val nick: String
 
     when (event.data !!.type) {
         1 -> for (i in event.data !!.options !![0].options !!) {
@@ -55,8 +56,11 @@ suspend fun stats(event: Interaction<ApplicationCommandData>) {
             EditWebhookMessage(
                 embeds = arrayOf(
                     Embed(
-                        "Citation stats for user",
-                        fields = arrayOf(EmbedField("Count", citationCount))
+                        "Citation stats",
+                        fields = arrayOf(
+                            EmbedField("User", "<@${userId}>"),
+                            EmbedField("Count", citationCount)
+                        )
                     )
                 )
             )
