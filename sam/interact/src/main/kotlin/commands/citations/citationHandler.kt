@@ -16,6 +16,7 @@ suspend fun citationHandler(event: Interaction<ApplicationCommandData>) {
             "get" -> return getCitation(event)
             "opt-in" -> return optIn(event)
             "opt-out" -> return optOut(event)
+            "stats" -> return stats(event)
         }
 
         2 -> return getCitation(event)

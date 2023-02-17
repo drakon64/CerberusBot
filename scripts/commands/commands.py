@@ -2,7 +2,6 @@ import json
 import os
 
 import requests
-
 from localizations import languages, translate_text
 
 application_commands = (
@@ -47,6 +46,19 @@ application_commands = (
             },
             {"name": "opt-in", "description": "Opt-in to citations", "type": 1},
             {"name": "opt-out", "description": "Opt-out of citations", "type": 1},
+            {
+                "name": "stats",
+                "description": "Get citation statistics for a user",
+                "type": 1,
+                "options": (
+                    {
+                        "name": "user",
+                        "description": "The user to get citation statistics for",
+                        "type": 6,
+                        "required": True,
+                    },
+                ),
+            },
         ),
     },
     {
