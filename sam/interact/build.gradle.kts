@@ -38,19 +38,19 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:4.9.0")
 
     // Rory
-    val ktorVersion = "2.2.3"
+    val ktorVersion = "2.2.4"
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
     // Translate
-    implementation("aws.sdk.kotlin:translate:0.20.2-beta")
+    implementation("aws.sdk.kotlin:translate:0.21.2-beta")
 
     // Universalis
     implementation("cloud.drakon:ktuniversalis:1.0.1")
-    implementation("org.jsoup:jsoup:1.15.3")
+    implementation("org.jsoup:jsoup:1.15.4")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-java:$ktorVersion")
