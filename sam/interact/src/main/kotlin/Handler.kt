@@ -7,8 +7,10 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
+import cloud.drakon.tempestbot.interact.commands.imageGeneration
 import cloud.drakon.tempestbot.interact.commands.rory
 import cloud.drakon.tempestbot.interact.commands.translate
+import com.aallam.openai.client.OpenAI
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import com.mongodb.client.MongoClients
@@ -28,6 +30,8 @@ class Handler: RequestStreamHandler {
         val mongoDatabase: MongoDatabase =
             MongoClients.create(System.getenv("MONGODB_URL"))
                 .getDatabase(System.getenv("MONGODB_DATABASE"))
+
+        val openAiClient: OpenAI = OpenAI(System.getenv("OPENAI_API_KEY"))
 
         val json = Json {
             ignoreUnknownKeys =
@@ -55,6 +59,7 @@ class Handler: RequestStreamHandler {
                         applicationCommand
                     )
 
+                    "imagegeneration" -> imageGeneration(applicationCommand)
                     "lodestone" -> lodestoneHandler(applicationCommand)
                     "rory" -> rory(applicationCommand)
                     "translate", "Translate" -> translate(applicationCommand, logger)

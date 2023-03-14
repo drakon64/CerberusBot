@@ -37,6 +37,9 @@ dependencies {
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
     implementation("org.mongodb:mongodb-driver-sync:4.9.0")
 
+    // OpenAI
+    implementation("com.aallam.openai:openai-client:3.1.0")
+
     // Rory
     val ktorVersion = "2.2.4"
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
