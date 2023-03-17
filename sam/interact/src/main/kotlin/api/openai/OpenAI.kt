@@ -30,6 +30,6 @@ class OpenAI(private val apiKey: String) {
     suspend fun createImage(request: CreateImageRequest): CreateImageResponse {
         return ktorClient.post("images/generations") {
             setBody(request)
-        }.body() as CreateImageResponse
+        }.body()
     }
 }
