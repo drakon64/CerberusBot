@@ -74,8 +74,8 @@ application_commands = (
         "type": 2,
     },
     {
-        "name": "imagegeneration",
-        "description": "Creates four images given a prompt",
+        "name": "image",
+        "description": "Creates an image given a prompt",
         "default_member_permissions": 0,
         "type": 1,
         "options": (
