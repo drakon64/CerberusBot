@@ -5,8 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable class CreateImageRequest(
     val prompt: String,
-    val n: Byte? = null,
-    val size: String? = null,
-    @SerialName("response_format") val responseFormat: String? = null,
-    val user: String? = null,
+    val n: Byte = 1,
+    val size: String = "1024x1024",
+    @SerialName("response_format") val responseFormat: String = "b64_json"
 )
