@@ -24,7 +24,9 @@ class OpenAI(private val apiKey: String) {
 
         install(Auth) {
             bearer {
-                BearerTokens(apiKey, apiKey)
+                loadTokens {
+                    BearerTokens(apiKey, apiKey)
+                }
             }
         }
 
