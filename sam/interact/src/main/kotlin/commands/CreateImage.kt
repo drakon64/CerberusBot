@@ -18,9 +18,7 @@ suspend fun createImage(event: Interaction<ApplicationCommandData>) {
         }
     }
 
-    val openAi = OpenAI(System.getenv("OPENAI_API_KEY"))
-
-    val createdImage = openAi.createImage(
+    val createdImage = OpenAI(System.getenv("OPENAI_API_KEY")).createImage(
         CreateImageRequest(
             prompt, 1, "1024x1024", "b64_json"
         )
@@ -35,12 +33,9 @@ suspend fun createImage(event: Interaction<ApplicationCommandData>) {
                     contentType = "image/png",
                     bytes = createdImage
                 )
-            ),
-            attachments = arrayOf(
+            ), attachments = arrayOf(
                 Attachment(
-                    id = "0",
-                    filename = "${prompt}.png",
-                    ephemeral = true
+                    id = "0", filename = "${prompt}.png", ephemeral = true
                 )
             )
         ), event.token
