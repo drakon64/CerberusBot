@@ -75,7 +75,7 @@ application_commands = (
     },
     {
         "name": "image",
-        "description": "Creates an image given a prompt",
+        "description": "Creates an image from a prompt",
         "default_member_permissions": 0,
         "type": 1,
         "options": (
