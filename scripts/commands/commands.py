@@ -80,7 +80,7 @@ application_commands = (
         "type": 1,
         "options": (
             {
-                "name": "id",
+                "name": "prompt",
                 "description": "The prompt to create an image from",
                 "type": 3,
                 "required": True,
