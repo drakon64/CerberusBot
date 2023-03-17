@@ -54,6 +54,7 @@ dependencies {
 
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-java:$ktorVersion")
+    implementation("io.ktor:ktor-client-auth:$ktorVersion")
 
     testImplementation(kotlin("test"))
 }

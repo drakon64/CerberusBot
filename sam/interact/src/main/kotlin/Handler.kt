@@ -5,6 +5,7 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
+import cloud.drakon.tempestbot.interact.commands.createImage
 import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
 import cloud.drakon.tempestbot.interact.commands.rory
@@ -55,6 +56,7 @@ class Handler: RequestStreamHandler {
                         applicationCommand
                     )
 
+                    "image" -> createImage(applicationCommand)
                     "lodestone" -> lodestoneHandler(applicationCommand)
                     "rory" -> rory(applicationCommand)
                     "translate", "Translate" -> translate(applicationCommand, logger)

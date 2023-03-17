@@ -74,6 +74,20 @@ application_commands = (
         "type": 2,
     },
     {
+        "name": "image",
+        "description": "Creates an image given a prompt",
+        "default_member_permissions": 0,
+        "type": 1,
+        "options": (
+            {
+                "name": "prompt",
+                "description": "The prompt to create an image from",
+                "type": 3,
+                "required": True,
+            },
+        ),
+    },
+    {
         "name": "lodestone",
         "description": "Final Fantasy XIV, The Lodestone",
         "default_member_permissions": 0,
