@@ -8,6 +8,7 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
 import cloud.drakon.tempestbot.interact.api.openai.OpenAI
+import java.util.Base64
 
 suspend fun createImage(event: Interaction<ApplicationCommandData>) {
     lateinit var prompt: String
@@ -18,11 +19,13 @@ suspend fun createImage(event: Interaction<ApplicationCommandData>) {
         }
     }
 
-    val createdImage = OpenAI(System.getenv("OPENAI_API_KEY")).createImage(
-        CreateImageRequest(
-            prompt, 1, "1024x1024", "b64_json"
-        )
-    ).data[0]["b64_json"] !!.toByteArray()
+    val createdImage = Base64.getDecoder().decode(
+        OpenAI(System.getenv("OPENAI_API_KEY")).createImage(
+            CreateImageRequest(
+                prompt
+            )
+        ).data[0]["b64_json"] !!
+    )
 
     Handler.ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(
