@@ -23,7 +23,7 @@ Resources:
             Ref: PublicKeyParameter
       Events:
         DiscordInteraction:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /
             Method: post
@@ -71,7 +71,7 @@ Resources:
 Outputs:
   TempestBot:
     Description: "API Gateway endpoint URL for TempestBot Defer function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
 
   TempestBotDeferFunction:
     Description: "TempestBot Defer Lambda Function ARN"

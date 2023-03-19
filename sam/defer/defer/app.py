@@ -2,7 +2,6 @@ import json
 import os
 
 import boto3
-import requests
 from discord_interactions import InteractionResponseType, InteractionType, verify_key
 
 lambda_client = boto3.client("lambda")
@@ -26,6 +25,7 @@ def lambda_handler(event, context):
 
     if body["type"] == InteractionType.PING:
         print("Received PING")
+
         return {"type": InteractionResponseType.PONG}
     elif body["type"] in (
         InteractionType.APPLICATION_COMMAND,
@@ -41,19 +41,11 @@ def lambda_handler(event, context):
     ):
         print("Deferring update message")
         response = {"type": InteractionResponseType.DEFERRED_UPDATE_MESSAGE}
+    else:
+        raise Exception(f'Unknown interaction type :"f{body["type"]}"')
 
-    defer = requests.post(
-        f"https://discord.com/api/v10/interactions/{body['id']}/{body['token']}/callback",
-        json=response,
+    lambda_client.invoke(
+        FunctionName=interact_function, InvocationType="Event", Payload=raw_body
     )
 
-    if defer.status_code == 204:
-        lambda_client.invoke(
-            FunctionName=interact_function, InvocationType="Event", Payload=raw_body
-        )
-
-        return True
-    else:
-        print(str(defer.content))
-
-        return False
+    return response
