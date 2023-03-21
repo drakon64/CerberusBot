@@ -1,8 +1,8 @@
-package cloud.drakon.tempestbot.interact.api.openai
+package cloud.drakon.tempestbot.interact.api.openai.images
 
 import kotlinx.serialization.Serializable
 
-@Serializable class CreateImageResponse(
+@Serializable class ImageResponse(
     val created: Int,
     val data: Array<Map<String, String>>,
 )

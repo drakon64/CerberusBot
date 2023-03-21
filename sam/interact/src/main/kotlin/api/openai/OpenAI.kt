@@ -1,6 +1,7 @@
 package cloud.drakon.tempestbot.interact.api.openai
 
-import api.openai.CreateImageRequest
+import cloud.drakon.tempestbot.interact.api.openai.images.ImageRequest
+import cloud.drakon.tempestbot.interact.api.openai.images.ImageResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -35,7 +36,7 @@ class OpenAI(private val apiKey: String) {
         }
     }
 
-    suspend fun createImage(request: CreateImageRequest): CreateImageResponse {
+    suspend fun createImage(request: ImageRequest): ImageResponse {
         return ktorClient.post("images/generations") {
             setBody(request)
         }.body()

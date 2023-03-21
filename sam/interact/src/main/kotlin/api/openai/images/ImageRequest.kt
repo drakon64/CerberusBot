@@ -1,9 +1,9 @@
-package api.openai
+package cloud.drakon.tempestbot.interact.api.openai.images
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable class CreateImageRequest(
+@Serializable class ImageRequest(
     val prompt: String,
     val n: Byte = 1,
     val size: String = "1024x1024",
