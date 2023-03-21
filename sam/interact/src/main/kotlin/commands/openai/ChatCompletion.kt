@@ -24,7 +24,7 @@ suspend fun createCompletion(event: Interaction<ApplicationCommandData>) {
                     "gpt-3.5-turbo", arrayOf(
                         Message("system", System.getenv("OPENAI_CHAT_SYSTEM_MESSAGE")),
                         Message("user", message)
-                    )
+                    ), temperature = 0.5
                 )
             ).choices[0].message.content
         ), event.token
