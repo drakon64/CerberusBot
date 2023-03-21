@@ -41,5 +41,6 @@ jobs:
           MONGODB_URL: ${{ secrets.MONGODB_URL }}
           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_CHAT_SYSTEM_MESSAGE: ${{ secrets.OPENAI_CHAT_SYSTEM_MESSAGE }}
         run: |
-          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL MongoDbDatabase=$MONGODB_DATABASE OpenAiApiKey=$OPENAI_API_KEY"
+          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL MongoDbDatabase=$MONGODB_DATABASE OpenAiApiKey=$OPENAI_API_KEY OpenAiChatSystemMessage=$OPENAI_CHAT_SYSTEM_MESSAGE"

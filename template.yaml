@@ -59,6 +59,8 @@ Resources:
             Ref: MongoDbDatabase
           OPENAI_API_KEY:
             Ref: OpenAiApiKey
+          OPENAI_CHAT_SYSTEM_MESSAGE:
+            Ref: OpenAiChatSystemMessage
       Policies:
         - Statement:
             - Sid: Translate
@@ -107,3 +109,5 @@ Parameters:
   OpenAiApiKey:
     Type: String
     NoEcho: True
+  OpenAiChatSystemMessage:
+    Type: String
