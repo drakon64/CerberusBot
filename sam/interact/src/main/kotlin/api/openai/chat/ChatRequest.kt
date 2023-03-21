@@ -14,5 +14,4 @@ import kotlinx.serialization.Serializable
     @SerialName("max_tokens") val maxTokens: Int = 2049,
     @SerialName("presence_penalty") val presencePenalty: Double = 0.0,
     @SerialName("frequency_penalty") val frequencyPenalty: Double = 0.0,
-    @SerialName("logit_bias") val logitBias: Map<Int, Short>? = null,
 )
