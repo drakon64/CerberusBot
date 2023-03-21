@@ -18,7 +18,7 @@ suspend fun createCompletion(event: Interaction<ApplicationCommandData>) {
 
     val createdCompletion = OpenAI(System.getenv("OPENAI_API_KEY")).createCompletion(
         CompletionRequest("gpt-3.5-turbo", prompt)
-    ).choices[0]["text"]
+    ).choices[0].text
 
     Handler.ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(content = createdCompletion), event.token

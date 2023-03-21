@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
     @SerialName("object") val completionObject: String,
     val created: Int,
     val model: String,
-    val choices: Array<Map<String, String?>>,
+    val choices: Array<CompletionChoice>,
     val usage: Map<String, Int>,
 )
