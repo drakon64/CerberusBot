@@ -5,9 +5,10 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
-import cloud.drakon.tempestbot.interact.commands.createImage
 import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
+import cloud.drakon.tempestbot.interact.commands.openai.createCompletion
+import cloud.drakon.tempestbot.interact.commands.openai.createImage
 import cloud.drakon.tempestbot.interact.commands.rory
 import cloud.drakon.tempestbot.interact.commands.translate
 import com.amazonaws.services.lambda.runtime.Context
@@ -56,6 +57,7 @@ class Handler: RequestStreamHandler {
                         applicationCommand
                     )
 
+                    "completion" -> createCompletion(applicationCommand)
                     "image" -> createImage(applicationCommand)
                     "lodestone" -> lodestoneHandler(applicationCommand)
                     "rory" -> rory(applicationCommand)

@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands
+package cloud.drakon.tempestbot.interact.commands.openai
 
 import cloud.drakon.ktdiscord.channel.Attachment
 import cloud.drakon.ktdiscord.file.File

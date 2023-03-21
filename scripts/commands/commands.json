@@ -76,6 +76,20 @@
         "type": 2
     },
     {
+        "name": "completion",
+        "description": "Creates a completion for the provided prompt using GPT-3.5",
+        "default_member_permissions": 0,
+        "type": 1,
+        "options": [
+            {
+                "name": "prompt",
+                "description": "The prompt to generate a completion for",
+                "type": 3,
+                "required": true
+            }
+        ]
+    },
+    {
         "name": "image",
         "description": "Creates an image from a prompt",
         "default_member_permissions": 0,
