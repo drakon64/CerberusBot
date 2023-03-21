@@ -57,7 +57,7 @@ class Handler: RequestStreamHandler {
                         applicationCommand
                     )
 
-                    "completion" -> createCompletion(applicationCommand)
+                    "chat" -> createCompletion(applicationCommand)
                     "image" -> createImage(applicationCommand)
                     "lodestone" -> lodestoneHandler(applicationCommand)
                     "rory" -> rory(applicationCommand)

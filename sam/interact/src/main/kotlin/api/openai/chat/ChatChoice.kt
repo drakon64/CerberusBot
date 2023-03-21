@@ -1,11 +1,10 @@
-package cloud.drakon.tempestbot.interact.api.openai.completion
+package cloud.drakon.tempestbot.interact.api.openai.chat
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable class CompletionChoice(
-    val text: String,
+@Serializable class ChatChoice(
     val index: Int,
-    val logprobs: Byte?,
+    val message: Message,
     @SerialName("finish_reason") val finishReason: String,
 )

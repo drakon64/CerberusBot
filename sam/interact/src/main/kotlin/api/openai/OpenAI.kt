@@ -1,7 +1,7 @@
 package cloud.drakon.tempestbot.interact.api.openai
 
-import cloud.drakon.tempestbot.interact.api.openai.completion.CompletionRequest
-import cloud.drakon.tempestbot.interact.api.openai.completion.CompletionResponse
+import cloud.drakon.tempestbot.interact.api.openai.chat.ChatRequest
+import cloud.drakon.tempestbot.interact.api.openai.chat.ChatResponse
 import cloud.drakon.tempestbot.interact.api.openai.images.ImageRequest
 import cloud.drakon.tempestbot.interact.api.openai.images.ImageResponse
 import io.ktor.client.HttpClient
@@ -38,8 +38,8 @@ class OpenAI(private val apiKey: String) {
         }
     }
 
-    suspend fun createCompletion(request: CompletionRequest): CompletionResponse {
-        return ktorClient.post("completions") {
+    suspend fun createChatCompletion(request: ChatRequest): ChatResponse {
+        return ktorClient.post("chat/completions") {
             setBody(request)
         }.body()
     }
