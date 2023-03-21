@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
     val prompt: String,
     val n: Byte = 1,
     val size: String = "1024x1024",
-    @SerialName("response_format") val responseFormat: String = "b64_json"
+    @SerialName("response_format") val responseFormat: String = "b64_json",
 )
