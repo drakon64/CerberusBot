@@ -17,15 +17,27 @@ suspend fun createCompletion(event: Interaction<ApplicationCommandData>) {
         }
     }
 
+    val chatMessage =
+        if ("OPENAI_CHAT_ASSISTANT_MESSAGE" in System.getenv() && System.getenv("OPENAI_CHAT_ASSISTANT_MESSAGE")
+                .isNotEmpty()
+        ) {
+            arrayOf(
+                Message("system", System.getenv("OPENAI_CHAT_SYSTEM_MESSAGE")),
+                Message("assistant", System.getenv("OPENAI_CHAT_ASSISTANT_MESSAGE")),
+                Message("user", message)
+            )
+        } else {
+            arrayOf(
+                Message("system", System.getenv("OPENAI_CHAT_SYSTEM_MESSAGE")),
+                Message("user", message)
+            )
+        }
+
+
     Handler.ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             content = OpenAI(System.getenv("OPENAI_API_KEY")).createChatCompletion(
-                ChatRequest(
-                    "gpt-3.5-turbo", arrayOf(
-                        Message("system", System.getenv("OPENAI_CHAT_SYSTEM_MESSAGE")),
-                        Message("user", message)
-                    ), temperature = 0.5
-                )
+                ChatRequest("gpt-3.5-turbo", chatMessage, temperature = 0.5)
             ).choices[0].message.content
         ), event.token
     )

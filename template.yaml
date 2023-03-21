@@ -61,6 +61,8 @@ Resources:
             Ref: OpenAiApiKey
           OPENAI_CHAT_SYSTEM_MESSAGE:
             Ref: OpenAiChatSystemMessage
+          OPENAI_CHAT_Assistant_MESSAGE:
+            Ref: OpenAiChatAssistantMessage
       Policies:
         - Statement:
             - Sid: Translate
@@ -110,4 +112,6 @@ Parameters:
     Type: String
     NoEcho: True
   OpenAiChatSystemMessage:
+    Type: String
+  OpenAiChatAssistantMessage:
     Type: String
