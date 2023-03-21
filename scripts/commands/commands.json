@@ -91,7 +91,7 @@
     },
     {
         "name": "image",
-        "description": "Creates an image from a prompt",
+        "description": "Creates an image from a prompt using DALL-E 2",
         "default_member_permissions": 0,
         "type": 1,
         "options": [
