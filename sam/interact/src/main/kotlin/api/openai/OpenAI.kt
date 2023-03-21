@@ -1,5 +1,7 @@
 package cloud.drakon.tempestbot.interact.api.openai
 
+import cloud.drakon.tempestbot.interact.api.openai.completion.CompletionRequest
+import cloud.drakon.tempestbot.interact.api.openai.completion.CompletionResponse
 import cloud.drakon.tempestbot.interact.api.openai.images.ImageRequest
 import cloud.drakon.tempestbot.interact.api.openai.images.ImageResponse
 import io.ktor.client.HttpClient
@@ -34,6 +36,12 @@ class OpenAI(private val apiKey: String) {
         install(ContentNegotiation) {
             json()
         }
+    }
+
+    suspend fun createCompletion(request: CompletionRequest): CompletionResponse {
+        return ktorClient.post("completions") {
+            setBody(request)
+        }.body()
     }
 
     suspend fun createImage(request: ImageRequest): ImageResponse {
