@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
     val id: String,
     @SerialName("object") val chatObject: String,
     val created: Int,
+    val model: String,
     val choices: Array<ChatChoice>,
     val usage: ChatUsage,
 )
