@@ -37,7 +37,7 @@ suspend fun createCompletion(event: Interaction<ApplicationCommandData>) {
     Handler.ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             content = OpenAI(System.getenv("OPENAI_API_KEY")).createChatCompletion(
-                ChatRequest("gpt-3.5-turbo", chatMessage, temperature = 0.5)
+                ChatRequest("gpt-3.5-turbo", chatMessage, temperature = 0.2)
             ).choices[0].message.content
         ), event.token
     )
