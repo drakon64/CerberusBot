@@ -22,11 +22,6 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
         }
     }
 
-    val defaultAssistant = System.getenv("CHAT_DEFAULT_ASSISTANT")
-    if (assistant == null && defaultAssistant.isNotEmpty()) {
-        assistant = defaultAssistant
-    }
-
     val messages: Messages? = if (assistant != null) {
         Handler.json.decodeFromString(
             Messages.serializer(), Handler.mongoDatabase.getCollection("openai").find(
