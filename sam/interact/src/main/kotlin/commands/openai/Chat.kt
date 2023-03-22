@@ -43,8 +43,8 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
         null
     }
 
-    val chatMessage: MutableList<Message> = messages?.messages?.toMutableList()
-        ?: mutableListOf()
+    val chatMessage: MutableList<Message> =
+        messages?.messages?.toMutableList() ?: mutableListOf()
     chatMessage.add(Message("user", message))
 
     Handler.ktDiscordClient.editOriginalInteractionResponse(
