@@ -8,7 +8,7 @@ import cloud.drakon.tempestbot.interact.api.openai.OpenAI
 import cloud.drakon.tempestbot.interact.api.openai.chat.ChatRequest
 import cloud.drakon.tempestbot.interact.api.openai.chat.Message
 
-suspend fun createCompletion(event: Interaction<ApplicationCommandData>) {
+suspend fun chat(event: Interaction<ApplicationCommandData>) {
     lateinit var message: String
 
     for (i in event.data !!.options !!) {
