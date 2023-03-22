@@ -23,6 +23,7 @@ jobs:
         env:
           APPLICATION_ID: ${{ secrets.CANARY_APPLICATION_ID }}
           BOT_TOKEN: ${{ secrets.CANARY_BOT_TOKEN }}
+          CHAT_ASSISTANTS: ${{ secrets.CHAT_ASSISTANTS }}
         working-directory: scripts/commands
         run: |
           python3 commands.py

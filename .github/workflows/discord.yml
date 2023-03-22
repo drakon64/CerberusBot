@@ -23,6 +23,7 @@ jobs:
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ASSISTANTS: ${{ secrets.CHAT_ASSISTANTS }}
         working-directory: scripts/commands
         run: |
           python3 commands.py
