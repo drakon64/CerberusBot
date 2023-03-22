@@ -40,7 +40,6 @@ jobs:
           PUBLIC_KEY: ${{ secrets.CANARY_PUBLIC_KEY }}
           MONGODB_URL: ${{ secrets.CANARY_MONGODB_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_CHAT_SYSTEM_MESSAGE: ${{ secrets.OPENAI_CHAT_SYSTEM_MESSAGE }}
-          OPENAI_CHAT_ASSISTANT_MESSAGE: ${{ secrets.OPENAI_CHAT_ASSISTANT_MESSAGE }}
+          CHAT_DEFAULT_ASSISTANT: ${{ secrets.CHAT_DEFAULT_ASSISTANT }}
         run: |
-          sam deploy --config-file canary.toml --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL OpenAiApiKey=$OPENAI_API_KEY OpenAiChatSystemMessage=$OPENAI_CHAT_SYSTEM_MESSAGE OpenAiChatAssistantMessage=$OPENAI_CHAT_ASSISTANT_MESSAGE"
+          sam deploy --config-file canary.toml --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL OpenAiApiKey=$OPENAI_API_KEY ChatDefaultAssistant=$CHAT_DEFAULT_ASSISTANT"
