@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
     val n: Byte = 1,
     val stream: Boolean = false,
     val stop: String? = null,
-    @SerialName("max_tokens") val maxTokens: Int = 2049,
+    @SerialName("max_tokens") val maxTokens: Short = 2000,
     @SerialName("presence_penalty") val presencePenalty: Double = 0.0,
     @SerialName("frequency_penalty") val frequencyPenalty: Double = 0.0,
 )
