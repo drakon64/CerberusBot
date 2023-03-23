@@ -17,6 +17,7 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 class OpenAI(private val apiKey: String) {
     private val ktorClient = HttpClient(Java) {
@@ -34,7 +35,7 @@ class OpenAI(private val apiKey: String) {
         }
 
         install(ContentNegotiation) {
-            json()
+            json(Json { encodeDefaults = false })
         }
     }
 
