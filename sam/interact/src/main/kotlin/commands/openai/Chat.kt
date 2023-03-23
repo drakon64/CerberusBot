@@ -12,6 +12,7 @@ import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
 import kotlinx.serialization.decodeFromString
+import org.bson.BsonArray
 import org.bson.BsonDocument
 
 suspend fun chat(event: Interaction<ApplicationCommandData>) {
@@ -55,17 +56,24 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
             "gpt-3.5-turbo", messages.toTypedArray(), temperature = 0.2
         )
     ).choices[0].message
-    messages.add(chatGpt)
+
+    val newMessages: Array<Message> = arrayOf(newMessage, chatGpt)
+    val document = BsonArray()
+    for (i in newMessages) {
+        document.add(
+            BsonDocument.parse(
+                Handler.json.encodeToString(
+                    Message.serializer(), i
+                )
+            )
+        )
+    }
 
     mongoCollection.updateOne(
         Filters.and(
             Filters.eq("guild_id", event.guildId), Filters.eq("thread", thread)
-        ), Updates.addToSet(
-            "messages", BsonDocument.parse(
-                Handler.json.encodeToString(
-                    Message.serializer(), chatGpt
-                )
-            )
+        ), Updates.addEachToSet(
+            "messages", document
         ), UpdateOptions().upsert(true)
     )
 
