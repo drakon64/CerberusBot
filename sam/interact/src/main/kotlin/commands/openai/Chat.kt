@@ -42,7 +42,6 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
         ).first()
 
         if (mongoThread != null) {
-            println(mongoThread.toJson())
             messages = Handler.json.decodeFromString(
                 Messages.serializer(), mongoThread.toJson()
             ).messages.toMutableList()
