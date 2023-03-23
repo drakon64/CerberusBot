@@ -7,11 +7,11 @@ import cloud.drakon.tempestbot.interact.Handler
 import cloud.drakon.tempestbot.interact.api.openai.OpenAI
 import cloud.drakon.tempestbot.interact.api.openai.chat.ChatRequest
 import cloud.drakon.tempestbot.interact.api.openai.chat.Message
+import cloud.drakon.tempestbot.interact.api.openai.chat.Messages
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
-import kotlinx.serialization.decodeFromString
 import org.bson.BsonArray
 import org.bson.BsonDocument
 
@@ -42,7 +42,10 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
         ).first()
 
         if (mongoThread != null) {
-            messages = Handler.json.decodeFromString(mongoThread.toJson())
+            println(mongoThread.toJson())
+            messages = Handler.json.decodeFromString(
+                Messages.serializer(), mongoThread.toJson()
+            ).messages.toMutableList()
             messages.add(newMessage)
         } else {
             messages = mutableListOf(newMessage)
@@ -57,25 +60,27 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
         )
     ).choices[0].message
 
-    val newMessages: Array<Message> = arrayOf(newMessage, chatGpt)
-    val document = BsonArray()
-    for (i in newMessages) {
-        document.add(
-            BsonDocument.parse(
-                Handler.json.encodeToString(
-                    Message.serializer(), i
+    if (thread != null) {
+        val newMessages: Array<Message> = arrayOf(newMessage, chatGpt)
+        val document = BsonArray()
+        for (i in newMessages) {
+            document.add(
+                BsonDocument.parse(
+                    Handler.json.encodeToString(
+                        Message.serializer(), i
+                    )
                 )
             )
+        }
+
+        mongoCollection.updateOne(
+            Filters.and(
+                Filters.eq("guild_id", event.guildId), Filters.eq("thread", thread)
+            ), Updates.addEachToSet(
+                "messages", document
+            ), UpdateOptions().upsert(true)
         )
     }
-
-    mongoCollection.updateOne(
-        Filters.and(
-            Filters.eq("guild_id", event.guildId), Filters.eq("thread", thread)
-        ), Updates.addEachToSet(
-            "messages", document
-        ), UpdateOptions().upsert(true)
-    )
 
     Handler.ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(
