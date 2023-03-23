@@ -55,7 +55,10 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
 
     val chatGpt = OpenAI(System.getenv("OPENAI_API_KEY")).createChatCompletion(
         ChatRequest(
-            "gpt-3.5-turbo", messages.toTypedArray(), temperature = 0.2
+            "gpt-3.5-turbo",
+            messages.toTypedArray(),
+            temperature = 0.2,
+            maxTokens = 2000
         )
     ).choices[0].message
 
