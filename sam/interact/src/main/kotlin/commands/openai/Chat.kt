@@ -11,6 +11,7 @@ import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.Updates
 import kotlinx.serialization.decodeFromString
+import org.bson.BsonDocument
 
 suspend fun chat(event: Interaction<ApplicationCommandData>) {
     lateinit var message: String
@@ -58,7 +59,13 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
     mongoCollection.findOneAndUpdate(
         Filters.and(
             Filters.eq("guild_id", event.guildId), Filters.eq("thread", thread)
-        ), Updates.addToSet("messages", chatGpt)
+        ), Updates.addToSet(
+            "messages", BsonDocument.parse(
+                Handler.json.encodeToString(
+                    Message.serializer(), chatGpt
+                )
+            )
+        )
     )
 
     Handler.ktDiscordClient.editOriginalInteractionResponse(
