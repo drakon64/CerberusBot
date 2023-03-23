@@ -5,10 +5,6 @@ import requests
 from localizations import languages, translate_text
 
 application_commands = json.load(open("commands.json", "r"))
-if len(os.environ["CHAT_ASSISTANTS"]) > 0:
-    for i in application_commands:
-        if i["name"] == "chat":
-            i["options"] = i["options"] + json.loads(os.environ["CHAT_ASSISTANTS"])
 
 application_id = os.environ["APPLICATION_ID"]
 bot_token = os.environ["BOT_TOKEN"]
