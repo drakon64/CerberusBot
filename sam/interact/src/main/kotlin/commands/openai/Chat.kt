@@ -9,6 +9,7 @@ import cloud.drakon.tempestbot.interact.api.openai.chat.ChatRequest
 import cloud.drakon.tempestbot.interact.api.openai.chat.Message
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
+import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
 import kotlinx.serialization.decodeFromString
 import org.bson.BsonDocument
@@ -56,7 +57,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
     ).choices[0].message
     messages.add(chatGpt)
 
-    mongoCollection.findOneAndUpdate(
+    mongoCollection.updateOne(
         Filters.and(
             Filters.eq("guild_id", event.guildId), Filters.eq("thread", thread)
         ), Updates.addToSet(
@@ -65,7 +66,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
                     Message.serializer(), chatGpt
                 )
             )
-        )
+        ), UpdateOptions().upsert(true)
     )
 
     Handler.ktDiscordClient.editOriginalInteractionResponse(
