@@ -86,6 +86,12 @@
                 "description": "The message to generate chat completions for",
                 "type": 3,
                 "required": true
+            },
+            {
+                "name": "thread",
+                "description": "The chat thread to use",
+                "type": 3,
+                "required": false
             }
         ]
     },
