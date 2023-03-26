@@ -8,26 +8,17 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 
 class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
-    private fun Boolean.toBinaryString(): String {
-        return if (this) {
-            "1"
-        } else {
-            "0"
-        }
-    }
-
     /**
+     * @param string The string to search for.
      * @param indexes Search a specific series of indexes separated by commas.
-     * @param string The string to search for. The results for this are affected by `string_column` and `string_algo`.
-     * @param stringAlgo The search algorithm to use for string matching. **Default:** wildcard
+     * @param language Tell the API to handle the request and the response in the specified language.
+     * @param columns Allows specific columns to be pulled from the data and exclude the rest of the JSON response.
      */
     suspend fun search(
         string: String,
         indexes: String? = null,
-        stringAlgo: String? = null,
         language: String? = null,
-        snakeCase: Boolean? = null,
-        privateKey: String? = null,
+        columns: Array<String>? = null,
     ): JsonElement {
         return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/search") {
             url {
@@ -37,49 +28,25 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
                 if (language != null) {
                     parameters.append("language", language)
                 }
-                if (snakeCase != null) {
-                    parameters.append("snake_case", snakeCase.toBinaryString())
-                }
-                if (privateKey != null) {
-                    parameters.append("private_key", privateKey)
+                if (columns != null) {
+                    parameters.append("columns", columns.joinToString(","))
                 }
 
                 if (indexes != null) {
                     parameters.append("indexes", indexes)
                 }
-                if (stringAlgo != null) {
-                    parameters.append("string_algo", stringAlgo)
-                }
             }
         }.bodyAsText())
     }
 
-    suspend fun item(
-        item: Int,
-        language: String? = null,
-        snakeCase: Boolean? = null,
-        privateKey: String? = null,
-    ): JsonElement {
-        return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/item/$item") {
-            url { // Global parameters
-                if (language != null) {
-                    parameters.append("language", language)
-                }
-                if (snakeCase != null) {
-                    parameters.append("snake_case", snakeCase.toBinaryString())
-                }
-                if (privateKey != null) {
-                    parameters.append("private_key", privateKey)
-                }
-            }
-        }.bodyAsText())
-    }
-
-    suspend fun characterSearch(name: String, server: String): JsonElement {
+    suspend fun characterSearch(name: String, server: String? = null): JsonElement {
         return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/character/search") {
             url {
                 parameters.append("name", name.replace(" ", "+"))
-                parameters.append("server", server)
+
+                if (server != null) {
+                    parameters.append("server", server)
+                }
             }
         }.bodyAsText())
     }
@@ -88,7 +55,13 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
         return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/character/$lodestoneId") {
             url {
                 if (extended != null) {
-                    parameters.append("extended", extended.toBinaryString())
+                    parameters.append(
+                        "extended", if (extended) {
+                            "1"
+                        } else {
+                            "0"
+                        }
+                    )
                 }
             }
         }.bodyAsText())

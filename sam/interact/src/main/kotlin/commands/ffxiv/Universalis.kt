@@ -45,10 +45,12 @@ suspend fun universalis(
     val ktorClient = HttpClient(Java)
     val xivApi = XivApiClient(ktorClient = ktorClient)
 
-    val xivApiItemId = xivApi.search(
-        item, "Item"
-    ).jsonObject["Results"] !!.jsonArray[0].jsonObject["ID"] !!.jsonPrimitive.int
-    val xivApiItem = xivApi.item(xivApiItemId)
+    val xivApiItem = xivApi.search(
+        item,
+        indexes = "Item",
+        columns = arrayOf("CanBeHq", "Description", "IconHD", "ID", "Name")
+    ).jsonObject["Results"] !!.jsonArray[0]
+    val xivApiItemId = xivApiItem.jsonObject["ID"] !!.jsonPrimitive.int
 
     val canBeHighQuality: Boolean =
         xivApiItem.jsonObject["CanBeHq"] !!.jsonPrimitive.int == 1
