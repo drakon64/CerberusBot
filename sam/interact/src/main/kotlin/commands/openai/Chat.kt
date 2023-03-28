@@ -7,7 +7,6 @@ import cloud.drakon.tempestbot.interact.Handler
 import cloud.drakon.tempestbot.interact.api.openai.OpenAI
 import cloud.drakon.tempestbot.interact.api.openai.chat.ChatRequest
 import cloud.drakon.tempestbot.interact.api.openai.chat.Message
-import cloud.drakon.tempestbot.interact.api.openai.chat.Messages
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
@@ -42,9 +41,9 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
         ).first()
 
         if (mongoThread != null) {
-            messages = Handler.json.decodeFromString(
-                Messages.serializer(), mongoThread.toJson()
-            ).messages.toMutableList()
+            messages =
+                (mongoThread["messages"] as ArrayList<*>).filterIsInstance<Message>()
+                    .toMutableList()
             messages.add(newMessage)
         } else {
             messages = mutableListOf(newMessage)
