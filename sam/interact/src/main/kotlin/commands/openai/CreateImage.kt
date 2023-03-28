@@ -24,7 +24,7 @@ suspend fun createImage(event: Interaction<ApplicationCommandData>) {
             ImageRequest(
                 prompt
             )
-        ).data[0]["b64_json"] !!
+        ).data[0].b64Json
     )
 
     Handler.ktDiscordClient.editOriginalInteractionResponse(

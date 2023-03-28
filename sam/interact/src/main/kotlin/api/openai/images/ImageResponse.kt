@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable class ImageResponse(
     val created: Int,
-    val data: Array<Map<String, String>>,
+    val data: Array<ImageB64Json>,
 )

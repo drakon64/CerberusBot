@@ -1,11 +1,13 @@
 package cloud.drakon.tempestbot.interact.api.openai.images
 
+import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable class ImageRequest(
+@Serializable
+class ImageRequest @OptIn(ExperimentalSerializationApi::class) constructor(
     val prompt: String,
-    val n: Byte = 1,
-    val size: String = "1024x1024",
-    @SerialName("response_format") val responseFormat: String = "b64_json",
+    @EncodeDefault @SerialName("response_format")
+    val responseFormat: String = "b64_json",
 )
