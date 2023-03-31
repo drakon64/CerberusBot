@@ -7,7 +7,6 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
-import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
@@ -22,6 +21,7 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.bson.types.Binary
+import org.jsoup.Jsoup
 
 suspend fun portrait(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
@@ -59,8 +59,11 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
         } else {
             val ktorClient = HttpClient(Java)
             portrait = ktorClient.get(
-                XivApiClient(ktorClient = ktorClient).profile(characterId).jsonObject["Character"] !!.jsonObject["Portrait"] !!.jsonPrimitive.content
-            ).body()
+                Jsoup.parse(
+                    ktorClient.get("https://eu.finalfantasyxiv.com/lodestone/character/${characterId}/")
+                        .body() as String
+                ).select(".js__image_popup > img:nth-child(1)").first() !!.attr("src")
+            ).body() as ByteArray
 
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
