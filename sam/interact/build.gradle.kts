@@ -38,7 +38,7 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:4.9.0")
 
     // Lodestone
-    implementation("cloud.drakon:ktlodestone:0.1.0-SNAPSHOT")
+    implementation("cloud.drakon:ktlodestone:0.1.0")
 
     // Rory
     val ktorVersion = "2.2.4"
