@@ -8,6 +8,7 @@ import cloud.drakon.ktdiscord.file.File
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
+import cloud.drakon.ktlodestone.KtLodestone
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
@@ -80,23 +81,19 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             characterClass = mongoProfile["class"] as String
             characterLevel = mongoProfile["level"] as Int
         } else {
-            val ktorClient = HttpClient(Java)
-            val profile = XivApiClient(ktorClient = ktorClient).profile(
-                characterId, true
-            ).jsonObject["Character"] !!
+            val profile = KtLodestone.getCharacter(characterId)
 
-            characterName = profile.jsonObject["Name"] !!.jsonPrimitive.content
-            characterTitle =
-                profile.jsonObject["Title"] !!.jsonObject["Name"] !!.jsonPrimitive.content
-            characterServer = profile.jsonObject["Server"] !!.jsonPrimitive.content
-            characterDatacenter = profile.jsonObject["DC"] !!.jsonPrimitive.content
-            characterAvatar =
-                ktorClient.get(profile.jsonObject["Avatar"] !!.jsonPrimitive.content)
-                    .body()
-            characterClass =
-                profile.jsonObject["ActiveClassJob"] !!.jsonObject["UnlockedState"] !!.jsonObject["Name"] !!.jsonPrimitive.content
-            characterLevel =
-                profile.jsonObject["ActiveClassJob"] !!.jsonObject["Level"] !!.jsonPrimitive.int
+            val ktorClient = HttpClient(Java)
+
+            characterName = profile.name
+            characterTitle = profile.title !!
+            characterServer = profile.server
+            characterDatacenter = profile.server
+            characterAvatar = ktorClient.get(profile.avatar).body()
+            characterClass = XivApiClient(ktorClient = ktorClient).profile(
+                characterId, true
+            ).jsonObject["Character"] !!.jsonObject["ActiveClassJob"] !!.jsonObject["UnlockedState"] !!.jsonObject["Name"] !!.jsonPrimitive.content
+            characterLevel = profile.activeClassJobLevel.toInt()
 
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
