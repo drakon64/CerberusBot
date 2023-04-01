@@ -88,7 +88,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             characterName = profile.name
             characterTitle = profile.title !!
             characterServer = profile.server
-            characterDatacenter = profile.server
+            characterDatacenter = profile.dc
             characterAvatar = ktorClient.get(profile.avatar).body()
             characterClass = XivApiClient(ktorClient = ktorClient).profile(
                 characterId, true
@@ -117,12 +117,12 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
                     Embed(
                         title = characterName,
                         description = "*$characterTitle*",
-                        url = "https://eu.finalfantasyxiv.com/lodestone/character/$characterId",
+                        url = "https://eu.finalfantasyxiv.com/lodestone/character/$characterId/",
                         thumbnail = EmbedThumbnail(url = "attachment://${filename}"),
                         fields = arrayOf(
                             EmbedField(
-                                name = "World (Datacenter)",
-                                value = "$characterServer ($characterDatacenter)"
+                                name = "World [Datacenter]",
+                                value = "$characterServer [$characterDatacenter]"
                             ),
                             EmbedField(name = "Class/Job", value = characterClass),
                             EmbedField(
