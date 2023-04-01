@@ -65,7 +65,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             ).first()
 
         val characterName: String
-        val characterTitle: String
+        val characterTitle: String?
         val characterServer: String
         val characterDatacenter: String
         val characterAvatar: ByteArray
@@ -74,7 +74,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
 
         if (mongoProfile != null) {
             characterName = mongoProfile["character_name"] as String
-            characterTitle = mongoProfile["title"] as String
+            characterTitle = mongoProfile["title"] as String?
             characterServer = mongoProfile["server"] as String
             characterDatacenter = mongoProfile["datacenter"] as String
             characterAvatar = (mongoProfile["avatar"] as Binary).data
@@ -86,7 +86,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             val ktorClient = HttpClient(Java)
 
             characterName = profile.name
-            characterTitle = profile.title !!
+            characterTitle = profile.title
             characterServer = profile.server
             characterDatacenter = profile.dc
             characterAvatar = ktorClient.get(profile.avatar).body()
@@ -116,7 +116,11 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
                 embeds = arrayOf(
                     Embed(
                         title = characterName,
-                        description = "*$characterTitle*",
+                        description = if (characterTitle != "null") { // TODO: Fix MongoDB returning nulls as a "null" string
+                            "*$characterTitle*"
+                        } else {
+                            null
+                        },
                         url = "https://eu.finalfantasyxiv.com/lodestone/character/$characterId/",
                         thumbnail = EmbedThumbnail(url = "attachment://${filename}"),
                         fields = arrayOf(
