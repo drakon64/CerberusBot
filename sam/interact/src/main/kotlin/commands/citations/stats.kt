@@ -14,7 +14,6 @@ import org.bson.types.ObjectId
 
 suspend fun stats(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
-    val nick: String
 
     when (event.data !!.type) {
         1 -> for (i in event.data !!.options !![0].options !!) {
