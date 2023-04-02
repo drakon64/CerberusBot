@@ -52,26 +52,31 @@ class Handler: RequestStreamHandler {
         when (event.data) {
             is ApplicationCommandData -> {
                 val applicationCommand = event as Interaction<ApplicationCommandData>
-                when (applicationCommand.data !!.name) {
-                    "citation", "Add citation", "Get citation" -> citationHandler(
-                        applicationCommand
-                    )
 
-                    "chat" -> chat(applicationCommand)
-                    "image" -> image(applicationCommand)
-                    "lodestone" -> lodestoneHandler(applicationCommand)
-                    "rory" -> rory(applicationCommand)
-                    "translate", "Translate" -> translate(applicationCommand, logger)
-                    "universalis" -> universalis(applicationCommand, logger)
-                    else -> {
-                        logger.log("Unknown command: " + event.data !!.name)
+                when (event.type) {
+                    2 -> when (applicationCommand.data !!.name) {
+                        "citation", "Add citation", "Get citation" -> citationHandler(
+                            applicationCommand
+                        )
+
+                        "chat" -> chat(applicationCommand)
+                        "image" -> image(applicationCommand)
+                        "lodestone" -> lodestoneHandler(applicationCommand)
+                        "rory" -> rory(applicationCommand)
+
+                        "translate", "Translate" -> translate(
+                            applicationCommand, logger
+                        )
+
+                        "universalis" -> universalis(applicationCommand, logger)
+                        else -> logger.log("Unknown command: ${event.data !!.name}")
                     }
+
+                    else -> logger.log("Unknown event type: ${event.type}")
                 }
             }
 
-            else -> {
-                logger.log("Unknown command type: " + event.javaClass)
-            }
+            else -> logger.log("Unknown command type: ${event.javaClass}")
         }
     }
 }
