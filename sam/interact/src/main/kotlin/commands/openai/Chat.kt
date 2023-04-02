@@ -7,7 +7,7 @@ import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
 import cloud.drakon.tempestbot.interact.Handler.Companion.json
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
-import cloud.drakon.tempestbot.interact.api.openai.OpenAI
+import cloud.drakon.tempestbot.interact.Handler.Companion.openAi
 import cloud.drakon.tempestbot.interact.api.openai.chat.ChatRequest
 import cloud.drakon.tempestbot.interact.api.openai.chat.Message
 import com.mongodb.client.model.Filters
@@ -57,7 +57,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
         messages = mutableListOf(newMessage)
     }
 
-    val chatGpt = OpenAI(System.getenv("OPENAI_API_KEY")).createChatCompletion(
+    val chatGpt = openAi.createChatCompletion(
         ChatRequest(
             "gpt-3.5-turbo",
             messages.toTypedArray(),

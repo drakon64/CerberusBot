@@ -4,6 +4,7 @@ import cloud.drakon.ktdiscord.KtDiscordClient
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.tempestbot.interact.api.openai.OpenAI
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
@@ -25,17 +26,19 @@ class Handler: RequestStreamHandler {
         val ktDiscordClient = KtDiscordClient(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
         ).Interaction(System.getenv("PUBLIC_KEY"))
-        val region: String = System.getenv("AWS_REGION")
-
-        val mongoDatabase: MongoDatabase =
-            MongoClients.create(System.getenv("MONGODB_URL"))
-                .getDatabase(System.getenv("MONGODB_DATABASE"))
 
         val json = Json {
             ignoreUnknownKeys =
                 true // Not all fields returned by the Discord API are documented
             isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
         }
+
+        val mongoDatabase: MongoDatabase =
+            MongoClients.create(System.getenv("MONGODB_URL"))
+                .getDatabase(System.getenv("MONGODB_DATABASE"))
+
+        val openAi = OpenAI(System.getenv("OPENAI_API_KEY"))
+        val region: String = System.getenv("AWS_REGION")
     }
 
     override fun handleRequest(
