@@ -10,7 +10,7 @@ import cloud.drakon.tempestbot.interact.api.openai.OpenAI
 import cloud.drakon.tempestbot.interact.api.openai.images.ImageRequest
 import java.util.Base64
 
-suspend fun createImage(event: Interaction<ApplicationCommandData>) {
+suspend fun image(event: Interaction<ApplicationCommandData>) {
     lateinit var prompt: String
 
     for (i in event.data !!.options !!) {
