@@ -12,10 +12,12 @@ import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import org.bson.BsonArray
 import org.bson.BsonDocument
 
-suspend fun chat(event: Interaction<ApplicationCommandData>) {
+suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
     lateinit var message: String
     var thread: String? = null
 
@@ -93,16 +95,23 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) {
     } else {
         val chatGptChunked = chatGpt.content.chunked(2000)
 
-        Handler.ktDiscordClient.editOriginalInteractionResponse(
-            EditWebhookMessage(
-                content = chatGptChunked[0]
-            ), event.token
-        )
-
-        for (i in chatGptChunked.drop(0)) {
-            Handler.ktDiscordClient.createFollowupMessage(
-                ExecuteWebhook(content = i), event.token
+        val editOriginalInteractionResponse = async {
+            Handler.ktDiscordClient.editOriginalInteractionResponse(
+                EditWebhookMessage(
+                    content = chatGptChunked[0]
+                ), event.token
             )
         }
+
+        val createFollowupMessage = async {
+            for (i in chatGptChunked.drop(0)) {
+                Handler.ktDiscordClient.createFollowupMessage(
+                    ExecuteWebhook(content = i), event.token
+                )
+            }
+        }
+
+        editOriginalInteractionResponse.await()
+        createFollowupMessage.await()
     }
 }

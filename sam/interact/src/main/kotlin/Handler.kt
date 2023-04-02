@@ -42,7 +42,7 @@ class Handler: RequestStreamHandler {
         inputStream: InputStream,
         outputStream: OutputStream,
         context: Context,
-    ) = runBlocking {
+    ): Unit = runBlocking {
         val logger = context.logger
 
         val event: Interaction<*> = json.decodeFromString(
