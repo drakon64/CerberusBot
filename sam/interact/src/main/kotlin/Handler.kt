@@ -23,7 +23,7 @@ import kotlinx.serialization.json.Json
 
 class Handler: RequestStreamHandler {
     companion object {
-        val ktDiscordClient = KtDiscordClient(
+        val ktDiscord = KtDiscordClient(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
         ).Interaction(System.getenv("PUBLIC_KEY"))
 

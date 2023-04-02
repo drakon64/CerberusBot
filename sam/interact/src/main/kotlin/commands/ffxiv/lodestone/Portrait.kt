@@ -6,7 +6,7 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktlodestone.KtLodestone
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
@@ -71,7 +71,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
 
         val filename = "${characterId}_portrait.jpg"
 
-        ktDiscordClient.editOriginalInteractionResponse(
+        ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
                 attachments = arrayOf(
                     Attachment(
@@ -88,7 +88,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
             ), event.token
         )
     } else {
-        ktDiscordClient.editOriginalInteractionResponse(
+        ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
                 "User does not have a linked Lodestone character!"
             ), event.token

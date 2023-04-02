@@ -6,7 +6,7 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 
 suspend fun translate(
@@ -46,7 +46,7 @@ suspend fun translate(
         "${translation.sourceLanguageCode}: ${translation.translatedText}"
     } else translation.translatedText !!
 
-    ktDiscordClient.editOriginalInteractionResponse(
+    ktDiscord.editOriginalInteractionResponse(
         EditWebhookMessage(content = translatedMessage), event.token
     )
 }

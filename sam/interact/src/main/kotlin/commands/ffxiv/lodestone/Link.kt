@@ -3,7 +3,7 @@ package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
 import com.mongodb.client.model.Filters
@@ -41,20 +41,20 @@ suspend fun link(event: Interaction<ApplicationCommandData>) {
                 ), UpdateOptions().upsert(true)
             )
 
-            ktDiscordClient.editOriginalInteractionResponse(
+            ktDiscord.editOriginalInteractionResponse(
                 EditWebhookMessage(
                     "Linked to character \"$characterName\" on \"$world\"."
                 ), event.token
             )
         }
 
-        0 -> ktDiscordClient.editOriginalInteractionResponse(
+        0 -> ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
                 "Could not find character \"$characterName\" on world \"$world\"."
             ), event.token
         )
 
-        else -> ktDiscordClient.editOriginalInteractionResponse(
+        else -> ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
                 "Please specify the exact character name."
             ), event.token

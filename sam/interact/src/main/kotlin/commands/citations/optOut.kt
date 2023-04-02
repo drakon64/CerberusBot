@@ -3,7 +3,7 @@ package cloud.drakon.tempestbot.interact.commands.citations
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import com.mongodb.client.model.Filters
 import org.bson.Document
 
@@ -21,7 +21,7 @@ suspend fun optOut(event: Interaction<ApplicationCommandData>) {
         )
     )
 
-    ktDiscordClient.editOriginalInteractionResponse(
+    ktDiscord.editOriginalInteractionResponse(
         EditWebhookMessage(
             content = "Opted out of citations!"
         ), interactionToken = event.token

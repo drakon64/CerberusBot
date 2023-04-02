@@ -3,7 +3,7 @@ package cloud.drakon.tempestbot.interact.commands.citations
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import com.mongodb.MongoWriteException
 import org.bson.Document
 
@@ -19,7 +19,7 @@ suspend fun optIn(event: Interaction<ApplicationCommandData>) {
         "Already opted-in to citations!"
     }
 
-    ktDiscordClient.editOriginalInteractionResponse(
+    ktDiscord.editOriginalInteractionResponse(
         EditWebhookMessage(
             content = content
         ), interactionToken = event.token

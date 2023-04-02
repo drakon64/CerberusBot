@@ -5,7 +5,7 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
 import cloud.drakon.tempestbot.interact.Handler.Companion.json
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.Handler.Companion.openAi
 import cloud.drakon.tempestbot.interact.api.openai.chat.ChatRequest
@@ -92,7 +92,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
 
     launch {
         if (chatGpt.content.length <= 2000) {
-            ktDiscordClient.editOriginalInteractionResponse(
+            ktDiscord.editOriginalInteractionResponse(
                 EditWebhookMessage(
                     content = chatGpt.content
                 ), event.token
@@ -101,7 +101,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
             val chatGptChunked = chatGpt.content.chunked(2000)
 
             launch {
-                ktDiscordClient.editOriginalInteractionResponse(
+                ktDiscord.editOriginalInteractionResponse(
                     EditWebhookMessage(
                         content = chatGptChunked[0]
                     ), event.token
@@ -110,7 +110,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
 
             launch {
                 for (i in chatGptChunked.drop(0)) {
-                    ktDiscordClient.createFollowupMessage(
+                    ktDiscord.createFollowupMessage(
                         ExecuteWebhook(content = i), event.token
                     )
                 }

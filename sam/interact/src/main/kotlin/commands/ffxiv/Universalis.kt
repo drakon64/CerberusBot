@@ -7,7 +7,7 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktuniversalis.KtUniversalisClient
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import io.ktor.client.HttpClient
@@ -105,7 +105,7 @@ suspend fun universalis(
         totalPrices = "N/A"
     }
 
-    ktDiscordClient.editOriginalInteractionResponse(
+    ktDiscord.editOriginalInteractionResponse(
         EditWebhookMessage(
             embeds = arrayOf(
                 Embed(
