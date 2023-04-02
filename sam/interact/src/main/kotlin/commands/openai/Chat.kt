@@ -12,8 +12,8 @@ import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
-import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.bson.BsonArray
 import org.bson.BsonDocument
 
@@ -77,41 +77,42 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
             )
         }
 
-        mongoCollection.updateOne(
-            Filters.and(
-                Filters.eq("guild_id", event.guildId), Filters.eq("thread", thread)
-            ), Updates.addEachToSet(
-                "messages", document
-            ), UpdateOptions().upsert(true)
-        )
-    }
-
-    if (chatGpt.content.length <= 2000) {
-        Handler.ktDiscordClient.editOriginalInteractionResponse(
-            EditWebhookMessage(
-                content = chatGpt.content
-            ), event.token
-        )
-    } else {
-        val chatGptChunked = chatGpt.content.chunked(2000)
-
-        val editOriginalInteractionResponse = async {
-            Handler.ktDiscordClient.editOriginalInteractionResponse(
-                EditWebhookMessage(
-                    content = chatGptChunked[0]
-                ), event.token
+        launch {
+            mongoCollection.updateOne(
+                Filters.and(
+                    Filters.eq("guild_id", event.guildId), Filters.eq("thread", thread)
+                ), Updates.addEachToSet(
+                    "messages", document
+                ), UpdateOptions().upsert(true)
             )
         }
+    }
 
-        val createFollowupMessage = async {
-            for (i in chatGptChunked.drop(0)) {
-                Handler.ktDiscordClient.createFollowupMessage(
-                    ExecuteWebhook(content = i), event.token
+    launch {
+        if (chatGpt.content.length <= 2000) {
+            Handler.ktDiscordClient.editOriginalInteractionResponse(
+                EditWebhookMessage(
+                    content = chatGpt.content
+                ), event.token
+            )
+        } else {
+            val chatGptChunked = chatGpt.content.chunked(2000)
+
+            launch {
+                Handler.ktDiscordClient.editOriginalInteractionResponse(
+                    EditWebhookMessage(
+                        content = chatGptChunked[0]
+                    ), event.token
                 )
             }
-        }
 
-        editOriginalInteractionResponse.await()
-        createFollowupMessage.await()
+            launch {
+                for (i in chatGptChunked.drop(0)) {
+                    Handler.ktDiscordClient.createFollowupMessage(
+                        ExecuteWebhook(content = i), event.token
+                    )
+                }
+            }
+        }
     }
 }
