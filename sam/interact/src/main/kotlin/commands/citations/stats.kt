@@ -5,7 +5,8 @@ import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler
+import cloud.drakon.tempestbot.interact.Handler.Companion.json
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import kotlinx.coroutines.delay
@@ -38,7 +39,7 @@ suspend fun stats(event: Interaction<ApplicationCommandData>) {
 
     if (citations != null) {
         val messagesJson: Citations =
-            Handler.json.decodeFromString(Citations.serializer(), citations.toJson())
+            json.decodeFromString(Citations.serializer(), citations.toJson())
 
         if (messagesJson.messages != null) {
             error = false
@@ -52,7 +53,7 @@ suspend fun stats(event: Interaction<ApplicationCommandData>) {
         errorString = "User has not opted-in to citations!"
     }
 
-    Handler.ktDiscordClient.editOriginalInteractionResponse(
+    ktDiscordClient.editOriginalInteractionResponse(
         if (! error) {
             EditWebhookMessage(
                 embeds = arrayOf(
@@ -73,6 +74,6 @@ suspend fun stats(event: Interaction<ApplicationCommandData>) {
     if (error) {
         delay(5000)
 
-        Handler.ktDiscordClient.deleteOriginalInteractionResponse(event.token)
+        ktDiscordClient.deleteOriginalInteractionResponse(event.token)
     }
 }

@@ -1,10 +1,10 @@
 package cloud.drakon.tempestbot.interact.api.xivapi
 
+import cloud.drakon.tempestbot.interact.Handler.Companion.json
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 
 class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
@@ -20,7 +20,7 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
         language: String? = null,
         columns: Array<String>? = null,
     ): JsonElement {
-        return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/search") {
+        return json.parseToJsonElement(ktorClient.get("https://xivapi.com/search") {
             url {
                 parameters.append("string", string)
 
@@ -40,7 +40,7 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
     }
 
     suspend fun characterSearch(name: String, server: String? = null): JsonElement {
-        return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/character/search") {
+        return json.parseToJsonElement(ktorClient.get("https://xivapi.com/character/search") {
             url {
                 parameters.append("name", name.replace(" ", "+"))
 
@@ -52,7 +52,7 @@ class XivApiClient(private val ktorClient: HttpClient = HttpClient(Java)) {
     }
 
     suspend fun profile(lodestoneId: Int, extended: Boolean? = null): JsonElement {
-        return Json.parseToJsonElement(ktorClient.get("https://xivapi.com/character/$lodestoneId") {
+        return json.parseToJsonElement(ktorClient.get("https://xivapi.com/character/$lodestoneId") {
             url {
                 if (extended != null) {
                     parameters.append(

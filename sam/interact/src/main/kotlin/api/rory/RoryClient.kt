@@ -1,5 +1,6 @@
 package cloud.drakon.tempestbot.interact.api.rory
 
+import cloud.drakon.tempestbot.interact.Handler.Companion.json
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
@@ -11,7 +12,7 @@ class RoryClient {
     suspend fun getRory(): Rory {
         return HttpClient(Java) {
             install(ContentNegotiation) {
-                json()
+                json(json = json)
             }
         }.get("https://rory.cat/purr").body()
     }

@@ -4,7 +4,9 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktdiscord.webhook.ExecuteWebhook
-import cloud.drakon.tempestbot.interact.Handler
+import cloud.drakon.tempestbot.interact.Handler.Companion.json
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
+import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.tempestbot.interact.api.openai.OpenAI
 import cloud.drakon.tempestbot.interact.api.openai.chat.ChatRequest
 import cloud.drakon.tempestbot.interact.api.openai.chat.Message
@@ -28,7 +30,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
         }
     }
 
-    val mongoCollection = Handler.mongoDatabase.getCollection("chat")
+    val mongoCollection = mongoDatabase.getCollection("chat")
 
     val messages: MutableList<Message>
     val newMessage = Message("user", message)
@@ -70,7 +72,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
         for (i in newMessages) {
             document.add(
                 BsonDocument.parse(
-                    Handler.json.encodeToString(
+                    json.encodeToString(
                         Message.serializer(), i
                     )
                 )
@@ -90,7 +92,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
 
     launch {
         if (chatGpt.content.length <= 2000) {
-            Handler.ktDiscordClient.editOriginalInteractionResponse(
+            ktDiscordClient.editOriginalInteractionResponse(
                 EditWebhookMessage(
                     content = chatGpt.content
                 ), event.token
@@ -99,7 +101,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
             val chatGptChunked = chatGpt.content.chunked(2000)
 
             launch {
-                Handler.ktDiscordClient.editOriginalInteractionResponse(
+                ktDiscordClient.editOriginalInteractionResponse(
                     EditWebhookMessage(
                         content = chatGptChunked[0]
                     ), event.token
@@ -108,7 +110,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
 
             launch {
                 for (i in chatGptChunked.drop(0)) {
-                    Handler.ktDiscordClient.createFollowupMessage(
+                    ktDiscordClient.createFollowupMessage(
                         ExecuteWebhook(content = i), event.token
                     )
                 }

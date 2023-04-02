@@ -5,8 +5,8 @@ import cloud.drakon.ktdiscord.file.File
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler
 import cloud.drakon.tempestbot.interact.Handler.Companion.json
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import io.ktor.client.HttpClient
@@ -81,7 +81,7 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
         }
     }
 
-    Handler.ktDiscordClient.editOriginalInteractionResponse(
+    ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             content = content, files = if (files.isNotEmpty()) {
                 files.toTypedArray()
@@ -98,6 +98,6 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
     if (error) {
         delay(5000)
 
-        Handler.ktDiscordClient.deleteOriginalInteractionResponse(event.token)
+        ktDiscordClient.deleteOriginalInteractionResponse(event.token)
     }
 }

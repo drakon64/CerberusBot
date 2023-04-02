@@ -5,7 +5,7 @@ import cloud.drakon.ktdiscord.file.File
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscordClient
 import cloud.drakon.tempestbot.interact.api.openai.OpenAI
 import cloud.drakon.tempestbot.interact.api.openai.images.ImageRequest
 import java.util.Base64
@@ -27,7 +27,7 @@ suspend fun image(event: Interaction<ApplicationCommandData>) {
         ).data[0].b64Json
     )
 
-    Handler.ktDiscordClient.editOriginalInteractionResponse(
+    ktDiscordClient.editOriginalInteractionResponse(
         EditWebhookMessage(
             files = arrayOf(
                 File(
