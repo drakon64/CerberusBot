@@ -16,6 +16,8 @@ import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.java.Java
 import java.io.InputStream
 import java.io.OutputStream
 import kotlinx.coroutines.runBlocking
@@ -26,6 +28,8 @@ class Handler: RequestStreamHandler {
         val ktDiscord = KtDiscordClient(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
         ).Interaction(System.getenv("PUBLIC_KEY"))
+
+        val ktorClient = HttpClient(Java)
 
         val json = Json {
             ignoreUnknownKeys =

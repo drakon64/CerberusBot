@@ -10,14 +10,13 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktlodestone.KtLodestone
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktorClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
-import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
 import java.time.LocalDateTime
 import org.bson.types.Binary
@@ -81,7 +80,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             characterTitle = profile.title
             characterServer = profile.server
             characterDatacenter = profile.dc
-            characterAvatar = HttpClient(Java).get(profile.avatar).body()
+            characterAvatar = ktorClient.get(profile.avatar).body()
             characterClass = profile.activeClassJob
             characterLevel = profile.activeClassJobLevel.toInt()
 

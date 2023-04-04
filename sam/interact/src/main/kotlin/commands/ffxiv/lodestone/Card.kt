@@ -6,14 +6,13 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktorClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
-import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
 import java.time.LocalDateTime
 import org.bson.types.Binary
@@ -52,7 +51,7 @@ suspend fun card(event: Interaction<ApplicationCommandData>) {
             card = (mongoCard["binary"] as Binary).data
         } else {
             card =
-                HttpClient(Java).get("https://xiv-character-cards.drakon.cloud/characters/id/$characterId.png")
+                ktorClient.get("https://xiv-character-cards.drakon.cloud/characters/id/$characterId.png")
                     .body()
 
             mongoCollection.updateOne(

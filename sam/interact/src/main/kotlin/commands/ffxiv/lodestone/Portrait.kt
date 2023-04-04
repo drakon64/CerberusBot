@@ -7,14 +7,13 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktlodestone.KtLodestone
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktorClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
-import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
 import java.time.LocalDateTime
 import org.bson.types.Binary
@@ -53,7 +52,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
             portrait = (mongoPortrait["binary"] as Binary).data
         } else {
             portrait =
-                HttpClient(Java).get(KtLodestone.Character.getCharacter(characterId).portrait)
+                ktorClient.get(KtLodestone.Character.getCharacter(characterId).portrait)
                     .body()
 
             mongoCollection.updateOne(

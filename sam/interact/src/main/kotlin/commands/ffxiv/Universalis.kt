@@ -8,10 +8,9 @@ import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandD
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktuniversalis.KtUniversalisClient
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.tempestbot.interact.Handler.Companion.ktorClient
 import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
 import com.amazonaws.services.lambda.runtime.LambdaLogger
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.java.Java
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -42,7 +41,6 @@ suspend fun universalis(
         else -> logger.log("Unknown application command type: " + event.data !!.type)
     }
 
-    val ktorClient = HttpClient(Java)
     val xivApi = XivApiClient(ktorClient = ktorClient)
 
     val xivApiItem = xivApi.search(
