@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.10"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    kotlin("jvm") version "1.8.20"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.20"
 }
 
 group = "cloud.drakon"
@@ -34,16 +34,15 @@ repositories {
 dependencies {
     implementation("cloud.drakon:ktdiscord:5.1.1")
 
+    val ktorVersion = "2.2.4"
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
     implementation("org.mongodb:mongodb-driver-sync:4.9.0")
 
     // Lodestone
     implementation("cloud.drakon:ktlodestone:1.0.0")
-
-    // Rory
-    val ktorVersion = "2.2.4"
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
     // Translate
     implementation("aws.sdk.kotlin:translate:0.21.4-beta")
