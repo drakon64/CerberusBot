@@ -17,10 +17,6 @@ import io.ktor.client.call.body
 import io.ktor.client.engine.java.Java
 import io.ktor.client.request.get
 import java.time.LocalDateTime
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import org.bson.types.Binary
 
 suspend fun portrait(event: Interaction<ApplicationCommandData>) {
@@ -42,8 +38,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
     ).first()
 
     if (characterIdDocument != null) {
-        val characterId =
-            Json.parseToJsonElement(characterIdDocument.toJson()).jsonObject["character_id"] !!.jsonPrimitive.int
+        val characterId = characterIdDocument["character_id"] as Int
 
         val mongoCollection = mongoDatabase.getCollection("lodestone_portrait")
         val mongoPortrait =
