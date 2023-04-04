@@ -11,7 +11,6 @@ import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktlodestone.KtLodestone
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
-import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
@@ -81,18 +80,14 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             characterClass = mongoProfile["class"] as String
             characterLevel = mongoProfile["level"] as Int
         } else {
-            val profile = KtLodestone.getCharacter(characterId)
-
-            val ktorClient = HttpClient(Java)
+            val profile = KtLodestone.Character.getCharacter(characterId)
 
             characterName = profile.name
             characterTitle = profile.title
             characterServer = profile.server
             characterDatacenter = profile.dc
-            characterAvatar = ktorClient.get(profile.avatar).body()
-            characterClass = XivApiClient(ktorClient = ktorClient).profile(
-                characterId, true
-            ).jsonObject["Character"] !!.jsonObject["ActiveClassJob"] !!.jsonObject["UnlockedState"] !!.jsonObject["Name"] !!.jsonPrimitive.content
+            characterAvatar = HttpClient(Java).get(profile.avatar).body()
+            characterClass = profile.activeClassJob
             characterLevel = profile.activeClassJobLevel.toInt()
 
             mongoCollection.updateOne(

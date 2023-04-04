@@ -58,7 +58,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
             portrait = (mongoPortrait["binary"] as Binary).data
         } else {
             portrait =
-                HttpClient(Java).get(KtLodestone.getCharacter(characterId).portrait)
+                HttpClient(Java).get(KtLodestone.Character.getCharacter(characterId).portrait)
                     .body()
 
             mongoCollection.updateOne(
