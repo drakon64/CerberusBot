@@ -61,7 +61,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
         ChatRequest(
             "gpt-3.5-turbo",
             messages.toTypedArray(),
-            temperature = 0.2,
+            temperature = 2.0,
             maxTokens = 2000
         )
     ).choices[0].message
