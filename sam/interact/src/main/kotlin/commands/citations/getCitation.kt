@@ -51,9 +51,9 @@ suspend fun getCitation(event: Interaction<ApplicationCommandData>) {
             content = if (randomCitation.content != null) {
                 "> " + randomCitation.content.replace(
                     "\n", "\n> "
-                ) + "\n- <@$userId>"
+                ) + "\n\\- <@$userId>"
             } else {
-                "- <@$userId>"
+                "\\- <@$userId>"
             }
 
             if (randomCitation.attachments != null) {

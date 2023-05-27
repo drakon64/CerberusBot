@@ -102,9 +102,9 @@ suspend fun addCitation(event: Interaction<ApplicationCommandData>) {
         ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
                 content = if (message.isNotEmpty()) {
-                    "> " + message.replace("\n", "\n> ") + "\n- <@$userId>"
+                    "> " + message.replace("\n", "\n> ") + "\n\\- <@$userId>"
                 } else {
-                    "- <@$userId>"
+                    "\\- <@$userId>"
                 }, files = if (files.isNotEmpty()) {
                     files.toTypedArray()
                 } else {
