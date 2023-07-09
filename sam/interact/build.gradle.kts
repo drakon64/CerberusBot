@@ -34,18 +34,18 @@ repositories {
 dependencies {
     implementation("cloud.drakon:ktdiscord:5.1.1")
 
-    val ktorVersion = "2.3.0"
+    val ktorVersion = "2.3.2"
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
-    implementation("org.mongodb:mongodb-driver-sync:4.9.1")
+    implementation("org.mongodb:mongodb-driver-sync:4.10.1")
 
     // Lodestone
     implementation("cloud.drakon:ktlodestone:1.0.0")
 
     // Translate
-    implementation("aws.sdk.kotlin:translate:0.23.0-beta")
+    implementation("aws.sdk.kotlin:translate:0.28.1-beta")
 
     // Universalis
     implementation("cloud.drakon:ktuniversalis:1.0.1")
