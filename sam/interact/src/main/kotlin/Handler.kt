@@ -1,6 +1,6 @@
 package cloud.drakon.tempestbot.interact
 
-import cloud.drakon.ktdiscord.KtDiscordClient
+import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
@@ -25,7 +25,7 @@ import kotlinx.serialization.json.Json
 
 class Handler: RequestStreamHandler {
     companion object {
-        val ktDiscord = KtDiscordClient(
+        val ktDiscord = KtDiscord(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
         ).Interaction(System.getenv("PUBLIC_KEY"))
 

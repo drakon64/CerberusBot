@@ -52,8 +52,7 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
             portrait = (mongoPortrait["binary"] as Binary).data
         } else {
             portrait =
-                ktorClient.get(KtLodestone.Character.getCharacter(characterId).portrait)
-                    .body()
+                ktorClient.get(KtLodestone.getCharacter(characterId).portrait).body()
 
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
