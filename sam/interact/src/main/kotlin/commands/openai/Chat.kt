@@ -59,7 +59,7 @@ suspend fun chat(event: Interaction<ApplicationCommandData>) = coroutineScope {
 
     val chatGpt = openAi.createChatCompletion(
         ChatRequest(
-            "gpt-3.5-turbo",
+            "gpt-4",
             messages.toTypedArray(),
             maxTokens = 2000
         )
