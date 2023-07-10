@@ -115,7 +115,7 @@
             },
             {
                 "name": "string",
-                "description": "The string to search for.",
+                "description": "The string to search for",
                 "type": 3,
                 "required": true
             }
