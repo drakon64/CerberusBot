@@ -13,10 +13,16 @@ suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope
     val bonuses = mutableListOf<String>()
 
     for (i in item["Bonuses"] !!.jsonObject.keys) {
+        val key = when (i) {
+            "CriticalHit" -> "Critical Hit"
+            "DirectHit" -> "Direct Hit"
+            else -> i
+        }
+
         val bonus = item["Bonuses"] !!.jsonObject[i] !!
 
         if (bonus.jsonObject["Relative"] !!.jsonPrimitive.boolean) {
-            bonuses.add("$i +${bonus.jsonObject["Value"] !!.jsonPrimitive.content} (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content})")
+            bonuses.add("$key +${bonus.jsonObject["Value"] !!.jsonPrimitive.content} (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content})")
         }
     }
 
