@@ -1,7 +1,6 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase
 
 import cloud.drakon.ktdiscord.channel.embed.Embed
-import cloud.drakon.ktdiscord.channel.embed.EmbedAuthor
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import kotlinx.coroutines.coroutineScope
@@ -32,9 +31,6 @@ suspend fun medicineMeal(item: JsonObject) = coroutineScope {
             )
         }",
         thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}"),
-        author = EmbedAuthor(
-            "TempestBot", "https://github.com/TempestProject/TempestBot"
-        ),
         fields = arrayOf(
             EmbedField(
                 name = "Item Level", value = item["LevelItem"] !!.jsonPrimitive.content
