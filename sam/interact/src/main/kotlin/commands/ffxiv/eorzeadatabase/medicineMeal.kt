@@ -33,8 +33,10 @@ suspend fun medicineMeal(item: JsonObject) = coroutineScope {
         thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}"),
         fields = arrayOf(
             EmbedField(
-                name = "Item Level", value = item["LevelItem"] !!.jsonPrimitive.content
-            ), EmbedField(name = "Effects", value = bonusesString)
+                name = "Item Level",
+                value = item["LevelItem"] !!.jsonPrimitive.content,
+                inline = true
+            ), EmbedField(name = "Effects", value = bonusesString, inline = true)
         )
     )
 }
