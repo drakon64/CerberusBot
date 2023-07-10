@@ -6,6 +6,7 @@ import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.tempestbot.interact.api.openai.OpenAI
 import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
+import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeaDatabase
 import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
 import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
 import cloud.drakon.tempestbot.interact.commands.openai.chat
@@ -67,6 +68,7 @@ class Handler: RequestStreamHandler {
                         )
 
                         "chat" -> chat(applicationCommand)
+                        "eorzeadatabase" -> eorzeaDatabase(applicationCommand, logger)
                         "image" -> image(applicationCommand)
                         "lodestone" -> lodestoneHandler(applicationCommand)
                         "rory" -> rory(applicationCommand)
