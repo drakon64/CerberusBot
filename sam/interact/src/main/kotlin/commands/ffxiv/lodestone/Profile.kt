@@ -63,7 +63,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
         val characterDatacenter: String
         val characterAvatar: ByteArray
         val characterClass: String
-        val characterLevel: Byte
+        val characterLevel: Int
 
         if (mongoProfile != null) {
             characterName = mongoProfile["character_name"] as String
@@ -72,7 +72,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             characterDatacenter = mongoProfile["datacenter"] as String
             characterAvatar = (mongoProfile["avatar"] as Binary).data
             characterClass = mongoProfile["class"] as String
-            characterLevel = mongoProfile["level"] as Byte
+            characterLevel = mongoProfile["level"] as Int
         } else {
             val profile = KtLodestone.getCharacter(characterId)
 
@@ -82,7 +82,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
             characterDatacenter = profile.dc
             characterAvatar = ktorClient.get(profile.avatar).body()
             characterClass = profile.activeClassJob.name
-            characterLevel = profile.activeClassJob.level
+            characterLevel = profile.activeClassJob.level.toInt()
 
             mongoCollection.updateOne(
                 Filters.eq("character_id", characterId), Updates.combine(
