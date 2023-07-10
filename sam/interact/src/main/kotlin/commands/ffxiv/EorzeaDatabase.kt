@@ -21,15 +21,11 @@ suspend fun eorzeaDatabase(
     lateinit var index: String
     lateinit var name: String
 
-    when (event.data !!.type) {
-        1 -> for (i in event.data !!.options !!) {
-            when (i.name) {
-                "index" -> index = i.value !!
-                "name" -> name = i.value !!
-            }
+    for (i in event.data !!.options !!) {
+        when (i.name) {
+            "index" -> index = i.value !!
+            "name" -> name = i.value !!
         }
-
-        else -> logger.log("Unknown application command type: " + event.data !!.type)
     }
 
     val search = KtXivApi.search(
