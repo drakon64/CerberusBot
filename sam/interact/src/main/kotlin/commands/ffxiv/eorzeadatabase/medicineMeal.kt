@@ -11,7 +11,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
 suspend fun medicineMeal(item: JsonObject) = coroutineScope {
-    lateinit var bonuses: MutableList<String>
+    val bonuses = mutableListOf<String>()
 
     for (i in item["Bonuses"] !!.jsonObject.keys) {
         val bonus = item["Bonuses"] !!.jsonObject[i] !!
