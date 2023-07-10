@@ -1,6 +1,7 @@
 package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase
 
 import cloud.drakon.ktdiscord.channel.embed.Embed
+import cloud.drakon.ktdiscord.channel.embed.EmbedAuthor
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import kotlinx.coroutines.coroutineScope
@@ -25,7 +26,15 @@ suspend fun medicineMeal(item: JsonObject) = coroutineScope {
     return@coroutineScope Embed(
         title = item["Name"] !!.jsonPrimitive.content,
         description = item["Description"] !!.jsonPrimitive.content,
+        url = "https://ffxiv.gamerescape.com/wiki/${
+            item["Name"] !!.jsonPrimitive.content.replace(
+                " ", "_"
+            )
+        }",
         thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}"),
+        author = EmbedAuthor(
+            "TempestBot", "https://github.com/TempestProject/TempestBot"
+        ),
         fields = arrayOf(
             EmbedField(
                 name = "Item Level", value = item["LevelItem"] !!.jsonPrimitive.content
