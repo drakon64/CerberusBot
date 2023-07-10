@@ -96,6 +96,32 @@
         ]
     },
     {
+        "name": "eorzeadatabase",
+        "description": "Eorzea Database",
+        "default_member_permissions": 0,
+        "type": 1,
+        "options": [
+            {
+                "name": "index",
+                "description": "Search an index",
+                "type": 3,
+                "required": true,
+                "options": [
+                    {
+                        "name": "Item",
+                        "value": "item"
+                    }
+                ]
+            },
+            {
+                "name": "string",
+                "description": "The string to search for.",
+                "type": 3,
+                "required": true
+            }
+        ]
+    },
+    {
         "name": "image",
         "description": "Creates an image from a prompt using DALL-E 2",
         "default_member_permissions": 0,
