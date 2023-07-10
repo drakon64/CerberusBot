@@ -106,7 +106,7 @@
                 "description": "Search an index",
                 "type": 3,
                 "required": true,
-                "options": [
+                "choices": [
                     {
                         "name": "Item",
                         "value": "item"

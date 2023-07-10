@@ -19,17 +19,17 @@ suspend fun eorzeaDatabase(
     logger.log("Responding to Eorzea Database command")
 
     lateinit var index: String
-    lateinit var name: String
+    lateinit var string: String
 
     for (i in event.data !!.options !!) {
         when (i.name) {
             "index" -> index = i.value !!
-            "name" -> name = i.value !!
+            "string" -> string = i.value !!
         }
     }
 
     val search = KtXivApi.search(
-        name, indexes = listOf(index), stringAlgo = StringAlgo.fuzzy, limit = 1
+        string, indexes = listOf(index), stringAlgo = StringAlgo.fuzzy, limit = 1
     )
     val id = search.results[0].id
     val item = KtXivApi.getContentId(index, id)
