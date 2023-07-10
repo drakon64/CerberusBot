@@ -11,6 +11,9 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.safety.Safelist
 
 suspend fun eorzeaDatabase(
     event: Interaction<ApplicationCommandData>,
@@ -33,11 +36,17 @@ suspend fun eorzeaDatabase(
     )
     val id = search.results[0].id
     val item = KtXivApi.getContentId(index, id)
+    val description = Jsoup.clean(
+        item["Description"] !!.jsonPrimitive.content,
+        "",
+        Safelist.none(),
+        Document.OutputSettings().prettyPrint(false)
+    )
     val itemKind = item["ItemKind"] !!.jsonObject["ID"] !!.jsonPrimitive.int
 
     val embed = when (itemKind) {
         5 -> { // Medicines & Meals
-            medicineMeal(item)
+            medicineMeal(item, description)
         }
 
         else -> {
