@@ -22,7 +22,7 @@ suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope
         val bonus = item["Bonuses"] !!.jsonObject[i] !!
 
         if (bonus.jsonObject["Relative"] !!.jsonPrimitive.boolean) {
-            bonuses.add("$key +${bonus.jsonObject["Value"] !!.jsonPrimitive.content} (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content})")
+            bonuses.add("$key +${bonus.jsonObject["Value"] !!.jsonPrimitive.content}% (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content})")
         }
     }
 
