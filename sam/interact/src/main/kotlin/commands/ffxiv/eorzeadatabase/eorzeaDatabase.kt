@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv
+package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase
 
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
