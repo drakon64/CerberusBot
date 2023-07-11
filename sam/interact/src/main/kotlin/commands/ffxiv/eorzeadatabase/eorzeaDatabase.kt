@@ -44,9 +44,12 @@ suspend fun eorzeaDatabase(
             Safelist.none(),
             Document.OutputSettings().prettyPrint(false)
         ).replace("""\n{3,}""".toRegex(), "\n\n")
-        val itemKind = item["ItemKind"] !!.jsonObject["ID"] !!.jsonPrimitive.int
 
-        val embed = when (itemKind) {
+        val embed = when (item["ItemKind"] !!.jsonObject["ID"] !!.jsonPrimitive.int) {
+            1 -> { // Arms
+                arms(item, description)
+            }
+
             5 -> { // Medicines & Meals
                 medicineMeal(item, description)
             }
