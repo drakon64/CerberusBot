@@ -19,9 +19,9 @@ suspend fun arms(item: JsonObject) = coroutineScope {
             else -> i
         }
 
-        val stat = item["Stats"] !!.jsonObject[i] !!
-        val value = stat.jsonObject["NQ"] !!.jsonPrimitive.int
-        val valueHq = stat.jsonObject["HQ"]?.jsonPrimitive?.int
+        val bonus = item["Stats"] !!.jsonObject[i] !!
+        val value = bonus.jsonObject["NQ"] !!.jsonPrimitive.int
+        val valueHq = bonus.jsonObject["HQ"]?.jsonPrimitive?.int
 
         if (valueHq != null) {
             bonuses.add(
@@ -33,6 +33,8 @@ suspend fun arms(item: JsonObject) = coroutineScope {
             )
         }
     }
+
+    val delay = ((item["DelayMs"] !!.jsonPrimitive.int).toDouble() / 1000).toString()
 
     return@coroutineScope Embed(
         title = item["Name"] !!.jsonPrimitive.content,
@@ -48,6 +50,10 @@ suspend fun arms(item: JsonObject) = coroutineScope {
                 value = item["LevelItem"] !!.jsonPrimitive.content,
                 inline = true
             ), EmbedField(
+                name = "Damage",
+                value = item["DamagePhys"] !!.jsonPrimitive.content,
+                inline = true
+            ), EmbedField(name = "Delay", value = delay, inline = true), EmbedField(
                 name = "Effects", value = bonuses.joinToString("\n"), inline = true
             )
         )
