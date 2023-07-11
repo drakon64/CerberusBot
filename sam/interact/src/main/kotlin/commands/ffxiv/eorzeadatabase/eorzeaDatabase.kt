@@ -6,9 +6,9 @@ import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktxivapi.KtXivApi
 import cloud.drakon.ktxivapi.search.StringAlgo
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.medicineMeal
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.jsoup.Jsoup
@@ -33,10 +33,10 @@ suspend fun eorzeaDatabase(
 
     val search = KtXivApi.search(
         string, indexes = listOf(index), stringAlgo = StringAlgo.fuzzy, limit = 1
-    ).results
+    ).jsonObject["Results"] !!.jsonArray.getOrNull(0)
 
-    if (search.isNotEmpty()) {
-        val id = search[0].id
+    if (search != null) {
+        val id = search.jsonObject["ID"] !!.jsonPrimitive.int
         val item = KtXivApi.getContentId(index, id)
         val description = Jsoup.clean(
             item["Description"] !!.jsonPrimitive.content,
