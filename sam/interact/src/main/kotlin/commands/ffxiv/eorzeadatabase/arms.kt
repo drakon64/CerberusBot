@@ -35,6 +35,10 @@ suspend fun arms(item: JsonObject) = coroutineScope {
     }
 
     val delay = ((item["DelayMs"] !!.jsonPrimitive.int).toDouble() / 1000).toString()
+    val classJob = """
+        ${item["ClassJobCategory"] !!.jsonObject["Name"] !!.jsonPrimitive.content}
+        Lv. ${item["LevelEquip"] !!.jsonPrimitive.content}
+    """.trimIndent()
 
     return@coroutineScope Embed(
         title = item["Name"] !!.jsonPrimitive.content,
@@ -54,6 +58,8 @@ suspend fun arms(item: JsonObject) = coroutineScope {
                 value = item["DamagePhys"] !!.jsonPrimitive.content,
                 inline = true
             ), EmbedField(name = "Delay", value = delay, inline = true), EmbedField(
+                name = "Class/Job", value = classJob, inline = true
+            ), EmbedField(
                 name = "Effects", value = bonuses.joinToString("\n"), inline = true
             )
         )
