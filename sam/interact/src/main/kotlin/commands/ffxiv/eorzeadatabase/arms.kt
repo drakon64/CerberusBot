@@ -5,7 +5,6 @@ import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -13,30 +12,25 @@ import kotlinx.serialization.json.jsonPrimitive
 suspend fun arms(item: JsonObject, description: String) = coroutineScope {
     val bonuses = mutableListOf<String>()
 
-    for (i in item["Bonuses"] !!.jsonObject.keys) {
+    for (i in item["Stats"] !!.jsonObject.keys) {
         val key = when (i) {
             "CriticalHit" -> "Critical Hit"
             "DirectHit" -> "Direct Hit"
             else -> i
         }
 
-        val bonus = item["Bonuses"] !!.jsonObject[i] !!
+        val stat = item["Stats"] !!.jsonObject[i] !!
+        val value = stat.jsonObject["NQ"] !!.jsonPrimitive.int
+        val valueHq = stat.jsonObject["HQ"]?.jsonPrimitive?.int
 
-        if (bonus.jsonObject["Relative"] !!.jsonPrimitive.boolean) {
-            val value = bonus.jsonObject["Value"] !!.jsonPrimitive.int
-            val valueHq = bonus.jsonObject["ValueHQ"]?.jsonPrimitive?.int
-            val max = bonus.jsonObject["Max"] !!.jsonPrimitive.int
-            val maxHq = bonus.jsonObject["MaxHQ"]?.jsonPrimitive?.int
-
-            if ((valueHq != value) || (maxHq != max)) {
-                bonuses.add(
-                    "$key +$value% (Max $max) / +$valueHq% (Max $maxHq) <:hq:916051971063054406>"
-                )
-            } else {
-                bonuses.add(
-                    "$key +$value% (Max $max)"
-                )
-            }
+        if (valueHq != null) {
+            bonuses.add(
+                "$key +$value / +$valueHq <:hq:916051971063054406>"
+            )
+        } else {
+            bonuses.add(
+                "$key +$value"
+            )
         }
     }
 
