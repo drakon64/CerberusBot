@@ -118,6 +118,30 @@
                 "description": "The string to search for",
                 "type": 3,
                 "required": true
+            },
+            {
+                "name": "language",
+                "description": "Handle the request and the response in the specified language",
+                "type": 3,
+                "required": false,
+                "choices": [
+                    {
+                        "name": "English",
+                        "value": "en"
+                    },
+                    {
+                        "name": "日本人",
+                        "value": "ja"
+                    },
+                    {
+                        "name": "Deutsch",
+                        "value": "de"
+                    },
+                    {
+                        "name": "Français",
+                        "value": "fr"
+                    }
+                ]
             }
         ]
     },
