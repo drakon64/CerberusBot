@@ -8,6 +8,42 @@ internal object Localisation {
         "fr" to "Attaque auto."
     )
 
+    val bonuses = mapOf(
+        "Bonuses" to mapOf(
+            "en" to "Bonuses", "ja" to "Bonuses", "de" to "Bonus", "fr" to "Bonus"
+        ), "CriticalHit" to mapOf(
+            "en" to "Critical Hit",
+            "ja" to "クリティカル",
+            "de" to "Kritischer Treffer",
+            "fr" to "Critique"
+        ), "Determination" to mapOf(
+            "en" to "Determination",
+            "ja" to "意思力",
+            "de" to "Entschlossenheit",
+            "fr" to "Détermination"
+        ), "DirectHitRate" to mapOf(
+            "en" to "Direct Hit Rate",
+            "ja" to "ダイレクトヒット",
+            "de" to "Direkter Treffer",
+            "fr" to "Coups nets"
+        ), "Intelligence" to mapOf(
+            "en" to "Intelligence",
+            "ja" to "INT",
+            "de" to "Intelligenz",
+            "fr" to "Intelligence"
+        ), "SkillSpeed" to mapOf(
+            "en" to "Skill Speed",
+            "ja" to "スキルスピード",
+            "de" to "Schnelligkeit",
+            "fr" to "Vivacité"
+        ), "Vitality" to mapOf(
+            "en" to "Vitality",
+            "ja" to "VIT",
+            "de" to "Konstitution",
+            "fr" to "Vitalité"
+        )
+    )
+
     val delay = mapOf(
         "en" to "Delay", "ja" to "攻撃間隔", "de" to "Verzögerung", "fr" to "Délai"
     )

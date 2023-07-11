@@ -11,14 +11,11 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
 suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineScope {
+    val language = searchLanguage ?: "en"
     val bonuses = mutableListOf<String>()
 
     for (i in item["Stats"] !!.jsonObject.keys) {
-        val key = when (i) {
-            "CriticalHit" -> "Critical Hit"
-            "DirectHit" -> "Direct Hit"
-            else -> i
-        }
+        val key = Localisation.bonuses.getValue(i).getValue(language)
 
         val bonus = item["Stats"] !!.jsonObject[i] !!
         val value = bonus.jsonObject["NQ"] !!.jsonPrimitive.int
@@ -36,7 +33,6 @@ suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineSc
     }
 
     val delay = ((item["DelayMs"] !!.jsonPrimitive.int).toDouble() / 1000).toString()
-    val language = searchLanguage ?: "en"
     val classJob = """
         ${item["ClassJobCategory"] !!.jsonObject["Name"] !!.jsonPrimitive.content}
         ${Localisation.level.getValue(language)} ${item["LevelEquip"] !!.jsonPrimitive.content}
@@ -70,7 +66,9 @@ suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineSc
             ), EmbedField(
                 name = "Class/Job", value = classJob, inline = true
             ), EmbedField(
-                name = "Effects", value = bonuses.joinToString("\n"), inline = true
+                name = Localisation.bonuses.getValue("Bonuses").getValue(language),
+                value = bonuses.joinToString("\n"),
+                inline = true
             )
         )
     )
