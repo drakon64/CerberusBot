@@ -23,13 +23,18 @@ suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope
         val bonus = item["Bonuses"] !!.jsonObject[i] !!
 
         if (bonus.jsonObject["Relative"] !!.jsonPrimitive.boolean) {
-            if ((bonus.jsonObject["ValueHQ"] !!.jsonPrimitive.int != bonus.jsonObject["Value"] !!.jsonPrimitive.int) && (bonus.jsonObject["MaxHQ"] !!.jsonPrimitive.int != bonus.jsonObject["Max"] !!.jsonPrimitive.int)) {
+            val value = bonus.jsonObject["Value"] !!.jsonPrimitive.int
+            val valueHq = bonus.jsonObject["ValueHQ"]?.jsonPrimitive?.int
+            val max = bonus.jsonObject["Max"] !!.jsonPrimitive.int
+            val maxHq = bonus.jsonObject["MaxHQ"]?.jsonPrimitive?.int
+
+            if ((valueHq != value) || (maxHq != max)) {
                 bonuses.add(
-                    "$key +${bonus.jsonObject["Value"] !!.jsonPrimitive.content}% (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content}) / +${bonus.jsonObject["ValueHQ"] !!.jsonPrimitive.content}% (Max ${bonus.jsonObject["MaxHQ"] !!.jsonPrimitive.content}) <:hq:916051971063054406>"
+                    "$key +$value% (Max $max) / +$valueHq% (Max $maxHq) <:hq:916051971063054406>"
                 )
             } else {
                 bonuses.add(
-                    "$key + ${bonus.jsonObject["Value"] !!.jsonPrimitive.content}% (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content})"
+                    "$key +$value% (Max $max)"
                 )
             }
         }
