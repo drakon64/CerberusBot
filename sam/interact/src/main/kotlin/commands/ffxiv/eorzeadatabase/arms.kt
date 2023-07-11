@@ -4,10 +4,11 @@ import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.item.Localisation
+import java.math.BigDecimal
+import java.math.RoundingMode
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
@@ -33,14 +34,31 @@ suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineSc
         }
     }
 
-    val damageType =
-        when (item["ClassJobUse"] !!.jsonObject["ClassJobCategory"] !!.jsonObject["ID"] !!.jsonPrimitive.int) {
-            30 -> Localisation.damageType.getValue("Physical Damage").getValue(language)
-            31 -> Localisation.damageType.getValue("Magic Damage").getValue(language)
-            else -> throw Throwable("Unknown class/job category: $this")
+    val damageType: String
+    val damage: Int
+    when (item["ClassJobUse"] !!.jsonObject["ClassJobCategory"] !!.jsonObject["ID"] !!.jsonPrimitive.int) {
+        30 -> {
+            damageType =
+                Localisation.damageType.getValue("Physical Damage").getValue(language)
+            damage = item["DamagePhys"] !!.jsonPrimitive.int
         }
 
-    val delay = ((item["DelayMs"] !!.jsonPrimitive.int).toDouble() / 1000).toString()
+        31 -> {
+            damageType =
+                Localisation.damageType.getValue("Magic Damage").getValue(language)
+            damage = item["DamageMag"] !!.jsonPrimitive.int
+        }
+
+        else -> throw Throwable("Unknown class/job category: $this")
+    }
+
+    val delay = ((item["DelayMs"] !!.jsonPrimitive.int).toDouble() / 1000)
+
+    val autoAttack =
+        BigDecimal.valueOf((delay / 3) * damage)
+            .setScale(2, RoundingMode.DOWN)
+            .toString()
+
     val classJob = """
         ${item["ClassJobCategory"] !!.jsonObject["Name"] !!.jsonPrimitive.content}
         ${Localisation.level.getValue(language)} ${item["LevelEquip"] !!.jsonPrimitive.content}
@@ -60,16 +78,14 @@ suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineSc
                 name = Localisation.itemLevel.getValue(language),
                 value = item["LevelItem"] !!.jsonPrimitive.content,
             ), EmbedField(
-                name = damageType,
-                value = item["DamagePhys"] !!.jsonPrimitive.content,
-                inline = true
+                name = damageType, value = damage.toString(), inline = true
             ), EmbedField(
                 name = Localisation.autoAttack.getValue(language),
-                value = "",
+                value = autoAttack,
                 inline = true
             ), EmbedField(
                 name = Localisation.delay.getValue(language),
-                value = delay,
+                value = delay.toString(),
                 inline = true
             ), EmbedField(
                 name = "Class/Job", value = classJob, inline = true
