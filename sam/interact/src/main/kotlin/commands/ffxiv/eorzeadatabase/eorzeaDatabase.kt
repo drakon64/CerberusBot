@@ -38,20 +38,16 @@ suspend fun eorzeaDatabase(
     if (search != null) {
         val id = search.jsonObject["ID"] !!.jsonPrimitive.int
         val item = KtXivApi.getContentId(index, id)
-        val description = Jsoup.clean(
-            item["Description"] !!.jsonPrimitive.content,
-            "",
-            Safelist.none(),
-            Document.OutputSettings().prettyPrint(false)
-        ).replace("""\n{3,}""".toRegex(), "\n\n")
 
         val embed = when (item["ItemKind"] !!.jsonObject["ID"] !!.jsonPrimitive.int) {
             1 -> { // Arms
-                arms(item, description)
+                arms(item)
             }
 
             5 -> { // Medicines & Meals
-                medicineMeal(item, description)
+                medicineMeal(
+                    item, cleanDescription(item["Description"] !!.jsonPrimitive.content)
+                )
             }
 
             else -> {

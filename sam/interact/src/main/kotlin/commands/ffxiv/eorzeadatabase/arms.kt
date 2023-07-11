@@ -9,7 +9,7 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun arms(item: JsonObject, description: String) = coroutineScope {
+suspend fun arms(item: JsonObject) = coroutineScope {
     val bonuses = mutableListOf<String>()
 
     for (i in item["Stats"] !!.jsonObject.keys) {
@@ -36,7 +36,6 @@ suspend fun arms(item: JsonObject, description: String) = coroutineScope {
 
     return@coroutineScope Embed(
         title = item["Name"] !!.jsonPrimitive.content,
-        description = description,
         url = "https://ffxiv.gamerescape.com/wiki/${
             item["Name"] !!.jsonPrimitive.content.replace(
                 " ", "_"
