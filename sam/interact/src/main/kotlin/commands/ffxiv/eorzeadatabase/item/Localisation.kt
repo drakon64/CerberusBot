@@ -44,6 +44,21 @@ internal object Localisation {
         )
     )
 
+    val damageType = mapOf(
+        "Magic Damage" to mapOf(
+            "en" to "Magic Damage",
+            "ja" to "魔法基本性能",
+            "de" to "Mag. Basiswert",
+            "fr" to "Dégâts magiques"
+        ),
+        "Physical Damage" to mapOf(
+            "en" to "Physical Damage",
+            "ja" to "物理基本性能",
+            "de" to "Phys. Basiswert",
+            "fr" to "Dégâts physiques"
+        )
+    )
+
     val delay = mapOf(
         "en" to "Delay", "ja" to "攻撃間隔", "de" to "Verzögerung", "fr" to "Délai"
     )

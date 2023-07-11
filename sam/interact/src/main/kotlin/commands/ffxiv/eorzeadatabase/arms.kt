@@ -7,6 +7,7 @@ import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.item.Local
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
@@ -32,6 +33,13 @@ suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineSc
         }
     }
 
+    val damageType =
+        when (item["ClassJobUse"] !!.jsonObject["ClassJobCategory"] !!.jsonObject["ID"] !!.jsonPrimitive.int) {
+            30 -> Localisation.damageType.getValue("Physical Damage").getValue(language)
+            31 -> Localisation.damageType.getValue("Magic Damage").getValue(language)
+            else -> throw Throwable("Unknown class/job category: $this")
+        }
+
     val delay = ((item["DelayMs"] !!.jsonPrimitive.int).toDouble() / 1000).toString()
     val classJob = """
         ${item["ClassJobCategory"] !!.jsonObject["Name"] !!.jsonPrimitive.content}
@@ -52,7 +60,7 @@ suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineSc
                 name = Localisation.itemLevel.getValue(language),
                 value = item["LevelItem"] !!.jsonPrimitive.content,
             ), EmbedField(
-                name = "Damage",
+                name = damageType,
                 value = item["DamagePhys"] !!.jsonPrimitive.content,
                 inline = true
             ), EmbedField(
