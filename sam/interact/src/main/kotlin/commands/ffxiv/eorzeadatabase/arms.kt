@@ -52,11 +52,12 @@ suspend fun arms(item: JsonObject) = coroutineScope {
             EmbedField(
                 name = "Item Level",
                 value = item["LevelItem"] !!.jsonPrimitive.content,
-                inline = true
             ), EmbedField(
                 name = "Damage",
                 value = item["DamagePhys"] !!.jsonPrimitive.content,
                 inline = true
+            ), EmbedField(
+                name = "Auto-attack", value = "", inline = true
             ), EmbedField(name = "Delay", value = delay, inline = true), EmbedField(
                 name = "Class/Job", value = classJob, inline = true
             ), EmbedField(
