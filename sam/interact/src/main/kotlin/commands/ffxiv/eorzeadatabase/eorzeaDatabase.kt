@@ -33,28 +33,36 @@ suspend fun eorzeaDatabase(
 
     val search = KtXivApi.search(
         string, indexes = listOf(index), stringAlgo = StringAlgo.fuzzy, limit = 1
-    )
-    val id = search.results[0].id
-    val item = KtXivApi.getContentId(index, id)
-    val description = Jsoup.clean(
-        item["Description"] !!.jsonPrimitive.content,
-        "",
-        Safelist.none(),
-        Document.OutputSettings().prettyPrint(false)
-    ).replace("""\n{3,}""".toRegex(), "\n\n")
-    val itemKind = item["ItemKind"] !!.jsonObject["ID"] !!.jsonPrimitive.int
+    ).results
 
-    val embed = when (itemKind) {
-        5 -> { // Medicines & Meals
-            medicineMeal(item, description)
+    if (search.isNotEmpty()) {
+        val id = search[0].id
+        val item = KtXivApi.getContentId(index, id)
+        val description = Jsoup.clean(
+            item["Description"] !!.jsonPrimitive.content,
+            "",
+            Safelist.none(),
+            Document.OutputSettings().prettyPrint(false)
+        ).replace("""\n{3,}""".toRegex(), "\n\n")
+        val itemKind = item["ItemKind"] !!.jsonObject["ID"] !!.jsonPrimitive.int
+
+        val embed = when (itemKind) {
+            5 -> { // Medicines & Meals
+                medicineMeal(item, description)
+            }
+
+            else -> {
+                throw Throwable("Unknown item type: ${item["ItemKind"] !!.jsonObject["Name"] !!.jsonPrimitive.content}")
+            }
         }
 
-        else -> {
-            throw Throwable("Unknown item type: ${item["ItemKind"] !!.jsonObject["Name"] !!.jsonPrimitive.content}")
-        }
+        ktDiscord.editOriginalInteractionResponse(
+            EditWebhookMessage(embeds = arrayOf(embed)), event.token
+        )
+    } else {
+        ktDiscord.editOriginalInteractionResponse(
+            EditWebhookMessage(content = "Could not find $index \"$string\""),
+            event.token
+        )
     }
-
-    ktDiscord.editOriginalInteractionResponse(
-        EditWebhookMessage(embeds = arrayOf(embed)), event.token
-    )
 }
