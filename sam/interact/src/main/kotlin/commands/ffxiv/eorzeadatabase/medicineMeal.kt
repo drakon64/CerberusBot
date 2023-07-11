@@ -13,6 +13,8 @@ import kotlinx.serialization.json.jsonPrimitive
 suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope {
     val bonuses = mutableListOf<String>()
 
+    val canBeHq = item["CanBeHq"] !!.jsonPrimitive.boolean
+
     for (i in item["Bonuses"] !!.jsonObject.keys) {
         val key = when (i) {
             "CriticalHit" -> "Critical Hit"
@@ -24,11 +26,12 @@ suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope
 
         if (bonus.jsonObject["Relative"] !!.jsonPrimitive.boolean) {
             val value = bonus.jsonObject["Value"] !!.jsonPrimitive.int
-            val valueHq = bonus.jsonObject["ValueHQ"]?.jsonPrimitive?.int
             val max = bonus.jsonObject["Max"] !!.jsonPrimitive.int
-            val maxHq = bonus.jsonObject["MaxHQ"]?.jsonPrimitive?.int
 
-            if ((valueHq != value) || (maxHq != max)) {
+            if (canBeHq) {
+                val valueHq = bonus.jsonObject["ValueHQ"] !!.jsonPrimitive.int
+                val maxHq = bonus.jsonObject["MaxHQ"] !!.jsonPrimitive.int
+
                 bonuses.add(
                     "$key +$value% (Max $max) / +$valueHq% (Max $maxHq) <:hq:916051971063054406>"
                 )
