@@ -60,7 +60,7 @@ suspend fun eorzeaDatabase(
 
         val embed = when (item["ItemKind"] !!.jsonObject["ID"] !!.jsonPrimitive.int) {
             1 -> { // Arms
-                arms(item)
+                arms(item, language)
             }
 
             5 -> { // Medicines & Meals

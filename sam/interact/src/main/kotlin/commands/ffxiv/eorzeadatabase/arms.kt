@@ -3,13 +3,14 @@ package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
+import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.item.Localisation
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun arms(item: JsonObject) = coroutineScope {
+suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineScope {
     val bonuses = mutableListOf<String>()
 
     for (i in item["Stats"] !!.jsonObject.keys) {
@@ -35,9 +36,10 @@ suspend fun arms(item: JsonObject) = coroutineScope {
     }
 
     val delay = ((item["DelayMs"] !!.jsonPrimitive.int).toDouble() / 1000).toString()
+    val language = searchLanguage ?: "en"
     val classJob = """
         ${item["ClassJobCategory"] !!.jsonObject["Name"] !!.jsonPrimitive.content}
-        Lv. ${item["LevelEquip"] !!.jsonPrimitive.content}
+        ${Localisation.level.getValue(language)} ${item["LevelEquip"] !!.jsonPrimitive.content}
     """.trimIndent()
 
     return@coroutineScope Embed(
@@ -51,15 +53,21 @@ suspend fun arms(item: JsonObject) = coroutineScope {
         thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}"),
         fields = arrayOf(
             EmbedField(
-                name = "Item Level",
+                name = Localisation.itemLevel.getValue(language),
                 value = item["LevelItem"] !!.jsonPrimitive.content,
             ), EmbedField(
                 name = "Damage",
                 value = item["DamagePhys"] !!.jsonPrimitive.content,
                 inline = true
             ), EmbedField(
-                name = "Auto-attack", value = "", inline = true
-            ), EmbedField(name = "Delay", value = delay, inline = true), EmbedField(
+                name = Localisation.autoAttack.getValue(language),
+                value = "",
+                inline = true
+            ), EmbedField(
+                name = Localisation.delay.getValue(language),
+                value = delay,
+                inline = true
+            ), EmbedField(
                 name = "Class/Job", value = classJob, inline = true
             ), EmbedField(
                 name = "Effects", value = bonuses.joinToString("\n"), inline = true
