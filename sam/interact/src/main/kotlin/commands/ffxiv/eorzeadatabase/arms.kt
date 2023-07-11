@@ -42,6 +42,7 @@ suspend fun arms(item: JsonObject) = coroutineScope {
 
     return@coroutineScope Embed(
         title = item["Name"] !!.jsonPrimitive.content,
+        description = item["ItemUICategory"] !!.jsonObject["Name"] !!.jsonPrimitive.content,
         url = "https://ffxiv.gamerescape.com/wiki/${
             item["Name"] !!.jsonPrimitive.content.replace(
                 " ", "_"
