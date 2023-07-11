@@ -57,7 +57,7 @@ suspend fun universalis(
         "",
         Safelist.none(),
         Document.OutputSettings().prettyPrint(false)
-    )
+    ).replace("""\n{3,}""".toRegex(), "\n\n")
 
     val marketBoardCurrentData = if (highQuality == true && canBeHighQuality) {
         KtUniversalisClient.getMarketBoardCurrentData(
