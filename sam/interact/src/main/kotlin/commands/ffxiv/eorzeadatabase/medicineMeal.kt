@@ -26,8 +26,6 @@ suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope
         }
     }
 
-    val bonusesString = bonuses.joinToString("\n")
-
     return@coroutineScope Embed(
         title = item["Name"] !!.jsonPrimitive.content,
         description = description,
@@ -42,7 +40,9 @@ suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope
                 name = "Item Level",
                 value = item["LevelItem"] !!.jsonPrimitive.content,
                 inline = true
-            ), EmbedField(name = "Effects", value = bonusesString, inline = true)
+            ), EmbedField(
+                name = "Effects", value = bonuses.joinToString("\n"), inline = true
+            )
         )
     )
 }
