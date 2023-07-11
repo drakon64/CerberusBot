@@ -6,6 +6,7 @@ import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
@@ -22,7 +23,15 @@ suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope
         val bonus = item["Bonuses"] !!.jsonObject[i] !!
 
         if (bonus.jsonObject["Relative"] !!.jsonPrimitive.boolean) {
-            bonuses.add("$key +${bonus.jsonObject["Value"] !!.jsonPrimitive.content}% (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content})")
+            if ((bonus.jsonObject["ValueHQ"] !!.jsonPrimitive.int != bonus.jsonObject["Value"] !!.jsonPrimitive.int) && (bonus.jsonObject["MaxHQ"] !!.jsonPrimitive.int != bonus.jsonObject["Max"] !!.jsonPrimitive.int)) {
+                bonuses.add(
+                    "$key +${bonus.jsonObject["Value"] !!.jsonPrimitive.content}% (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content}) / +${bonus.jsonObject["ValueHQ"] !!.jsonPrimitive.content}% (Max ${bonus.jsonObject["MaxHQ"] !!.jsonPrimitive.content}) <:hq:916051971063054406>"
+                )
+            } else {
+                bonuses.add(
+                    "$key + ${bonus.jsonObject["Value"] !!.jsonPrimitive.content}% (Max ${bonus.jsonObject["Max"] !!.jsonPrimitive.content})"
+                )
+            }
         }
     }
 
