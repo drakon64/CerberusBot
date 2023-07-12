@@ -6,7 +6,7 @@ import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.ktuniversalis.KtUniversalisClient
+import cloud.drakon.ktuniversalis.KtUniversalis
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktorClient
 import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
@@ -62,7 +62,7 @@ suspend fun universalis(
         ).replace("""\n{3,}""".toRegex(), "\n\n")
 
         val marketBoardCurrentData = if (highQuality == true && canBeHighQuality) {
-            KtUniversalisClient.getMarketBoardCurrentData(
+            KtUniversalis.getMarketBoardCurrentData(
                 world,
                 arrayOf(xivApiItemId).toIntArray(),
                 entries = 5,
@@ -70,7 +70,7 @@ suspend fun universalis(
                 hq = true
             )
         } else if (highQuality == false) {
-            KtUniversalisClient.getMarketBoardCurrentData(
+            KtUniversalis.getMarketBoardCurrentData(
                 world,
                 arrayOf(xivApiItemId).toIntArray(),
                 entries = 5,
@@ -78,7 +78,7 @@ suspend fun universalis(
                 hq = false
             )
         } else {
-            KtUniversalisClient.getMarketBoardCurrentData(
+            KtUniversalis.getMarketBoardCurrentData(
                 world, arrayOf(xivApiItemId).toIntArray(), entries = 5, listings = 5
             )
         }
