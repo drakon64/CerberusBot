@@ -50,8 +50,7 @@ internal object Localisation {
             "ja" to "魔法基本性能",
             "de" to "Mag. Basiswert",
             "fr" to "Dégâts magiques"
-        ),
-        "Physical Damage" to mapOf(
+        ), "Physical Damage" to mapOf(
             "en" to "Physical Damage",
             "ja" to "物理基本性能",
             "de" to "Phys. Basiswert",
