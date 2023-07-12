@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase
+package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.item
 
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField

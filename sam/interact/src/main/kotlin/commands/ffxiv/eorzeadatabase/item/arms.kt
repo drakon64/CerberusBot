@@ -1,9 +1,8 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase
+package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.item
 
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
-import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.item.Localisation
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlinx.coroutines.coroutineScope
