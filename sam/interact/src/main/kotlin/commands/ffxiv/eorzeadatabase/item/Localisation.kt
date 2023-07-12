@@ -31,11 +31,23 @@ internal object Localisation {
             "ja" to "INT",
             "de" to "Intelligenz",
             "fr" to "Intelligence"
+        ), "Piety" to mapOf(
+            "en" to "Piety", "ja" to "信仰", "de" to "Frömmigkeit", "fr" to "Piété"
         ), "SkillSpeed" to mapOf(
             "en" to "Skill Speed",
             "ja" to "スキルスピード",
             "de" to "Schnelligkeit",
             "fr" to "Vivacité"
+        ), "SpellSpeed" to mapOf(
+            "en" to "Spell Speed",
+            "ja" to "スペルスピード",
+            "de" to "Zaubertempo",
+            "fr" to "Célérité"
+        ), "Tenacity" to mapOf(
+            "en" to "Tenacity",
+            "ja" to "不屈",
+            "de" to "Unbeugsamkeit",
+            "fr" to "Ténacité"
         ), "Vitality" to mapOf(
             "en" to "Vitality",
             "ja" to "VIT",
