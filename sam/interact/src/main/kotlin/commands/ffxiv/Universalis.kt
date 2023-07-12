@@ -47,7 +47,7 @@ suspend fun universalis(
         item,
         indexes = "Item",
         columns = arrayOf("CanBeHq", "Description", "IconHD", "ID", "Name")
-    ).jsonObject["Results"]?.jsonArray?.get(0)
+    ).jsonObject["Results"]?.jsonArray?.getOrNull(0)
 
     if (xivApiItem != null) {
         val xivApiItemId = xivApiItem.jsonObject["ID"] !!.jsonPrimitive.int
