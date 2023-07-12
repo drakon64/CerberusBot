@@ -11,7 +11,7 @@ _TempestBot_ is a Discord bot that runs on AWS Lambda.
 ## Features
 
 - Citations: Save quotes from guild members and repost them. Requires users to opt-in.
-- Chat: Creates a completion for a chat message using GPT-3.5
+- Chat: Creates a completion for a chat message using GPT-4
 - Images: Creates an image from a prompt using DALL-E 2
 - Translate: Translate messages using AWS Translate.
 - ~~Subject Access Request: The bot will DM you with all of the information that it holds on your Discord account.~~
@@ -19,6 +19,9 @@ _TempestBot_ is a Discord bot that runs on AWS Lambda.
 
 ### Final Fantasy XIV features
 
+- Eorzea Database: Search for an item in the Eorzea Database. Provides rich results for:
+  - Arms
+  - Medicines & Meals
 - Lodestone: Link your Discord account to a Final Fantasy XIV character and display your characters
   card/portrait/profile. Uses XIVAPI and https://github.com/xivapi/XIV-Character-Cards.
 - Universalis: Search the Final Fantasy XIV market board for an item in a given world, datacenter, or region.
