@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    implementation("cloud.drakon:ktdiscord:6.0.0")
+    implementation("cloud.drakon:ktdiscord:6.1.0")
 
     val ktorVersion = "2.3.2"
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
@@ -61,14 +61,15 @@ dependencies {
 
     // Universalis
     implementation("cloud.drakon:ktuniversalis:2.0.0")
-    implementation("org.jsoup:jsoup:1.15.4")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-java:$ktorVersion")
     implementation("io.ktor:ktor-client-auth:$ktorVersion")
+
+    implementation("org.jsoup:jsoup:1.16.1")
 
     testImplementation(kotlin("test"))
 }
