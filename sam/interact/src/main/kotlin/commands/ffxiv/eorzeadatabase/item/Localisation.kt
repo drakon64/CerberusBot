@@ -84,8 +84,4 @@ internal object Localisation {
     val level = mapOf(
         "en" to "Lv.", "ja" to "Lv", "de" to "Ab St.", "fr" to "Nv"
     )
-
-    // val magicalDamage: Map<String, String>
-
-    // val physicalDamage: Map<String, String>
 }
