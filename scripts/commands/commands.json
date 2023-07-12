@@ -96,6 +96,56 @@
         ]
     },
     {
+        "name": "eorzeadatabase",
+        "description": "Eorzea Database",
+        "default_member_permissions": 0,
+        "type": 1,
+        "options": [
+            {
+                "name": "index",
+                "description": "Search an index",
+                "type": 3,
+                "required": true,
+                "choices": [
+                    {
+                        "name": "Item",
+                        "value": "item"
+                    }
+                ]
+            },
+            {
+                "name": "string",
+                "description": "The string to search for",
+                "type": 3,
+                "required": true
+            },
+            {
+                "name": "language",
+                "description": "Handle the request and the response in the specified language",
+                "type": 3,
+                "required": false,
+                "choices": [
+                    {
+                        "name": "English",
+                        "value": "en"
+                    },
+                    {
+                        "name": "日本人",
+                        "value": "ja"
+                    },
+                    {
+                        "name": "Deutsch",
+                        "value": "de"
+                    },
+                    {
+                        "name": "Français",
+                        "value": "fr"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "name": "image",
         "description": "Creates an image from a prompt using DALL-E 2",
         "default_member_permissions": 0,

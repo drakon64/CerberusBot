@@ -29,6 +29,15 @@ repositories {
             password = System.getenv("GITHUB_TOKEN")
         }
     }
+
+    maven {
+        name = "KtXivApi"
+        url = uri("https://maven.pkg.github.com/drakon64/KtXivApi")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 dependencies {
@@ -43,6 +52,9 @@ dependencies {
 
     // Lodestone
     implementation("cloud.drakon:ktlodestone:6.1.0")
+
+    // Eorzea Database
+    implementation("cloud.drakon:ktxivapi:0.0.1-SNAPSHOT")
 
     // Translate
     implementation("aws.sdk.kotlin:translate:0.28.1-beta")
