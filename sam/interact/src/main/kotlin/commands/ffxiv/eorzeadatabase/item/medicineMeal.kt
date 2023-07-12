@@ -10,56 +10,57 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun medicineMeal(item: JsonObject, description: String) = coroutineScope {
-    val bonuses = mutableListOf<String>()
+suspend fun medicineMeal(item: JsonObject, description: String, lodestone: String) =
+    coroutineScope {
+        val bonuses = mutableListOf<String>()
 
-    val canBeHq = item["CanBeHq"] !!.jsonPrimitive.boolean
+        val canBeHq = item["CanBeHq"] !!.jsonPrimitive.boolean
 
-    for (i in item["Bonuses"] !!.jsonObject.keys) {
-        val key = when (i) {
-            "CriticalHit" -> "Critical Hit"
-            "DirectHit" -> "Direct Hit"
-            else -> i
-        }
+        for (i in item["Bonuses"] !!.jsonObject.keys) {
+            val key = when (i) {
+                "CriticalHit" -> "Critical Hit"
+                "DirectHit" -> "Direct Hit"
+                else -> i
+            }
 
-        val bonus = item["Bonuses"] !!.jsonObject[i] !!
+            val bonus = item["Bonuses"] !!.jsonObject[i] !!
 
-        if (bonus.jsonObject["Relative"] !!.jsonPrimitive.boolean) {
-            val value = bonus.jsonObject["Value"] !!.jsonPrimitive.int
-            val max = bonus.jsonObject["Max"] !!.jsonPrimitive.int
+            if (bonus.jsonObject["Relative"] !!.jsonPrimitive.boolean) {
+                val value = bonus.jsonObject["Value"] !!.jsonPrimitive.int
+                val max = bonus.jsonObject["Max"] !!.jsonPrimitive.int
 
-            if (canBeHq) {
-                val valueHq = bonus.jsonObject["ValueHQ"] !!.jsonPrimitive.int
-                val maxHq = bonus.jsonObject["MaxHQ"] !!.jsonPrimitive.int
+                if (canBeHq) {
+                    val valueHq = bonus.jsonObject["ValueHQ"] !!.jsonPrimitive.int
+                    val maxHq = bonus.jsonObject["MaxHQ"] !!.jsonPrimitive.int
 
-                bonuses.add(
-                    "$key +$value% (Max $max) / +$valueHq% (Max $maxHq) <:hq:916051971063054406>"
-                )
-            } else {
-                bonuses.add(
-                    "$key +$value% (Max $max)"
-                )
+                    bonuses.add(
+                        "$key +$value% (Max $max) / +$valueHq% (Max $maxHq) <:hq:916051971063054406>"
+                    )
+                } else {
+                    bonuses.add(
+                        "$key +$value% (Max $max)"
+                    )
+                }
             }
         }
-    }
 
-    return@coroutineScope Embed(
-        title = item["Name"] !!.jsonPrimitive.content,
-        description = description,
-        url = "https://ffxiv.gamerescape.com/wiki/${
-            item["Name"] !!.jsonPrimitive.content.replace(
-                " ", "_"
-            )
-        }",
-        thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}"),
-        fields = arrayOf(
-            EmbedField(
-                name = "Item Level",
-                value = item["LevelItem"] !!.jsonPrimitive.content,
-                inline = true
-            ), EmbedField(
-                name = "Effects", value = bonuses.joinToString("\n"), inline = true
+        return@coroutineScope Embed(
+            title = item["Name"] !!.jsonPrimitive.content,
+            description = description,
+            url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
+                item["Name"] !!.jsonPrimitive.content.replace(
+                    " ", "_"
+                )
+            }",
+            thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}"),
+            fields = arrayOf(
+                EmbedField(
+                    name = "Item Level",
+                    value = item["LevelItem"] !!.jsonPrimitive.content,
+                    inline = true
+                ), EmbedField(
+                    name = "Effects", value = bonuses.joinToString("\n"), inline = true
+                )
             )
         )
-    )
-}
+    }

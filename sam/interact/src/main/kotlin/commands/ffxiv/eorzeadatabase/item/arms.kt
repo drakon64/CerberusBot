@@ -11,8 +11,7 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineScope {
-    val language = searchLanguage ?: "en"
+suspend fun arms(item: JsonObject, language: String, lodestone: String) = coroutineScope {
     val bonuses = mutableListOf<String>()
 
     for (i in item["Stats"] !!.jsonObject.keys) {
@@ -66,9 +65,9 @@ suspend fun arms(item: JsonObject, searchLanguage: String? = null) = coroutineSc
     return@coroutineScope Embed(
         title = item["Name"] !!.jsonPrimitive.content,
         description = item["ItemUICategory"] !!.jsonObject["Name"] !!.jsonPrimitive.content,
-        url = "https://ffxiv.gamerescape.com/wiki/${
+        url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
             item["Name"] !!.jsonPrimitive.content.replace(
-                " ", "_"
+                " ", "+"
             )
         }",
         thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}"),

@@ -7,7 +7,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun genericItem(item: JsonObject) = coroutineScope {
+suspend fun genericItem(item: JsonObject, lodestone: String) = coroutineScope {
     val descriptionElement = item["Description"]?.jsonPrimitive?.content
     val description = if (descriptionElement != null) {
         cleanDescription(descriptionElement)
@@ -18,9 +18,9 @@ suspend fun genericItem(item: JsonObject) = coroutineScope {
     return@coroutineScope Embed(
         title = item["Name"] !!.jsonPrimitive.content,
         description = description,
-        url = "https://ffxiv.gamerescape.com/wiki/${
+        url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
             item["Name"] !!.jsonPrimitive.content.replace(
-                " ", "_"
+                " ", "+"
             )
         }",
         thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}")

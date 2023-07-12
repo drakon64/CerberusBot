@@ -22,7 +22,7 @@ suspend fun eorzeaDatabase(
 
     lateinit var index: String
     lateinit var string: String
-    var language: String? = null
+    var language = "en"
 
     for (i in event.data !!.options !!) {
         when (i.name) {
@@ -32,16 +32,30 @@ suspend fun eorzeaDatabase(
         }
     }
 
-    val searchLanguage = if (language != null) {
-        when (language) {
-            "en" -> Language.en
-            "ja" -> Language.ja
-            "de" -> Language.de
-            "fr" -> Language.fr
-            else -> throw Throwable("Unknown language: \"$language\"")
+    val searchLanguage: Language
+    val lodestone: String
+    when (language) {
+        "en" -> {
+            searchLanguage = Language.en
+            lodestone = "eu"
         }
-    } else {
-        null
+
+        "ja" -> {
+            searchLanguage = Language.ja
+            lodestone = "jp"
+        }
+
+        "de" -> {
+            searchLanguage = Language.de
+            lodestone = "de"
+        }
+
+        "fr" -> {
+            searchLanguage = Language.fr
+            lodestone = "fr"
+        }
+
+        else -> throw Throwable("Unknown language: \"$language\"")
     }
 
     val search = KtXivApi.search(
@@ -57,7 +71,7 @@ suspend fun eorzeaDatabase(
         val item = KtXivApi.getContentId(index, id, searchLanguage)
 
         val embed = when (index) {
-            "item" -> itemHandler(item, language)
+            "item" -> itemHandler(item, language, lodestone)
 
             else -> throw Throwable("Unknown index: \"$index\"")
         }
