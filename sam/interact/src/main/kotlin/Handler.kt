@@ -1,12 +1,12 @@
-package cloud.drakon.tempestbot.interact
+package cloud.drakon.cerberusbot.interact
 
+import cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.eorzeaDatabase
+import cloud.drakon.cerberusbot.interact.commands.lodestone.lodestoneHandler
+import cloud.drakon.cerberusbot.interact.commands.universalis
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.tempestbot.interact.commands.eorzeadatabase.eorzeaDatabase
-import cloud.drakon.tempestbot.interact.commands.lodestone.lodestoneHandler
-import cloud.drakon.tempestbot.interact.commands.universalis
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import com.mongodb.client.MongoClients
@@ -18,7 +18,7 @@ import java.io.OutputStream
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 
-class Handler: RequestStreamHandler {
+class Handler : RequestStreamHandler {
     companion object {
         val ktDiscord = KtDiscord(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
@@ -53,11 +53,11 @@ class Handler: RequestStreamHandler {
                 val applicationCommand = event as Interaction<ApplicationCommandData>
 
                 when (event.type) {
-                    2 -> when (applicationCommand.data !!.name) {
+                    2 -> when (applicationCommand.data!!.name) {
                         "eorzeadatabase" -> eorzeaDatabase(applicationCommand, logger)
                         "lodestone" -> lodestoneHandler(applicationCommand)
                         "universalis" -> universalis(applicationCommand, logger)
-                        else -> logger.log("Unknown command: ${event.data !!.name}")
+                        else -> logger.log("Unknown command: ${event.data!!.name}")
                     }
 
                     else -> logger.log("Unknown event type: ${event.type}")

@@ -21,7 +21,7 @@
       ],
       "Resource": [
         "arn:aws:cloudformation:eu-west-2:***:stack/aws-sam-cli-managed-default/${StackId}",
-        "arn:aws:cloudformation:eu-west-2:***:stack/TempestBot/${StackId}",
+        "arn:aws:cloudformation:eu-west-2:***:stack/CerberusBot/${StackId}",
         "arn:aws:cloudformation:eu-west-2:aws:transform/Serverless-2016-10-31"
       ]
     },
@@ -37,8 +37,8 @@
         "iam:PutRolePolicy"
       ],
       "Resource": [
-        "arn:aws:iam::***:role/TempestBot-TempestBotDeferFunctionRole",
-        "arn:aws:iam::***:role/TempestBot-TempestBotInteractFunctionRole"
+        "arn:aws:iam::***:role/CerberusBot-CerberusBotDeferFunctionRole",
+        "arn:aws:iam::***:role/CerberusBot-CerberusBotInteractFunctionRole"
       ]
     },
     {
@@ -63,8 +63,8 @@
         "lambda:UpdateFunctionConfiguration"
       ],
       "Resource": [
-        "arn:aws:lambda:eu-west-2:***:function:TempestBot-TempestBotInteractFunction",
-        "arn:aws:lambda:eu-west-2:***:function:TempestBot-TempestBotDeferFunction"
+        "arn:aws:lambda:eu-west-2:***:function:CerberusBot-CerberusBotInteractFunction",
+        "arn:aws:lambda:eu-west-2:***:function:CerberusBot-CerberusBotDeferFunction"
       ]
     },
     {

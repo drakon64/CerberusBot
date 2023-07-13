@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands.eorzeadatabase.item
+package cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.item
 
 internal object Localisation {
     val autoAttack = mapOf(

@@ -1,8 +1,8 @@
-package cloud.drakon.tempestbot.interact.commands.eorzeadatabase.item
+package cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.item
 
+import cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.cleanDescription
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
-import cloud.drakon.tempestbot.interact.commands.eorzeadatabase.cleanDescription
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -16,13 +16,13 @@ suspend fun genericItem(item: JsonObject, lodestone: String) = coroutineScope {
     }
 
     return@coroutineScope Embed(
-        title = item["Name"] !!.jsonPrimitive.content,
+        title = item["Name"]!!.jsonPrimitive.content,
         description = description,
         url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
-            item["Name"] !!.jsonPrimitive.content.replace(
+            item["Name"]!!.jsonPrimitive.content.replace(
                 " ", "+"
             )
         }",
-        thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"] !!.jsonPrimitive.content}")
+        thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"]!!.jsonPrimitive.content}")
     )
 }

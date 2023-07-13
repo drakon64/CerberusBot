@@ -1,5 +1,8 @@
-package cloud.drakon.tempestbot.interact.commands
+package cloud.drakon.cerberusbot.interact.commands
 
+import cloud.drakon.cerberusbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.cerberusbot.interact.Handler.Companion.ktorClient
+import cloud.drakon.cerberusbot.interact.api.xivapi.XivApiClient
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
@@ -7,9 +10,6 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktuniversalis.KtUniversalis
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktorClient
-import cloud.drakon.tempestbot.interact.api.xivapi.XivApiClient
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
@@ -29,16 +29,16 @@ suspend fun universalis(
     lateinit var world: String
     var highQuality: Boolean? = null
 
-    when (event.data !!.type) {
-        1 -> for (i in event.data !!.options !!) {
+    when (event.data!!.type) {
+        1 -> for (i in event.data!!.options!!) {
             when (i.name) {
-                "item" -> item = i.value !!
-                "world" -> world = i.value !!
-                "high_quality" -> highQuality = i.value !!.toBooleanStrict()
+                "item" -> item = i.value!!
+                "world" -> world = i.value!!
+                "high_quality" -> highQuality = i.value!!.toBooleanStrict()
             }
         }
 
-        else -> logger.log("Unknown application command type: " + event.data !!.type)
+        else -> logger.log("Unknown application command type: " + event.data!!.type)
     }
 
     val xivApi = XivApiClient(ktorClient = ktorClient)
@@ -50,12 +50,12 @@ suspend fun universalis(
     ).jsonObject["Results"]?.jsonArray?.getOrNull(0)
 
     if (xivApiItem != null) {
-        val xivApiItemId = xivApiItem.jsonObject["ID"] !!.jsonPrimitive.int
+        val xivApiItemId = xivApiItem.jsonObject["ID"]!!.jsonPrimitive.int
 
         val canBeHighQuality: Boolean =
-            xivApiItem.jsonObject["CanBeHq"] !!.jsonPrimitive.int == 1
+            xivApiItem.jsonObject["CanBeHq"]!!.jsonPrimitive.int == 1
         val description: String = Jsoup.clean(
-            xivApiItem.jsonObject["Description"] !!.jsonPrimitive.content,
+            xivApiItem.jsonObject["Description"]!!.jsonPrimitive.content,
             "",
             Safelist.none(),
             Document.OutputSettings().prettyPrint(false)
@@ -87,7 +87,7 @@ suspend fun universalis(
         var totalPrices = ""
         val gil = "<:gil:235457032616935424>"
 
-        if (! marketBoardListings.isNullOrEmpty()) {
+        if (!marketBoardListings.isNullOrEmpty()) {
             for (i in marketBoardListings) {
                 listings += String.format(
                     "%,d", i.pricePerUnit
@@ -109,10 +109,10 @@ suspend fun universalis(
             EditWebhookMessage(
                 embeds = arrayOf(
                     Embed(
-                        title = "Current prices for " + xivApiItem.jsonObject["Name"] !!.jsonPrimitive.content,
+                        title = "Current prices for " + xivApiItem.jsonObject["Name"]!!.jsonPrimitive.content,
                         description = description,
                         url = "https://universalis.app/market/$xivApiItemId",
-                        thumbnail = EmbedThumbnail("https://xivapi.com" + xivApiItem.jsonObject["IconHD"] !!.jsonPrimitive.content),
+                        thumbnail = EmbedThumbnail("https://xivapi.com" + xivApiItem.jsonObject["IconHD"]!!.jsonPrimitive.content),
                         fields = arrayOf(
                             if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.currentAveragePriceHq > 0)) {
                                 EmbedField(

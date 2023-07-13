@@ -1,5 +1,8 @@
-package cloud.drakon.tempestbot.interact.commands.lodestone
+package cloud.drakon.cerberusbot.interact.commands.lodestone
 
+import cloud.drakon.cerberusbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.cerberusbot.interact.Handler.Companion.ktorClient
+import cloud.drakon.cerberusbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.ktdiscord.channel.Attachment
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
@@ -9,9 +12,6 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktlodestone.KtLodestone
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktorClient
-import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Projections
 import com.mongodb.client.model.UpdateOptions
@@ -23,11 +23,11 @@ import org.bson.types.Binary
 
 suspend fun profile(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
-    val guildId: String = event.guildId !!
+    val guildId: String = event.guildId!!
 
-    for (i in event.data !!.options !![0].options !!) {
+    for (i in event.data!!.options!![0].options!!) {
         when (i.name) {
-            "user" -> userId = i.value !!
+            "user" -> userId = i.value!!
         }
     }
 

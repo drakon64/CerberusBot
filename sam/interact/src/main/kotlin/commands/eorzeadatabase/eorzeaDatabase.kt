@@ -1,13 +1,13 @@
-package cloud.drakon.tempestbot.interact.commands.eorzeadatabase
+package cloud.drakon.cerberusbot.interact.commands.eorzeadatabase
 
+import cloud.drakon.cerberusbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.item.itemHandler
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktxivapi.KtXivApi
 import cloud.drakon.ktxivapi.common.Language
 import cloud.drakon.ktxivapi.search.StringAlgo
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.tempestbot.interact.commands.eorzeadatabase.item.itemHandler
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
@@ -24,11 +24,11 @@ suspend fun eorzeaDatabase(
     lateinit var string: String
     var language = "en"
 
-    for (i in event.data !!.options !!) {
+    for (i in event.data!!.options!!) {
         when (i.name) {
-            "index" -> index = i.value !!
-            "string" -> string = i.value !!
-            "language" -> language = i.value !!
+            "index" -> index = i.value!!
+            "string" -> string = i.value!!
+            "language" -> language = i.value!!
         }
     }
 
@@ -64,10 +64,10 @@ suspend fun eorzeaDatabase(
         stringAlgo = StringAlgo.fuzzy,
         limit = 1,
         language = searchLanguage
-    ).jsonObject["Results"] !!.jsonArray.getOrNull(0)
+    ).jsonObject["Results"]!!.jsonArray.getOrNull(0)
 
     if (search != null) {
-        val id = search.jsonObject["ID"] !!.jsonPrimitive.int
+        val id = search.jsonObject["ID"]!!.jsonPrimitive.int
         val item = KtXivApi.getContentId(index, id, searchLanguage)
 
         val embed = when (index) {

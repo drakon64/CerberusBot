@@ -1,15 +1,15 @@
-package cloud.drakon.tempestbot.interact.commands.lodestone
+package cloud.drakon.cerberusbot.interact.commands.lodestone
 
+import cloud.drakon.cerberusbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.cerberusbot.interact.Handler.Companion.mongoDatabase
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.tempestbot.interact.Handler.Companion.mongoDatabase
 import com.mongodb.client.model.Filters
 
 suspend fun unlink(event: Interaction<ApplicationCommandData>) {
-    val userId: String = event.member !!.user !!.id
-    val guildId: String = event.guildId !!
+    val userId: String = event.member!!.user!!.id
+    val guildId: String = event.guildId!!
 
     mongoDatabase.getCollection("lodestone_link").deleteOne(
         Filters.and(

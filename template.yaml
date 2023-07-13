@@ -1,12 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  TempestBot
+  CerberusBot
 
   Discord Interactions bot written in Kotlin and Python
 
 Resources:
-  TempestBotDeferFunction:
+  CerberusBotDeferFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: sam/defer/defer
@@ -18,7 +18,7 @@ Resources:
       Timeout: 3
       Environment:
         Variables:
-          INTERACT_FUNCTION: !Ref TempestBotInteractFunction
+          INTERACT_FUNCTION: !Ref CerberusBotInteractFunction
           PUBLIC_KEY:
             Ref: PublicKeyParameter
       Events:
@@ -33,12 +33,12 @@ Resources:
               Effect: Allow
               Action:
                 - lambda:InvokeFunction
-              Resource: !GetAtt TempestBotInteractFunction.Arn
-  TempestBotInteractFunction:
+              Resource: !GetAtt CerberusBotInteractFunction.Arn
+  CerberusBotInteractFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: sam/interact
-      Handler: cloud.drakon.tempestbot.interact.Handler::handleRequest
+      Handler: cloud.drakon.cerberusbot.interact.Handler::handleRequest
       Runtime: java17
       Architectures:
         - arm64
@@ -71,23 +71,23 @@ Resources:
               Resource: "*"
 
 Outputs:
-  TempestBot:
-    Description: "API Gateway endpoint URL for TempestBot Defer function"
+  CerberusBot:
+    Description: "API Gateway endpoint URL for CerberusBot Defer function"
     Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
 
-  TempestBotDeferFunction:
-    Description: "TempestBot Defer Lambda Function ARN"
-    Value: !GetAtt TempestBotDeferFunction.Arn
-  TempestBotDeferFunctionIamRole:
-    Description: "Implicit IAM Role created for TempestBot Defer function"
-    Value: !GetAtt TempestBotDeferFunctionRole.Arn
+  CerberusBotDeferFunction:
+    Description: "CerberusBot Defer Lambda Function ARN"
+    Value: !GetAtt CerberusBotDeferFunction.Arn
+  CerberusBotDeferFunctionIamRole:
+    Description: "Implicit IAM Role created for CerberusBot Defer function"
+    Value: !GetAtt CerberusBotDeferFunctionRole.Arn
 
-  TempestBotInteractFunction:
-    Description: "TempestBot Interact Lambda Function ARN"
-    Value: !GetAtt TempestBotInteractFunction.Arn
-  TempestBotInteractFunctionIamRole:
-    Description: "Implicit IAM Role created for TempestBot Interact function"
-    Value: !GetAtt TempestBotInteractFunctionRole.Arn
+  CerberusBotInteractFunction:
+    Description: "CerberusBot Interact Lambda Function ARN"
+    Value: !GetAtt CerberusBotInteractFunction.Arn
+  CerberusBotInteractFunctionIamRole:
+    Description: "Implicit IAM Role created for CerberusBot Interact function"
+    Value: !GetAtt CerberusBotInteractFunctionRole.Arn
 
 Parameters:
   ApplicationIDParameter:
@@ -105,7 +105,7 @@ Parameters:
   MongoDbDatabase:
     Type: String
     NoEcho: True
-    Default: tempestbot
+    Default: cerberusbot
   OpenAiApiKey:
     Type: String
     NoEcho: True

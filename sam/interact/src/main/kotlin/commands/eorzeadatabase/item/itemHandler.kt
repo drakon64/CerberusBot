@@ -1,6 +1,6 @@
-package cloud.drakon.tempestbot.interact.commands.eorzeadatabase.item
+package cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.item
 
-import cloud.drakon.tempestbot.interact.commands.eorzeadatabase.cleanDescription
+import cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.cleanDescription
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.int
@@ -9,7 +9,7 @@ import kotlinx.serialization.json.jsonPrimitive
 
 suspend fun itemHandler(item: JsonObject, language: String, lodestone: String) =
     coroutineScope {
-        return@coroutineScope when (item["ItemKind"] !!.jsonObject["ID"] !!.jsonPrimitive.int) {
+        return@coroutineScope when (item["ItemKind"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
             1 -> { // Arms
                 arms(item, language, lodestone)
             }
@@ -17,7 +17,7 @@ suspend fun itemHandler(item: JsonObject, language: String, lodestone: String) =
             5 -> { // Medicines & Meals
                 medicineMeal(
                     item,
-                    cleanDescription(item["Description"] !!.jsonPrimitive.content),
+                    cleanDescription(item["Description"]!!.jsonPrimitive.content),
                     lodestone
                 )
             }

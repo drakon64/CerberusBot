@@ -2,8 +2,8 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "TempestBot"
-s3_prefix = "TempestBot"
+stack_name = "CerberusBot"
+s3_prefix = "CerberusBot"
 region = "eu-west-2"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
