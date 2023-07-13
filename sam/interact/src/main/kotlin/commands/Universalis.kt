@@ -1,8 +1,6 @@
 package cloud.drakon.cerberusbot.interact.commands
 
 import cloud.drakon.cerberusbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.cerberusbot.interact.Handler.Companion.ktorClient
-import cloud.drakon.cerberusbot.interact.api.xivapi.XivApiClient
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
@@ -10,6 +8,8 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktuniversalis.KtUniversalis
+import cloud.drakon.ktxivapi.KtXivApi
+import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
@@ -41,12 +41,11 @@ suspend fun universalis(
         else -> logger.log("Unknown application command type: " + event.data!!.type)
     }
 
-    val xivApi = XivApiClient(ktorClient = ktorClient)
-
-    val xivApiItem = xivApi.search(
+    val xivApiItem = KtXivApi.search(
         item,
-        indexes = "Item",
-        columns = arrayOf("CanBeHq", "Description", "IconHD", "ID", "Name")
+        listOf("Item"),
+        StringAlgo.fuzzy,
+        columns = listOf("CanBeHq", "Description", "IconHD", "ID", "Name")
     ).jsonObject["Results"]?.jsonArray?.getOrNull(0)
 
     if (xivApiItem != null) {
