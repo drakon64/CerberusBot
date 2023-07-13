@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
+package cloud.drakon.tempestbot.interact.commands.lodestone
 
 import cloud.drakon.ktdiscord.channel.Attachment
 import cloud.drakon.ktdiscord.channel.embed.Embed

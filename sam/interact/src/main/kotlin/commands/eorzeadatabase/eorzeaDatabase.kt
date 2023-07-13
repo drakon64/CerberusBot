@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase
+package cloud.drakon.tempestbot.interact.commands.eorzeadatabase
 
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
@@ -7,7 +7,7 @@ import cloud.drakon.ktxivapi.KtXivApi
 import cloud.drakon.ktxivapi.common.Language
 import cloud.drakon.ktxivapi.search.StringAlgo
 import cloud.drakon.tempestbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.item.itemHandler
+import cloud.drakon.tempestbot.interact.commands.eorzeadatabase.item.itemHandler
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray

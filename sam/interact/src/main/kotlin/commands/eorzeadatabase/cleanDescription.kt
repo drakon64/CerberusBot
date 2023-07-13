@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase
+package cloud.drakon.tempestbot.interact.commands.eorzeadatabase
 
 import kotlinx.coroutines.coroutineScope
 import org.jsoup.Jsoup

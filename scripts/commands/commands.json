@@ -1,101 +1,5 @@
 [
     {
-        "name": "citation",
-        "description": "Citations",
-        "default_member_permissions": 0,
-        "dm_permission": false,
-        "type": 1,
-        "options": [
-            {
-                "name": "get",
-                "description": "Get citations",
-                "type": 1,
-                "options": [
-                    {
-                        "name": "user",
-                        "description": "The user to get a random citation from",
-                        "type": 6,
-                        "required": true
-                    }
-                ]
-            },
-            {
-                "name": "add",
-                "description": "Add citations",
-                "type": 1,
-                "options": [
-                    {
-                        "name": "user",
-                        "description": "The user to add a citation to",
-                        "type": 6,
-                        "required": true
-                    },
-                    {
-                        "name": "citation",
-                        "description": "The citation to add",
-                        "type": 3,
-                        "required": true
-                    }
-                ]
-            },
-            {
-                "name": "opt-in",
-                "description": "Opt-in to citations",
-                "type": 1
-            },
-            {
-                "name": "opt-out",
-                "description": "Opt-out of citations",
-                "type": 1
-            },
-            {
-                "name": "stats",
-                "description": "Get citation statistics for a user",
-                "type": 1,
-                "options": [
-                    {
-                        "name": "user",
-                        "description": "The user to get citation statistics for",
-                        "type": 6,
-                        "required": true
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Add citation",
-        "default_member_permissions": 0,
-        "dm_permission": false,
-        "type": 3
-    },
-    {
-        "name": "Get citation",
-        "default_member_permissions": 0,
-        "dm_permission": false,
-        "type": 2
-    },
-    {
-        "name": "chat",
-        "description": "Creates a completion for the chat message using GPT-4",
-        "default_member_permissions": 0,
-        "type": 1,
-        "options": [
-            {
-                "name": "message",
-                "description": "The message to generate chat completions for",
-                "type": 3,
-                "required": true
-            },
-            {
-                "name": "thread",
-                "description": "The chat thread to use",
-                "type": 3,
-                "required": false
-            }
-        ]
-    },
-    {
         "name": "eorzeadatabase",
         "description": "Eorzea Database",
         "default_member_permissions": 0,
@@ -142,20 +46,6 @@
                         "value": "fr"
                     }
                 ]
-            }
-        ]
-    },
-    {
-        "name": "image",
-        "description": "Creates an image from a prompt using DALL-E 2",
-        "default_member_permissions": 0,
-        "type": 1,
-        "options": [
-            {
-                "name": "prompt",
-                "description": "The prompt to create an image from",
-                "type": 3,
-                "required": true
             }
         ]
     },
@@ -230,52 +120,6 @@
                 ]
             }
         ]
-    },
-    {
-        "name": "rory",
-        "description": "cat",
-        "default_member_permissions": 0,
-        "type": 1,
-        "options": [
-            {
-                "name": "id",
-                "description": "Rory ID",
-                "type": 4,
-                "max_value": 123,
-                "required": false
-            }
-        ]
-    },
-    {
-        "name": "translate",
-        "description": "Translate to or from other languages",
-        "default_member_permissions": 0,
-        "type": 1,
-        "options": [
-            {
-                "name": "message",
-                "description": "The text to translate",
-                "type": 3,
-                "required": true
-            },
-            {
-                "name": "to",
-                "description": "The language to translate to",
-                "type": 3,
-                "required": true
-            },
-            {
-                "name": "from",
-                "description": "The language to translate from",
-                "type": 3,
-                "required": false
-            }
-        ]
-    },
-    {
-        "name": "Translate",
-        "default_member_permissions": 0,
-        "type": 3
     },
     {
         "name": "universalis",

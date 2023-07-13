@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv
+package cloud.drakon.tempestbot.interact.commands
 
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField

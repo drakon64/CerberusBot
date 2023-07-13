@@ -1,4 +1,4 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone
+package cloud.drakon.tempestbot.interact.commands.lodestone
 
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData

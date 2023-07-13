@@ -4,15 +4,9 @@ import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.tempestbot.interact.api.openai.OpenAI
-import cloud.drakon.tempestbot.interact.commands.citations.citationHandler
-import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.eorzeaDatabase
-import cloud.drakon.tempestbot.interact.commands.ffxiv.lodestone.lodestoneHandler
-import cloud.drakon.tempestbot.interact.commands.ffxiv.universalis
-import cloud.drakon.tempestbot.interact.commands.openai.chat
-import cloud.drakon.tempestbot.interact.commands.openai.image
-import cloud.drakon.tempestbot.interact.commands.rory
-import cloud.drakon.tempestbot.interact.commands.translate
+import cloud.drakon.tempestbot.interact.commands.eorzeadatabase.eorzeaDatabase
+import cloud.drakon.tempestbot.interact.commands.lodestone.lodestoneHandler
+import cloud.drakon.tempestbot.interact.commands.universalis
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import com.mongodb.client.MongoClients
@@ -41,9 +35,6 @@ class Handler: RequestStreamHandler {
         val mongoDatabase: MongoDatabase =
             MongoClients.create(System.getenv("MONGODB_URL"))
                 .getDatabase(System.getenv("MONGODB_DATABASE"))
-
-        val openAi = OpenAI(System.getenv("OPENAI_API_KEY"))
-        val region: String = System.getenv("AWS_REGION")
     }
 
     override fun handleRequest(
@@ -63,20 +54,8 @@ class Handler: RequestStreamHandler {
 
                 when (event.type) {
                     2 -> when (applicationCommand.data !!.name) {
-                        "citation", "Add citation", "Get citation" -> citationHandler(
-                            applicationCommand
-                        )
-
-                        "chat" -> chat(applicationCommand)
                         "eorzeadatabase" -> eorzeaDatabase(applicationCommand, logger)
-                        "image" -> image(applicationCommand)
                         "lodestone" -> lodestoneHandler(applicationCommand)
-                        "rory" -> rory(applicationCommand)
-
-                        "translate", "Translate" -> translate(
-                            applicationCommand, logger
-                        )
-
                         "universalis" -> universalis(applicationCommand, logger)
                         else -> logger.log("Unknown command: ${event.data !!.name}")
                     }

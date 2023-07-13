@@ -56,9 +56,6 @@ dependencies {
     // Eorzea Database
     implementation("cloud.drakon:ktxivapi:0.0.1-SNAPSHOT")
 
-    // Translate
-    implementation("aws.sdk.kotlin:translate:0.28.1-beta")
-
     // Universalis
     implementation("cloud.drakon:ktuniversalis:2.0.0")
 

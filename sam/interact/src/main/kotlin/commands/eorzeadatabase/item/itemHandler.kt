@@ -1,6 +1,6 @@
-package cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.item
+package cloud.drakon.tempestbot.interact.commands.eorzeadatabase.item
 
-import cloud.drakon.tempestbot.interact.commands.ffxiv.eorzeadatabase.cleanDescription
+import cloud.drakon.tempestbot.interact.commands.eorzeadatabase.cleanDescription
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.int

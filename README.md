@@ -1,23 +1,14 @@
-# TempestBot
+# CerberusBot
 
 [![Kotlin Alpha](https://kotl.in/badges/alpha.svg)](https://kotlinlang.org/docs/components-stability.html)
 [![Kotlin](https://img.shields.io/badge/kotlin-1.9.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
-[![License](https://img.shields.io/github/license/TempestProject/TempestBot)](https://www.gnu.org/licenses/agpl-3.0.en.html)
+[![License](https://img.shields.io/github/license/drakon64/CerberusBot)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
-_TempestBot_ is a Discord bot that runs on AWS Lambda.
+_CerberusBot_ is a Discord bot that runs on AWS Lambda.
 
 ---
 
 ## Features
-
-- Citations: Save quotes from guild members and repost them. Requires users to opt-in.
-- Chat: Creates a completion for a chat message using GPT-4
-- Images: Creates an image from a prompt using DALL-E 2
-- Translate: Translate messages using AWS Translate.
-- ~~Subject Access Request: The bot will DM you with all of the information that it holds on your Discord account.~~
-- Localisations: _TempestBot_ is fully localised for all Discord-supported locales.
-
-### Final Fantasy XIV features
 
 - Eorzea Database: Search for an item in the Eorzea Database. Provides rich results for:
   - Arms
@@ -27,5 +18,5 @@ _TempestBot_ is a Discord bot that runs on AWS Lambda.
 - Universalis: Search the Final Fantasy XIV market board for an item in a given world, datacenter, or region.
   Uses https://github.com/Universalis-FFXIV/Universalis.
 
-As _TempestBot_ uses the Discord Interactions API, features can be selectively enabled or disabled within your guilds
+As _CerberusBot_ uses the Discord Interactions API, features can be selectively enabled or disabled within your guilds
 settings.
