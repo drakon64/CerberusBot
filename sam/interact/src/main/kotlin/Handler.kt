@@ -18,7 +18,7 @@ import java.io.OutputStream
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 
-class Handler : RequestStreamHandler {
+class Handler: RequestStreamHandler {
     companion object {
         val ktDiscord = KtDiscord(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
