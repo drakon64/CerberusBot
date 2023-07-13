@@ -8,6 +8,10 @@ plugins {
 group = "cloud.drakon"
 version = "0.0.1-SNAPSHOT"
 
+kotlin {
+    jvmToolchain(17)
+}
+
 repositories {
     mavenCentral()
     mavenLocal()
@@ -71,9 +75,6 @@ dependencies {
 }
 
 tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
-    }
     test {
         useJUnitPlatform()
     }
