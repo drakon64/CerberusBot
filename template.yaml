@@ -57,10 +57,6 @@ Resources:
             Ref: MongoDbUrl
           MONGODB_DATABASE:
             Ref: MongoDbDatabase
-          OPENAI_API_KEY:
-            Ref: OpenAiApiKey
-          CHAT_DEFAULT_ASSISTANT:
-            Ref: ChatDefaultAssistant
       Policies:
         - Statement:
             - Sid: Translate
@@ -106,9 +102,3 @@ Parameters:
     Type: String
     NoEcho: True
     Default: cerberusbot
-  OpenAiApiKey:
-    Type: String
-    NoEcho: True
-  ChatDefaultAssistant:
-    Type: String
-    Default: ""
