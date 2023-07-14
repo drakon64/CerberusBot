@@ -75,7 +75,7 @@ def translate_command(command: dict):
                         choice["name_localizations"][target_language["discord"]] = (
                             translate_text(
                                 choice["name"], target_language["aws"]
-                            ).replace(" ", "_")
+                            )
                         )
 
                 if "options" in option_or_subcommand:
@@ -99,8 +99,6 @@ def translate_command(command: dict):
                                     translate_text(
                                         choice["name"], target_language["aws"]
                                     )
-                                    .replace(" ", "_")
-                                    .lower()
                                 )
 
                 option_or_subcommand["name"] = (
