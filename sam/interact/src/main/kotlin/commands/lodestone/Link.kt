@@ -2,17 +2,17 @@ package cloud.drakon.cerberusbot.interact.commands.lodestone
 
 import cloud.drakon.cerberusbot.interact.Handler.Companion.ktDiscord
 import cloud.drakon.cerberusbot.interact.Handler.Companion.mongoDatabase
-import cloud.drakon.cerberusbot.interact.api.xivapi.XivApiClient
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
+import cloud.drakon.ktlodestone.KtLodestone
+import cloud.drakon.ktlodestone.search.World
+import cloud.drakon.ktlodestone.search.result.CharacterSearchResult
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.client.model.Updates
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
+
+lateinit var character: CharacterSearchResult
 
 suspend fun link(event: Interaction<ApplicationCommandData>) {
     val userId: String = event.member!!.user!!.id
@@ -27,18 +27,35 @@ suspend fun link(event: Interaction<ApplicationCommandData>) {
         }
     }
 
-    val characters = XivApiClient().characterSearch(
-        characterName, world
-    ).jsonObject["Results"]!!.jsonArray
+    val characters = KtLodestone.searchCharacter(
+        characterName, World.valueOf(world)
+    )
 
-    when (characters.size) {
-        1 -> {
+    suspend fun couldNotFindCharacter() {
+        ktDiscord.editOriginalInteractionResponse(
+            EditWebhookMessage(
+                "Could not find character \"$characterName\" on world \"$world\"."
+            ), event.token
+        )
+    }
+
+    if (characters != null) {
+        for (i in characters) {
+            if (i.name == characterName) {
+                character = i
+            }
+        }
+
+        if (!::character.isInitialized) {
+            couldNotFindCharacter()
+        } else {
             mongoDatabase.getCollection("lodestone_link").updateOne(
                 Filters.and(
-                    Filters.eq("user_id", userId), Filters.eq("guild_id", guildId)
-                ), Updates.set(
-                    "character_id", characters[0].jsonObject["ID"]!!.jsonPrimitive.int
-                ), UpdateOptions().upsert(true)
+                    Filters.eq("user_id", userId),
+                    Filters.eq("guild_id", guildId)
+                ),
+                Updates.set("character_id", character.id),
+                UpdateOptions().upsert(true)
             )
 
             ktDiscord.editOriginalInteractionResponse(
@@ -47,17 +64,7 @@ suspend fun link(event: Interaction<ApplicationCommandData>) {
                 ), event.token
             )
         }
-
-        0 -> ktDiscord.editOriginalInteractionResponse(
-            EditWebhookMessage(
-                "Could not find character \"$characterName\" on world \"$world\"."
-            ), event.token
-        )
-
-        else -> ktDiscord.editOriginalInteractionResponse(
-            EditWebhookMessage(
-                "Please specify the exact character name."
-            ), event.token
-        )
+    } else {
+        couldNotFindCharacter()
     }
 }

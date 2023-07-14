@@ -60,7 +60,7 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync:4.10.1")
 
     // Lodestone
-    implementation("cloud.drakon:ktlodestone:6.1.0")
+    implementation("cloud.drakon:ktlodestone:6.2.0")
 
     // Eorzea Database
     implementation("cloud.drakon:ktxivapi:0.0.1-SNAPSHOT")
