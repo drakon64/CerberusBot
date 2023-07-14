@@ -1,7 +1,7 @@
 from localize import translate_command
 
 
-def create_universalis_command():
+async def create_universalis_command():
     command = {
         "name": "universalis",
         "name_localizations": {},
@@ -28,7 +28,9 @@ def create_universalis_command():
             {
                 "name": "high quality",
                 "name_localizations": {},
-                "description": "Only show high quality market board listings or vice versa",
+                "description": (
+                    "Only show high quality market board listings or vice versa"
+                ),
                 "description_localizations": {},
                 "type": 5,
             },

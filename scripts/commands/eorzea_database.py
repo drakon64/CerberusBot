@@ -1,7 +1,7 @@
 from localize import translate_command
 
 
-def create_eorzea_database_command():
+async def create_eorzea_database_command():
     command = {
         "name": "Eorzea Database",
         "name_localizations": {},

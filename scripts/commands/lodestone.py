@@ -1,7 +1,7 @@
 from localize import translate_command
 
 
-def create_lodestone_command():
+async def create_lodestone_command():
     command = {
         "name": "lodestone",
         "name_localizations": {},
