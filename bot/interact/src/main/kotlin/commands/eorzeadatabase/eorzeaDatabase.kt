@@ -21,13 +21,13 @@ suspend fun eorzeaDatabase(
     logger.log("Responding to Eorzea Database command")
 
     lateinit var index: String
-    lateinit var string: String
+    lateinit var query: String
     var language = "en"
 
     for (i in event.data!!.options!!) {
         when (i.name) {
             "index" -> index = i.value!!
-            "string" -> string = i.value!!
+            "query" -> query = i.value!!
             "language" -> language = i.value!!
         }
     }
@@ -59,7 +59,7 @@ suspend fun eorzeaDatabase(
     }
 
     val search = KtXivApi.search(
-        string,
+        query,
         indexes = listOf(index),
         stringAlgo = StringAlgo.fuzzy,
         limit = 1,
@@ -83,7 +83,7 @@ suspend fun eorzeaDatabase(
         )
     } else {
         ktDiscord.editOriginalInteractionResponse(
-            EditWebhookMessage(content = "Could not find $index \"$string\""),
+            EditWebhookMessage(content = "Could not find $index \"$query\""),
             event.token
         )
     }

@@ -54,7 +54,7 @@ class Handler: RequestStreamHandler {
 
                 when (event.type) {
                     2 -> when (applicationCommand.data!!.name) {
-                        "eorzeadatabase" -> eorzeaDatabase(applicationCommand, logger)
+                        "eorzea_database" -> eorzeaDatabase(applicationCommand, logger)
                         "lodestone" -> lodestoneHandler(applicationCommand)
                         "universalis" -> universalis(applicationCommand, logger)
                         else -> logger.log("Unknown command: ${event.data!!.name}")
