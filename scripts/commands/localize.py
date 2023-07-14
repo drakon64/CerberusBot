@@ -60,6 +60,7 @@ def translate_command(command: dict):
                 ] = (
                     translate_text(option_or_subcommand["name"], target_language["aws"])
                     .replace(" ", "_")
+                    .replace("'", "")
                     .lower()
                 )
                 option_or_subcommand["description_localizations"][
