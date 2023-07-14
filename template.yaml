@@ -50,7 +50,7 @@ Resources:
             Ref: ApplicationIDParameter
           BOT_TOKEN:
             Ref: BotTokenParameter
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=0
           PUBLIC_KEY:
             Ref: PublicKeyParameter
           MONGODB_URL:
