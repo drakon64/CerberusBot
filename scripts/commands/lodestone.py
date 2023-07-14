@@ -17,16 +17,17 @@ async def create_lodestone_command():
                     "Get a character card of a users Final Fantasy XIV character"
                 ),
                 "description_localizations": {},
-                "type": 1,
                 "options": [
                     {
                         "name": "user",
                         "name_localizations": {},
                         "description": "The user to get a Lodestone card for",
                         "description_localizations": {},
+                        "required": True,
                         "type": 6,
                     }
                 ],
+                "type": 1,
             },
             {
                 "name": "link",
@@ -44,6 +45,7 @@ async def create_lodestone_command():
                             "The name of the character to link your Discord account to"
                         ),
                         "description_localizations": {},
+                        "required": True,
                         "type": 3,
                     },
                     {
@@ -53,6 +55,7 @@ async def create_lodestone_command():
                             "The world of the character to link your Discord account to"
                         ),
                         "description_localizations": {},
+                        "required": True,
                         "type": 3,
                     },
                 ],
@@ -78,6 +81,7 @@ async def create_lodestone_command():
                         "name_localizations": {},
                         "description": "The user to get a Lodestone portrait for",
                         "description_localizations": {},
+                        "required": True,
                         "type": 6,
                     }
                 ],
@@ -94,6 +98,7 @@ async def create_lodestone_command():
                         "name_localizations": {},
                         "description": "The user to get a Lodestone profile for",
                         "description_localizations": {},
+                        "required": True,
                         "type": 6,
                     }
                 ],

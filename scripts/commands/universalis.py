@@ -14,16 +14,16 @@ async def create_universalis_command():
                 "name_localizations": {},
                 "description": "The item to search for",
                 "description_localizations": {},
-                "type": 3,
                 "required": True,
+                "type": 3,
             },
             {
                 "name": "world",
                 "name_localizations": {},
                 "description": "The World/Data Center/Region to search",
                 "description_localizations": {},
-                "type": 3,
                 "required": True,
+                "type": 3,
             },
             {
                 "name": "high quality",

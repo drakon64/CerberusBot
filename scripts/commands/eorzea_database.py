@@ -14,16 +14,18 @@ async def create_eorzea_database_command():
                 "name_localizations": {},
                 "description": "The index to search in",
                 "description_localizations": {},
-                "type": 3,
+                "required": True,
                 "choices": (
                     {"name": "Item", "name_localizations": {}, "value": "item"},
                 ),
+                "type": 3,
             },
             {
                 "name": "query",
                 "name_localizations": {},
                 "description": "The search query",
                 "description_localizations": {},
+                "required": True,
                 "type": 3,
             },
             {
@@ -31,14 +33,13 @@ async def create_eorzea_database_command():
                 "name_localizations": {},
                 "description": "The language to search in",
                 "description_localizations": {},
-                "type": 3,
-                "required": False,
                 "choices": (
                     {"name": "English", "name_localizations": {}, "value": "en"},
                     {"name": "Japanese", "name_localizations": {}, "value": "ja"},
                     {"name": "German", "name_localizations": {}, "value": "de"},
                     {"name": "French", "name_localizations": {}, "value": "fr"},
                 ),
+                "type": 3,
             },
         ),
     }
