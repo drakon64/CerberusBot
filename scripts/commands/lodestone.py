@@ -21,7 +21,9 @@ async def create_lodestone_command():
                     {
                         "name": "user",
                         "name_localizations": {},
-                        "description": "The user to get a Lodestone card for",
+                        "description": (
+                            "The user to get a Lodestone character card from"
+                        ),
                         "description_localizations": {},
                         "required": True,
                         "type": 6,
@@ -79,7 +81,7 @@ async def create_lodestone_command():
                     {
                         "name": "user",
                         "name_localizations": {},
-                        "description": "The user to get a Lodestone portrait for",
+                        "description": "The user to get a Lodestone portrait from",
                         "description_localizations": {},
                         "required": True,
                         "type": 6,
@@ -89,14 +91,16 @@ async def create_lodestone_command():
             {
                 "name": "profile",
                 "name_localizations": {},
-                "description": "Get a profile of a users Final Fantasy XIV character",
+                "description": (
+                    "Generate an embed of a users Final Fantasy XIV character"
+                ),
                 "description_localizations": {},
                 "type": 1,
                 "options": [
                     {
                         "name": "user",
                         "name_localizations": {},
-                        "description": "The user to get a Lodestone profile for",
+                        "description": "The user to generate an embed from",
                         "description_localizations": {},
                         "required": True,
                         "type": 6,
