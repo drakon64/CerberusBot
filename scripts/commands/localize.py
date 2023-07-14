@@ -1,6 +1,7 @@
 import boto3
 
 discord_to_aws = (
+    {"discord": "id", "aws": "id"},
     {"discord": "da", "aws": "da"},
     {"discord": "de", "aws": "de"},
     {"discord": "es-ES", "aws": "es"},

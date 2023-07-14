@@ -2,6 +2,7 @@
     {
         "name": "eorzea_database",
         "name_localizations": {
+            "id": "database_eorzea",
             "da": "eorzea_database",
             "de": "eorzea-datenbank",
             "es-ES": "base_de_datos_eorzea",
@@ -33,6 +34,7 @@
         },
         "description": "Search the Eorzea Database",
         "description_localizations": {
+            "id": "Cari Database Eorzea",
             "da": "Søg i Eorzea-databasen",
             "de": "Suche in der Eorzea-Datenbank",
             "es-ES": "Busque en la base de datos de Eorzea",
@@ -67,6 +69,7 @@
             {
                 "name": "index",
                 "name_localizations": {
+                    "id": "indeks",
                     "da": "indeks",
                     "de": "indizieren",
                     "es-ES": "índice",
@@ -98,6 +101,7 @@
                 },
                 "description": "The index to search in",
                 "description_localizations": {
+                    "id": "Indeks untuk mencari di",
                     "da": "Indekset, der skal søges i",
                     "de": "Der Index, in dem gesucht werden soll",
                     "es-ES": "El índice en el que buscar",
@@ -132,6 +136,7 @@
                     {
                         "name": "Item",
                         "name_localizations": {
+                            "id": "Barang",
                             "da": "Vare",
                             "de": "Artikel",
                             "es-ES": "Artículo",
@@ -168,6 +173,7 @@
             {
                 "name": "query",
                 "name_localizations": {
+                    "id": "pertanyaan",
                     "da": "forespørgsel",
                     "de": "abfragen",
                     "es-ES": "consulta",
@@ -199,6 +205,7 @@
                 },
                 "description": "The search query",
                 "description_localizations": {
+                    "id": "Permintaan pencarian",
                     "da": "Søgeforespørgslen",
                     "de": "Die Suchabfrage",
                     "es-ES": "La consulta de búsqueda",
@@ -233,6 +240,7 @@
             {
                 "name": "language",
                 "name_localizations": {
+                    "id": "bahasa",
                     "da": "sprog",
                     "de": "sprache",
                     "es-ES": "lengua",
@@ -264,6 +272,7 @@
                 },
                 "description": "The language to search in",
                 "description_localizations": {
+                    "id": "Bahasa untuk mencari di",
                     "da": "Sproget at søge i",
                     "de": "Die Sprache, in der gesucht werden soll",
                     "es-ES": "El idioma en el que realizar la búsqueda",
@@ -299,6 +308,7 @@
                     {
                         "name": "English",
                         "name_localizations": {
+                            "id": "Inggris",
                             "da": "engelsk",
                             "de": "Englisch",
                             "es-ES": "Inglés",
@@ -333,6 +343,7 @@
                     {
                         "name": "Japanese",
                         "name_localizations": {
+                            "id": "Orang_Jepang",
                             "da": "Japansk",
                             "de": "japanisch",
                             "es-ES": "japonés",
@@ -367,6 +378,7 @@
                     {
                         "name": "German",
                         "name_localizations": {
+                            "id": "orang_Jerman",
                             "da": "Tysk",
                             "de": "Deutsch",
                             "es-ES": "alemán",
@@ -401,6 +413,7 @@
                     {
                         "name": "French",
                         "name_localizations": {
+                            "id": "Prancis",
                             "da": "franskmænd",
                             "de": "Französisch",
                             "es-ES": "francesa",
@@ -439,6 +452,7 @@
     {
         "name": "lodestone",
         "name_localizations": {
+            "id": "batu_permata",
             "da": "lodestone",
             "de": "magnetstein",
             "es-ES": "imán",
@@ -470,6 +484,7 @@
         },
         "description": "Final Fantasy XIV, The Lodestone",
         "description_localizations": {
+            "id": "Final Fantasy XIV, Lodestone",
             "da": "Final Fantasy XIV, Lodestone",
             "de": "Final Fantasy XIV - Der Lodestone",
             "es-ES": "Final Fantasy XIV, La piedra imán",
@@ -505,6 +520,7 @@
             {
                 "name": "card",
                 "name_localizations": {
+                    "id": "kartu",
                     "da": "kort",
                     "de": "karte",
                     "es-ES": "tarjeta",
@@ -536,6 +552,7 @@
                 },
                 "description": "Get a character card of a users Final Fantasy XIV character",
                 "description_localizations": {
+                    "id": "Dapatkan kartu karakter dari karakter Final Fantasy XIV pengguna",
                     "da": "Få et karakterkort af en brugers Final Fantasy XIV-karakter",
                     "de": "Hol dir eine Charakterkarte eines Final Fantasy XIV-Charakters eines Benutzers",
                     "es-ES": "Consigue una tarjeta de personaje de Final Fantasy XIV de un usuario",
@@ -570,6 +587,7 @@
                     {
                         "name": "user",
                         "name_localizations": {
+                            "id": "pengguna",
                             "da": "bruger",
                             "de": "benutzer",
                             "es-ES": "usuario",
@@ -601,6 +619,7 @@
                         },
                         "description": "The user to get a Lodestone card for",
                         "description_localizations": {
+                            "id": "Pengguna untuk mendapatkan kartu Lodestone untuk",
                             "da": "Brugeren til at få et Lodestone-kort til",
                             "de": "Der Benutzer, für den eine Lodestone-Karte gekauft werden soll",
                             "es-ES": "El usuario para el que se va a obtener una tarjeta Lodestone",
@@ -637,6 +656,7 @@
             {
                 "name": "link",
                 "name_localizations": {
+                    "id": "pranala",
                     "da": "link",
                     "de": "verknüpfung",
                     "es-ES": "eslabón",
@@ -668,6 +688,7 @@
                 },
                 "description": "Link your Discord account to a Final Fantasy XIV character",
                 "description_localizations": {
+                    "id": "Tautkan akun Discord Anda ke karakter Final Fantasy XIV",
                     "da": "Link din Discord-konto til en Final Fantasy XIV-karakter",
                     "de": "Verbinde dein Discord-Konto mit einem Final Fantasy XIV-Charakter",
                     "es-ES": "Vincula tu cuenta de Discord a un personaje de Final Fantasy XIV",
@@ -702,6 +723,7 @@
                     {
                         "name": "character",
                         "name_localizations": {
+                            "id": "watak",
                             "da": "karakter",
                             "de": "zeichen",
                             "es-ES": "carácter",
@@ -733,6 +755,7 @@
                         },
                         "description": "The name of the character to link your Discord account to",
                         "description_localizations": {
+                            "id": "Nama karakter untuk menautkan akun Discord Anda",
                             "da": "Navnet på det tegn, du skal linke din Discord-konto til",
                             "de": "Der Name des Charakters, mit dem dein Discord-Konto verknüpft werden soll",
                             "es-ES": "El nombre del personaje al que vas a vincular tu cuenta de Discord",
@@ -767,6 +790,7 @@
                     {
                         "name": "world",
                         "name_localizations": {
+                            "id": "dunia",
                             "da": "verden",
                             "de": "welt",
                             "es-ES": "mundo",
@@ -798,6 +822,7 @@
                         },
                         "description": "The world of the character to link your Discord account to",
                         "description_localizations": {
+                            "id": "Dunia karakter untuk menautkan akun Discord Anda",
                             "da": "Karakterens verden til at linke din Discord-konto til",
                             "de": "Die Welt des Charakters, mit dem du deinen Discord-Account verknüpfen möchtest",
                             "es-ES": "El mundo del personaje al que vincular tu cuenta de Discord",
@@ -834,6 +859,7 @@
             {
                 "name": "unlink",
                 "name_localizations": {
+                    "id": "memutuskan_tautan",
                     "da": "fjerne_linket",
                     "de": "verknüpfung_aufheben",
                     "es-ES": "desvincular",
@@ -865,6 +891,7 @@
                 },
                 "description": "Unlink your Discord account from a Final Fantasy XIV character",
                 "description_localizations": {
+                    "id": "Putuskan tautan akun Discord Anda dari karakter Final Fantasy XIV",
                     "da": "Fjern linket til din Discord-konto fra en Final Fantasy XIV-karakter",
                     "de": "Verbinde deinen Discord-Account mit einem Final Fantasy XIV-Charakter",
                     "es-ES": "Desvincula tu cuenta de Discord de un personaje de Final Fantasy XIV",
@@ -899,6 +926,7 @@
             {
                 "name": "portrait",
                 "name_localizations": {
+                    "id": "potret",
                     "da": "portræt",
                     "de": "porträt",
                     "es-ES": "retrato",
@@ -930,6 +958,7 @@
                 },
                 "description": "Get a portrait of a users Final Fantasy XIV character",
                 "description_localizations": {
+                    "id": "Dapatkan potret karakter Final Fantasy XIV pengguna",
                     "da": "Få et portræt af en brugeres Final Fantasy XIV-karakter",
                     "de": "Hol dir ein Portrait des Final Fantasy XIV-Charakters eines Benutzers",
                     "es-ES": "Obtén un retrato del personaje de Final Fantasy XIV de un usuario",
@@ -964,6 +993,7 @@
                     {
                         "name": "user",
                         "name_localizations": {
+                            "id": "pengguna",
                             "da": "bruger",
                             "de": "benutzer",
                             "es-ES": "usuario",
@@ -995,6 +1025,7 @@
                         },
                         "description": "The user to get a Lodestone portrait for",
                         "description_localizations": {
+                            "id": "Pengguna untuk mendapatkan potret Lodestone untuk",
                             "da": "Brugeren til at få et Lodestone-portræt til",
                             "de": "Der Benutzer, für den ein Lodestone-Portrait erstellt werden soll",
                             "es-ES": "El usuario para el que se va a obtener un retrato de Lodestone",
@@ -1031,6 +1062,7 @@
             {
                 "name": "profile",
                 "name_localizations": {
+                    "id": "profil",
                     "da": "profil",
                     "de": "profil",
                     "es-ES": "perfil",
@@ -1062,6 +1094,7 @@
                 },
                 "description": "Get a profile of a users Final Fantasy XIV character",
                 "description_localizations": {
+                    "id": "Dapatkan profil karakter Final Fantasy XIV pengguna",
                     "da": "Få en profil af en brugeres Final Fantasy XIV-karakter",
                     "de": "Hol dir ein Profil des Final Fantasy XIV-Charakters eines Benutzers",
                     "es-ES": "Obtén el perfil de un personaje de Final Fantasy XIV de un usuario",
@@ -1096,6 +1129,7 @@
                     {
                         "name": "user",
                         "name_localizations": {
+                            "id": "pengguna",
                             "da": "bruger",
                             "de": "benutzer",
                             "es-ES": "usuario",
@@ -1127,6 +1161,7 @@
                         },
                         "description": "The user to get a Lodestone profile for",
                         "description_localizations": {
+                            "id": "Pengguna untuk mendapatkan profil Lodestone untuk",
                             "da": "Brugeren skal få en Lodestone-profil for",
                             "de": "Der Benutzer, für den ein Lodestone-Profil erstellt werden soll",
                             "es-ES": "El usuario para el que se va a obtener un perfil de Lodestone",
@@ -1165,6 +1200,7 @@
     {
         "name": "universalis",
         "name_localizations": {
+            "id": "universalis",
             "da": "universalis",
             "de": "universalis",
             "es-ES": "universalis",
@@ -1196,6 +1232,7 @@
         },
         "description": "Get Final Fantasy XIV market board listings",
         "description_localizations": {
+            "id": "Dapatkan daftar papan pasar Final Fantasy XIV",
             "da": "Få Final Fantasy XIV markedsfortegnelser",
             "de": "Holen Sie sich Final Fantasy XIV Market Board-Angebote",
             "es-ES": "Obtén los listados de los tableros de mercado de Final Fantasy XIV",
@@ -1230,6 +1267,7 @@
             {
                 "name": "item",
                 "name_localizations": {
+                    "id": "item",
                     "da": "vare",
                     "de": "artikel",
                     "es-ES": "ítem",
@@ -1261,6 +1299,7 @@
                 },
                 "description": "The item to search for",
                 "description_localizations": {
+                    "id": "Item yang harus dicari",
                     "da": "Det element, der skal søges efter",
                     "de": "Der Artikel, nach dem gesucht werden soll",
                     "es-ES": "El elemento que se va a buscar",
@@ -1296,6 +1335,7 @@
             {
                 "name": "world",
                 "name_localizations": {
+                    "id": "dunia",
                     "da": "verden",
                     "de": "welt",
                     "es-ES": "mundo",
@@ -1327,6 +1367,7 @@
                 },
                 "description": "The World/Data Center/Region to search",
                 "description_localizations": {
+                    "id": "Dunia/Pusat Data/Wilayah untuk mencari",
                     "da": "Verden/Datacenter/Region til søgning",
                     "de": "Die Welt/das Rechenzentrum/die Region, in der gesucht werden soll",
                     "es-ES": "El mundo/el centro de datos/la región para buscar",
@@ -1362,6 +1403,7 @@
             {
                 "name": "high_quality",
                 "name_localizations": {
+                    "id": "kualitas_tinggi",
                     "da": "høj_kvalitet",
                     "de": "hoch_qualität",
                     "es-ES": "alta_calidad",
@@ -1393,6 +1435,7 @@
                 },
                 "description": "Only show high quality market board listings or vice versa",
                 "description_localizations": {
+                    "id": "Hanya tampilkan daftar papan pasar berkualitas tinggi atau sebaliknya",
                     "da": "Vis kun markedsfortegnelser af høj kvalitet eller omvendt",
                     "de": "Nur qualitativ hochwertige Market Board-Angebote anzeigen oder umgekehrt",
                     "es-ES": "Mostrar únicamente listados de foros de mercado de alta calidad o viceversa",
