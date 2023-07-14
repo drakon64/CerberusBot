@@ -9,7 +9,7 @@ Resources:
   CerberusBotDeferFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: sam/defer/defer
+      CodeUri: bot/defer/defer
       Handler: app.lambda_handler
       Runtime: python3.9
       Architectures:
@@ -37,7 +37,7 @@ Resources:
   CerberusBotInteractFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: sam/interact
+      CodeUri: bot/interact
       Handler: cloud.drakon.cerberusbot.interact.Handler::handleRequest
       Runtime: java17
       Architectures:
