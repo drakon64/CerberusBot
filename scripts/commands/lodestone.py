@@ -70,6 +70,16 @@ async def create_lodestone_command():
                         "required": True,
                         "type": 3,
                     },
+                    {
+                        "name": "ephemeral",
+                        "name_localizations": {},
+                        "description": (
+                            "The message is only visible to the user who invoked the"
+                            " Interaction"
+                        ),
+                        "description_localizations": {},
+                        "type": 5,
+                    },
                 ),
             },
             {
@@ -79,6 +89,18 @@ async def create_lodestone_command():
                     "Unlink your Discord account from a Final Fantasy XIV character"
                 ),
                 "description_localizations": {},
+                "options": (
+                    {
+                        "name": "ephemeral",
+                        "name_localizations": {},
+                        "description": (
+                            "The message is only visible to the user who invoked the"
+                            " Interaction"
+                        ),
+                        "description_localizations": {},
+                        "type": 5,
+                    },
+                ),
                 "type": 1,
             },
             {
@@ -95,6 +117,16 @@ async def create_lodestone_command():
                         "description_localizations": {},
                         "required": True,
                         "type": 6,
+                    },
+                    {
+                        "name": "ephemeral",
+                        "name_localizations": {},
+                        "description": (
+                            "The message is only visible to the user who invoked the"
+                            " Interaction"
+                        ),
+                        "description_localizations": {},
+                        "type": 5,
                     },
                 ),
             },
@@ -114,6 +146,16 @@ async def create_lodestone_command():
                         "description_localizations": {},
                         "required": True,
                         "type": 6,
+                    },
+                    {
+                        "name": "ephemeral",
+                        "name_localizations": {},
+                        "description": (
+                            "The message is only visible to the user who invoked the"
+                            " Interaction"
+                        ),
+                        "description_localizations": {},
+                        "type": 5,
                     },
                 ),
             },

@@ -34,6 +34,16 @@ async def create_universalis_command():
                 "description_localizations": {},
                 "type": 5,
             },
+            {
+                "name": "ephemeral",
+                "name_localizations": {},
+                "description": (
+                    "The message is only visible to the user who invoked the"
+                    " Interaction"
+                ),
+                "description_localizations": {},
+                "type": 5,
+            },
         ],
     }
 
