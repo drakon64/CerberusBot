@@ -22,13 +22,20 @@ suspend fun eorzeaDatabase(
 
     lateinit var index: String
     lateinit var query: String
-    var language = "en"
+    var language: String? = null
 
     for (i in event.data!!.options!!) {
         when (i.name) {
             "index" -> index = i.value!!
             "query" -> query = i.value!!
             "language" -> language = i.value!!
+        }
+    }
+
+    if (language == null) {
+        language = when (event.locale) {
+            "ja", "de", "fr" -> event.locale
+            else -> "en"
         }
     }
 
