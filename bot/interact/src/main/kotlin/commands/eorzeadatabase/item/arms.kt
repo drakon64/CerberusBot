@@ -34,27 +34,14 @@ suspend fun arms(item: JsonObject, language: String, lodestone: String) =
         }
 
         val damageType: String
-        val damage: String
+        val nqDamage: Int
         when (item["ClassJobUse"]!!.jsonObject["ClassJobCategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
             30 -> {
                 damageType =
                     Localisation.damageType.getValue("Physical Damage")
                         .getValue(language)
 
-                val nqDamage = item["DamagePhys"]!!.jsonPrimitive.int
-
-                val hqDamage =
-                    if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
-                        nqDamage + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
-                    } else {
-                        null
-                    }
-
-                damage = if (hqDamage != null) {
-                    "$nqDamage / $hqDamage <:hq:916051971063054406>"
-                } else {
-                    nqDamage.toString()
-                }
+                nqDamage = item["DamagePhys"]!!.jsonPrimitive.int
             }
 
             31 -> {
@@ -62,36 +49,48 @@ suspend fun arms(item: JsonObject, language: String, lodestone: String) =
                     Localisation.damageType.getValue("Magic Damage")
                         .getValue(language)
 
-                val nqDamage = item["DamageMag"]!!.jsonPrimitive.int
-
-                val hqDamage =
-                    if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
-                        nqDamage + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
-                    } else {
-                        null
-                    }
-
-                damage = if (hqDamage != null) {
-                    "$nqDamage / $hqDamage <:hq:916051971063054406>"
-                } else {
-                    nqDamage.toString()
-                }
+                nqDamage = item["DamageMag"]!!.jsonPrimitive.int
             }
 
             else -> throw Throwable("Unknown class/job category: $this")
         }
 
+        val hqDamage =
+            if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
+                nqDamage + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
+            } else {
+                null
+            }
+
+        val damage = if (hqDamage != null) {
+            "$nqDamage / $hqDamage <:hq:916051971063054406>"
+        } else {
+            nqDamage.toString()
+        }
+
         val delay = ((item["DelayMs"]!!.jsonPrimitive.int).toDouble() / 1000)
 
-        val autoAttack =
-            BigDecimal.valueOf((delay / 3) * damage)
+        val nqAutoAttack =
+            BigDecimal.valueOf((delay / 3) * nqDamage)
                 .setScale(2, RoundingMode.DOWN)
-                .toString()
+
+        val hqAutoAttack = if (hqDamage != null) {
+            BigDecimal.valueOf((delay / 3) * hqDamage)
+                .setScale(2, RoundingMode.DOWN)
+        } else {
+            null
+        }
+
+        val autoAttack = if (hqAutoAttack != null) {
+            "$nqAutoAttack / $hqAutoAttack <:hq:916051971063054406>"
+        } else {
+            nqAutoAttack.toString()
+        }
 
         val classJob = """
-        ${item["ClassJobCategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content}
-        ${Localisation.level.getValue(language)} ${item["LevelEquip"]!!.jsonPrimitive.content}
-    """.trimIndent()
+            ${item["ClassJobCategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content}
+            ${Localisation.level.getValue(language)} ${item["LevelEquip"]!!.jsonPrimitive.content}
+        """.trimIndent()
 
         return@coroutineScope Embed(
             title = item["Name"]!!.jsonPrimitive.content,
