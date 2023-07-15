@@ -43,6 +43,11 @@ internal object Localisation {
             "ja" to "スペルスピード",
             "de" to "Zaubertempo",
             "fr" to "Célérité"
+        ), "Strength" to mapOf(
+            "en" to "Strength",
+            "ja" to "STR",
+            "de" to "Stärke",
+            "fr" to "Force"
         ), "Tenacity" to mapOf(
             "en" to "Tenacity",
             "ja" to "不屈",
