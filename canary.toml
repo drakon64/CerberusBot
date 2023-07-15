@@ -2,8 +2,8 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "CerberusBotCanary"
-s3_prefix = "CerberusBotCanary"
+stack_name = "DynamisBotCanary"
+s3_prefix = "DynamisBotCanary"
 region = "eu-west-2"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"

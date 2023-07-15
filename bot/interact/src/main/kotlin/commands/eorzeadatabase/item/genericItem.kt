@@ -1,6 +1,6 @@
-package cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.item
+package cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.item
 
-import cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.cleanDescription
+import cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.cleanDescription
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import kotlinx.coroutines.coroutineScope

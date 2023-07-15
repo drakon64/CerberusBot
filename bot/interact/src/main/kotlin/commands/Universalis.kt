@@ -1,6 +1,6 @@
-package cloud.drakon.cerberusbot.interact.commands
+package cloud.drakon.dynamisbot.interact.commands
 
-import cloud.drakon.cerberusbot.interact.Handler.Companion.ktDiscord
+import cloud.drakon.dynamisbot.interact.Handler.Companion.ktDiscord
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail

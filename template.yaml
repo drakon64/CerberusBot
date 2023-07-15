@@ -1,12 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  CerberusBot
+  DynamisBot
 
   Discord Interactions bot written in Kotlin and Python
 
 Resources:
-  CerberusBotDeferFunction:
+  DynamisBotDeferFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: bot/defer/defer
@@ -18,7 +18,7 @@ Resources:
       Timeout: 3
       Environment:
         Variables:
-          INTERACT_FUNCTION: !Ref CerberusBotInteractFunction
+          INTERACT_FUNCTION: !Ref DynamisBotInteractFunction
           PUBLIC_KEY:
             Ref: PublicKeyParameter
       Events:
@@ -33,12 +33,12 @@ Resources:
               Effect: Allow
               Action:
                 - lambda:InvokeFunction
-              Resource: !GetAtt CerberusBotInteractFunction.Arn
-  CerberusBotInteractFunction:
+              Resource: !GetAtt DynamisBotInteractFunction.Arn
+  DynamisBotInteractFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: bot/interact
-      Handler: cloud.drakon.cerberusbot.interact.Handler::handleRequest
+      Handler: cloud.drakon.dynamisbot.interact.Handler::handleRequest
       Runtime: java17
       Architectures:
         - arm64
@@ -67,23 +67,23 @@ Resources:
               Resource: "*"
 
 Outputs:
-  CerberusBot:
-    Description: "API Gateway endpoint URL for CerberusBot Defer function"
+  DynamisBot:
+    Description: "API Gateway endpoint URL for DynamisBot Defer function"
     Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
 
-  CerberusBotDeferFunction:
-    Description: "CerberusBot Defer Lambda Function ARN"
-    Value: !GetAtt CerberusBotDeferFunction.Arn
-  CerberusBotDeferFunctionIamRole:
-    Description: "Implicit IAM Role created for CerberusBot Defer function"
-    Value: !GetAtt CerberusBotDeferFunctionRole.Arn
+  DynamisBotDeferFunction:
+    Description: "DynamisBot Defer Lambda Function ARN"
+    Value: !GetAtt DynamisBotDeferFunction.Arn
+  DynamisBotDeferFunctionIamRole:
+    Description: "Implicit IAM Role created for DynamisBot Defer function"
+    Value: !GetAtt DynamisBotDeferFunctionRole.Arn
 
-  CerberusBotInteractFunction:
-    Description: "CerberusBot Interact Lambda Function ARN"
-    Value: !GetAtt CerberusBotInteractFunction.Arn
-  CerberusBotInteractFunctionIamRole:
-    Description: "Implicit IAM Role created for CerberusBot Interact function"
-    Value: !GetAtt CerberusBotInteractFunctionRole.Arn
+  DynamisBotInteractFunction:
+    Description: "DynamisBot Interact Lambda Function ARN"
+    Value: !GetAtt DynamisBotInteractFunction.Arn
+  DynamisBotInteractFunctionIamRole:
+    Description: "Implicit IAM Role created for DynamisBot Interact function"
+    Value: !GetAtt DynamisBotInteractFunctionRole.Arn
 
 Parameters:
   ApplicationIDParameter:
@@ -101,4 +101,4 @@ Parameters:
   MongoDbDatabase:
     Type: String
     NoEcho: True
-    Default: cerberusbot
+    Default: dynamisbot

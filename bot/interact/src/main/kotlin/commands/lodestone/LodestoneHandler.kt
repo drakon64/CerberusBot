@@ -1,4 +1,4 @@
-package cloud.drakon.cerberusbot.interact.commands.lodestone
+package cloud.drakon.dynamisbot.interact.commands.lodestone
 
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData

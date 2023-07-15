@@ -1,8 +1,8 @@
-package cloud.drakon.cerberusbot.interact
+package cloud.drakon.dynamisbot.interact
 
-import cloud.drakon.cerberusbot.interact.commands.eorzeadatabase.eorzeaDatabase
-import cloud.drakon.cerberusbot.interact.commands.lodestone.lodestoneHandler
-import cloud.drakon.cerberusbot.interact.commands.universalis
+import cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.eorzeaDatabase
+import cloud.drakon.dynamisbot.interact.commands.lodestone.lodestoneHandler
+import cloud.drakon.dynamisbot.interact.commands.universalis
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer

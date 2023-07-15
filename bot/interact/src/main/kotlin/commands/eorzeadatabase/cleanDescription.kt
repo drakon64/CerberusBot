@@ -1,4 +1,4 @@
-package cloud.drakon.cerberusbot.interact.commands.eorzeadatabase
+package cloud.drakon.dynamisbot.interact.commands.eorzeadatabase
 
 import kotlinx.coroutines.coroutineScope
 import org.jsoup.Jsoup
