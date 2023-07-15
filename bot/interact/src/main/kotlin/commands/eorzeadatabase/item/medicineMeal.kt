@@ -14,7 +14,7 @@ suspend fun medicineMeal(item: JsonObject, description: String, lodestone: Strin
     coroutineScope {
         val bonuses = mutableListOf<String>()
 
-        val canBeHq = item["CanBeHq"]!!.jsonPrimitive.boolean
+        val canBeHq = item["CanBeHq"]!!.jsonPrimitive.int == 1
 
         for (i in item["Bonuses"]!!.jsonObject.keys) {
             val key = when (i) {
