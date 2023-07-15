@@ -39,5 +39,6 @@ jobs:
           BOT_TOKEN: ${{ secrets.CANARY_BOT_TOKEN }}
           PUBLIC_KEY: ${{ secrets.CANARY_PUBLIC_KEY }}
           MONGODB_URL: ${{ secrets.CANARY_MONGODB_URL }}
+          MONGODB_DATABASE: ${{ secrets.CANARY_MONGODB_DATABASE }}
         run: |
-          sam deploy --config-file canary.toml --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL OpenAiApiKey=$OPENAI_API_KEY ChatDefaultAssistant=$CHAT_DEFAULT_ASSISTANT"
+          sam deploy --config-file canary.toml --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3 --parameter-overrides "ApplicationIDParameter=$APPLICATION_ID BotTokenParameter=$BOT_TOKEN PublicKeyParameter=$PUBLIC_KEY MongoDbUrl=$MONGODB_URL MongoDbDatabase=$MONGODB_DATABASE"
