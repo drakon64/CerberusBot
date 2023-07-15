@@ -81,108 +81,89 @@ suspend fun universalis(
                 world, arrayOf(xivApiItemId).toIntArray(), entries = 5, listings = 5
             )
         }
+
         val marketBoardListings = marketBoardCurrentData.listings
-        var listings = ""
-        var totalPrices = ""
+        val listings = mutableListOf<String>()
         val gil = "<:gil:235457032616935424>"
 
-        if (!marketBoardListings.isNullOrEmpty()) {
-            for (i in marketBoardListings) {
-                listings += String.format(
-                    "%,d", i.pricePerUnit
-                ) + " $gil x " + i.quantity + " [" + i.worldName + "]" + if (i.hq) {
-                    " <:hq:916051971063054406>\n"
-                } else {
-                    "\n"
-                }
-                totalPrices += String.format(
-                    "%,d", i.total
-                ) + " $gil\n"
-            }
+        if (marketBoardListings.isNullOrEmpty()) {
+            listings.add("None")
         } else {
-            listings = "None"
-            totalPrices = "N/A"
+            for (listing in marketBoardListings) {
+                val pricePerUnit = String.format("%,d", listing.pricePerUnit)
+                val totalPrice = String.format(
+                    "%,d", listing.pricePerUnit * listing.quantity
+                )
+
+                var listingString = "$pricePerUnit $gil x ${listing.quantity} ($totalPrice) [${listing.worldName}]"
+                if (highQuality == true) {
+                    listingString += " <:hq:916051971063054406>"
+                }
+
+                listings.add(listingString)
+            }
         }
+
+        val currentAveragePriceField = if (highQuality == true && canBeHighQuality) {
+            "Current average price (HQ)"
+        } else if (highQuality == false) {
+            "Current average price (NQ)"
+        } else {
+            "Current average price"
+        }
+
+        val historicAveragePriceField = if (highQuality == true && canBeHighQuality) {
+            "Historic average price (HQ)"
+        } else if (highQuality == false) {
+            "Historic average price (NQ)"
+        } else {
+            "Historic average price"
+        }
+
+        val currentAveragePrice = if (highQuality == true && canBeHighQuality) {
+            String.format("%,f", marketBoardCurrentData.currentAveragePriceHq)
+                .trimEnd('0') + " $gil"
+        } else if (highQuality == false) {
+            String.format("%,f", marketBoardCurrentData.currentAveragePriceNq)
+                .trimEnd('0') + " $gil"
+        } else {
+            String.format("%,f", marketBoardCurrentData.currentAveragePrice)
+                .trimEnd('0') + " $gil"
+        }
+
+        val currentAveragePriceEmbed = EmbedField(
+            currentAveragePriceField, currentAveragePrice, true
+        )
+
+        val historicAveragePrice = if (highQuality == true && canBeHighQuality) {
+            String.format("%,f", marketBoardCurrentData.averagePriceHq)
+                .trimEnd('0') + " $gil"
+        } else if (highQuality == false) {
+            String.format("%,f", marketBoardCurrentData.averagePriceNq)
+                .trimEnd('0') + " $gil"
+        } else {
+            String.format("%,f", marketBoardCurrentData.averagePrice)
+                .trimEnd('0') + " $gil"
+        }
+
+        val historicAveragePriceEmbed = EmbedField(
+            historicAveragePriceField, historicAveragePrice, true
+        )
 
         ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
                 embeds = arrayOf(
                     Embed(
-                        title = "Current prices for " + xivApiItem.jsonObject["Name"]!!.jsonPrimitive.content,
+                        title = "Current prices for ${xivApiItem.jsonObject["Name"]!!.jsonPrimitive.content}",
                         description = description,
                         url = "https://universalis.app/market/$xivApiItemId",
-                        thumbnail = EmbedThumbnail("https://xivapi.com" + xivApiItem.jsonObject["IconHD"]!!.jsonPrimitive.content),
+                        thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.jsonObject["IconHD"]!!.jsonPrimitive.content}"),
                         fields = arrayOf(
-                            if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.currentAveragePriceHq > 0)) {
-                                EmbedField(
-                                    name = "Current average price (HQ)",
-                                    value = String.format(
-                                        "%,f",
-                                        marketBoardCurrentData.currentAveragePriceHq
-                                    ).trimEnd('0') + " $gil",
-                                    inline = false
-                                )
-                            } else if (highQuality == false && (marketBoardCurrentData.currentAveragePriceNq > 0)) {
-                                EmbedField(
-                                    name = "Current average price (NQ)",
-                                    value = String.format(
-                                        "%,f",
-                                        marketBoardCurrentData.currentAveragePriceNq
-                                    ).trimEnd('0') + " $gil",
-                                    inline = false
-                                )
-                            } else if (highQuality == null && (marketBoardCurrentData.currentAveragePrice > 0)) {
-                                EmbedField(
-                                    name = "Current average price",
-                                    value = String.format(
-                                        "%,f",
-                                        marketBoardCurrentData.currentAveragePrice
-                                    ).trimEnd('0') + " $gil",
-                                    inline = false
-                                )
-                            } else {
-                                EmbedField(
-                                    name = "Current average price",
-                                    value = "N/A",
-                                    inline = false
-                                )
-                            },
-                            if (highQuality == true && canBeHighQuality && (marketBoardCurrentData.averagePriceHq > 0)) {
-                                EmbedField(
-                                    name = "Historic average price (HQ)",
-                                    value = String.format(
-                                        "%,f", marketBoardCurrentData.averagePriceHq
-                                    ).trimEnd('0') + " $gil",
-                                    inline = false
-                                )
-                            } else if (highQuality == false && (marketBoardCurrentData.averagePriceNq > 0)) {
-                                EmbedField(
-                                    name = "Historic average price (NQ)",
-                                    value = String.format(
-                                        "%,f", marketBoardCurrentData.averagePriceNq
-                                    ).trimEnd('0') + " $gil",
-                                    inline = false
-                                )
-                            } else if (highQuality == null && (marketBoardCurrentData.averagePrice > 0)) {
-                                EmbedField(
-                                    name = "Historic average price",
-                                    value = String.format(
-                                        "%,f", marketBoardCurrentData.averagePrice
-                                    ).trimEnd('0') + " $gil",
-                                    inline = false
-                                )
-                            } else {
-                                EmbedField(
-                                    name = "Historic average price",
-                                    value = "N/A",
-                                    inline = false
-                                )
-                            },
+                            currentAveragePriceEmbed,
+                            historicAveragePriceEmbed,
                             EmbedField(
-                                name = "Listings", value = listings, inline = true
-                            ),
-                            EmbedField(
-                                name = "Total price", value = totalPrices, inline = true
+                                name = "Listings",
+                                value = listings.joinToString("\n")
                             )
                         )
                     )
