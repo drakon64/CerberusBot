@@ -46,15 +46,13 @@ def lambda_handler(event, context):
         except KeyError:
             pass
 
+        response = {
+            "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
+        }
+
         if ephemeral:
-            response = {
-                "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
-                "data": {"flags": 1 << 6},
-            }
-        else:
-            response = {
-                "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
-            }
+            response["data"] = {"flags": 1 << 6}
+
     else:
         raise Exception(f'Unknown interaction type :"f{body["type"]}"')
 
