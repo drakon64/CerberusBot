@@ -33,9 +33,8 @@ async def main():
                         f"https://discord.com/api/v10/applications/{application_id}/commands",
                         headers={
                             "Authorization": f"Bot {bot_token}",
-                            "Content-Type": "application/json",
                         },
-                        data=json.dumps(commands),
+                        json=commands,
                     ).content
                 )
             ),

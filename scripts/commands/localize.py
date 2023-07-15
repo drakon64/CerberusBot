@@ -73,9 +73,7 @@ def translate_command(command: dict):
                 if "choices" in option_or_subcommand:
                     for choice in option_or_subcommand["choices"]:
                         choice["name_localizations"][target_language["discord"]] = (
-                            translate_text(
-                                choice["name"], target_language["aws"]
-                            )
+                            translate_text(choice["name"], target_language["aws"])
                         )
 
                 if "options" in option_or_subcommand:
@@ -95,10 +93,8 @@ def translate_command(command: dict):
                             for choice in option["choices"]:
                                 choice["name_localizations"][
                                     target_language["discord"]
-                                ] = (
-                                    translate_text(
-                                        choice["name"], target_language["aws"]
-                                    )
+                                ] = translate_text(
+                                    choice["name"], target_language["aws"]
                                 )
 
                 option_or_subcommand["name"] = (
