@@ -16,7 +16,7 @@ suspend fun arms(item: JsonObject, language: String, lodestone: String) =
         val bonuses = mutableListOf<String>()
 
         for (i in item["Stats"]!!.jsonObject.keys) {
-            val key = Localisation.bonuses.getValue(i).getValue(language)
+            val key = Localisation.bonuses[i]?.getValue(language) ?: i
 
             val bonus = item["Stats"]!!.jsonObject[i]!!
             val value = bonus.jsonObject["NQ"]!!.jsonPrimitive.int
