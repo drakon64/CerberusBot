@@ -62,7 +62,7 @@ suspend fun arms(item: JsonObject, language: String, lodestone: String) =
                 null
             }
 
-        val damage = if (hqDamage != null) {
+        val damage = if (hqDamage != null && hqDamage != nqDamage) {
             "$nqDamage / $hqDamage <:hq:916051971063054406>"
         } else {
             nqDamage.toString()
@@ -81,7 +81,7 @@ suspend fun arms(item: JsonObject, language: String, lodestone: String) =
             null
         }
 
-        val autoAttack = if (hqAutoAttack != null) {
+        val autoAttack = if (hqAutoAttack != null && hqAutoAttack != nqAutoAttack) {
             "$nqAutoAttack / $hqAutoAttack <:hq:916051971063054406>"
         } else {
             nqAutoAttack.toString()
