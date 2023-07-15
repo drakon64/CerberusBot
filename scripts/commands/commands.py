@@ -10,6 +10,10 @@ from universalis import create_universalis_command
 
 
 async def main():
+    eorzea_database = asyncio.create_task(create_eorzea_database_command())
+    lodestone = asyncio.create_task(create_lodestone_command())
+    universalis = asyncio.create_task(create_universalis_command())
+
     if "APPLICATION_ID" in os.environ and "BOT_TOKEN" in os.environ:
         put_commands = True
 
@@ -17,10 +21,6 @@ async def main():
         bot_token = os.environ["BOT_TOKEN"]
     else:
         put_commands = False
-
-    eorzea_database = asyncio.create_task(create_eorzea_database_command())
-    lodestone = asyncio.create_task(create_lodestone_command())
-    universalis = asyncio.create_task(create_universalis_command())
 
     commands = (
         await eorzea_database,
