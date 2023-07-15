@@ -34,19 +34,48 @@ suspend fun arms(item: JsonObject, language: String, lodestone: String) =
         }
 
         val damageType: String
-        val damage: Int
+        val damage: String
         when (item["ClassJobUse"]!!.jsonObject["ClassJobCategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
             30 -> {
                 damageType =
                     Localisation.damageType.getValue("Physical Damage")
                         .getValue(language)
-                damage = item["DamagePhys"]!!.jsonPrimitive.int
+
+                val nqDamage = item["DamagePhys"]!!.jsonPrimitive.int
+
+                val hqDamage =
+                    if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
+                        nqDamage + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
+                    } else {
+                        null
+                    }
+
+                damage = if (hqDamage != null) {
+                    "$nqDamage / $hqDamage <:hq:916051971063054406>"
+                } else {
+                    nqDamage.toString()
+                }
             }
 
             31 -> {
                 damageType =
-                    Localisation.damageType.getValue("Magic Damage").getValue(language)
-                damage = item["DamageMag"]!!.jsonPrimitive.int
+                    Localisation.damageType.getValue("Magic Damage")
+                        .getValue(language)
+
+                val nqDamage = item["DamageMag"]!!.jsonPrimitive.int
+
+                val hqDamage =
+                    if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
+                        nqDamage + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
+                    } else {
+                        null
+                    }
+
+                damage = if (hqDamage != null) {
+                    "$nqDamage / $hqDamage <:hq:916051971063054406>"
+                } else {
+                    nqDamage.toString()
+                }
             }
 
             else -> throw Throwable("Unknown class/job category: $this")
@@ -78,7 +107,7 @@ suspend fun arms(item: JsonObject, language: String, lodestone: String) =
                     name = Localisation.itemLevel.getValue(language),
                     value = item["LevelItem"]!!.jsonPrimitive.content,
                 ), EmbedField(
-                    name = damageType, value = damage.toString(), inline = true
+                    name = damageType, value = damage, inline = true
                 ), EmbedField(
                     name = Localisation.autoAttack.getValue(language),
                     value = autoAttack,
