@@ -27,20 +27,34 @@ def lambda_handler(event, context):
         print("Received PING")
 
         return {"type": InteractionResponseType.PONG}
-    elif body["type"] in (
-        InteractionType.APPLICATION_COMMAND,
-        InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE,
-    ):
+    elif body["type"] == InteractionType.APPLICATION_COMMAND:
         print("Deferring channel message")
-        response = {
-            "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
-        }
-    elif body["type"] in (
-        InteractionType.MESSAGE_COMPONENT,
-        InteractionType.MODAL_SUBMIT,
-    ):
-        print("Deferring update message")
-        response = {"type": InteractionResponseType.DEFERRED_UPDATE_MESSAGE}
+
+        ephemeral = True
+        print(body)
+
+        try:
+            if "options" in body["data"]["options"]:
+                for option in body["data"]["options"]:
+                    for sub_option in option:
+                        if sub_option["name"] == "ephemeral":
+                            ephemeral = option["value"]
+            else:
+                for option in body["data"]["options"]:
+                    if option["name"] == "ephemeral":
+                        ephemeral = option["value"]
+        except KeyError:
+            pass
+
+        if ephemeral:
+            response = {
+                "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+                "data": {"flags": 1 << 6},
+            }
+        else:
+            response = {
+                "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
+            }
     else:
         raise Exception(f'Unknown interaction type :"f{body["type"]}"')
 

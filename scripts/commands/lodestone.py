@@ -9,7 +9,7 @@ async def create_lodestone_command():
         "description_localizations": {},
         "dm_permission": False,
         "type": 1,
-        "options": [
+        "options": (
             {
                 "name": "card",
                 "name_localizations": {},
@@ -17,7 +17,7 @@ async def create_lodestone_command():
                     "Get a character card of a users Final Fantasy XIV character"
                 ),
                 "description_localizations": {},
-                "options": [
+                "options": (
                     {
                         "name": "user",
                         "name_localizations": {},
@@ -27,8 +27,18 @@ async def create_lodestone_command():
                         "description_localizations": {},
                         "required": True,
                         "type": 6,
-                    }
-                ],
+                    },
+                    {
+                        "name": "ephemeral",
+                        "name_localizations": {},
+                        "description": (
+                            "The message is only visible to the user who invoked the"
+                            " Interaction"
+                        ),
+                        "description_localizations": {},
+                        "type": 5,
+                    },
+                ),
                 "type": 1,
             },
             {
@@ -39,7 +49,7 @@ async def create_lodestone_command():
                 ),
                 "description_localizations": {},
                 "type": 1,
-                "options": [
+                "options": (
                     {
                         "name": "character",
                         "name_localizations": {},
@@ -60,7 +70,7 @@ async def create_lodestone_command():
                         "required": True,
                         "type": 3,
                     },
-                ],
+                ),
             },
             {
                 "name": "unlink",
@@ -77,7 +87,7 @@ async def create_lodestone_command():
                 "description": "Get a portrait of a users Final Fantasy XIV character",
                 "description_localizations": {},
                 "type": 1,
-                "options": [
+                "options": (
                     {
                         "name": "user",
                         "name_localizations": {},
@@ -85,8 +95,8 @@ async def create_lodestone_command():
                         "description_localizations": {},
                         "required": True,
                         "type": 6,
-                    }
-                ],
+                    },
+                ),
             },
             {
                 "name": "profile",
@@ -96,7 +106,7 @@ async def create_lodestone_command():
                 ),
                 "description_localizations": {},
                 "type": 1,
-                "options": [
+                "options": (
                     {
                         "name": "user",
                         "name_localizations": {},
@@ -104,10 +114,10 @@ async def create_lodestone_command():
                         "description_localizations": {},
                         "required": True,
                         "type": 6,
-                    }
-                ],
+                    },
+                ),
             },
-        ],
+        ),
     }
 
     command = translate_command(command)
