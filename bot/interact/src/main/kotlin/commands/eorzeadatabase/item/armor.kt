@@ -78,9 +78,14 @@ suspend fun armor(item: JsonObject, language: String, lodestone: String) =
                     name = Localisation.itemLevel.getValue(language),
                     value = item["LevelItem"]!!.jsonPrimitive.content,
                 ), EmbedField(
-                    name = "Defense", value = physicalDefense, inline = true
+                    name = Localisation.defense.getValue("Defense").getValue(language),
+                    value = physicalDefense,
+                    inline = true
                 ), EmbedField(
-                    name = "Magic Defense", value = magicDefense, inline = true
+                    name = Localisation.defense.getValue("Magic Defense")
+                        .getValue(language),
+                    value = magicDefense,
+                    inline = true
                 ), EmbedField(
                     name = "Class/Job", value = classJob
                 ), EmbedField(

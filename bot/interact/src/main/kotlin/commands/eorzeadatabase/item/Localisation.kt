@@ -75,6 +75,20 @@ internal object Localisation {
         )
     )
 
+    val defense = mapOf(
+        "Defense" to mapOf(
+            "en" to "Defense",
+            "ja" to "物理防御力",
+            "de" to "Verteidigung",
+            "fr" to "Défense"
+        ), "Magic Defense" to mapOf(
+            "en" to "Magic Defense",
+            "ja" to "魔法防御力",
+            "de" to "Magieabwehr",
+            "fr" to "Défense magique"
+        )
+    )
+
     val delay = mapOf(
         "en" to "Delay", "ja" to "攻撃間隔", "de" to "Verzögerung", "fr" to "Délai"
     )
