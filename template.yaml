@@ -34,7 +34,9 @@ Resources:
               Effect: Allow
               Action:
                 - lambda:InvokeFunction
-              Resource: !GetAtt DynamisBotInteractFunction.Arn
+              Resource:
+                - !GetAtt DynamisBotInteractFunction.Arn
+                - !GetAtt DynamisBotUniversalisFunction.Arn
   DynamisBotInteractFunction:
     Type: AWS::Serverless::Function
     Properties:
