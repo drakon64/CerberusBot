@@ -2,105 +2,108 @@ package cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.item
 
 internal object Localisation {
     val autoAttack = mapOf(
-        "en" to "Auto-attack",
         "ja" to "物理オートアタック",
         "de" to "Auto-Attacke",
         "fr" to "Attaque auto."
-    )
+    ).withDefault { "Auto-attack" }
 
     val bonuses = mapOf(
         "Bonuses" to mapOf(
-            "en" to "Bonuses", "ja" to "Bonuses", "de" to "Bonus", "fr" to "Bonus"
-        ), "CriticalHit" to mapOf(
-            "en" to "Critical Hit",
+            "ja" to "Bonuses",
+            "de" to "Bonus",
+            "fr" to "Bonus"
+        ).withDefault { "Bonuses" },
+        "CriticalHit" to mapOf(
             "ja" to "クリティカル",
             "de" to "Kritischer Treffer",
             "fr" to "Critique"
-        ), "Determination" to mapOf(
-            "en" to "Determination",
+        ).withDefault { "Critical Hit" },
+        "Determination" to mapOf(
             "ja" to "意思力",
             "de" to "Entschlossenheit",
             "fr" to "Détermination"
-        ), "DirectHitRate" to mapOf(
-            "en" to "Direct Hit Rate",
+        ).withDefault { "Determination" },
+        "DirectHitRate" to mapOf(
             "ja" to "ダイレクトヒット",
             "de" to "Direkter Treffer",
             "fr" to "Coups nets"
-        ), "Intelligence" to mapOf(
-            "en" to "Intelligence",
+        ).withDefault { "Direct Hit Rate" },
+        "Intelligence" to mapOf(
             "ja" to "INT",
             "de" to "Intelligenz",
             "fr" to "Intelligence"
-        ), "Piety" to mapOf(
-            "en" to "Piety", "ja" to "信仰", "de" to "Frömmigkeit", "fr" to "Piété"
-        ), "SkillSpeed" to mapOf(
-            "en" to "Skill Speed",
+        ).withDefault { "Intelligence" },
+        "Piety" to mapOf(
+            "ja" to "信仰",
+            "de" to "Frömmigkeit",
+            "fr" to "Piété"
+        ).withDefault { "Piety" },
+        "SkillSpeed" to mapOf(
             "ja" to "スキルスピード",
             "de" to "Schnelligkeit",
             "fr" to "Vivacité"
-        ), "SpellSpeed" to mapOf(
-            "en" to "Spell Speed",
+        ).withDefault { "Skill Speed" },
+        "SpellSpeed" to mapOf(
             "ja" to "スペルスピード",
             "de" to "Zaubertempo",
             "fr" to "Célérité"
-        ), "Strength" to mapOf(
-            "en" to "Strength",
+        ).withDefault { "Spell Speed" },
+        "Strength" to mapOf(
             "ja" to "STR",
             "de" to "Stärke",
             "fr" to "Force"
-        ), "Tenacity" to mapOf(
-            "en" to "Tenacity",
+        ).withDefault { "Strength" },
+        "Tenacity" to mapOf(
             "ja" to "不屈",
             "de" to "Unbeugsamkeit",
             "fr" to "Ténacité"
-        ), "Vitality" to mapOf(
-            "en" to "Vitality",
+        ).withDefault { "Tenacity" },
+        "Vitality" to mapOf(
             "ja" to "VIT",
             "de" to "Konstitution",
             "fr" to "Vitalité"
-        )
+        ).withDefault { "Vitality" }
     )
 
     val damageType = mapOf(
         "Magic Damage" to mapOf(
-            "en" to "Magic Damage",
             "ja" to "魔法基本性能",
             "de" to "Mag. Basiswert",
             "fr" to "Dégâts magiques"
-        ), "Physical Damage" to mapOf(
-            "en" to "Physical Damage",
+        ).withDefault { "Magic Damage" },
+        "Physical Damage" to mapOf(
             "ja" to "物理基本性能",
             "de" to "Phys. Basiswert",
             "fr" to "Dégâts physiques"
-        )
+        ).withDefault { "Physical Damage" }
     )
 
     val defense = mapOf(
         "Defense" to mapOf(
-            "en" to "Defense",
             "ja" to "物理防御力",
             "de" to "Verteidigung",
             "fr" to "Défense"
-        ), "Magic Defense" to mapOf(
-            "en" to "Magic Defense",
+        ).withDefault { "Defense" },
+        "Magic Defense" to mapOf(
             "ja" to "魔法防御力",
             "de" to "Magieabwehr",
             "fr" to "Défense magique"
-        )
+        ).withDefault { "Magic Defense" }
     )
 
     val delay = mapOf(
-        "en" to "Delay", "ja" to "攻撃間隔", "de" to "Verzögerung", "fr" to "Délai"
-    )
+        "ja" to "攻撃間隔",
+        "de" to "Verzögerung",
+        "fr" to "Délai"
+    ).withDefault { "Delay" }
 
     val itemLevel = mapOf(
-        "en" to "Item Level",
         "ja" to "ITEM LEVEL",
         "de" to "G.-Stufe",
         "fr" to "Niveau d'objet"
-    )
+    ).withDefault { "Item Level" }
 
     val level = mapOf(
-        "en" to "Lv.", "ja" to "Lv", "de" to "Ab St.", "fr" to "Nv"
-    )
+        "ja" to "Lv", "de" to "Ab St.", "fr" to "Nv"
+    ).withDefault { "Lv." }
 }
