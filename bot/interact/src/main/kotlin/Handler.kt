@@ -2,7 +2,6 @@ package cloud.drakon.dynamisbot.interact
 
 import cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.eorzeaDatabase
 import cloud.drakon.dynamisbot.interact.commands.lodestone.lodestoneHandler
-import cloud.drakon.dynamisbot.interact.commands.universalis
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
@@ -56,7 +55,6 @@ class Handler: RequestStreamHandler {
                     2 -> when (applicationCommand.data!!.name) {
                         "eorzea_database" -> eorzeaDatabase(applicationCommand, logger)
                         "lodestone" -> lodestoneHandler(applicationCommand)
-                        "universalis" -> universalis(applicationCommand, logger)
                         else -> logger.log("Unknown command: ${event.data!!.name}")
                     }
 

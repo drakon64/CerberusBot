@@ -8,6 +8,8 @@ lambda_client = boto3.client("lambda")
 public_key = os.environ["PUBLIC_KEY"]
 interact_function = os.environ["INTERACT_FUNCTION"]
 
+universalis_function = os.environ["UNIVERSALIS_FUNCTION"]
+
 
 def lambda_handler(event, context):
     headers = event["headers"]
@@ -30,21 +32,30 @@ def lambda_handler(event, context):
     elif body["type"] == InteractionType.APPLICATION_COMMAND:
         print("Deferring channel message")
 
-        ephemeral = True
-        print(body)
+        ephemeral = False
 
-        try:
-            if "options" in body["data"]["options"]:
-                for option in body["data"]["options"]:
-                    for sub_option in option:
-                        if sub_option["name"] == "ephemeral":
-                            ephemeral = option["value"]
-            else:
+        match body["data"]["name"]:
+            case "universalis":
                 for option in body["data"]["options"]:
                     if option["name"] == "ephemeral":
                         ephemeral = option["value"]
-        except KeyError:
-            pass
+
+                function = universalis_function
+            case _:
+                try:
+                    if "options" in body["data"]["options"]:
+                        for option in body["data"]["options"]:
+                            for sub_option in option:
+                                if sub_option["name"] == "ephemeral":
+                                    ephemeral = option["value"]
+                    else:
+                        for option in body["data"]["options"]:
+                            if option["name"] == "ephemeral":
+                                ephemeral = option["value"]
+                except KeyError:
+                    pass
+
+                function = interact_function
 
         response = {
             "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
@@ -57,7 +68,7 @@ def lambda_handler(event, context):
         raise Exception(f'Unknown interaction type :"f{body["type"]}"')
 
     lambda_client.invoke(
-        FunctionName=interact_function, InvocationType="Event", Payload=raw_body
+        FunctionName=function, InvocationType="Event", Payload=raw_body
     )
 
     return response
