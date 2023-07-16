@@ -60,11 +60,17 @@
         "lambda:GetFunctionCodeSigningConfig",
         "lambda:ListTags",
         "lambda:UpdateFunctionCode",
-        "lambda:UpdateFunctionConfiguration"
+        "lambda:UpdateFunctionConfiguration",
+        "lambda:ListVersionsByFunction",
+        "lambda:PublishVersion",
+        "lambda:GetFunctionConfiguration",
+        "lambda:UpdateFunctionConfiguration",
+        "lambda:UpdateAlias"
       ],
       "Resource": [
+        "arn:aws:lambda:eu-west-2:***:function:DynamisBot-DynamisBotDeferFunction",
         "arn:aws:lambda:eu-west-2:***:function:DynamisBot-DynamisBotInteractFunction",
-        "arn:aws:lambda:eu-west-2:***:function:DynamisBot-DynamisBotDeferFunction"
+        "arn:aws:lambda:eu-west-2:***:function:DynamisBot-DynamisBotInteractFunction:*"
       ]
     },
     {
