@@ -4,9 +4,9 @@ import os
 
 import requests
 
-from eorzea_database import create_eorzea_database_command
-from lodestone import create_lodestone_command
-from universalis import create_universalis_command
+from commands.eorzea_database import create_eorzea_database_command
+from commands.lodestone import create_lodestone_command
+from commands.universalis import create_universalis_command
 
 
 async def main():

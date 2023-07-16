@@ -1,4 +1,5 @@
-from localize import translate_command
+from lib.localize import translate_command
+from option.ephemeral import ephemeral
 
 
 async def create_universalis_command():
@@ -34,16 +35,7 @@ async def create_universalis_command():
                 "description_localizations": {},
                 "type": 5,
             },
-            {
-                "name": "ephemeral",
-                "name_localizations": {},
-                "description": (
-                    "The message is only visible to the user who invoked the"
-                    " Interaction"
-                ),
-                "description_localizations": {},
-                "type": 5,
-            },
+            ephemeral,
         ],
     }
 
