@@ -7,6 +7,19 @@ internal object Localisation {
         "fr" to "Attaque auto."
     ).withDefault { "Auto-attack" }
 
+    val block = mapOf(
+        "Strength" to mapOf(
+            "ja" to "ブロック性能",
+            "de" to "Blockeffekt",
+            "fr" to "Force de blocage"
+        ).withDefault { "Block Strength" },
+        "Rate" to mapOf(
+            "ja" to "ブロック発動力",
+            "de" to "Blockrate",
+            "fr" to "Taux de blocage"
+        ).withDefault { "Block Rate" }
+    )
+
     val bonuses = mapOf(
         "Bonuses" to mapOf(
             "ja" to "Bonuses",

@@ -31,32 +31,92 @@ suspend fun armor(item: JsonObject, language: String, lodestone: String) =
             }
         }
 
-        val nqPhysicalDefense = item["DefensePhys"]!!.jsonPrimitive.int
-        val nqMagicDefense = item["DefenseMag"]!!.jsonPrimitive.int
+        val embedFieldOne: EmbedField
+        val embedFieldTwo: EmbedField
 
-        val hqPhysicalDefense =
-            if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
-                nqPhysicalDefense + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
+        if (item["EquipSlotCategoryTargetID"]!!.jsonPrimitive.int == 2) {
+            val nqBlock = item["Block"]!!.jsonPrimitive.int
+            val nqBlockRate = item["BlockRate"]!!.jsonPrimitive.int
+
+            val hqBlock =
+                if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
+                    nqBlock + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
+                } else {
+                    null
+                }
+
+            val hqBlockRate =
+                if (item["BaseParamValueSpecial1"]?.jsonPrimitive?.int != null) {
+                    nqBlockRate + item["BaseParamValueSpecial1"]!!.jsonPrimitive.int
+                } else {
+                    null
+                }
+
+            val block = if (hqBlock != null) {
+                "$nqBlock / $hqBlock <:hq:916051971063054406>"
             } else {
-                null
+                "$nqBlock"
             }
-        val hqMagicDefense =
-            if (item["BaseParamValueSpecial1"]?.jsonPrimitive?.int != null) {
-                nqMagicDefense + item["BaseParamValueSpecial1"]!!.jsonPrimitive.int
+
+            val blockRate = if (hqBlockRate != null) {
+                "$nqBlockRate / $hqBlockRate <:hq:916051971063054406>"
             } else {
-                null
+                "$nqBlockRate"
             }
 
-        val physicalDefense = if (hqPhysicalDefense != null) {
-            "$nqPhysicalDefense / $hqPhysicalDefense <:hq:916051971063054406>"
-        } else {
-            "$nqPhysicalDefense"
-        }
+            embedFieldOne = EmbedField(
+                name = Localisation.block.getValue("Strength").getValue(language),
+                value = block,
+                inline = true
+            )
 
-        val magicDefense = if (hqMagicDefense != null) {
-            "$nqMagicDefense / $hqMagicDefense <:hq:916051971063054406>"
+            embedFieldTwo = EmbedField(
+                name = Localisation.block.getValue("Rate").getValue(language),
+                value = blockRate,
+                inline = true
+            )
         } else {
-            "$nqMagicDefense"
+            val nqPhysicalDefense = item["DefensePhys"]!!.jsonPrimitive.int
+            val nqMagicDefense = item["DefenseMag"]!!.jsonPrimitive.int
+
+            val hqPhysicalDefense =
+                if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
+                    nqPhysicalDefense + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
+                } else {
+                    null
+                }
+
+            val hqMagicDefense =
+                if (item["BaseParamValueSpecial1"]?.jsonPrimitive?.int != null) {
+                    nqMagicDefense + item["BaseParamValueSpecial1"]!!.jsonPrimitive.int
+                } else {
+                    null
+                }
+
+            val physicalDefense = if (hqPhysicalDefense != null) {
+                "$nqPhysicalDefense / $hqPhysicalDefense <:hq:916051971063054406>"
+            } else {
+                "$nqPhysicalDefense"
+            }
+
+            val magicDefense = if (hqMagicDefense != null) {
+                "$nqMagicDefense / $hqMagicDefense <:hq:916051971063054406>"
+            } else {
+                "$nqMagicDefense"
+            }
+
+            embedFieldOne = EmbedField(
+                name = Localisation.defense.getValue("Defense").getValue(language),
+                value = physicalDefense,
+                inline = true
+            )
+
+            embedFieldTwo = EmbedField(
+                name = Localisation.defense.getValue("Magic Defense")
+                    .getValue(language),
+                value = magicDefense,
+                inline = true
+            )
         }
 
         val classJob = """
@@ -77,16 +137,8 @@ suspend fun armor(item: JsonObject, language: String, lodestone: String) =
                 EmbedField(
                     name = Localisation.itemLevel.getValue(language),
                     value = item["LevelItem"]!!.jsonPrimitive.content,
-                ), EmbedField(
-                    name = Localisation.defense.getValue("Defense").getValue(language),
-                    value = physicalDefense,
-                    inline = true
-                ), EmbedField(
-                    name = Localisation.defense.getValue("Magic Defense")
-                        .getValue(language),
-                    value = magicDefense,
-                    inline = true
-                ), EmbedField(
+                ), embedFieldOne, embedFieldTwo,
+                EmbedField(
                     name = "Class/Job", value = classJob
                 ), EmbedField(
                     name = Localisation.bonuses.getValue("Bonuses").getValue(language),
