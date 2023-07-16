@@ -14,6 +14,10 @@ suspend fun itemHandler(item: JsonObject, language: String, lodestone: String) =
                 arms(item, language, lodestone)
             }
 
+            3 -> { // Armor
+                armor(item, language, lodestone)
+            }
+
             5 -> { // Medicines & Meals
                 medicineMeal(
                     item,
