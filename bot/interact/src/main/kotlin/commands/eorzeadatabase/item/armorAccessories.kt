@@ -9,7 +9,7 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun armor(item: JsonObject, language: String, lodestone: String) =
+suspend fun armorAccessories(item: JsonObject, language: String, lodestone: String) =
     coroutineScope {
         val bonuses = mutableListOf<String>()
 
