@@ -19,6 +19,7 @@ Resources:
       Environment:
         Variables:
           INTERACT_FUNCTION: !Ref DynamisBotInteractFunction
+          UNIVERSALIS_FUNCTION: !Ref DynamisBotUniversalisFunction
           PUBLIC_KEY:
             Ref: PublicKeyParameter
       Events:
