@@ -34,27 +34,20 @@ def lambda_handler(event, context):
 
         ephemeral = False
 
+        try:
+            for option in body["data"]["options"]:
+                for sub_option in option["options"]:
+                    if sub_option["name"] == "ephemeral":
+                        ephemeral = sub_option["value"]
+        except KeyError:
+            for option in body["data"]["options"]:
+                if option["name"] == "ephemeral":
+                    ephemeral = option["value"]
+
         match body["data"]["name"]:
             case "universalis":
-                for option in body["data"]["options"]:
-                    if option["name"] == "ephemeral":
-                        ephemeral = option["value"]
-
                 function = universalis_function
             case _:
-                try:
-                    if "options" in body["data"]["options"]:
-                        for option in body["data"]["options"]:
-                            for sub_option in option:
-                                if sub_option["name"] == "ephemeral":
-                                    ephemeral = option["value"]
-                    else:
-                        for option in body["data"]["options"]:
-                            if option["name"] == "ephemeral":
-                                ephemeral = option["value"]
-                except KeyError:
-                    pass
-
                 function = interact_function
 
         response = {
