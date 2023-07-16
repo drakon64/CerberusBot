@@ -47,13 +47,15 @@ Resources:
         - x86_64
       MemorySize: 512
       Timeout: 900
+      AutoPublishAlias: SnapStart
+      SnapStart:
+        ApplyOn: PublishedVersions
       Environment:
         Variables:
           APPLICATION_ID:
             Ref: ApplicationIDParameter
           BOT_TOKEN:
             Ref: BotTokenParameter
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
           PUBLIC_KEY:
             Ref: PublicKeyParameter
           MONGODB_URL:
@@ -78,13 +80,15 @@ Resources:
         - x86_64
       MemorySize: 512
       Timeout: 900
+      AutoPublishAlias: SnapStart
+      SnapStart:
+        ApplyOn: PublishedVersions
       Environment:
         Variables:
           APPLICATION_ID:
             Ref: ApplicationIDParameter
           BOT_TOKEN:
             Ref: BotTokenParameter
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
           PUBLIC_KEY:
             Ref: PublicKeyParameter
 
