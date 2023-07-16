@@ -52,13 +52,13 @@ suspend fun armor(item: JsonObject, language: String, lodestone: String) =
                     null
                 }
 
-            val block = if (hqBlock != null) {
+            val block = if (hqBlock != null && hqBlock != nqBlock) {
                 "$nqBlock / $hqBlock <:hq:916051971063054406>"
             } else {
                 "$nqBlock"
             }
 
-            val blockRate = if (hqBlockRate != null) {
+            val blockRate = if (hqBlockRate != null && hqBlockRate != nqBlockRate) {
                 "$nqBlockRate / $hqBlockRate <:hq:916051971063054406>"
             } else {
                 "$nqBlockRate"
@@ -93,17 +93,19 @@ suspend fun armor(item: JsonObject, language: String, lodestone: String) =
                     null
                 }
 
-            val physicalDefense = if (hqPhysicalDefense != null) {
-                "$nqPhysicalDefense / $hqPhysicalDefense <:hq:916051971063054406>"
-            } else {
-                "$nqPhysicalDefense"
-            }
+            val physicalDefense =
+                if (hqPhysicalDefense != null && hqPhysicalDefense != nqPhysicalDefense) {
+                    "$nqPhysicalDefense / $hqPhysicalDefense <:hq:916051971063054406>"
+                } else {
+                    "$nqPhysicalDefense"
+                }
 
-            val magicDefense = if (hqMagicDefense != null) {
-                "$nqMagicDefense / $hqMagicDefense <:hq:916051971063054406>"
-            } else {
-                "$nqMagicDefense"
-            }
+            val magicDefense =
+                if (hqMagicDefense != null && hqMagicDefense != nqMagicDefense) {
+                    "$nqMagicDefense / $hqMagicDefense <:hq:916051971063054406>"
+                } else {
+                    "$nqMagicDefense"
+                }
 
             embedFieldOne = EmbedField(
                 name = Localisation.defense.getValue("Defense").getValue(language),
