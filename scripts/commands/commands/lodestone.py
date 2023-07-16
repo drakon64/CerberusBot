@@ -45,9 +45,7 @@ async def create_lodestone_command():
                     {
                         "name": "character",
                         "name_localizations": {},
-                        "description": (
-                            "The name of the character to link your Discord account to"
-                        ),
+                        "description": "The name of the character to link to",
                         "description_localizations": {},
                         "required": True,
                         "type": 3,
@@ -55,9 +53,7 @@ async def create_lodestone_command():
                     {
                         "name": "world",
                         "name_localizations": {},
-                        "description": (
-                            "The world of the character to link your Discord account to"
-                        ),
+                        "description": "The world of the character to link to",
                         "description_localizations": {},
                         "required": True,
                         "type": 3,
