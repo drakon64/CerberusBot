@@ -44,7 +44,7 @@ Resources:
       Handler: cloud.drakon.dynamisbot.interact.Handler::handleRequest
       Runtime: java17
       Architectures:
-        - arm64
+        - x86_64
       MemorySize: 512
       Timeout: 900
       Environment:
@@ -53,7 +53,7 @@ Resources:
             Ref: ApplicationIDParameter
           BOT_TOKEN:
             Ref: BotTokenParameter
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=0
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
           PUBLIC_KEY:
             Ref: PublicKeyParameter
           MONGODB_URL:
@@ -75,7 +75,7 @@ Resources:
       Handler: cloud.drakon.dynamisbot.universalis.Handler::handleRequest
       Runtime: java17
       Architectures:
-        - arm64
+        - x86_64
       MemorySize: 512
       Timeout: 900
       Environment:
@@ -84,7 +84,7 @@ Resources:
             Ref: ApplicationIDParameter
           BOT_TOKEN:
             Ref: BotTokenParameter
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=0
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
           PUBLIC_KEY:
             Ref: PublicKeyParameter
 
