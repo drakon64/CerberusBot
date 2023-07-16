@@ -12,6 +12,7 @@ _DynamisBot_ is a Discord bot that runs on AWS Lambda.
 
 - Eorzea Database: Search for an item in the Eorzea Database. Provides rich results for:
   - Arms
+  - Armor/Accessories
   - Medicines & Meals
 - Lodestone: Link your Discord account to a Final Fantasy XIV character and display your characters
   card/portrait/profile. Uses XIVAPI and https://github.com/xivapi/XIV-Character-Cards.
