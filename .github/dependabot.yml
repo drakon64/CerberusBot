@@ -1,11 +1,16 @@
 version: 2
 updates:
   - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/sam/defer" # Location of package manifests
+    directory: "/bot/defer" # Location of package manifests
     schedule:
       interval: "daily"
 
   - package-ecosystem: "gradle" # See documentation for possible values
-    directory: "/sam/interact" # Location of package manifests
+    directory: "/bot/interact" # Location of package manifests
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gradle" # See documentation for possible values
+    directory: "/bot/commands/universalis" # Location of package manifests
     schedule:
       interval: "daily"
