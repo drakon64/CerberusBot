@@ -1,18 +1,27 @@
 package cloud.drakon.dynamisbot.universalis
 
 import cloud.drakon.ktdiscord.KtDiscord
-import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.interaction.Interaction
+import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktuniversalis.KtUniversalis
 import cloud.drakon.ktxivapi.KtXivApi
 import com.amazonaws.services.lambda.runtime.Context
-import com.amazonaws.services.lambda.runtime.RequestHandler
+import com.amazonaws.services.lambda.runtime.RequestStreamHandler
+import java.io.InputStream
+import java.io.OutputStream
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
 
-class Handler: RequestHandler<Interaction<ApplicationCommandData>, Message> {
+class Handler: RequestStreamHandler {
     companion object {
         // Initialise these during the initialization phase
+
+        val json = Json {
+            ignoreUnknownKeys =
+                true // Not all fields returned by the Discord API are documented
+            isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
+        }
 
         val ktDiscord = KtDiscord(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
@@ -23,9 +32,14 @@ class Handler: RequestHandler<Interaction<ApplicationCommandData>, Message> {
     }
 
     override fun handleRequest(
-        input: Interaction<ApplicationCommandData>,
+        inputStream: InputStream,
+        outputStream: OutputStream,
         context: Context,
-    ) = runBlocking {
-        return@runBlocking Universalis.universalisCommand(input, context.logger)
+    ): Unit = runBlocking {
+        val event: Interaction<ApplicationCommandData> = json.decodeFromString(
+            InteractionJsonSerializer, inputStream.readAllBytes().decodeToString()
+        ) as Interaction<ApplicationCommandData>
+
+        Universalis.universalisCommand(event, context.logger)
     }
 }
