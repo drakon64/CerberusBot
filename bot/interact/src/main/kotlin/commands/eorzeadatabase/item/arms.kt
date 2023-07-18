@@ -13,25 +13,7 @@ import kotlinx.serialization.json.jsonPrimitive
 
 suspend fun arms(item: JsonObject, language: String, lodestone: String) =
     coroutineScope {
-        val bonuses = mutableListOf<String>()
-
-        for (i in item["Stats"]!!.jsonObject.keys) {
-            val key = Localisation.bonuses[i]?.getValue(language) ?: i
-
-            val bonus = item["Stats"]!!.jsonObject[i]!!
-            val value = bonus.jsonObject["NQ"]!!.jsonPrimitive.int
-            val valueHq = bonus.jsonObject["HQ"]?.jsonPrimitive?.int
-
-            if (valueHq != null) {
-                bonuses.add(
-                    "$key +$value / +$valueHq <:hq:916051971063054406>"
-                )
-            } else {
-                bonuses.add(
-                    "$key +$value"
-                )
-            }
-        }
+        val stats = getStats(item, language)
 
         val damageType: String
         val nqDamage: Int
@@ -119,7 +101,7 @@ suspend fun arms(item: JsonObject, language: String, lodestone: String) =
                     name = "Class/Job", value = classJob, inline = true
                 ), EmbedField(
                     name = Localisation.bonuses.getValue("Bonuses").getValue(language),
-                    value = bonuses.joinToString("\n"),
+                    value = stats.joinToString("\n"),
                     inline = true
                 )
             )
