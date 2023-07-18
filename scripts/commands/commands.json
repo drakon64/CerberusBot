@@ -117,10 +117,10 @@
                     "fr": "éphémère",
                     "ja": "一時的だ"
                 },
-                "description": "Make the bot response only visible to you",
+                "description": "Make the bot response visible only to you",
                 "description_localizations": {
                     "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
-                    "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                    "fr": "Rendre la réponse du bot visible uniquement pour vous",
                     "ja": "ボットの応答を自分だけに見えるようにする"
                 },
                 "type": 5
@@ -180,10 +180,10 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "Make the bot response only visible to you",
+                        "description": "Make the bot response visible only to you",
                         "description_localizations": {
                             "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
-                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "fr": "Rendre la réponse du bot visible uniquement pour vous",
                             "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
@@ -245,10 +245,10 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "Make the bot response only visible to you",
+                        "description": "Make the bot response visible only to you",
                         "description_localizations": {
                             "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
-                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "fr": "Rendre la réponse du bot visible uniquement pour vous",
                             "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
@@ -276,10 +276,10 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "Make the bot response only visible to you",
+                        "description": "Make the bot response visible only to you",
                         "description_localizations": {
                             "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
-                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "fr": "Rendre la réponse du bot visible uniquement pour vous",
                             "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
@@ -325,10 +325,10 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "Make the bot response only visible to you",
+                        "description": "Make the bot response visible only to you",
                         "description_localizations": {
                             "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
-                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "fr": "Rendre la réponse du bot visible uniquement pour vous",
                             "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
@@ -373,10 +373,10 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "Make the bot response only visible to you",
+                        "description": "Make the bot response visible only to you",
                         "description_localizations": {
                             "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
-                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "fr": "Rendre la réponse du bot visible uniquement pour vous",
                             "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
@@ -454,10 +454,10 @@
                     "fr": "éphémère",
                     "ja": "一時的だ"
                 },
-                "description": "Make the bot response only visible to you",
+                "description": "Make the bot response visible only to you",
                 "description_localizations": {
                     "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
-                    "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                    "fr": "Rendre la réponse du bot visible uniquement pour vous",
                     "ja": "ボットの応答を自分だけに見えるようにする"
                 },
                 "type": 5
