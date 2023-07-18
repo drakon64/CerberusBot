@@ -35,13 +35,13 @@ suspend fun armorAccessories(item: JsonObject, language: String, lodestone: Stri
                 }
 
             val block = if (hqBlock != null && hqBlock != nqBlock) {
-                "$nqBlock / $hqBlock <:hq:916051971063054406>"
+                "$nqBlock / $hqBlock <:hqlight:673889304359206923>"
             } else {
                 "$nqBlock"
             }
 
             val blockRate = if (hqBlockRate != null && hqBlockRate != nqBlockRate) {
-                "$nqBlockRate / $hqBlockRate <:hq:916051971063054406>"
+                "$nqBlockRate / $hqBlockRate <:hqlight:673889304359206923>"
             } else {
                 "$nqBlockRate"
             }
@@ -77,14 +77,14 @@ suspend fun armorAccessories(item: JsonObject, language: String, lodestone: Stri
 
             val physicalDefense =
                 if (hqPhysicalDefense != null && hqPhysicalDefense != nqPhysicalDefense) {
-                    "$nqPhysicalDefense / $hqPhysicalDefense <:hq:916051971063054406>"
+                    "$nqPhysicalDefense / $hqPhysicalDefense <:hqlight:673889304359206923>"
                 } else {
                     "$nqPhysicalDefense"
                 }
 
             val magicDefense =
                 if (hqMagicDefense != null && hqMagicDefense != nqMagicDefense) {
-                    "$nqMagicDefense / $hqMagicDefense <:hq:916051971063054406>"
+                    "$nqMagicDefense / $hqMagicDefense <:hqlight:673889304359206923>"
                 } else {
                     "$nqMagicDefense"
                 }

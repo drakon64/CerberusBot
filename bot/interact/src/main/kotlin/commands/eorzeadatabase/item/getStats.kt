@@ -18,7 +18,7 @@ suspend fun getStats(item: JsonObject, language: String) = coroutineScope {
 
         if (valueHq != null) {
             stats.add(
-                "$key +$value / +$valueHq <:hq:916051971063054406>"
+                "$key +$value / +$valueHq <:hqlight:673889304359206923>"
             )
         } else {
             stats.add(

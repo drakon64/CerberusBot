@@ -34,7 +34,7 @@ suspend fun medicineMeal(item: JsonObject, description: String, lodestone: Strin
                     val maxHq = bonus.jsonObject["MaxHQ"]!!.jsonPrimitive.int
 
                     bonuses.add(
-                        "$key +$value% (Max $max) / +$valueHq% (Max $maxHq) <:hq:916051971063054406>"
+                        "$key +$value% (Max $max) / +$valueHq% (Max $maxHq) <:hqlight:673889304359206923>"
                     )
                 } else {
                     bonuses.add(
