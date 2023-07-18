@@ -117,11 +117,11 @@
                     "fr": "éphémère",
                     "ja": "一時的だ"
                 },
-                "description": "The message is only visible to the user who invoked the Interaction",
+                "description": "Make the bot response only visible to you",
                 "description_localizations": {
-                    "de": "Die Nachricht ist nur für den Benutzer sichtbar, der die Interaktion aufgerufen hat",
-                    "fr": "Le message n'est visible que par l'utilisateur qui a invoqué l'interaction",
-                    "ja": "メッセージは、インタラクションを呼び出したユーザーにのみ表示されます。"
+                    "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                    "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                    "ja": "ボットの応答を自分だけに見えるようにする"
                 },
                 "type": 5
             }
@@ -180,11 +180,11 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "The message is only visible to the user who invoked the Interaction",
+                        "description": "Make the bot response only visible to you",
                         "description_localizations": {
-                            "de": "Die Nachricht ist nur für den Benutzer sichtbar, der die Interaktion aufgerufen hat",
-                            "fr": "Le message n'est visible que par l'utilisateur qui a invoqué l'interaction",
-                            "ja": "メッセージは、インタラクションを呼び出したユーザーにのみ表示されます。"
+                            "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
                     }
@@ -245,11 +245,11 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "The message is only visible to the user who invoked the Interaction",
+                        "description": "Make the bot response only visible to you",
                         "description_localizations": {
-                            "de": "Die Nachricht ist nur für den Benutzer sichtbar, der die Interaktion aufgerufen hat",
-                            "fr": "Le message n'est visible que par l'utilisateur qui a invoqué l'interaction",
-                            "ja": "メッセージは、インタラクションを呼び出したユーザーにのみ表示されます。"
+                            "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
                     }
@@ -276,11 +276,11 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "The message is only visible to the user who invoked the Interaction",
+                        "description": "Make the bot response only visible to you",
                         "description_localizations": {
-                            "de": "Die Nachricht ist nur für den Benutzer sichtbar, der die Interaktion aufgerufen hat",
-                            "fr": "Le message n'est visible que par l'utilisateur qui a invoqué l'interaction",
-                            "ja": "メッセージは、インタラクションを呼び出したユーザーにのみ表示されます。"
+                            "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
                     }
@@ -325,11 +325,11 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "The message is only visible to the user who invoked the Interaction",
+                        "description": "Make the bot response only visible to you",
                         "description_localizations": {
-                            "de": "Die Nachricht ist nur für den Benutzer sichtbar, der die Interaktion aufgerufen hat",
-                            "fr": "Le message n'est visible que par l'utilisateur qui a invoqué l'interaction",
-                            "ja": "メッセージは、インタラクションを呼び出したユーザーにのみ表示されます。"
+                            "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
                     }
@@ -373,11 +373,11 @@
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
-                        "description": "The message is only visible to the user who invoked the Interaction",
+                        "description": "Make the bot response only visible to you",
                         "description_localizations": {
-                            "de": "Die Nachricht ist nur für den Benutzer sichtbar, der die Interaktion aufgerufen hat",
-                            "fr": "Le message n'est visible que par l'utilisateur qui a invoqué l'interaction",
-                            "ja": "メッセージは、インタラクションを呼び出したユーザーにのみ表示されます。"
+                            "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                            "ja": "ボットの応答を自分だけに見えるようにする"
                         },
                         "type": 5
                     }
@@ -454,11 +454,11 @@
                     "fr": "éphémère",
                     "ja": "一時的だ"
                 },
-                "description": "The message is only visible to the user who invoked the Interaction",
+                "description": "Make the bot response only visible to you",
                 "description_localizations": {
-                    "de": "Die Nachricht ist nur für den Benutzer sichtbar, der die Interaktion aufgerufen hat",
-                    "fr": "Le message n'est visible que par l'utilisateur qui a invoqué l'interaction",
-                    "ja": "メッセージは、インタラクションを呼び出したユーザーにのみ表示されます。"
+                    "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                    "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous",
+                    "ja": "ボットの応答を自分だけに見えるようにする"
                 },
                 "type": 5
             }

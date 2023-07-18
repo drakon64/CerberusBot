@@ -4,9 +4,7 @@ ephemeral = translate_command(
     {
         "name": "ephemeral",
         "name_localizations": {},
-        "description": (
-            "The message is only visible to the user who invoked the Interaction"
-        ),
+        "description": "Make the bot response only visible to you",
         "description_localizations": {},
         "type": 5,
     }
