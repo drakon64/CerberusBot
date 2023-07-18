@@ -4,8 +4,7 @@ on:
     branches:
       - main
     paths:
-      - scripts/commands/commands.json
-      - scripts/commands/commands.py
+      - scripts/commands/*.py
   workflow_dispatch:
 
 jobs:

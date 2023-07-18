@@ -4,8 +4,7 @@ on:
     branches:
       - canary
     paths:
-      - scripts/commands/commands.json
-      - scripts/commands/commands.py
+      - scripts/commands/*.py
   workflow_dispatch:
 
 jobs:
