@@ -130,9 +130,9 @@
     {
         "name": "lodestone",
         "name_localizations": {
-            "de": "magnetstein",
+            "de": "lodestone",
             "fr": "lodestone",
-            "ja": "ロードストーン"
+            "ja": "lodestone"
         },
         "description": "Final Fantasy XIV, The Lodestone",
         "description_localizations": {

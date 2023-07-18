@@ -4,7 +4,7 @@ from option.ephemeral import ephemeral
 
 async def create_lodestone_command():
     command = {
-        "name": "lodestone",
+        "name": "Lodestone",
         "name_localizations": {},
         "description": "Final Fantasy XIV, The Lodestone",
         "description_localizations": {},
@@ -113,5 +113,9 @@ async def create_lodestone_command():
     }
 
     command = translate_command(command)
+    command["name"] = "lodestone"
+    command["name_localizations"]["ja"] = "lodestone"
+    command["name_localizations"]["de"] = "lodestone"
+    command["name_localizations"]["fr"] = "lodestone"
 
     return command
