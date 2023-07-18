@@ -1,35 +1,9 @@
 import boto3
 
 discord_to_aws = (
-    {"discord": "id", "aws": "id"},
-    {"discord": "da", "aws": "da"},
     {"discord": "de", "aws": "de"},
-    {"discord": "es-ES", "aws": "es"},
     {"discord": "fr", "aws": "fr"},
-    {"discord": "hr", "aws": "hr"},
-    {"discord": "it", "aws": "it"},
-    {"discord": "lt", "aws": "lt"},
-    {"discord": "hu", "aws": "hu"},
-    {"discord": "nl", "aws": "nl"},
-    {"discord": "no", "aws": "no"},
-    {"discord": "pl", "aws": "pl"},
-    {"discord": "pt-BR", "aws": "pt"},
-    {"discord": "ro", "aws": "ro"},
-    {"discord": "fi", "aws": "fi"},
-    {"discord": "sv-SE", "aws": "sv"},
-    {"discord": "vi", "aws": "vi"},
-    {"discord": "tr", "aws": "tr"},
-    {"discord": "cs", "aws": "cs"},
-    {"discord": "el", "aws": "el"},
-    {"discord": "bg", "aws": "bg"},
-    {"discord": "ru", "aws": "ru"},
-    {"discord": "uk", "aws": "uk"},
-    {"discord": "hi", "aws": "hi"},
-    {"discord": "th", "aws": "th"},
-    {"discord": "zh-CN", "aws": "zh"},
     {"discord": "ja", "aws": "ja"},
-    {"discord": "zh-TW", "aws": "zh-TW"},
-    {"discord": "ko", "aws": "ko"},
 )
 
 translate_client = boto3.client(
@@ -61,7 +35,6 @@ def translate_command(command: dict):
                 ] = (
                     translate_text(option_or_subcommand["name"], target_language["aws"])
                     .replace(" ", "_")
-                    .replace("'", "")
                     .lower()
                 )
                 option_or_subcommand["description_localizations"][
