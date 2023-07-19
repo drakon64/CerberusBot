@@ -1,5 +1,6 @@
 package cloud.drakon.dynamisbot.eorzeadatabase.item
 
+import cloud.drakon.dynamisbot.eorzeadatabase.cleanDescription
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
@@ -15,9 +16,10 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
     coroutineScope {
         val stats = getStats(item, language)
 
-        val description = item["Description"]!!.jsonPrimitive.content.ifBlank {
-            item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content
-        }
+        val description =
+            cleanDescription(item["Description"]!!.jsonPrimitive.content.ifBlank {
+                item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content
+            })
 
         val damageType: String
         val nqDamage: Int
