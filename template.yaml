@@ -118,7 +118,7 @@ Outputs:
 
   DynamisBotLodestoneFunctionIamRole:
     Description: "Implicit IAM Role created for DynamisBot Lodestone function"
-    Value: !GetAtt DynamisBotLodestoneFunction.Arn
+    Value: !GetAtt DynamisBotLodestoneFunctionRole.Arn
 
 Parameters:
   ApplicationIDParameter:
