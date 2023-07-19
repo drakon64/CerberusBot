@@ -21,75 +21,76 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
                 item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content
             })
 
-        val damageType: String
-        val nqDamage: Int
-        when (item["ClassJobUse"]!!.jsonObject["ClassJobCategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
-            30, 32, 33 -> {
-                damageType =
-                    Localisation.damageType.getValue("Physical Damage")
-                        .getValue(language)
-
-                nqDamage = item["DamagePhys"]!!.jsonPrimitive.int
-            }
-
-            31 -> {
-                damageType =
-                    Localisation.damageType.getValue("Magic Damage")
-                        .getValue(language)
-
-                nqDamage = item["DamageMag"]!!.jsonPrimitive.int
-            }
-
-            else -> throw Throwable("Unknown class/job category: $this")
-        }
-
-        val hqDamage =
-            if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
-                nqDamage + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
-            } else {
-                null
-            }
-
-        val damage = if (hqDamage != null && hqDamage != nqDamage) {
-            "$nqDamage / $hqDamage <:hqlight:673889304359206923>"
-        } else {
-            nqDamage.toString()
-        }
-
-        val delay = ((item["DelayMs"]!!.jsonPrimitive.int).toDouble() / 1000)
-
-        val nqAutoAttack =
-            BigDecimal.valueOf((delay / 3) * nqDamage)
-                .setScale(2, RoundingMode.DOWN)
-
-        val hqAutoAttack = if (hqDamage != null) {
-            BigDecimal.valueOf((delay / 3) * hqDamage)
-                .setScale(2, RoundingMode.DOWN)
-        } else {
-            null
-        }
-
-        val autoAttack = if (hqAutoAttack != null && hqAutoAttack != nqAutoAttack) {
-            "$nqAutoAttack / $hqAutoAttack <:hqlight:673889304359206923>"
-        } else {
-            nqAutoAttack.toString()
-        }
-
         val classJob = """
             ${item["ClassJobCategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content}
             ${Localisation.level.getValue(language)} ${item["LevelEquip"]!!.jsonPrimitive.content}
         """.trimIndent()
 
-        return@coroutineScope Embed(
-            title = item["Name"]!!.jsonPrimitive.content,
-            description = description,
-            url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
-                item["Name"]!!.jsonPrimitive.content.replace(
-                    " ", "+"
-                )
-            }",
-            thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"]!!.jsonPrimitive.content}"),
-            fields = arrayOf(
+        val embeds: Array<EmbedField>
+
+        val classJobCategoryId = try {
+            item["ClassJobUse"]!!.jsonObject["ClassJobCategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int
+        } catch (e: IllegalArgumentException) { // kotlinx.serialization returns `JsonNull` instead of `null` for some godforsaken reason
+            null
+        }
+
+        if (classJobCategoryId != null) {
+            val damageType: String
+            val nqDamage: Int
+
+            when (classJobCategoryId) {
+                30, 32, 33 -> {
+                    damageType =
+                        Localisation.damageType.getValue("Physical Damage")
+                            .getValue(language)
+
+                    nqDamage = item["DamagePhys"]!!.jsonPrimitive.int
+                }
+
+                31 -> {
+                    damageType =
+                        Localisation.damageType.getValue("Magic Damage")
+                            .getValue(language)
+
+                    nqDamage = item["DamageMag"]!!.jsonPrimitive.int
+                }
+
+                else -> throw Throwable("Unknown class/job category: $this")
+            }
+
+            val hqDamage =
+                if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
+                    nqDamage + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
+                } else {
+                    null
+                }
+
+            val damage = if (hqDamage != null && hqDamage != nqDamage) {
+                "$nqDamage / $hqDamage <:hqlight:673889304359206923>"
+            } else {
+                nqDamage.toString()
+            }
+
+            val delay = ((item["DelayMs"]!!.jsonPrimitive.int).toDouble() / 1000)
+
+            val nqAutoAttack =
+                BigDecimal.valueOf((delay / 3) * nqDamage)
+                    .setScale(2, RoundingMode.DOWN)
+
+            val hqAutoAttack = if (hqDamage != null) {
+                BigDecimal.valueOf((delay / 3) * hqDamage)
+                    .setScale(2, RoundingMode.DOWN)
+            } else {
+                null
+            }
+
+            val autoAttack = if (hqAutoAttack != null && hqAutoAttack != nqAutoAttack) {
+                "$nqAutoAttack / $hqAutoAttack <:hqlight:673889304359206923>"
+            } else {
+                nqAutoAttack.toString()
+            }
+
+            embeds = arrayOf(
                 EmbedField(
                     name = Localisation.itemLevel.getValue(language),
                     value = item["LevelItem"]!!.jsonPrimitive.content,
@@ -111,5 +112,30 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
                     inline = true
                 )
             )
+        } else {
+            embeds = arrayOf(
+                EmbedField(
+                    name = Localisation.itemLevel.getValue(language),
+                    value = item["LevelItem"]!!.jsonPrimitive.content,
+                ), EmbedField(
+                    name = "Class/Job", value = classJob, inline = true
+                ), EmbedField(
+                    name = Localisation.bonuses.getValue("Bonuses").getValue(language),
+                    value = stats.joinToString("\n"),
+                    inline = true
+                )
+            )
+        }
+
+        return@coroutineScope Embed(
+            title = item["Name"]!!.jsonPrimitive.content,
+            description = description,
+            url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
+                item["Name"]!!.jsonPrimitive.content.replace(
+                    " ", "+"
+                )
+            }",
+            thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"]!!.jsonPrimitive.content}"),
+            fields = embeds
         )
     }
