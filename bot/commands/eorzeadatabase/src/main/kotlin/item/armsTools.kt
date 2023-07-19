@@ -18,7 +18,7 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
         val damageType: String
         val nqDamage: Int
         when (item["ClassJobUse"]!!.jsonObject["ClassJobCategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
-            30 -> {
+            30, 32, 33 -> {
                 damageType =
                     Localisation.damageType.getValue("Physical Damage")
                         .getValue(language)
