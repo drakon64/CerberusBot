@@ -16,10 +16,15 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
     coroutineScope {
         val stats = getStats(item, language)
 
-        val description =
-            cleanDescription(item["Description"]!!.jsonPrimitive.content.ifBlank {
+        val description = if (item["Description"]!!.jsonPrimitive.content.isBlank()) {
+            cleanDescription(item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content)
+        } else {
+            cleanDescription(
                 item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content
-            })
+                + "\n\n"
+                + item["Description"]!!.jsonPrimitive.content
+            )
+        }
 
         val classJob = """
             ${item["ClassJobCategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content}
