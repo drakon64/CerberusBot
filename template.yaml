@@ -60,10 +60,6 @@ Resources:
             Ref: BotTokenParameter
           PUBLIC_KEY:
             Ref: PublicKeyParameter
-          MONGODB_URL:
-            Ref: MongoDbUrl
-          MONGODB_DATABASE:
-            Ref: MongoDbDatabase
   DynamisBotLodestoneFunction:
     Type: AWS::Serverless::Function
     Properties:
