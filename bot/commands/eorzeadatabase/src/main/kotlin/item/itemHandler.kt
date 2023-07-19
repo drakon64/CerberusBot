@@ -10,8 +10,8 @@ import kotlinx.serialization.json.jsonPrimitive
 suspend fun itemHandler(item: JsonObject, language: String, lodestone: String) =
     coroutineScope {
         return@coroutineScope when (item["ItemKind"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
-            1 -> { // Arms
-                arms(item, language, lodestone)
+            1, 2 -> { // Arms, Tools
+                armsTools(item, language, lodestone)
             }
 
             3, 4 -> { // Armor, Accessories

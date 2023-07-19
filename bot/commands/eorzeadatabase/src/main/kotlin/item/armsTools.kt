@@ -11,7 +11,7 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun arms(item: JsonObject, language: String, lodestone: String) =
+suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
     coroutineScope {
         val stats = getStats(item, language)
 
