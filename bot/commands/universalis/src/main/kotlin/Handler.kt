@@ -29,6 +29,9 @@ class Handler: RequestStreamHandler {
 
         val ktXivApi = KtXivApi
         val ktUniversalis = KtUniversalis
+
+        val spanRegex = """<span.*?>|</span>""".toRegex()
+        val newLineRegex = """\n{3,}""".toRegex()
     }
 
     override fun handleRequest(

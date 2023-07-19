@@ -3,6 +3,8 @@ package cloud.drakon.dynamisbot.universalis
 import cloud.drakon.dynamisbot.universalis.Handler.Companion.ktDiscord
 import cloud.drakon.dynamisbot.universalis.Handler.Companion.ktUniversalis
 import cloud.drakon.dynamisbot.universalis.Handler.Companion.ktXivApi
+import cloud.drakon.dynamisbot.universalis.Handler.Companion.newLineRegex
+import cloud.drakon.dynamisbot.universalis.Handler.Companion.spanRegex
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
@@ -17,9 +19,6 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.safety.Safelist
 
 object Universalis {
     suspend fun universalisCommand(
@@ -54,14 +53,12 @@ object Universalis {
         if (xivApiItem != null) {
             val xivApiItemId = xivApiItem.jsonObject["ID"]!!.jsonPrimitive.int
 
-            val canBeHighQuality: Boolean =
+            val canBeHighQuality =
                 xivApiItem.jsonObject["CanBeHq"]!!.jsonPrimitive.int == 1
-            val description: String = Jsoup.clean(
-                xivApiItem.jsonObject["Description"]!!.jsonPrimitive.content,
-                "",
-                Safelist.none(),
-                Document.OutputSettings().prettyPrint(false)
-            ).replace("""\n{3,}""".toRegex(), "\n\n")
+            val description =
+                xivApiItem.jsonObject["Description"]!!.jsonPrimitive.content
+                    .replace(spanRegex, "")
+                    .replace(newLineRegex, "\n\n")
 
             val marketBoardCurrentData = if (highQuality == true && canBeHighQuality) {
                 ktUniversalis.getMarketBoardCurrentData(
