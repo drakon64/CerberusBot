@@ -15,6 +15,10 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
     coroutineScope {
         val stats = getStats(item, language)
 
+        val description = item["Description"]!!.jsonPrimitive.content.ifBlank {
+            item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content
+        }
+
         val damageType: String
         val nqDamage: Int
         when (item["ClassJobUse"]!!.jsonObject["ClassJobCategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
@@ -76,7 +80,7 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
 
         return@coroutineScope Embed(
             title = item["Name"]!!.jsonPrimitive.content,
-            description = item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content,
+            description = description,
             url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
                 item["Name"]!!.jsonPrimitive.content.replace(
                     " ", "+"
