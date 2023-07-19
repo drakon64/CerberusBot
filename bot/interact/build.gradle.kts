@@ -44,8 +44,6 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
-    implementation("org.jsoup:jsoup:1.16.1")
-
     implementation("org.mongodb:mongodb-driver-sync:4.10.1")
 
     // Lodestone

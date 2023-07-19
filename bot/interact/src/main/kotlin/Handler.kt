@@ -34,6 +34,9 @@ class Handler: RequestStreamHandler {
         val mongoDatabase: MongoDatabase =
             MongoClients.create(System.getenv("MONGODB_URL"))
                 .getDatabase(System.getenv("MONGODB_DATABASE"))
+
+        val spanRegex = """<span.*?>|</span>""".toRegex()
+        val newLineRegex = """\n{3,}""".toRegex()
     }
 
     override fun handleRequest(
