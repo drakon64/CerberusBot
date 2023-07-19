@@ -1,8 +1,8 @@
-package cloud.drakon.dynamisbot.interact.commands.lodestone
+package cloud.drakon.dynamisbot.lodestone
 
-import cloud.drakon.dynamisbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.dynamisbot.interact.Handler.Companion.ktorClient
-import cloud.drakon.dynamisbot.interact.Handler.Companion.mongoDatabase
+import cloud.drakon.dynamisbot.lodestone.Handler.Companion.ktDiscord
+import cloud.drakon.dynamisbot.lodestone.Handler.Companion.ktorClient
+import cloud.drakon.dynamisbot.lodestone.Handler.Companion.mongoDatabase
 import cloud.drakon.ktdiscord.channel.Attachment
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField

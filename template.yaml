@@ -18,7 +18,8 @@ Resources:
       Timeout: 3
       Environment:
         Variables:
-          INTERACT_FUNCTION: !Ref DynamisBotInteractFunction
+          EORZEADATABASE_FUNCTION: !Ref DynamisBotEorzeaDatabaseFunction
+          LODESTONE_FUNCTION: !Ref DynamisBotLodestoneFunction
           UNIVERSALIS_FUNCTION: !Ref DynamisBotUniversalisFunction
           PUBLIC_KEY:
             Ref: PublicKeyParameter
@@ -35,13 +36,14 @@ Resources:
               Action:
                 - lambda:InvokeFunction
               Resource:
-                - !GetAtt DynamisBotInteractFunction.Arn
+                - !GetAtt DynamisBotEorzeaDatabaseFunction.Arn
+                - !GetAtt DynamisBotLodestoneFunction.Arn
                 - !GetAtt DynamisBotUniversalisFunction.Arn
-  DynamisBotInteractFunction:
+  DynamisBotEorzeaDatabaseFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: bot/interact
-      Handler: cloud.drakon.dynamisbot.interact.Handler::handleRequest
+      CodeUri: bot/commands/eorzeadatabase
+      Handler: cloud.drakon.dynamisbot.eorzeadatabase.Handler::handleRequest
       Runtime: java17
       Architectures:
         - x86_64
@@ -62,14 +64,31 @@ Resources:
             Ref: MongoDbUrl
           MONGODB_DATABASE:
             Ref: MongoDbDatabase
-      Policies:
-        - Statement:
-            - Sid: Translate
-              Effect: Allow
-              Action:
-                - translate:TranslateText
-                - comprehend:DetectDominantLanguage
-              Resource: "*"
+  DynamisBotLodestoneFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: bot/commands/lodestone
+      Handler: cloud.drakon.dynamisbot.lodestone.Handler::handleRequest
+      Runtime: java17
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Timeout: 900
+      AutoPublishAlias: SnapStart
+      SnapStart:
+        ApplyOn: PublishedVersions
+      Environment:
+        Variables:
+          APPLICATION_ID:
+            Ref: ApplicationIDParameter
+          BOT_TOKEN:
+            Ref: BotTokenParameter
+          PUBLIC_KEY:
+            Ref: PublicKeyParameter
+          MONGODB_URL:
+            Ref: MongoDbUrl
+          MONGODB_DATABASE:
+            Ref: MongoDbDatabase
   DynamisBotUniversalisFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -97,19 +116,9 @@ Outputs:
     Description: "API Gateway endpoint URL for DynamisBot Defer function"
     Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
 
-  DynamisBotDeferFunction:
-    Description: "DynamisBot Defer Lambda Function ARN"
-    Value: !GetAtt DynamisBotDeferFunction.Arn
-  DynamisBotDeferFunctionIamRole:
-    Description: "Implicit IAM Role created for DynamisBot Defer function"
-    Value: !GetAtt DynamisBotDeferFunctionRole.Arn
-
-  DynamisBotInteractFunction:
-    Description: "DynamisBot Interact Lambda Function ARN"
-    Value: !GetAtt DynamisBotInteractFunction.Arn
-  DynamisBotInteractFunctionIamRole:
-    Description: "Implicit IAM Role created for DynamisBot Interact function"
-    Value: !GetAtt DynamisBotInteractFunctionRole.Arn
+  DynamisBotLodestoneFunctionIamRole:
+    Description: "Implicit IAM Role created for DynamisBot Lodestone function"
+    Value: !GetAtt DynamisBotLodestoneFunction.Arn
 
 Parameters:
   ApplicationIDParameter:

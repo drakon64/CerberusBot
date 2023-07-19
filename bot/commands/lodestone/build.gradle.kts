@@ -49,9 +49,6 @@ dependencies {
     // Lodestone
     implementation("cloud.drakon:ktlodestone:6.2.0")
 
-    // Eorzea Database
-    implementation("cloud.drakon:ktxivapi:0.0.1-SNAPSHOT")
-
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 

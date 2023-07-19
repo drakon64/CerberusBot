@@ -6,8 +6,9 @@ from discord_interactions import InteractionResponseType, InteractionType, verif
 
 lambda_client = boto3.client("lambda")
 public_key = os.environ["PUBLIC_KEY"]
-interact_function = os.environ["INTERACT_FUNCTION"]
 
+eorzea_database_function = os.environ["EORZEADATABASE_FUNCTION"]
+lodestone_function = os.environ["LODESTONE_FUNCTION"]
 universalis_function = os.environ["UNIVERSALIS_FUNCTION"]
 
 
@@ -45,10 +46,12 @@ def lambda_handler(event, context):
                     ephemeral = option["value"]
 
         match body["data"]["name"]:
+            case "eorzea_database":
+                function = eorzea_database_function
+            case "lodestone":
+                function = lodestone_function
             case "universalis":
                 function = universalis_function
-            case _:
-                function = interact_function
 
         response = {
             "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE

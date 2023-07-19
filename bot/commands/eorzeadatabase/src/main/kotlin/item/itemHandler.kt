@@ -1,6 +1,6 @@
-package cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.item
+package cloud.drakon.dynamisbot.eorzeadatabase.item
 
-import cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.cleanDescription
+import cloud.drakon.dynamisbot.eorzeadatabase.cleanDescription
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.int

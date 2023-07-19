@@ -1,7 +1,7 @@
-package cloud.drakon.dynamisbot.interact.commands.eorzeadatabase
+package cloud.drakon.dynamisbot.eorzeadatabase
 
-import cloud.drakon.dynamisbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.item.itemHandler
+import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.ktDiscord
+import cloud.drakon.dynamisbot.eorzeadatabase.item.itemHandler
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage

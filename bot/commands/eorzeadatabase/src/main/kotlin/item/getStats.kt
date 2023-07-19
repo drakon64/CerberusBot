@@ -1,4 +1,4 @@
-package cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.item
+package cloud.drakon.dynamisbot.eorzeadatabase.item
 
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject

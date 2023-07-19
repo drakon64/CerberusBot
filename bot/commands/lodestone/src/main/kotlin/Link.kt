@@ -1,7 +1,7 @@
-package cloud.drakon.dynamisbot.interact.commands.lodestone
+package cloud.drakon.dynamisbot.lodestone
 
-import cloud.drakon.dynamisbot.interact.Handler.Companion.ktDiscord
-import cloud.drakon.dynamisbot.interact.Handler.Companion.mongoDatabase
+import cloud.drakon.dynamisbot.lodestone.Handler.Companion.ktDiscord
+import cloud.drakon.dynamisbot.lodestone.Handler.Companion.mongoDatabase
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage

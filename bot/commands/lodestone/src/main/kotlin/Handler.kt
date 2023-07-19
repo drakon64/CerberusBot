@@ -1,7 +1,5 @@
-package cloud.drakon.dynamisbot.interact
+package cloud.drakon.dynamisbot.lodestone
 
-import cloud.drakon.dynamisbot.interact.commands.eorzeadatabase.eorzeaDatabase
-import cloud.drakon.dynamisbot.interact.commands.lodestone.lodestoneHandler
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
@@ -19,11 +17,11 @@ import kotlinx.serialization.json.Json
 
 class Handler: RequestStreamHandler {
     companion object {
+        // Initialise these during the initialization phase
+
         val ktDiscord = KtDiscord(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
         ).Interaction(System.getenv("PUBLIC_KEY"))
-
-        val ktorClient = HttpClient(Java)
 
         val json = Json {
             ignoreUnknownKeys =
@@ -31,12 +29,11 @@ class Handler: RequestStreamHandler {
             isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
         }
 
+        val ktorClient = HttpClient(Java)
+
         val mongoDatabase: MongoDatabase =
             MongoClients.create(System.getenv("MONGODB_URL"))
                 .getDatabase(System.getenv("MONGODB_DATABASE"))
-
-        val spanRegex = """<span.*?>|</span>""".toRegex()
-        val newLineRegex = """\n{3,}""".toRegex()
     }
 
     override fun handleRequest(
@@ -44,28 +41,10 @@ class Handler: RequestStreamHandler {
         outputStream: OutputStream,
         context: Context,
     ): Unit = runBlocking {
-        val logger = context.logger
-
-        val event: Interaction<*> = json.decodeFromString(
+        val event: Interaction<ApplicationCommandData> = json.decodeFromString(
             InteractionJsonSerializer, inputStream.readAllBytes().decodeToString()
-        )
+        ) as Interaction<ApplicationCommandData>
 
-        when (event.data) {
-            is ApplicationCommandData -> {
-                val applicationCommand = event as Interaction<ApplicationCommandData>
-
-                when (event.type) {
-                    2 -> when (applicationCommand.data!!.name) {
-                        "eorzea_database" -> eorzeaDatabase(applicationCommand, logger)
-                        "lodestone" -> lodestoneHandler(applicationCommand)
-                        else -> logger.log("Unknown command: ${event.data!!.name}")
-                    }
-
-                    else -> logger.log("Unknown event type: ${event.type}")
-                }
-            }
-
-            else -> logger.log("Unknown command type: ${event.javaClass}")
-        }
+        lodestoneHandler(event)
     }
 }
