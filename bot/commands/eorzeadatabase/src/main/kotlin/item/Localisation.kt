@@ -26,6 +26,20 @@ internal object Localisation {
             "de" to "Bonus",
             "fr" to "Bonus"
         ).withDefault { "Bonuses" },
+        "Control" to mapOf(
+            "ja" to "加工精度",
+            "de" to "Kontrolle",
+            "fr" to "Contrôle"
+        ).withDefault { "Control" },
+        "CP" to mapOf(
+            "de" to "HP",
+            "fr" to "PS"
+        ).withDefault { "CP" },
+        "Craftsmanship" to mapOf(
+            "ja" to "作業精度",
+            "de" to "Kunstfertigkeit",
+            "fr" to "Habileté"
+        ).withDefault { "CP" },
         "CriticalHit" to mapOf(
             "ja" to "クリティカル",
             "de" to "Kritischer Treffer",
