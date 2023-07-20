@@ -22,7 +22,6 @@ internal object Localisation {
 
     val bonuses = mapOf(
         "Bonuses" to mapOf(
-            "ja" to "Bonuses",
             "de" to "Bonus",
             "fr" to "Bonus"
         ).withDefault { "Bonuses" },
@@ -58,7 +57,6 @@ internal object Localisation {
         "Intelligence" to mapOf(
             "ja" to "INT",
             "de" to "Intelligenz",
-            "fr" to "Intelligence"
         ).withDefault { "Intelligence" },
         "Piety" to mapOf(
             "ja" to "信仰",
