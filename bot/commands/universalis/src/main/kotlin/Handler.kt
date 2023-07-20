@@ -2,7 +2,6 @@ package cloud.drakon.dynamisbot.universalis
 
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
-import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktuniversalis.KtUniversalis
 import cloud.drakon.ktxivapi.KtXivApi
@@ -39,9 +38,8 @@ class Handler: RequestStreamHandler {
         outputStream: OutputStream,
         context: Context,
     ): Unit = runBlocking {
-        val event: Interaction<ApplicationCommandData> = json.decodeFromString(
-            InteractionJsonSerializer, inputStream.readAllBytes().decodeToString()
-        ) as Interaction<ApplicationCommandData>
+        val event: Interaction<ApplicationCommandData> =
+            json.decodeFromString(inputStream.readAllBytes().decodeToString())
 
         Universalis.universalisCommand(event, context.logger)
     }

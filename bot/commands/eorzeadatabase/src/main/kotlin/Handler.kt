@@ -2,7 +2,6 @@ package cloud.drakon.dynamisbot.eorzeadatabase
 
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
-import cloud.drakon.ktdiscord.interaction.InteractionJsonSerializer
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
@@ -34,9 +33,8 @@ class Handler: RequestStreamHandler {
         outputStream: OutputStream,
         context: Context,
     ): Unit = runBlocking {
-        val event: Interaction<ApplicationCommandData> = json.decodeFromString(
-            InteractionJsonSerializer, inputStream.readAllBytes().decodeToString()
-        ) as Interaction<ApplicationCommandData>
+        val event: Interaction<ApplicationCommandData> =
+            json.decodeFromString(inputStream.readAllBytes().decodeToString())
 
         eorzeaDatabase(event, context.logger)
     }
