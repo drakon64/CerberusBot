@@ -54,10 +54,24 @@ internal object Localisation {
             "de" to "Direkter Treffer",
             "fr" to "Coups nets"
         ).withDefault { "Direct Hit Rate" },
+        "Gathering" to mapOf(
+            "ja" to "獲得力",
+            "de" to "Sammelgeschick",
+            "fr" to "Collecte",
+        ).withDefault { "Gathering" },
+        "GP" to mapOf(
+            "de" to "SP",
+            "fr" to "PR"
+        ).withDefault { "GP" },
         "Intelligence" to mapOf(
             "ja" to "INT",
             "de" to "Intelligenz",
         ).withDefault { "Intelligence" },
+        "Perception" to mapOf(
+            "ja" to "技術力",
+            "de" to "Expertise",
+            "fr" to "Savoir-faire"
+        ).withDefault { "Perception" },
         "Piety" to mapOf(
             "ja" to "信仰",
             "de" to "Frömmigkeit",
