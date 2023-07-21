@@ -17,6 +17,6 @@ suspend fun questHandler(quest: Quest, lodestone: String) =
                 )
             }&db_search_category=quest",
             image = EmbedImage(url = "https://xivapi.com${quest.banner}"),
-            thumbnail = EmbedThumbnail(url = quest.journalGenre.icon)
+            thumbnail = EmbedThumbnail(url = "https://xivapi.com${quest.journalGenre.icon}")
         )
     }
