@@ -60,7 +60,7 @@ suspend fun link(event: Interaction<ApplicationCommandData>) {
 
             ktDiscord.editOriginalInteractionResponse(
                 EditWebhookMessage(
-                    "Linked to character \"$characterName\" on \"$world\"."
+                    "Linked to character \"$characterName\" on \"$world\""
                 ), event.token
             )
         }

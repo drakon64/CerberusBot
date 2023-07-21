@@ -144,7 +144,7 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
     } else {
         ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
-                "User does not have a linked Lodestone character!"
+                "User does not have a linked Lodestone character"
             ), event.token
         )
     }
