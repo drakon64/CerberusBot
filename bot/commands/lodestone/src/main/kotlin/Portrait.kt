@@ -22,10 +22,14 @@ suspend fun portrait(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
     val guildId: String = event.guildId!!
 
-    for (i in event.data!!.options!![0].options!!) {
-        when (i.name) {
-            "user" -> userId = i.value!!
+    if (event.type == 1) {
+        for (i in event.data!!.options!![0].options!!) {
+            when (i.name) {
+                "user" -> userId = i.value!!
+            }
         }
+    } else if (event.type == 2) {
+        userId = event.data!!.resolved!!.members!!.iterator().next().key
     }
 
     val characterIdDocument = mongoDatabase.getCollection("lodestone_link").find(
