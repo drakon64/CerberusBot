@@ -28,7 +28,7 @@ suspend fun card(event: Interaction<ApplicationCommandData>) {
             }
         }
     } else if (event.type == 2) {
-        userId = event.data!!.resolved!!.members!!.iterator().next().key
+        userId = event.member!!.user!!.id
     }
 
     val characterIdDocument = mongoDatabase.getCollection("lodestone_link").find(
