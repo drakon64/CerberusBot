@@ -43,20 +43,24 @@ class Handler: RequestStreamHandler {
         val event: Interaction<ApplicationCommandData> =
             json.decodeFromString(inputStream.readAllBytes().decodeToString())
 
-        if (event.type == 1) {
-            when (event.data!!.options!![0].name) {
+        when (event.type) {
+            1 -> when (event.data!!.options!![0].name) {
                 "card" -> card(event)
                 "link" -> link(event)
                 "unlink" -> unlink(event)
                 "portrait" -> portrait(event)
                 "profile" -> profile(event)
+                else -> throw Exception("Unknown slash command: ${event.data!!.options!![0].name}")
             }
-        } else if (event.type == 2) {
-            when (event.data!!.name) {
+
+            2 -> when (event.data!!.name) {
                 "Character card" -> card(event)
                 "Character portrait" -> portrait(event)
                 "Character profile" -> profile(event)
+                else -> throw Exception("Unknown user command: ${event.data!!.name}")
             }
+
+            else -> throw Exception("Unknown event type: ${event.type}")
         }
     }
 }
