@@ -8,6 +8,22 @@ import kotlinx.coroutines.coroutineScope
 
 suspend fun questHandler(quest: Quest, lodestone: String) =
     coroutineScope {
+        val embedFields = mutableListOf(
+            EmbedField(
+                name = "Level",
+                value = quest.classJobLevel.toString()
+            )
+        )
+
+        if (quest.gilReward != null) {
+            embedFields.add(
+                EmbedField(
+                    name = "Gil",
+                    value = "${quest.gilReward} <:gil:235457032616935424>"
+                )
+            )
+        }
+
         return@coroutineScope Embed(
             title = quest.name,
             description = quest.journalGenre.name,
@@ -19,15 +35,6 @@ suspend fun questHandler(quest: Quest, lodestone: String) =
             }&db_search_category=quest",
             image = EmbedImage(url = "https://xivapi.com${quest.banner}"),
             thumbnail = EmbedThumbnail(url = "https://xivapi.com${quest.journalGenre.icon}"),
-            fields = arrayOf(
-                EmbedField(
-                    name = "Level",
-                    value = quest.classJobLevel.toString()
-                ),
-                EmbedField(
-                    name = "Gil",
-                    value = "${quest.gilReward} <:gil:235457032616935424>"
-                )
-            )
+            fields = embedFields.toTypedArray()
         )
     }
