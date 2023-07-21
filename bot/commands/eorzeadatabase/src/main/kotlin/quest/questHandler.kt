@@ -20,7 +20,7 @@ suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
         )
     )
 
-    if (quest.gilReward != null) {
+    if (quest.gilReward > 0) {
         embedFields.add(
             EmbedField(
                 name = "Gil",
