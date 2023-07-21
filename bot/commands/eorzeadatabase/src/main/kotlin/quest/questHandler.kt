@@ -1,6 +1,7 @@
 package cloud.drakon.dynamisbot.eorzeadatabase.quest
 
 import cloud.drakon.ktdiscord.channel.embed.Embed
+import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedImage
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import kotlinx.coroutines.coroutineScope
@@ -17,6 +18,16 @@ suspend fun questHandler(quest: Quest, lodestone: String) =
                 )
             }&db_search_category=quest",
             image = EmbedImage(url = "https://xivapi.com${quest.banner}"),
-            thumbnail = EmbedThumbnail(url = "https://xivapi.com${quest.journalGenre.icon}")
+            thumbnail = EmbedThumbnail(url = "https://xivapi.com${quest.journalGenre.icon}"),
+            fields = arrayOf(
+                EmbedField(
+                    name = "Level",
+                    value = quest.classJobLevel.toString()
+                ),
+                EmbedField(
+                    name = "Gil",
+                    value = "${quest.gilReward} <:gil:235457032616935424>"
+                )
+            )
         )
     }

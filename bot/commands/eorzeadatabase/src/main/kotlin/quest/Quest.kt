@@ -6,5 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable class Quest(
     @SerialName("Name") val name: String,
     @SerialName("JournalGenre") val journalGenre: JournalGenre,
-    @SerialName("Banner") val banner: String
+    @SerialName("Banner") val banner: String,
+    @SerialName("ClassJobLevel0") val classJobLevel: Byte,
+    @SerialName("GiLReward") val gilReward: Short
 )
