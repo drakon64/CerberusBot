@@ -1,5 +1,6 @@
 package cloud.drakon.dynamisbot.eorzeadatabase
 
+import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.json
 import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.ktDiscord
 import cloud.drakon.dynamisbot.eorzeadatabase.item.itemHandler
 import cloud.drakon.dynamisbot.eorzeadatabase.quest.questHandler
@@ -10,7 +11,6 @@ import cloud.drakon.ktxivapi.KtXivApi
 import cloud.drakon.ktxivapi.common.Language
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
@@ -79,8 +79,6 @@ suspend fun eorzeaDatabase(
     if (search != null) {
         val id = search.jsonObject["ID"]!!.jsonPrimitive.int
         val result = KtXivApi.getContentId(index, id, searchLanguage)
-
-        val json = Json { ignoreUnknownKeys = true }
 
         val embed = when (index) {
             "item" -> itemHandler(result, language, lodestone)
