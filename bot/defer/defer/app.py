@@ -35,15 +35,15 @@ def lambda_handler(event, context):
 
         ephemeral = False
 
-        try:
+        if "options" in body["data"]:
             for option in body["data"]["options"]:
-                for sub_option in option["options"]:
-                    if sub_option["name"] == "ephemeral":
-                        ephemeral = sub_option["value"]
-        except KeyError:
-            for option in body["data"]["options"]:
-                if option["name"] == "ephemeral":
-                    ephemeral = option["value"]
+                if "options" in option:
+                    for sub_option in option["options"]:
+                        if sub_option["name"] == "ephemeral":
+                            ephemeral = sub_option["value"]
+                else:
+                    if option["name"] == "ephemeral":
+                        ephemeral = option["value"]
 
         match body["data"]["name"]:
             case "eorzea_database":
