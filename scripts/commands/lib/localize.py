@@ -30,9 +30,10 @@ def translate_command(command: dict, slash_command=True):
                 .lower()
             )
 
-        command["description_localizations"][target_language["discord"]] = (
-            translate_text(command["description"], target_language["aws"])
-        )
+        if "description" in command:
+            command["description_localizations"][target_language["discord"]] = (
+                translate_text(command["description"], target_language["aws"])
+            )
 
         if "options" in command:
             for option_or_subcommand in command["options"]:

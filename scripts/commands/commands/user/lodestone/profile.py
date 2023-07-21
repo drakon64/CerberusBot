@@ -5,8 +5,6 @@ async def create_lodestone_profile_command():
     command = {
         "name": "Character profile",
         "name_localizations": {},
-        "description": "Generate an embed of a users Final Fantasy XIV character",
-        "description_localizations": {},
         "dm_permission": False,
         "type": 2,
     }

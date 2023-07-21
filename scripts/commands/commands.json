@@ -392,12 +392,6 @@
             "fr": "Carte de personnage",
             "ja": "キャラクターカード"
         },
-        "description": "Get a character card of a users Final Fantasy XIV character",
-        "description_localizations": {
-            "de": "Hol dir eine Charakterkarte eines Final Fantasy XIV-Charakters eines Benutzers",
-            "fr": "Obtenez la carte de personnage d'un personnage de Final Fantasy XIV d'un utilisateur",
-            "ja": "ユーザーのファイナルファンタジーXIVキャラクターのキャラクターカードを入手してください"
-        },
         "dm_permission": false,
         "type": 2
     },
@@ -408,12 +402,6 @@
             "fr": "Portrait de personnage",
             "ja": "キャラクターポートレート"
         },
-        "description": "Get a portrait of a users Final Fantasy XIV character",
-        "description_localizations": {
-            "de": "Hol dir ein Portrait des Final Fantasy XIV-Charakters eines Benutzers",
-            "fr": "Obtenez le portrait d'un personnage de Final Fantasy XIV d'un utilisateur",
-            "ja": "ユーザーのファイナルファンタジーXIVキャラクターのポートレートを手に入れよう"
-        },
         "dm_permission": false,
         "type": 2
     },
@@ -423,12 +411,6 @@
             "de": "Charakterprofil",
             "fr": "Profil du personnage",
             "ja": "キャラクタープロフィール"
-        },
-        "description": "Generate an embed of a users Final Fantasy XIV character",
-        "description_localizations": {
-            "de": "Generiere eine Einbettung des Final Fantasy XIV-Charakters eines Benutzers",
-            "fr": "Générer une intégration du personnage de Final Fantasy XIV d'un utilisateur",
-            "ja": "ユーザーのファイナルファンタジーXIVキャラクターの埋め込みを生成します"
         },
         "dm_permission": false,
         "type": 2
