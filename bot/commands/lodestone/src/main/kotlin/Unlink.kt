@@ -31,7 +31,7 @@ suspend fun unlink(event: Interaction<ApplicationCommandData>) {
 
     ktDiscord.editOriginalInteractionResponse(
         EditWebhookMessage(
-            "Removed Lodestone character link."
+            "Removed Lodestone character link"
         ), event.token
     )
 }
