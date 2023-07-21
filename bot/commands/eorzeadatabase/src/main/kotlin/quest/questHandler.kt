@@ -42,7 +42,7 @@ suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
 
     return@coroutineScope Embed(
         title = quest.name,
-        description = quest.journalGenre.name,
+        description = quest.journalGenre.journalCategory.name,
         url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
             quest.name.replace(
                 " ",
