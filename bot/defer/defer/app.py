@@ -41,22 +41,21 @@ def lambda_handler(event, context):
                     for sub_option in option["options"]:
                         if sub_option["name"] == "ephemeral":
                             ephemeral = sub_option["value"]
+                            break
                 else:
                     if option["name"] == "ephemeral":
                         ephemeral = option["value"]
+                        break
 
         match body["data"]["name"]:
             case "eorzea_database":
                 function = eorzea_database_function
-            case (
-                "lodestone",
-                "Character card",
-                "Character portrait",
-                "Character profile",
-            ):
+            case "lodestone" | "Character card" | "Character portrait" | "Character profile":
                 function = lodestone_function
             case "universalis":
                 function = universalis_function
+            case _:
+                raise Exception(f'Unknown command: {body["data"]["name"]}')
 
         response = {
             "type": InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE
