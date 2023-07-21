@@ -2,6 +2,7 @@ package cloud.drakon.dynamisbot.eorzeadatabase
 
 import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.ktDiscord
 import cloud.drakon.dynamisbot.eorzeadatabase.item.itemHandler
+import cloud.drakon.dynamisbot.eorzeadatabase.quest.questHandler
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
@@ -79,6 +80,7 @@ suspend fun eorzeaDatabase(
 
         val embed = when (index) {
             "item" -> itemHandler(result, language, lodestone)
+            "quest" -> questHandler(result, lodestone)
 
             else -> throw Throwable("Unknown index: \"$index\"")
         }
