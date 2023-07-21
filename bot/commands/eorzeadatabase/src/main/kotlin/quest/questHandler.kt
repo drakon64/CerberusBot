@@ -8,7 +8,7 @@ import kotlinx.coroutines.coroutineScope
 
 suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
     val image = if (quest.banner != "") {
-        EmbedImage(url = quest.banner)
+        EmbedImage(url = "https://xivapi.com${quest.banner}")
     } else {
         null
     }
