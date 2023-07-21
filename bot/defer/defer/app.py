@@ -50,9 +50,9 @@ def lambda_handler(event, context):
                 function = eorzea_database_function
             case (
                 "lodestone",
-                "Lodestone: Get character card",
-                "Lodestone: Get character portrait",
-                "Lodestone: Get character profile",
+                "Character card",
+                "Character portrait",
+                "Character profile",
             ):
                 function = lodestone_function
             case "universalis":

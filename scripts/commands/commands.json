@@ -386,11 +386,11 @@
         ]
     },
     {
-        "name": "Lodestone: Get character card",
+        "name": "Character card",
         "name_localizations": {
-            "de": "Lodestone: Hol dir eine Charakterkarte",
-            "fr": "Lodestone : Obtenir une carte de personnage",
-            "ja": "ロードストーン:キャラクターカードを入手"
+            "de": "Charakterkarte",
+            "fr": "Carte de personnage",
+            "ja": "キャラクターカード"
         },
         "description": "Get a character card of a users Final Fantasy XIV character",
         "description_localizations": {
@@ -402,11 +402,11 @@
         "type": 2
     },
     {
-        "name": "Lodestone: Get character portrait",
+        "name": "Character portrait",
         "name_localizations": {
-            "de": "Lodestone: Hol dir ein Charakterporträt",
-            "fr": "Lodestone : Obtenez le portrait d'un personnage",
-            "ja": "ロードストーン:キャラクターのポートレートを入手"
+            "de": "Charakterporträt",
+            "fr": "Portrait de personnage",
+            "ja": "キャラクターポートレート"
         },
         "description": "Get a portrait of a users Final Fantasy XIV character",
         "description_localizations": {
@@ -418,11 +418,11 @@
         "type": 2
     },
     {
-        "name": "Lodestone: Get character profile",
+        "name": "Character profile",
         "name_localizations": {
-            "de": "Lodestone: Erhalte Charakterprofil",
-            "fr": "Lodestone : Obtenir le profil du personnage",
-            "ja": "Lodestone: キャラクターのプロフィールを取得"
+            "de": "Charakterprofil",
+            "fr": "Profil du personnage",
+            "ja": "キャラクタープロフィール"
         },
         "description": "Generate an embed of a users Final Fantasy XIV character",
         "description_localizations": {
