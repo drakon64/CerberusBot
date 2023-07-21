@@ -20,11 +20,22 @@ suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
         )
     )
 
+    if (quest.experiencePoints > 0) {
+        embedFields.add(
+            EmbedField(
+                name = "Experience",
+                value = "${quest.experiencePoints} <:exp:474543347965362176>",
+                inline = true
+            )
+        )
+    }
+
     if (quest.gilReward > 0) {
         embedFields.add(
             EmbedField(
                 name = "Gil",
-                value = "${quest.gilReward} <:gil:235457032616935424>"
+                value = "${quest.gilReward} <:gil:235457032616935424>",
+                inline = true
             )
         )
     }
