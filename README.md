@@ -23,3 +23,7 @@ _DynamisBot_ is a Discord bot that runs on AWS Lambda.
 
 As _DynamisBot_ uses the Discord Interactions API, features can be selectively enabled or disabled within your guilds
 settings.
+
+## Adding to Discord
+
+_DynamisBot_ can be added to your Discord server using [this link](https://discord.com/api/oauth2/authorize?client_id=1130903004657229904&permissions=0&scope=bot).
