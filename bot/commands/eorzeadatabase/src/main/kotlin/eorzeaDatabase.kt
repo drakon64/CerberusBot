@@ -81,10 +81,12 @@ suspend fun eorzeaDatabase(
         val id = search.jsonObject["ID"]!!.jsonPrimitive.int
         val result = KtXivApi.getContentId(index, id, searchLanguage)
 
+        val json = Json { ignoreUnknownKeys = true }
+
         val embed = when (index) {
             "item" -> itemHandler(result, language, lodestone)
             "quest" -> {
-                val quest: Quest = Json.decodeFromJsonElement(result)
+                val quest: Quest = json.decodeFromJsonElement(result)
                 questHandler(quest, lodestone)
             }
 
