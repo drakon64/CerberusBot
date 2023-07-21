@@ -41,22 +41,23 @@ async def main():
     json.dump(commands, open("commands.json", "w"), ensure_ascii=False, indent=4)
 
     if put_commands:
+        request = requests.put(
+            f"https://discord.com/api/v10/applications/{application_id}/commands",
+            headers={
+                "Authorization": f"Bot {bot_token}",
+            },
+            json=commands,
+        )
+
         print(
             json.dumps(
-                json.loads(
-                    bytes.decode(
-                        requests.put(
-                            f"https://discord.com/api/v10/applications/{application_id}/commands",
-                            headers={
-                                "Authorization": f"Bot {bot_token}",
-                            },
-                            json=commands,
-                        ).content
-                    )
-                ),
+                json.loads(bytes.decode(request.content)),
                 indent=4,
             )
         )
+
+        if request.status_code != 200:
+            raise Exception()
 
 
 asyncio.run(main())
