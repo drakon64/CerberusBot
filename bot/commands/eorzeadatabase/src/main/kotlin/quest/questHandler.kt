@@ -7,6 +7,12 @@ import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import kotlinx.coroutines.coroutineScope
 
 suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
+    val image = if (quest.banner != "") {
+        EmbedImage(url = quest.banner)
+    } else {
+        null
+    }
+
     val embedFields = mutableListOf(
         EmbedField(
             name = "Level",
@@ -32,7 +38,7 @@ suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
                 "+"
             )
         }&db_search_category=quest",
-        image = EmbedImage(url = "https://xivapi.com${quest.banner}"),
+        image = image,
         thumbnail = EmbedThumbnail(url = "https://xivapi.com${quest.journalGenre.icon}"),
         fields = embedFields.toTypedArray()
     )
