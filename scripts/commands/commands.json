@@ -270,6 +270,21 @@
                 },
                 "options": [
                     {
+                        "name": "global",
+                        "name_localizations": {
+                            "de": "weltweite",
+                            "fr": "globaux",
+                            "ja": "グローバル"
+                        },
+                        "description": "Unlink from all Discord guilds",
+                        "description_localizations": {
+                            "de": "Trenne die Verbindung zu allen Discord-Gilden",
+                            "fr": "Dissocier de toutes les guildes Discord",
+                            "ja": "すべてのDiscordギルドからリンクを解除する"
+                        },
+                        "type": 5
+                    },
+                    {
                         "name": "ephemeral",
                         "name_localizations": {
                             "de": "ephemer",

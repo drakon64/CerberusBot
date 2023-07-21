@@ -68,7 +68,16 @@ async def create_lodestone_command():
                     "Unlink your Discord account from a Final Fantasy XIV character"
                 ),
                 "description_localizations": {},
-                "options": (ephemeral,),
+                "options": (
+                    {
+                        "name": "global",
+                        "name_localizations": {},
+                        "description": "Unlink from all Discord guilds",
+                        "description_localizations": {},
+                        "type": 5,
+                    },
+                    ephemeral,
+                ),
                 "type": 1,
             },
             {
