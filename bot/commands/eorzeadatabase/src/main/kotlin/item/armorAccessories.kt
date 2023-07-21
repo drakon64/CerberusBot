@@ -115,7 +115,7 @@ suspend fun armorAccessories(item: JsonObject, language: String, lodestone: Stri
                 item["Name"]!!.jsonPrimitive.content.replace(
                     " ", "+"
                 )
-            }",
+            }&db_search_category=item",
             thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"]!!.jsonPrimitive.content}"),
             fields = arrayOf(
                 EmbedField(

@@ -51,7 +51,7 @@ suspend fun medicineMeal(item: JsonObject, description: String, lodestone: Strin
                 item["Name"]!!.jsonPrimitive.content.replace(
                     " ", "_"
                 )
-            }",
+            }&db_search_category=item",
             thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"]!!.jsonPrimitive.content}"),
             fields = arrayOf(
                 EmbedField(

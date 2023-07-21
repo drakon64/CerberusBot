@@ -139,7 +139,7 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
                 item["Name"]!!.jsonPrimitive.content.replace(
                     " ", "+"
                 )
-            }",
+            }&db_search_category=item",
             thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"]!!.jsonPrimitive.content}"),
             fields = embeds
         )
