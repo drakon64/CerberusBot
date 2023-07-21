@@ -46,6 +46,4 @@ async def create_eorzea_database_command():
         ),
     }
 
-    command = translate_command(command)
-
-    return command
+    return translate_command(command)

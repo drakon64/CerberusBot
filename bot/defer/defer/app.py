@@ -48,7 +48,12 @@ def lambda_handler(event, context):
         match body["data"]["name"]:
             case "eorzea_database":
                 function = eorzea_database_function
-            case "lodestone":
+            case (
+                "lodestone",
+                "Lodestone: Get character card",
+                "Lodestone: Get character portrait",
+                "Lodestone: Get character profile",
+            ):
                 function = lodestone_function
             case "universalis":
                 function = universalis_function

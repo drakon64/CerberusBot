@@ -39,6 +39,4 @@ async def create_universalis_command():
         ],
     }
 
-    command = translate_command(command)
-
-    return command
+    return translate_command(command)

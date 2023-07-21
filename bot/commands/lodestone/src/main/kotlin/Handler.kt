@@ -43,6 +43,12 @@ class Handler: RequestStreamHandler {
         val event: Interaction<ApplicationCommandData> =
             json.decodeFromString(inputStream.readAllBytes().decodeToString())
 
-        lodestoneHandler(event)
+        when (event.data!!.options!![0].name) {
+            "card", "Lodestone: Get character card" -> card(event)
+            "link" -> link(event)
+            "unlink" -> unlink(event)
+            "portrait", "Lodestone: Get character portrait" -> portrait(event)
+            "profile", "Lodestone: Get character profile" -> profile(event)
+        }
     }
 }

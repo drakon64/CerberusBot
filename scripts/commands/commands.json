@@ -386,6 +386,54 @@
         ]
     },
     {
+        "name": "Lodestone: Get character card",
+        "name_localizations": {
+            "de": "Lodestone: Hol dir eine Charakterkarte",
+            "fr": "Lodestone : Obtenir une carte de personnage",
+            "ja": "ロードストーン:キャラクターカードを入手"
+        },
+        "description": "Get a character card of a users Final Fantasy XIV character",
+        "description_localizations": {
+            "de": "Hol dir eine Charakterkarte eines Final Fantasy XIV-Charakters eines Benutzers",
+            "fr": "Obtenez la carte de personnage d'un personnage de Final Fantasy XIV d'un utilisateur",
+            "ja": "ユーザーのファイナルファンタジーXIVキャラクターのキャラクターカードを入手してください"
+        },
+        "dm_permission": false,
+        "type": 2
+    },
+    {
+        "name": "Lodestone: Get character portrait",
+        "name_localizations": {
+            "de": "Lodestone: Hol dir ein Charakterporträt",
+            "fr": "Lodestone : Obtenez le portrait d'un personnage",
+            "ja": "ロードストーン:キャラクターのポートレートを入手"
+        },
+        "description": "Get a portrait of a users Final Fantasy XIV character",
+        "description_localizations": {
+            "de": "Hol dir ein Portrait des Final Fantasy XIV-Charakters eines Benutzers",
+            "fr": "Obtenez le portrait d'un personnage de Final Fantasy XIV d'un utilisateur",
+            "ja": "ユーザーのファイナルファンタジーXIVキャラクターのポートレートを手に入れよう"
+        },
+        "dm_permission": false,
+        "type": 2
+    },
+    {
+        "name": "Lodestone: Get character profile",
+        "name_localizations": {
+            "de": "Lodestone: Erhalte Charakterprofil",
+            "fr": "Lodestone : Obtenir le profil du personnage",
+            "ja": "Lodestone: キャラクターのプロフィールを取得"
+        },
+        "description": "Generate an embed of a users Final Fantasy XIV character",
+        "description_localizations": {
+            "de": "Generiere eine Einbettung des Final Fantasy XIV-Charakters eines Benutzers",
+            "fr": "Générer une intégration du personnage de Final Fantasy XIV d'un utilisateur",
+            "ja": "ユーザーのファイナルファンタジーXIVキャラクターの埋め込みを生成します"
+        },
+        "dm_permission": false,
+        "type": 2
+    },
+    {
         "name": "universalis",
         "name_localizations": {
             "de": "universalis",

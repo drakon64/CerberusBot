@@ -7,12 +7,19 @@ import requests
 from commands.eorzea_database import create_eorzea_database_command
 from commands.lodestone import create_lodestone_command
 from commands.universalis import create_universalis_command
+from commands.user.lodestone.card import create_lodestone_card_command
+from commands.user.lodestone.portrait import create_lodestone_portrait_command
+from commands.user.lodestone.profile import create_lodestone_profile_command
 
 
 async def main():
     eorzea_database = asyncio.create_task(create_eorzea_database_command())
     lodestone = asyncio.create_task(create_lodestone_command())
     universalis = asyncio.create_task(create_universalis_command())
+
+    lodestone_card = asyncio.create_task(create_lodestone_card_command())
+    lodestone_portrait = asyncio.create_task(create_lodestone_portrait_command())
+    lodestone_profile = asyncio.create_task(create_lodestone_profile_command())
 
     if "APPLICATION_ID" in os.environ and "BOT_TOKEN" in os.environ:
         put_commands = True
@@ -25,6 +32,9 @@ async def main():
     commands = (
         await eorzea_database,
         await lodestone,
+        await lodestone_card,
+        await lodestone_portrait,
+        await lodestone_profile,
         await universalis,
     )
 

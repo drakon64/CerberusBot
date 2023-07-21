@@ -17,13 +17,19 @@ def translate_text(text: str, target_language_code: str) -> str:
     ).get("TranslatedText")
 
 
-def translate_command(command: dict):
+def translate_command(command: dict, slash_command=True):
     for target_language in discord_to_aws:
-        command["name_localizations"][target_language["discord"]] = (
-            translate_text(command["name"], target_language["aws"])
-            .replace(" ", "_")
-            .lower()
+        command["name_localizations"][target_language["discord"]] = translate_text(
+            command["name"], target_language["aws"]
         )
+
+        if slash_command:
+            command["name_localizations"][target_language["discord"]] = (
+                command["name_localizations"][target_language["discord"]]
+                .replace(" ", "_")
+                .lower()
+            )
+
         command["description_localizations"][target_language["discord"]] = (
             translate_text(command["description"], target_language["aws"])
         )
@@ -74,6 +80,7 @@ def translate_command(command: dict):
                     option_or_subcommand["name"].replace(" ", "_").lower()
                 )
 
-    command["name"] = command["name"].replace(" ", "_").lower()
+    if slash_command:
+        command["name"] = command["name"].replace(" ", "_").lower()
 
     return command
