@@ -2,6 +2,7 @@ package cloud.drakon.dynamisbot.eorzeadatabase.quest
 
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedImage
+import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
@@ -17,6 +18,7 @@ suspend fun questHandler(quest: JsonObject, lodestone: String) =
                     " ", "+"
                 )
             }&db_search_category=quest",
-            image = EmbedImage(url = "https://xivapi.com${quest["Banner"]!!.jsonPrimitive.content}")
+            image = EmbedImage(url = "https://xivapi.com${quest["Banner"]!!.jsonPrimitive.content}"),
+            thumbnail = EmbedThumbnail(url = quest["JournalGenre"]!!.jsonObject["IconHD"]!!.jsonPrimitive.content)
         )
     }
