@@ -25,13 +25,13 @@ suspend fun profile(event: Interaction<ApplicationCommandData>) {
     lateinit var userId: String
     val guildId: String = event.guildId!!
 
-    if (event.type == 1) {
+    if (event.data!!.type == 1) {
         for (i in event.data!!.options!![0].options!!) {
             when (i.name) {
                 "user" -> userId = i.value!!
             }
         }
-    } else if (event.type == 2) {
+    } else if (event.data!!.type == 2) {
         userId = event.member!!.user!!.id
     }
 

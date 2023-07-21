@@ -43,7 +43,7 @@ class Handler: RequestStreamHandler {
         val event: Interaction<ApplicationCommandData> =
             json.decodeFromString(inputStream.readAllBytes().decodeToString())
 
-        when (event.type) {
+        when (event.data!!.type) {
             1 -> when (event.data!!.options!![0].name) {
                 "card" -> card(event)
                 "link" -> link(event)
