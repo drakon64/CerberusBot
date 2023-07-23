@@ -9,10 +9,11 @@ import kotlinx.serialization.Serializable
     @SerialName("Name") override val name: String,
     @SerialName("Description") override val description: String?,
     @SerialName("IconHD") override val iconHd: String,
+    @SerialName("ItemUICategory") override val itemUiCategory: Item.ItemUICategory,
 
     @SerialName("CanBeHQ") val canBeHq: Int,
     @SerialName("Bonuses") val bonuses: Map<String, Bonus>,
-    @SerialName("Levelitem") val levelItem: String
+    @SerialName("Levelitem") val levelItem: String,
 ): Item {
     @Serializable class Bonus(
         @SerialName("Relative") val relative: Boolean,

@@ -78,7 +78,7 @@ suspend fun eorzeaDatabase(
         val result = KtXivApi.getContentId(index, id, searchLanguage)
 
         val embed = when (index) {
-            "item" -> itemHandler(result, language)
+            "item" -> itemHandler(result, language, lodestone)
 
             else -> throw Throwable("Unknown index: \"$index\"")
         }

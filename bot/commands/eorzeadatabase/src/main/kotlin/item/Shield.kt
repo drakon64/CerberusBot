@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
     @SerialName("LevelEquip") override val levelEquip: String,
 
     @SerialName("ItemUICategory")
-    override val itemUiCategory: StatsItem.ItemUICategory,
+    override val itemUiCategory: Item.ItemUICategory,
 
     @SerialName("IconHD") override val iconHd: String,
 

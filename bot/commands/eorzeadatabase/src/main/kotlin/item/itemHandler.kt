@@ -8,7 +8,11 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-suspend fun itemHandler(item: JsonObject, language: String) = coroutineScope {
+suspend fun itemHandler(
+    item: JsonObject,
+    language: String,
+    lodestone: String
+) = coroutineScope {
     val embed: Item = when (item["ItemKind"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
         1, 2 -> json.decodeFromJsonElement<ArmsTools>(item)
 
@@ -26,5 +30,8 @@ suspend fun itemHandler(item: JsonObject, language: String) = coroutineScope {
         else -> json.decodeFromJsonElement<GenericItem>(item)
     }
 
-    return@coroutineScope embed.createEmbed(embed.createEmbedFields(language))
+    return@coroutineScope embed.createEmbed(
+        embed.createEmbedFields(language),
+        lodestone
+    )
 }

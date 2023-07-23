@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable class ArmsTools(
     @SerialName("Name") override val name: String,
     @SerialName("Description") override val description: String? = null,
-    @SerialName("ItemUICategory") override val itemUiCategory: StatsItem.ItemUICategory,
+    @SerialName("ItemUICategory") override val itemUiCategory: Item.ItemUICategory,
     @SerialName("IconHD") override val iconHd: String,
     @SerialName("Stats") override val stats: Map<String, Map<String, Int>>,
 
