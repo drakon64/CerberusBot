@@ -38,7 +38,7 @@ internal object Localisation {
             "ja" to "作業精度",
             "de" to "Kunstfertigkeit",
             "fr" to "Habileté"
-        ).withDefault { "CP" },
+        ).withDefault { "Craftsmanship" },
         "CriticalHit" to mapOf(
             "ja" to "クリティカル",
             "de" to "Kritischer Treffer",
