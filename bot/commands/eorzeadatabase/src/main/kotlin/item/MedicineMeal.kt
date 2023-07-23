@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
     @SerialName("ItemUICategory") override val itemUiCategory: Item.ItemUICategory,
 
     @SerialName("CanBeHq") val canBeHq: Int,
-    @SerialName("Bonuses") val bonuses: Map<String, Bonus>? = null,
+    @SerialName("Bonuses") val bonuses: Map<String, Bonus>,
     @SerialName("LevelItem") val levelItem: String,
 ): Item {
     @Serializable class Bonus(
@@ -26,41 +26,33 @@ import kotlinx.serialization.Serializable
     override suspend fun createEmbedFields(language: String) = coroutineScope {
         val bonusList = mutableListOf<String>()
 
-        val embeds = mutableListOf(
+        for (i in bonuses.keys) {
+            val key = Localisation.bonuses[i]?.getValue(language) ?: i
+            val bonus = bonuses.getValue(i)
+
+            if (bonus.relative) {
+                if (this@MedicineMeal.canBeHq == 1) {
+                    bonusList.add(
+                        "$key +${bonus.value}% (Max ${bonus.max}) / +${bonus.valueHq}% (Max ${bonus.maxHq}) <:hqlight:673889304359206923>"
+                    )
+                } else {
+                    bonusList.add(
+                        "$key +${bonus.value}% (Max ${bonus.max})"
+                    )
+                }
+            }
+        }
+
+        return@coroutineScope arrayOf(
             EmbedField(
                 name = "Item Level",
                 value = this@MedicineMeal.levelItem,
                 inline = true
+            ), EmbedField(
+                name = "Effects",
+                value = bonusList.joinToString("\n"),
+                inline = true
             )
         )
-
-        if (bonuses != null) {
-            for (i in bonuses.keys) {
-                val key = Localisation.bonuses[i]?.getValue(language) ?: i
-                val bonus = bonuses.getValue(i)
-
-                if (bonus.relative) {
-                    if (this@MedicineMeal.canBeHq == 1) {
-                        bonusList.add(
-                            "$key +${bonus.value}% (Max ${bonus.max}) / +${bonus.valueHq}% (Max ${bonus.maxHq}) <:hqlight:673889304359206923>"
-                        )
-                    } else {
-                        bonusList.add(
-                            "$key +${bonus.value}% (Max ${bonus.max})"
-                        )
-                    }
-                }
-            }
-
-            embeds.add(
-                EmbedField(
-                    name = "Effects",
-                    value = bonusList.joinToString("\n"),
-                    inline = true
-                )
-            )
-        }
-
-        return@coroutineScope embeds.toTypedArray()
     }
 }

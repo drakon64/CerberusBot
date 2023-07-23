@@ -25,9 +25,12 @@ suspend fun itemHandler(
         }
 
         4 -> json.decodeFromJsonElement<Accessories>(item)
-        5 -> json.decodeFromJsonElement<MedicineMeal>(item)
 
-        else -> json.decodeFromJsonElement<GenericItem>(item)
+        else -> when (item["ItemUICategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
+            44, 46 -> json.decodeFromJsonElement<MedicineMeal>(item)
+
+            else -> json.decodeFromJsonElement<GenericItem>(item)
+        }
     }
 
     return@coroutineScope embed.createEmbed(
