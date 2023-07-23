@@ -27,12 +27,7 @@ import kotlinx.serialization.Serializable
         val bonusList = mutableListOf<String>()
 
         for (i in bonuses.keys) {
-            val key = when (i) {
-                "CriticalHit" -> "Critical Hit"
-                "DirectHit" -> "Direct Hit"
-                else -> i
-            }
-
+            val key = Localisation.bonuses[i]?.getValue(language) ?: i
             val bonus = bonuses.getValue(i)
 
             if (bonus.relative) {
