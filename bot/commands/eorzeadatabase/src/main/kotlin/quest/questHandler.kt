@@ -58,7 +58,7 @@ suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
                 " ",
                 "+"
             )
-        }&db_search_category=quest",
+        }&category=quest",
         image = image,
         thumbnail = EmbedThumbnail(url = "https://xivapi.com${quest.journalGenre.icon}"),
         fields = embedFields.toTypedArray()
