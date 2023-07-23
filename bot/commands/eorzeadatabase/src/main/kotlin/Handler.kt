@@ -19,8 +19,7 @@ class Handler: RequestStreamHandler {
         ).Interaction(System.getenv("PUBLIC_KEY"))
 
         val json = Json {
-            ignoreUnknownKeys =
-                true // Not all fields returned by the Discord API are documented
+            ignoreUnknownKeys = true
             isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
         }
 

@@ -75,10 +75,10 @@ suspend fun eorzeaDatabase(
 
     if (search != null) {
         val id = search.jsonObject["ID"]!!.jsonPrimitive.int
-        val item = KtXivApi.getContentId(index, id, searchLanguage)
+        val result = KtXivApi.getContentId(index, id, searchLanguage)
 
         val embed = when (index) {
-            "item" -> itemHandler(item, language, lodestone)
+            "item" -> itemHandler(result, language, lodestone)
 
             else -> throw Throwable("Unknown index: \"$index\"")
         }
