@@ -8,7 +8,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable sealed interface ArmorAccessories: StatsItem {
+@Serializable sealed interface ArmorAccessoriesShield: StatsItem {
     @SerialName("Name") override val name: String
     @SerialName("IconHD") override val iconHd: String
     @SerialName("Stats") override val stats: Map<String, Map<String, Int>>
@@ -19,13 +19,13 @@ import kotlinx.serialization.Serializable
     @Serializable class ClassJobCategory(@SerialName("Name") val name: String)
 
     override suspend fun createEmbed(fields: Array<EmbedField>?): Embed = coroutineScope {
-        val description = if (this@ArmorAccessories.description.isNullOrBlank()) {
-            cleanDescription(this@ArmorAccessories.itemUiCategory.name)
+        val description = if (this@ArmorAccessoriesShield.description.isNullOrBlank()) {
+            cleanDescription(this@ArmorAccessoriesShield.itemUiCategory.name)
         } else {
             cleanDescription(
-                this@ArmorAccessories.itemUiCategory.name
+                this@ArmorAccessoriesShield.itemUiCategory.name
                 + "\n\n"
-                + this@ArmorAccessories.description
+                + this@ArmorAccessoriesShield.description
             )
         }
 

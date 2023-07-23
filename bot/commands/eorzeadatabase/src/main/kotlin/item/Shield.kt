@@ -5,7 +5,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable class Armor(
+@Serializable class Shield(
     @SerialName("Name") override val name: String,
     @SerialName("Description") override val description: String? = null,
 
@@ -23,60 +23,60 @@ import kotlinx.serialization.Serializable
 
     @SerialName("LevelItem") val levelItem: String,
 
-    @SerialName("DefensePhys") val defensePhys: Int,
-    @SerialName("DefenseMag") val defenseMag: Int,
+    @SerialName("Block") val block: Int,
+    @SerialName("BlockRate") val blockRate: Int,
 
     @SerialName("BaseParamValueSpecial0") val baseParamValueSpecial0: Byte? = null,
     @SerialName("BaseParamValueSpecial1") val baseParamValueSpecial1: Byte? = null
 ): ArmorAccessoriesShield {
     override suspend fun createEmbedFields(language: String): Array<EmbedField> =
         coroutineScope {
-            val stats = getStats(this@Armor, language)
+            val stats = getStats(this@Shield, language)
 
             val classJob = """
-                ${this@Armor.classJobCategory.name}
-                ${Localisation.level.getValue(language)} ${this@Armor.levelEquip}
+                ${this@Shield.classJobCategory.name}
+                ${Localisation.level.getValue(language)} ${this@Shield.levelEquip}
             """.trimIndent()
 
-            val hqPhysicalDefense = if (this@Armor.baseParamValueSpecial0 != null) {
-                this@Armor.defensePhys + this@Armor.baseParamValueSpecial0
+            val nqBlock = this@Shield.block
+            val nqBlockRate = this@Shield.blockRate
+
+            val hqBlock = if (this@Shield.baseParamValueSpecial0 != null) {
+                nqBlock + this@Shield.baseParamValueSpecial0
             } else {
                 null
             }
 
-            val hqMagicDefense = if (this@Armor.baseParamValueSpecial1 != null) {
-                this@Armor.defenseMag + this@Armor.baseParamValueSpecial1
+            val hqBlockRate = if (this@Shield.baseParamValueSpecial1 != null) {
+                nqBlockRate + this@Shield.baseParamValueSpecial1
             } else {
                 null
             }
 
-            val physicalDefense =
-                if (hqPhysicalDefense != null && hqPhysicalDefense != this@Armor.defensePhys) {
-                    "${this@Armor.defensePhys} / $hqPhysicalDefense <:hqlight:673889304359206923>"
-                } else {
-                    this@Armor.defensePhys.toString()
-                }
+            val block = if (hqBlock != null && hqBlock != nqBlock) {
+                "$nqBlock / $hqBlock <:hqlight:673889304359206923>"
+            } else {
+                "$nqBlock"
+            }
 
-            val magicDefense =
-                if (hqMagicDefense != null && hqMagicDefense != this@Armor.defenseMag) {
-                    "${this@Armor.defenseMag} / $hqMagicDefense <:hqlight:673889304359206923>"
-                } else {
-                    this@Armor.defenseMag.toString()
-                }
+            val blockRate = if (hqBlockRate != null && hqBlockRate != nqBlockRate) {
+                "$nqBlockRate / $hqBlockRate <:hqlight:673889304359206923>"
+            } else {
+                "$nqBlockRate"
+            }
 
             return@coroutineScope arrayOf(
                 EmbedField(
                     name = Localisation.itemLevel.getValue(language),
-                    value = this@Armor.levelItem,
+                    value = this@Shield.levelItem,
                 ),
                 EmbedField(
-                    name = Localisation.defense.getValue("Defense").getValue(language),
-                    value = physicalDefense,
+                    name = Localisation.block.getValue("Strength").getValue(language),
+                    value = block,
                     inline = true
                 ), EmbedField(
-                    name = Localisation.defense.getValue("Magic Defense")
-                        .getValue(language),
-                    value = magicDefense,
+                    name = Localisation.block.getValue("Rate").getValue(language),
+                    value = blockRate,
                     inline = true
                 ),
                 EmbedField(

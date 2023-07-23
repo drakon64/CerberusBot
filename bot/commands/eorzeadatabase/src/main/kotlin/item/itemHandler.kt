@@ -10,11 +10,16 @@ import kotlinx.serialization.json.jsonPrimitive
 
 suspend fun itemHandler(item: JsonObject, language: String) = coroutineScope {
     val embed: Item = when (item["ItemKind"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
-        1, 2 -> { // Arms, Tools
-            json.decodeFromJsonElement<ArmsTools>(item)
+        1, 2 -> json.decodeFromJsonElement<ArmsTools>(item)
+
+        3 -> {
+            if (item["EquipSlotCategoryTargetID"]!!.jsonPrimitive.int == 2) {
+                json.decodeFromJsonElement<Shield>(item)
+            } else {
+                json.decodeFromJsonElement<Armor>(item)
+            }
         }
 
-        3 -> json.decodeFromJsonElement<Armor>(item)
         4 -> json.decodeFromJsonElement<Accessories>(item)
         5 -> json.decodeFromJsonElement<MedicineMeal>(item)
 

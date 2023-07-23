@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
     @SerialName("Description") override val description: String? = null,
 
     @SerialName("ClassJobCategory")
-    override val classJobCategory: ArmorAccessories.ClassJobCategory,
+    override val classJobCategory: ArmorAccessoriesShield.ClassJobCategory,
 
     @SerialName("ItemUICategory")
     override val itemUiCategory: StatsItem.ItemUICategory,
@@ -25,7 +25,7 @@ import kotlinx.serialization.Serializable
 
     @SerialName("BaseParamValueSpecial0") val baseParamValueSpecial0: Byte? = null,
     @SerialName("BaseParamValueSpecial1") val baseParamValueSpecial1: Byte? = null
-): ArmorAccessories {
+): ArmorAccessoriesShield {
     override suspend fun createEmbedFields(language: String) = coroutineScope {
         val stats = getStats(this@Accessories, language)
 
