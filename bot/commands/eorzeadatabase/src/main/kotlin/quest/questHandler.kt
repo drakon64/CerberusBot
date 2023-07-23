@@ -24,7 +24,12 @@ suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
         embedFields.add(
             EmbedField(
                 name = "Experience",
-                value = "${quest.experiencePoints} <:exp:474543347965362176>",
+                value = "${
+                    String.format(
+                        "%,d",
+                        quest.experiencePoints
+                    )
+                } <:exp:474543347965362176>",
                 inline = true
             )
         )
@@ -34,7 +39,12 @@ suspend fun questHandler(quest: Quest, lodestone: String) = coroutineScope {
         embedFields.add(
             EmbedField(
                 name = "Gil",
-                value = "${quest.gilReward} <:gil:235457032616935424>",
+                value = "${
+                    String.format(
+                        "%,d",
+                        quest.gilReward
+                    )
+                } <:gil:235457032616935424>",
                 inline = true
             )
         )
