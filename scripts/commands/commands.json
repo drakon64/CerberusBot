@@ -37,6 +37,15 @@
                             "ja": "アイテム"
                         },
                         "value": "item"
+                    },
+                    {
+                        "name": "Quest",
+                        "name_localizations": {
+                            "de": "Quest",
+                            "fr": "Quête",
+                            "ja": "クエスト"
+                        },
+                        "value": "quest"
                     }
                 ],
                 "type": 3

@@ -1,7 +1,9 @@
 package cloud.drakon.dynamisbot.eorzeadatabase
 
+import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.json
 import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.ktDiscord
 import cloud.drakon.dynamisbot.eorzeadatabase.item.itemHandler
+import cloud.drakon.dynamisbot.eorzeadatabase.quest.Quest
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
@@ -9,6 +11,7 @@ import cloud.drakon.ktxivapi.KtXivApi
 import cloud.drakon.ktxivapi.common.Language
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
+import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -79,6 +82,9 @@ suspend fun eorzeaDatabase(
 
         val embed = when (index) {
             "item" -> itemHandler(result, language, lodestone)
+
+            "quest" -> json.decodeFromJsonElement<Quest>(result)
+                .createEmbed(language, lodestone)
 
             else -> throw Throwable("Unknown index: \"$index\"")
         }

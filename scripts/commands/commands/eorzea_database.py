@@ -18,6 +18,7 @@ async def create_eorzea_database_command():
                 "required": True,
                 "choices": (
                     {"name": "Item", "name_localizations": {}, "value": "item"},
+                    {"name": "Quest", "name_localizations": {}, "value": "quest"},
                 ),
                 "type": 3,
             },
