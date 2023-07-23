@@ -23,15 +23,15 @@ import kotlinx.serialization.Serializable
         @Serializable class JournalCategory(@SerialName("Name") val name: String)
     }
 
-    private val level =
-        mapOf("ja" to "Lv", "de" to "St.", "fr" to "Niv.").withDefault { "Lv." }
+    private val level = mapOf(
+        "ja" to "Lv", "de" to "St.", "fr" to "Niv."
+    ).withDefault { "Lv." }
 
-    private val experience =
-        mapOf(
-            "ja" to "経験値",
-            "de" to "Routine",
-            "fr" to "Expérience"
-        ).withDefault { "Experience" }
+    private val experience = mapOf(
+        "ja" to "経験値",
+        "de" to "Routine",
+        "fr" to "Expérience"
+    ).withDefault { "Experience" }
 
     private val gil = mapOf("ja" to "ギル", "fr" to "Gils").withDefault { "Gil" }
 
