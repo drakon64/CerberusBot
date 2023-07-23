@@ -1,43 +1,47 @@
 package cloud.drakon.dynamisbot.eorzeadatabase.item
 
-import cloud.drakon.dynamisbot.eorzeadatabase.cleanDescription
-import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
-import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlinx.coroutines.coroutineScope
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
-    coroutineScope {
-        val stats = getStats(item, language)
+@Serializable class ArmsTools(
+    @SerialName("Name") override val name: String,
+    @SerialName("Description") override val description: String? = null,
+    @SerialName("ItemUICategory") override val itemUiCategory: StatsItem.ItemUICategory,
+    @SerialName("IconHD") override val iconHd: String,
+    @SerialName("Stats") override val stats: Map<String, Map<String, Int>>,
 
-        val description = if (item["Description"]!!.jsonPrimitive.content.isBlank()) {
-            cleanDescription(item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content)
-        } else {
-            cleanDescription(
-                item["ItemUICategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content
-                + "\n\n"
-                + item["Description"]!!.jsonPrimitive.content
-            )
-        }
+    @SerialName("ClassJobCategory") val classJobCategory: ClassJobCategory,
+    @SerialName("LevelEquip") val levelEquip: String,
+    @SerialName("ClassJobUse") val classJobUse: ClassJobUse? = null,
+    @SerialName("DamagePhys") val damagePhys: Int,
+    @SerialName("DamageMag") val damageMag: Int,
+    @SerialName("DelayMs") val delayMs: Double,
+    @SerialName("LevelItem") val levelItem: String,
+
+    @SerialName("BaseParamValueSpecial0") val baseParamValueSpecial0: Byte? = null,
+): StatsItem {
+    @Serializable class ClassJobCategory(@SerialName("Name") val name: String)
+    @Serializable class ClassJobUse(
+        @SerialName("ClassJobCategory") val classJobCategory: ClassJobCategory? = null
+    ) {
+        @Serializable class ClassJobCategory(@SerialName("ID") val id: Int? = null)
+    }
+
+    override suspend fun createEmbedFields(language: String) = coroutineScope {
+        val stats = getStats(this@ArmsTools, language)
 
         val classJob = """
-            ${item["ClassJobCategory"]!!.jsonObject["Name"]!!.jsonPrimitive.content}
-            ${Localisation.level.getValue(language)} ${item["LevelEquip"]!!.jsonPrimitive.content}
+            ${this@ArmsTools.classJobCategory.name}
+            ${Localisation.level.getValue(language)} ${this@ArmsTools.levelEquip}
         """.trimIndent()
 
         val embeds: Array<EmbedField>
 
-        val classJobCategoryId = try {
-            item["ClassJobUse"]!!.jsonObject["ClassJobCategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int
-        } catch (e: IllegalArgumentException) { // kotlinx.serialization returns `JsonNull` instead of `null` for some godforsaken reason
-            null
-        }
+        val classJobCategoryId = this@ArmsTools.classJobUse?.classJobCategory?.id
 
         if (classJobCategoryId != null) {
             val damageType: String
@@ -49,7 +53,7 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
                         Localisation.damageType.getValue("Physical Damage")
                             .getValue(language)
 
-                    nqDamage = item["DamagePhys"]!!.jsonPrimitive.int
+                    nqDamage = this@ArmsTools.damagePhys
                 }
 
                 31 -> {
@@ -57,18 +61,17 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
                         Localisation.damageType.getValue("Magic Damage")
                             .getValue(language)
 
-                    nqDamage = item["DamageMag"]!!.jsonPrimitive.int
+                    nqDamage = this@ArmsTools.damageMag
                 }
 
                 else -> throw Throwable("Unknown class/job category: $this")
             }
 
-            val hqDamage =
-                if (item["BaseParamValueSpecial0"]?.jsonPrimitive?.int != null) {
-                    nqDamage + item["BaseParamValueSpecial0"]!!.jsonPrimitive.int
-                } else {
-                    null
-                }
+            val hqDamage = if (this@ArmsTools.baseParamValueSpecial0 != null) {
+                nqDamage + this@ArmsTools.baseParamValueSpecial0
+            } else {
+                null
+            }
 
             val damage = if (hqDamage != null && hqDamage != nqDamage) {
                 "$nqDamage / $hqDamage <:hqlight:673889304359206923>"
@@ -76,11 +79,10 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
                 nqDamage.toString()
             }
 
-            val delay = ((item["DelayMs"]!!.jsonPrimitive.int).toDouble() / 1000)
+            val delay = this@ArmsTools.delayMs / 1000
 
-            val nqAutoAttack =
-                BigDecimal.valueOf((delay / 3) * nqDamage)
-                    .setScale(2, RoundingMode.DOWN)
+            val nqAutoAttack = BigDecimal.valueOf((delay / 3) * nqDamage)
+                .setScale(2, RoundingMode.DOWN)
 
             val hqAutoAttack = if (hqDamage != null) {
                 BigDecimal.valueOf((delay / 3) * hqDamage)
@@ -98,7 +100,7 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
             embeds = arrayOf(
                 EmbedField(
                     name = Localisation.itemLevel.getValue(language),
-                    value = item["LevelItem"]!!.jsonPrimitive.content,
+                    value = this@ArmsTools.levelItem,
                 ), EmbedField(
                     name = damageType, value = damage, inline = true
                 ), EmbedField(
@@ -110,18 +112,17 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
                     value = delay.toString(),
                     inline = true
                 ), EmbedField(
-                    name = "Class/Job", value = classJob, inline = true
+                    name = "Class/Job", value = classJob
                 ), EmbedField(
                     name = Localisation.bonuses.getValue("Bonuses").getValue(language),
-                    value = stats.joinToString("\n"),
-                    inline = true
+                    value = stats.joinToString("\n")
                 )
             )
         } else {
             embeds = arrayOf(
                 EmbedField(
                     name = Localisation.itemLevel.getValue(language),
-                    value = item["LevelItem"]!!.jsonPrimitive.content,
+                    value = this@ArmsTools.levelItem,
                 ), EmbedField(
                     name = "Class/Job", value = classJob, inline = true
                 ), EmbedField(
@@ -132,15 +133,6 @@ suspend fun armsTools(item: JsonObject, language: String, lodestone: String) =
             )
         }
 
-        return@coroutineScope Embed(
-            title = item["Name"]!!.jsonPrimitive.content,
-            description = description,
-            url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
-                item["Name"]!!.jsonPrimitive.content.replace(
-                    " ", "+"
-                )
-            }&db_search_category=item",
-            thumbnail = EmbedThumbnail(url = "https://xivapi.com${item["IconHD"]!!.jsonPrimitive.content}"),
-            fields = embeds
-        )
+        return@coroutineScope embeds
     }
+}
