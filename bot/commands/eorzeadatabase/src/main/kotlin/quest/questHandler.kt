@@ -17,7 +17,7 @@ suspend fun questHandler(quest: Quest, language: String, lodestone: String) =
         val embedFields = mutableListOf(
             EmbedField(
                 name = Localisation.level.getValue(language),
-                value = quest.classJobLevel.toString()
+                value = quest.classJobLevel
             )
         )
 

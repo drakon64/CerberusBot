@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
     @SerialName("Name") val name: String,
     @SerialName("JournalGenre") val journalGenre: JournalGenre,
     @SerialName("Banner") val banner: String,
-    @SerialName("ClassJobLevel0") val classJobLevel: Byte,
+    @SerialName("ClassJobLevel0") val classJobLevel: String,
     @SerialName("ExperiencePoints") val experiencePoints: Short,
     @SerialName("GilReward") val gilReward: Short
 ) {
