@@ -82,7 +82,7 @@ suspend fun eorzeaDatabase(
 
         val embed = when (index) {
             "item" -> itemHandler(result, language, lodestone)
-            "quest" -> questHandler(json.decodeFromJsonElement(result), lodestone)
+            "quest" -> questHandler(json.decodeFromJsonElement(result), language, lodestone)
             else -> throw Throwable("Unknown index: \"$index\"")
         }
 
