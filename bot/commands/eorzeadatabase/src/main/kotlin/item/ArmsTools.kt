@@ -1,8 +1,7 @@
 package cloud.drakon.dynamisbot.eorzeadatabase.item
 
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
-import java.math.BigDecimal
-import java.math.RoundingMode
+import kotlin.math.floor
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -81,12 +80,10 @@ import kotlinx.serialization.Serializable
 
             val delay = this@ArmsTools.delayMs / 1000
 
-            val nqAutoAttack = BigDecimal.valueOf((delay / 3) * nqDamage)
-                .setScale(2, RoundingMode.DOWN)
+            val nqAutoAttack = (floor(((delay / 3) * nqDamage) * 100) / 100).toString()
 
             val hqAutoAttack = if (hqDamage != null) {
-                BigDecimal.valueOf((delay / 3) * hqDamage)
-                    .setScale(2, RoundingMode.DOWN)
+                (floor(((delay / 3) * hqDamage) * 100) / 100).toString()
             } else {
                 null
             }
@@ -94,7 +91,7 @@ import kotlinx.serialization.Serializable
             val autoAttack = if (hqAutoAttack != null && hqAutoAttack != nqAutoAttack) {
                 "$nqAutoAttack / $hqAutoAttack <:hqlight:673889304359206923>"
             } else {
-                nqAutoAttack.toString()
+                nqAutoAttack
             }
 
             embeds = arrayOf(
