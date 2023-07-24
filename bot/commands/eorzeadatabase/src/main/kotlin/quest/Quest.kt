@@ -17,6 +17,7 @@ import kotlinx.serialization.Serializable
     @SerialName("GilReward") val gilReward: Short
 ) {
     @Serializable class JournalGenre(
+        @SerialName("Name") val name: String,
         @SerialName("IconHD") val icon: String,
         @SerialName("JournalCategory") val journalCategory: JournalCategory
     ) {
@@ -84,7 +85,10 @@ import kotlinx.serialization.Serializable
 
         return@coroutineScope Embed(
             title = this@Quest.name,
-            description = this@Quest.journalGenre.journalCategory.name,
+            description = """
+                ${this@Quest.journalGenre.name}
+                ${this@Quest.journalGenre.journalCategory.name}
+            """.trimIndent(),
             url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
                 this@Quest.name.replace(
                     " ",
