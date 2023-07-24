@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable class Quest(
     @SerialName("Name") val name: String,
+    @SerialName("Expansion") val expansion: Expansion,
     @SerialName("JournalGenre") val journalGenre: JournalGenre,
     @SerialName("Banner") val banner: String,
     @SerialName("ClassJobLevel0") val classJobLevel: String,
@@ -24,9 +25,11 @@ import kotlinx.serialization.Serializable
         @Serializable class JournalCategory(@SerialName("Name") val name: String)
     }
 
-//    private val genre = mapOf("" to "").withDefault { "Genre" }
+    @Serializable class Expansion(@SerialName("Name") val name: String)
 
 //    private val category = mapOf("" to "").withDefault { "Category" }
+
+//    private val subCategory = mapOf("" to "").withDefault { "Subcategory" }
 
     private val level = mapOf(
         "ja" to "Lv", "de" to "St.", "fr" to "Niv."
@@ -51,6 +54,11 @@ import kotlinx.serialization.Serializable
         }
 
         val embedFields = mutableListOf(
+            EmbedField(
+                name = "Expansion",
+                value = this@Quest.expansion.name,
+                inline = true
+            ),
             EmbedField(
                 name = "Category",
                 value = this@Quest.journalGenre.journalCategory.name,
