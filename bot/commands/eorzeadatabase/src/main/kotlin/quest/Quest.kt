@@ -65,15 +65,21 @@ import kotlinx.serialization.Serializable
                 inline = true
             ),
             EmbedField(
-                name = "Subcategory",
-                value = this@Quest.journalGenre.name,
-                inline = true
-            ),
-            EmbedField(
                 name = level.getValue(language),
                 value = this@Quest.classJobLevel
             )
         )
+
+        if (this@Quest.journalGenre.name != this@Quest.expansion.name) {
+            embedFields.add(
+                2,
+                EmbedField(
+                    name = "Subcategory",
+                    value = this@Quest.journalGenre.name,
+                    inline = true
+                ),
+            )
+        }
 
         if (this@Quest.experiencePoints > 0) {
             embedFields.add(
