@@ -24,6 +24,10 @@ import kotlinx.serialization.Serializable
         @Serializable class JournalCategory(@SerialName("Name") val name: String)
     }
 
+//    private val genre = mapOf("" to "").withDefault { "Genre" }
+
+//    private val category = mapOf("" to "").withDefault { "Category" }
+
     private val level = mapOf(
         "ja" to "Lv", "de" to "St.", "fr" to "Niv."
     ).withDefault { "Lv." }
@@ -47,6 +51,16 @@ import kotlinx.serialization.Serializable
         }
 
         val embedFields = mutableListOf(
+            EmbedField(
+                name = "Category",
+                value = this@Quest.journalGenre.journalCategory.name,
+                inline = true
+            ),
+            EmbedField(
+                name = "Subcategory",
+                value = this@Quest.journalGenre.name,
+                inline = true
+            ),
             EmbedField(
                 name = level.getValue(language),
                 value = this@Quest.classJobLevel
@@ -85,10 +99,6 @@ import kotlinx.serialization.Serializable
 
         return@coroutineScope Embed(
             title = this@Quest.name,
-            description = """
-                ${this@Quest.journalGenre.name}
-                ${this@Quest.journalGenre.journalCategory.name}
-            """.trimIndent(),
             url = "https://$lodestone.finalfantasyxiv.com/lodestone/playguide/db/search/?q=${
                 this@Quest.name.replace(
                     " ",
