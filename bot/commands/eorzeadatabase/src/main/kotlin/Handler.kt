@@ -31,7 +31,7 @@ class Handler: RequestStreamHandler {
         inputStream: InputStream,
         outputStream: OutputStream,
         context: Context,
-    ): Unit = runBlocking {
+    ) = runBlocking {
         val event: Interaction<ApplicationCommandData> =
             json.decodeFromString(inputStream.readAllBytes().decodeToString())
 
