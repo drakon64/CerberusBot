@@ -51,17 +51,15 @@ suspend fun universalisCommand(
 
     if (result != null) {
         val xivApiItem: Item = json.decodeFromJsonElement(result)
-        val xivApiItemId = xivApiItem.id
 
         val description = xivApiItem.description
             .replace(spanRegex, "")
             .replace(newLineRegex, "\n\n")
-        val canBeHighQuality = xivApiItem.canBeHq
 
-        val marketBoardCurrentData = if (highQuality == true && canBeHighQuality) {
+        val marketBoardCurrentData = if (highQuality == true && xivApiItem.canBeHq) {
             ktUniversalis.getMarketBoardCurrentData(
                 world,
-                arrayOf(xivApiItemId).toIntArray(),
+                arrayOf(xivApiItem.id).toIntArray(),
                 entries = 5,
                 listings = 5,
                 hq = true
@@ -69,14 +67,14 @@ suspend fun universalisCommand(
         } else if (highQuality == false) {
             ktUniversalis.getMarketBoardCurrentData(
                 world,
-                arrayOf(xivApiItemId).toIntArray(),
+                arrayOf(xivApiItem.id).toIntArray(),
                 entries = 5,
                 listings = 5,
                 hq = false
             )
         } else {
             ktUniversalis.getMarketBoardCurrentData(
-                world, arrayOf(xivApiItemId).toIntArray(), entries = 5, listings = 5
+                world, arrayOf(xivApiItem.id).toIntArray(), entries = 5, listings = 5
             )
         }
 
@@ -103,7 +101,7 @@ suspend fun universalisCommand(
             }
         }
 
-        val currentAveragePriceField = if (highQuality == true && canBeHighQuality) {
+        val currentAveragePriceField = if (highQuality == true && xivApiItem.canBeHq) {
             "Current average price (HQ)"
         } else if (highQuality == false) {
             "Current average price (NQ)"
@@ -111,7 +109,7 @@ suspend fun universalisCommand(
             "Current average price"
         }
 
-        val historicAveragePriceField = if (highQuality == true && canBeHighQuality) {
+        val historicAveragePriceField = if (highQuality == true && xivApiItem.canBeHq) {
             "Historic average price (HQ)"
         } else if (highQuality == false) {
             "Historic average price (NQ)"
@@ -119,7 +117,7 @@ suspend fun universalisCommand(
             "Historic average price"
         }
 
-        val currentAveragePrice = if (highQuality == true && canBeHighQuality) {
+        val currentAveragePrice = if (highQuality == true && xivApiItem.canBeHq) {
             String.format("%,f", marketBoardCurrentData.currentAveragePriceHq)
                 .trimEnd('0') + " $gil"
         } else if (highQuality == false) {
@@ -134,7 +132,7 @@ suspend fun universalisCommand(
             currentAveragePriceField, currentAveragePrice, true
         )
 
-        val historicAveragePrice = if (highQuality == true && canBeHighQuality) {
+        val historicAveragePrice = if (highQuality == true && xivApiItem.canBeHq) {
             String.format("%,f", marketBoardCurrentData.averagePriceHq)
                 .trimEnd('0') + " $gil"
         } else if (highQuality == false) {
@@ -155,7 +153,7 @@ suspend fun universalisCommand(
                     Embed(
                         title = "Current prices for ${xivApiItem.name}",
                         description = description,
-                        url = "https://universalis.app/market/$xivApiItemId",
+                        url = "https://universalis.app/market/$xivApiItem.id",
                         thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
                         fields = arrayOf(
                             currentAveragePriceEmbed,
