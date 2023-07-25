@@ -41,6 +41,6 @@ class Handler: RequestStreamHandler {
         val event: Interaction<ApplicationCommandData> =
             json.decodeFromString(inputStream.readAllBytes().decodeToString())
 
-        Universalis.universalisCommand(event, context.logger)
+        universalisCommand(event, context.logger)
     }
 }
