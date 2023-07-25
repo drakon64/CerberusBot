@@ -23,13 +23,13 @@ suspend fun eorzeaDatabase(
 ) {
     logger.log("Responding to Eorzea Database command")
 
-    lateinit var index: String
+    lateinit var index: Index
     lateinit var query: String
     var language: String? = null
 
     for (i in event.data!!.options!!) {
         when (i.name) {
-            "index" -> index = i.value!!
+            "index" -> index = Index.valueOf(i.value!!)
             "query" -> query = i.value!!
             "language" -> language = i.value!!
         }
@@ -68,7 +68,7 @@ suspend fun eorzeaDatabase(
         else -> throw Throwable("Unknown language: \"$language\"")
     }
 
-    val columns = if (index == "quest") {
+    val columns = if (index.name == "quest") {
         listOf(
             "Name",
             "Expansion.Name",
@@ -86,7 +86,7 @@ suspend fun eorzeaDatabase(
 
     val search = KtXivApi.search(
         query,
-        indexes = listOf(index),
+        indexes = listOf(index.name),
         stringAlgo = StringAlgo.fuzzy,
         limit = 1,
         language = searchLanguage,
@@ -94,9 +94,9 @@ suspend fun eorzeaDatabase(
     ).jsonObject["Results"]!!.jsonArray.getOrNull(0)
 
     if (search != null) {
-        val result = if (index != "quest") {
+        val result = if (index != Index.quest) {
             KtXivApi.getContentId(
-                index,
+                index.name,
                 search.jsonObject["ID"]!!.jsonPrimitive.int,
                 searchLanguage
             )
@@ -105,12 +105,10 @@ suspend fun eorzeaDatabase(
         }
 
         val embed = when (index) {
-            "item" -> itemHandler(result, language, lodestone)
+            Index.item -> itemHandler(result, language, lodestone)
 
-            "quest" -> json.decodeFromJsonElement<Quest>(search)
+            Index.quest -> json.decodeFromJsonElement<Quest>(search)
                 .createEmbed(language, lodestone)
-
-            else -> throw Throwable("Unknown index: \"$index\"")
         }
 
         ktDiscord.editOriginalInteractionResponse(
