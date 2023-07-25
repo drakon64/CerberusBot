@@ -2,12 +2,12 @@ package cloud.drakon.dynamisbot.eorzeadatabase
 
 import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.json
 import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.ktDiscord
+import cloud.drakon.dynamisbot.eorzeadatabase.Handler.Companion.ktXivApi
 import cloud.drakon.dynamisbot.eorzeadatabase.item.itemHandler
 import cloud.drakon.dynamisbot.eorzeadatabase.quest.Quest
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.ktxivapi.KtXivApi
 import cloud.drakon.ktxivapi.common.Language
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
@@ -85,7 +85,7 @@ suspend fun eorzeaDatabase(
         null
     }
 
-    val search = KtXivApi.search(
+    val search = ktXivApi.search(
         query,
         indexes = listOf(index.name),
         stringAlgo = StringAlgo.fuzzy,
@@ -96,7 +96,7 @@ suspend fun eorzeaDatabase(
 
     if (search != null) {
         val result = if (index != Index.quest) {
-            KtXivApi.getContentId(
+            ktXivApi.getContentId(
                 index.name,
                 search.jsonObject["ID"]!!.jsonPrimitive.int,
                 searchLanguage

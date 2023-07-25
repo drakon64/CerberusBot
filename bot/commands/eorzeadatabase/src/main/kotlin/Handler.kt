@@ -3,6 +3,7 @@ package cloud.drakon.dynamisbot.eorzeadatabase
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktxivapi.KtXivApi
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
 import java.io.InputStream
@@ -17,6 +18,8 @@ class Handler: RequestStreamHandler {
         val ktDiscord = KtDiscord(
             System.getenv("APPLICATION_ID"), System.getenv("BOT_TOKEN")
         ).Interaction(System.getenv("PUBLIC_KEY"))
+
+        val ktXivApi = KtXivApi
 
         val json = Json {
             ignoreUnknownKeys = true
