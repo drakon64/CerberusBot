@@ -11,6 +11,7 @@ import cloud.drakon.ktxivapi.KtXivApi
 import cloud.drakon.ktxivapi.common.Language
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
@@ -105,7 +106,7 @@ suspend fun eorzeaDatabase(
         }
 
         val embed = when (index) {
-            Index.item -> itemHandler(result, language, lodestone)
+            Index.item -> itemHandler(result as JsonObject, language, lodestone)
 
             Index.quest -> json.decodeFromJsonElement<Quest>(search)
                 .createEmbed(language, lodestone)
