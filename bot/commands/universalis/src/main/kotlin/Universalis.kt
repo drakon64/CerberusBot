@@ -46,7 +46,7 @@ suspend fun universalisCommand(
         item,
         listOf("Item"),
         StringAlgo.fuzzy,
-        columns = listOf("ID", "CanBeHq", "Description", "ID", "Name")
+        columns = listOf("Name", "Description", "ID", "IconHD", "CanBeHq")
     ).jsonObject["Results"]?.jsonArray?.getOrNull(0)
 
     if (result != null) {
