@@ -68,22 +68,46 @@ suspend fun eorzeaDatabase(
         else -> throw Throwable("Unknown language: \"$language\"")
     }
 
+    val columns = if (index == "quest") {
+        listOf(
+            "Name",
+            "Expansion.Name",
+            "JournalGenre.Name",
+            "JournalGenre.IconHD",
+            "JournalGenre.JournalCategory.Name",
+            "Banner",
+            "ClassJobLevel0",
+            "ExperiencePoints",
+            "GilReward"
+        )
+    } else {
+        null
+    }
+
     val search = KtXivApi.search(
         query,
         indexes = listOf(index),
         stringAlgo = StringAlgo.fuzzy,
         limit = 1,
-        language = searchLanguage
+        language = searchLanguage,
+        columns = columns
     ).jsonObject["Results"]!!.jsonArray.getOrNull(0)
 
     if (search != null) {
-        val id = search.jsonObject["ID"]!!.jsonPrimitive.int
-        val result = KtXivApi.getContentId(index, id, searchLanguage)
+        val result = if (index != "quest") {
+            KtXivApi.getContentId(
+                index,
+                search.jsonObject["ID"]!!.jsonPrimitive.int,
+                searchLanguage
+            )
+        } else {
+            search
+        }
 
         val embed = when (index) {
             "item" -> itemHandler(result, language, lodestone)
 
-            "quest" -> json.decodeFromJsonElement<Quest>(result)
+            "quest" -> json.decodeFromJsonElement<Quest>(search)
                 .createEmbed(language, lodestone)
 
             else -> throw Throwable("Unknown index: \"$index\"")

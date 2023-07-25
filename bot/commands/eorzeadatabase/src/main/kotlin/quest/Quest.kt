@@ -17,6 +17,8 @@ import kotlinx.serialization.Serializable
     @SerialName("ExperiencePoints") val experiencePoints: Int,
     @SerialName("GilReward") val gilReward: Short
 ) {
+    @Serializable class Expansion(@SerialName("Name") val name: String)
+
     @Serializable class JournalGenre(
         @SerialName("Name") val name: String,
         @SerialName("IconHD") val icon: String,
@@ -24,8 +26,6 @@ import kotlinx.serialization.Serializable
     ) {
         @Serializable class JournalCategory(@SerialName("Name") val name: String)
     }
-
-    @Serializable class Expansion(@SerialName("Name") val name: String)
 
 //    private val category = mapOf("" to "").withDefault { "Category" }
 
