@@ -50,13 +50,14 @@ suspend fun universalisCommand(
     ).jsonObject["Results"]?.jsonArray?.getOrNull(0)
 
     if (result != null) {
-        val xivApiItem: Item = json.decodeFromJsonElement(result)
+        val xivApiItem = json.decodeFromJsonElement<Item>(result)
+        val canBeHq = xivApiItem.canBeHq == 1
 
         val description = xivApiItem.description
             .replace(spanRegex, "")
             .replace(newLineRegex, "\n\n")
 
-        val marketBoardCurrentData = if (highQuality == true && xivApiItem.canBeHq) {
+        val marketBoardCurrentData = if (highQuality == true && canBeHq) {
             ktUniversalis.getMarketBoardCurrentData(
                 world,
                 arrayOf(xivApiItem.id).toIntArray(),
@@ -101,7 +102,7 @@ suspend fun universalisCommand(
             }
         }
 
-        val currentAveragePriceField = if (highQuality == true && xivApiItem.canBeHq) {
+        val currentAveragePriceField = if (highQuality == true && canBeHq) {
             "Current average price (HQ)"
         } else if (highQuality == false) {
             "Current average price (NQ)"
@@ -109,7 +110,7 @@ suspend fun universalisCommand(
             "Current average price"
         }
 
-        val historicAveragePriceField = if (highQuality == true && xivApiItem.canBeHq) {
+        val historicAveragePriceField = if (highQuality == true && canBeHq) {
             "Historic average price (HQ)"
         } else if (highQuality == false) {
             "Historic average price (NQ)"
@@ -117,7 +118,7 @@ suspend fun universalisCommand(
             "Historic average price"
         }
 
-        val currentAveragePrice = if (highQuality == true && xivApiItem.canBeHq) {
+        val currentAveragePrice = if (highQuality == true && canBeHq) {
             String.format("%,f", marketBoardCurrentData.currentAveragePriceHq)
                 .trimEnd('0') + " $gil"
         } else if (highQuality == false) {
@@ -132,7 +133,7 @@ suspend fun universalisCommand(
             currentAveragePriceField, currentAveragePrice, true
         )
 
-        val historicAveragePrice = if (highQuality == true && xivApiItem.canBeHq) {
+        val historicAveragePrice = if (highQuality == true && canBeHq) {
             String.format("%,f", marketBoardCurrentData.averagePriceHq)
                 .trimEnd('0') + " $gil"
         } else if (highQuality == false) {

@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
     @SerialName("Description") val description: String,
     @SerialName("ID") val id: Int,
     @SerialName("IconHD") val iconHd: String,
-    @SerialName("CanBeHq") val canBeHq: Boolean
+    @SerialName("CanBeHq") val canBeHq: Int
 )
