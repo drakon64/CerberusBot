@@ -15,8 +15,12 @@ val json = Json {
     isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
 }
 
-external fun require(module: String): dynamic
-val process = require("process")
+external interface Process {
+    val env: dynamic
+}
+
+external val process: dynamic
+
 val ktDiscord = KtDiscord(
     process.env.APPLICATION_ID as String,
     process.env.BOT_TOKEN as String
