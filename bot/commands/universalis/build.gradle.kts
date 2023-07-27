@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("multiplatform") version "1.9.0"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
 }
 
@@ -7,7 +7,25 @@ group = "cloud.drakon"
 version = "0.0.1-SNAPSHOT"
 
 kotlin {
-    jvmToolchain(17)
+    js {
+        nodejs {
+            binaries.executable()
+            useEsModules()
+        }
+    }
+
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation("cloud.drakon:ktdiscord:6.1.0")
+                implementation("cloud.drakon:ktxivapi:0.0.1-SNAPSHOT")
+                implementation("cloud.drakon:ktuniversalis:3.0.0")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+            }
+        }
+    }
 }
 
 repositories {
@@ -39,24 +57,5 @@ repositories {
             username = System.getenv("GITHUB_ACTOR")
             password = System.getenv("GITHUB_TOKEN")
         }
-    }
-}
-
-dependencies {
-    implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
-
-    implementation("cloud.drakon:ktdiscord:6.1.0")
-    implementation("cloud.drakon:ktxivapi:0.0.1-SNAPSHOT")
-    implementation("cloud.drakon:ktuniversalis:2.0.0")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-
-    testImplementation(kotlin("test"))
-}
-
-tasks {
-    test {
-        useJUnitPlatform()
     }
 }
