@@ -33,6 +33,6 @@ val spanRegex = """<span.*?>|</span>""".toRegex()
 val newLineRegex = """\n{3,}""".toRegex()
 
 @JsExport
-fun handler(event: Any?, context: Any?) = GlobalScope.promise {
-    universalisCommand(json.decodeFromString(event as String))
+fun handler(event: JSON, context: Any?) = GlobalScope.promise {
+    universalisCommand(json.decodeFromString(JSON.stringify(event)))
 }
