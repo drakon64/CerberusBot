@@ -15,7 +15,12 @@ val json = Json {
     isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
 }
 
-val ktDiscord = KtDiscord("APPLICATION_ID", "BOT_TOKEN").Interaction("PUBLIC_KEY")
+external fun require(module: String): dynamic
+val process = require("process")
+val ktDiscord = KtDiscord(
+    process.env.APPLICATION_ID as String,
+    process.env.BOT_TOKEN as String
+).Interaction(process.env.PUBLIC_KEY as String)
 
 val ktXivApi = KtXivApi
 val ktUniversalis = KtUniversalis
