@@ -88,16 +88,13 @@ Resources:
   DynamisBotUniversalisFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: bot/commands/universalis
-      Handler: cloud.drakon.dynamisbot.universalis.Handler::handleRequest
-      Runtime: java17
+      CodeUri: bot/commands/universalis/build/js/packages/universalis/universalis.zip
+      Handler: universalis.handler
+      Runtime: nodejs18.x
       Architectures:
-        - x86_64
+        - arm64
       MemorySize: 512
       Timeout: 900
-      AutoPublishAlias: SnapStart
-      SnapStart:
-        ApplyOn: PublishedVersions
       Environment:
         Variables:
           APPLICATION_ID:

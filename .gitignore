@@ -1,6 +1,8 @@
 .aws-sam
 .DS_Store
 
+**/kotlin-js-store
+
 .idea/discord.xml
 
 resources/iam main.json

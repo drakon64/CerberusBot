@@ -28,6 +28,15 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
+      - name: Compile `universalis` to Node.js
+        shell: sh
+        run: |
+          cd bot/commands/universalis
+          ./gradlew compileProductionExecutableKotlinJs
+          cd build/js/packages/universalis/kotlin
+          zip -9 ../universalis *.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: sam build
         run: sam build
         env:
