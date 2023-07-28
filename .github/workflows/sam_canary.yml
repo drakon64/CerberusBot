@@ -35,6 +35,9 @@ jobs:
           ./gradlew compileProductionExecutableKotlinJs
           cd build/js/packages/universalis/kotlin
           sed -i "s/eval('require')/import/g" *.mjs
+          mv * ../
+          cd ..
+          rmdir kotlin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: sam build
