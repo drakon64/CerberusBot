@@ -66,7 +66,8 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
                 )
             }
 
-            val marketBoardListings = marketBoardCurrentData.listings
+            val marketBoardListings =
+                marketBoardCurrentData.listings // TODO: Confirm if this is needed with K2 compiler
             val listings = mutableListOf<String>()
             val gil = "<:gil:235457032616935424>"
 
