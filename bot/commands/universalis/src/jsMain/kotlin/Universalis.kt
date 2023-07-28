@@ -74,8 +74,10 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
                 listings.add("None")
             } else {
                 for (listing in marketBoardListings) {
-                    val pricePerUnit = listing.pricePerUnit
-                    val totalPrice = listing.pricePerUnit * listing.quantity
+                    // TODO: Replace with Number.toLocaleString('en')
+                    val pricePerUnit = js("listing.pricePerUnit.toLocaleString(\"en\")")
+                    val totalPrice =
+                        js("(listing.pricePerUnit * listing.quantity).toLocaleString(\"en\")")
 
                     var listingString =
                         "$pricePerUnit $gil x ${listing.quantity} ($totalPrice) [${listing.worldName}]"
@@ -104,14 +106,23 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
             }
 
             val currentAveragePrice = if (highQuality == true && canBeHq) {
-                marketBoardCurrentData.currentAveragePriceHq.toString()
+                // TODO: Replace with Number.toLocaleString('en')
+                val currentAveragePrice = marketBoardCurrentData.currentAveragePriceHq
+                    .toString()
                     .trimEnd('0') + " $gil"
+                js("currentAveragePrice.toLocaleString(\"en\")")
             } else if (highQuality == false) {
-                marketBoardCurrentData.currentAveragePriceNq.toString()
+                // TODO: Replace with Number.toLocaleString('en')
+                val currentAveragePrice = marketBoardCurrentData.currentAveragePriceNq
+                    .toString()
                     .trimEnd('0') + " $gil"
+                js("currentAveragePrice.toLocaleString(\"en\")")
             } else {
-                marketBoardCurrentData.currentAveragePrice.toString()
+                // TODO: Replace with Number.toLocaleString('en')
+                val currentAveragePrice = marketBoardCurrentData.currentAveragePrice
+                    .toString()
                     .trimEnd('0') + " $gil"
+                js("currentAveragePrice.toLocaleString(\"en\")")
             }
 
             val currentAveragePriceEmbed = EmbedField(
@@ -119,13 +130,23 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
             )
 
             val historicAveragePrice = if (highQuality == true && canBeHq) {
-                marketBoardCurrentData.averagePriceHq.toString()
+                // TODO: Replace with Number.toLocaleString('en')
+                val historicAveragePrice = marketBoardCurrentData.averagePriceHq
+                    .toString()
                     .trimEnd('0') + " $gil"
+                js("historicAveragePrice.toLocaleString(\"en\")")
             } else if (highQuality == false) {
-                marketBoardCurrentData.averagePriceNq.toString()
+                // TODO: Replace with Number.toLocaleString('en')
+                val historicAveragePrice = marketBoardCurrentData.averagePriceNq
+                    .toString()
                     .trimEnd('0') + " $gil"
+                js("historicAveragePrice.toLocaleString(\"en\")")
             } else {
-                marketBoardCurrentData.averagePrice.toString().trimEnd('0') + " $gil"
+                // TODO: Replace with Number.toLocaleString('en')
+                val historicAveragePrice = marketBoardCurrentData.averagePrice
+                    .toString()
+                    .trimEnd('0') + " $gil"
+                js("historicAveragePrice.toLocaleString(\"en\")")
             }
 
             val historicAveragePriceEmbed = EmbedField(
