@@ -88,8 +88,8 @@ Resources:
   DynamisBotUniversalisFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: bot/commands/universalis/build/js
-      Handler: universalis.handler
+      CodeUri: bot/commands/universalis/build/js/packages/universalis
+      Handler: kotlin/universalis.handler
       Runtime: nodejs18.x
       Architectures:
         - arm64
