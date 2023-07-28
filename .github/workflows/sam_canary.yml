@@ -34,6 +34,7 @@ jobs:
           cd bot/commands/universalis
           ./gradlew compileProductionExecutableKotlinJs
           cd build/js/packages/universalis/kotlin
+          sed -i "s/eval('require')/import/g" *.mjs
           zip -9 ../universalis *.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
