@@ -103,6 +103,16 @@ Resources:
             Ref: BotTokenParameter
           PUBLIC_KEY:
             Ref: PublicKeyParameter
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        EntryPoints:
+          - universalis.mjs
+        Format: esm
+        OutExtension:
+          - .js=.mjs
+        Sourcemap: true
+        SourcesContent: false
 
 Outputs:
   DynamisBot:

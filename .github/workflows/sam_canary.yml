@@ -35,7 +35,7 @@ jobs:
           ./gradlew build
           cd build/js/packages/universalis
           sed -i "s/eval('require')/import/g" kotlin/*.mjs
-          sudo apt -y install jq
+          sudo apt -y install jq esbuild
           PACKAGE=$(mktemp)
           jq '.main = "universalis.mjs"' package.json > $PACKAGE
           mv $PACKAGE package.json
