@@ -10,9 +10,8 @@ import kotlinx.serialization.json.Json
 // Initialise these during the initialization phase
 
 val json = Json {
-    ignoreUnknownKeys =
-        true // Not all fields returned by the Discord API are documented
-    isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
+    ignoreUnknownKeys = true // Not all fields returned by the Discord API are documented
+    isLenient = true // TODO https://github.com/TempestProject/KtDiscord/issues/3
 }
 
 @JsName("process")
