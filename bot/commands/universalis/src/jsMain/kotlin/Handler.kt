@@ -15,16 +15,15 @@ val json = Json {
     isLenient = true // TODO https://github.com/TempestProject/Tempest/issues/3
 }
 
-external interface Process {
+@JsName("process")
+external object Process {
     val env: dynamic
 }
 
-external val process: dynamic
-
 val ktDiscord = KtDiscord(
-    process.env.APPLICATION_ID as String,
-    process.env.BOT_TOKEN as String,
-).Interaction(process.env.PUBLIC_KEY as String)
+    Process.env.APPLICATION_ID as String,
+    Process.env.BOT_TOKEN as String,
+).Interaction(Process.env.PUBLIC_KEY as String)
 
 val ktXivApi = KtXivApi
 val ktUniversalis = KtUniversalis
