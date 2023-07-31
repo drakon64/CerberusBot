@@ -30,7 +30,7 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
             item,
             listOf("Item"),
             StringAlgo.fuzzy,
-            columns = listOf("Name", "Description", "ID", "IconHD", "CanBeHq")
+            columns = listOf("Name", "Description", "ID", "IconHD", "CanBeHq"),
         ).jsonObject["Results"]?.jsonArray?.getOrNull(0)
 
         if (result != null) {
@@ -47,7 +47,7 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
                     listOf(xivApiItem.id),
                     entries = 5,
                     listings = 5,
-                    hq = true
+                    hq = true,
                 )
             } else if (highQuality == false) {
                 ktUniversalis.getMarketBoardCurrentData(
@@ -55,19 +55,18 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
                     listOf(xivApiItem.id),
                     entries = 5,
                     listings = 5,
-                    hq = false
+                    hq = false,
                 )
             } else {
                 ktUniversalis.getMarketBoardCurrentData(
                     world,
                     listOf(xivApiItem.id),
                     entries = 5,
-                    listings = 5
+                    listings = 5,
                 )
             }
 
-            val marketBoardListings =
-                marketBoardCurrentData.listings // TODO: Confirm if this is needed with K2 compiler
+            val marketBoardListings = marketBoardCurrentData.listings // TODO: Confirm if this is needed with K2 compiler
             val listings = mutableListOf<String>()
             val gil = "<:gil:235457032616935424>"
 
@@ -78,7 +77,9 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
                     // TODO: Replace with Number.toLocaleString('en')
                     val pricePerUnit = js("listing.pricePerUnit.toLocaleString(\"en\")")
                     val totalPrice =
-                        js("(listing.pricePerUnit * listing.quantity).toLocaleString(\"en\")")
+                        js(
+                            "(listing.pricePerUnit * listing.quantity).toLocaleString(\"en\")",
+                        )
 
                     var listingString =
                         "$pricePerUnit $gil x ${listing.quantity} ($totalPrice) [${listing.worldName}]"
@@ -127,7 +128,9 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
             }
 
             val currentAveragePriceEmbed = EmbedField(
-                currentAveragePriceField, currentAveragePrice, true
+                name = currentAveragePriceField,
+                value = currentAveragePrice,
+                inline = true,
             )
 
             val historicAveragePrice = if (highQuality == true && canBeHq) {
@@ -151,7 +154,9 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
             }
 
             val historicAveragePriceEmbed = EmbedField(
-                historicAveragePriceField, historicAveragePrice, true
+                name = historicAveragePriceField,
+                value = historicAveragePrice,
+                inline = true,
             )
 
             return@coroutineScope ktDiscord.editOriginalInteractionResponse(
@@ -161,23 +166,26 @@ suspend fun universalisCommand(event: Interaction<ApplicationCommandData>) =
                             title = "Current prices for ${xivApiItem.name}",
                             description = description,
                             url = "https://universalis.app/market/$xivApiItem.id",
-                            thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
+                            thumbnail = EmbedThumbnail(
+                                "https://xivapi.com${xivApiItem.iconHd}",
+                            ),
                             fields = arrayOf(
                                 currentAveragePriceEmbed,
                                 historicAveragePriceEmbed,
                                 EmbedField(
                                     name = "Listings",
-                                    value = listings.joinToString("\n")
-                                )
-                            )
-                        )
-                    )
-                ), event.token
+                                    value = listings.joinToString("\n"),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                event.token,
             )
         } else {
             return@coroutineScope ktDiscord.editOriginalInteractionResponse(
                 EditWebhookMessage(content = "Could not find item \"$item\""),
-                event.token
+                event.token,
             )
         }
     }

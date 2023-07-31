@@ -23,7 +23,7 @@ external val process: dynamic
 
 val ktDiscord = KtDiscord(
     process.env.APPLICATION_ID as String,
-    process.env.BOT_TOKEN as String
+    process.env.BOT_TOKEN as String,
 ).Interaction(process.env.PUBLIC_KEY as String)
 
 val ktXivApi = KtXivApi
