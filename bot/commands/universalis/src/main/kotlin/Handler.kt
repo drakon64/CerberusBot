@@ -2,7 +2,7 @@ package cloud.drakon.dynamisbot.universalis
 
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
-import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.interaction.interactiondata.ApplicationCommandData
 import cloud.drakon.ktuniversalis.KtUniversalis
 import cloud.drakon.ktxivapi.KtXivApi
 import com.amazonaws.services.lambda.runtime.Context

@@ -11,7 +11,7 @@ import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
 import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.interaction.Interaction
-import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.interaction.interactiondata.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
@@ -150,13 +150,13 @@ suspend fun universalisCommand(
 
         return@coroutineScope ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
-                embeds = arrayOf(
+                embeds = listOf(
                     Embed(
                         title = "Current prices for ${xivApiItem.name}",
                         description = description,
                         url = "https://universalis.app/market/$xivApiItem.id",
                         thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
-                        fields = arrayOf(
+                        fields = listOf(
                             currentAveragePriceEmbed,
                             historicAveragePriceEmbed,
                             EmbedField(
