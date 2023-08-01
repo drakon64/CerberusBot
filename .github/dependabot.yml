@@ -6,7 +6,12 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "gradle" # See documentation for possible values
-    directory: "/bot/interact" # Location of package manifests
+    directory: "/bot/commands/eorzeadatabase" # Location of package manifests
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gradle" # See documentation for possible values
+    directory: "/bot/commands/lodestone" # Location of package manifests
     schedule:
       interval: "daily"
 

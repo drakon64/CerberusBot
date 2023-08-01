@@ -60,7 +60,7 @@ suspend fun universalisCommand(
         val marketBoardCurrentData = if (highQuality == true && canBeHq) {
             ktUniversalis.getMarketBoardCurrentData(
                 world,
-                arrayOf(xivApiItem.id).toIntArray(),
+                listOf(xivApiItem.id),
                 entries = 5,
                 listings = 5,
                 hq = true
@@ -68,14 +68,14 @@ suspend fun universalisCommand(
         } else if (highQuality == false) {
             ktUniversalis.getMarketBoardCurrentData(
                 world,
-                arrayOf(xivApiItem.id).toIntArray(),
+                listOf(xivApiItem.id),
                 entries = 5,
                 listings = 5,
                 hq = false
             )
         } else {
             ktUniversalis.getMarketBoardCurrentData(
-                world, arrayOf(xivApiItem.id).toIntArray(), entries = 5, listings = 5
+                world, listOf(xivApiItem.id), entries = 5, listings = 5
             )
         }
 
