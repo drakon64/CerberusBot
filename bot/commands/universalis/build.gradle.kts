@@ -49,7 +49,7 @@ dependencies {
     implementation("cloud.drakon:ktxivapi:0.0.1-SNAPSHOT")
     implementation("cloud.drakon:ktuniversalis:2.0.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     testImplementation(kotlin("test"))
