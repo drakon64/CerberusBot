@@ -45,6 +45,7 @@ def translate_command(command: dict, slash_command=True):
                 command["name_localizations"][target_language["discord"]] = (
                     command["name_localizations"][target_language["discord"]]
                     .replace(" ", "_")
+                    .replace("'", "")
                     .lower()
                 )
 

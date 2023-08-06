@@ -3,7 +3,7 @@
         "name": "eorzea_database",
         "name_localizations": {
             "de": "eorzea-datenbank",
-            "fr": "base_de_données_d'éorzéa",
+            "fr": "base_de_données_déorzéa",
             "ja": "エオルゼアデータベース"
         },
         "description": "Search the Eorzea Database",
