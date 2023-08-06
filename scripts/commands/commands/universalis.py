@@ -9,6 +9,7 @@ async def create_universalis_command():
         "description": "Get Final Fantasy XIV market board listings",
         "description_localizations": {},
         "type": 1,
+        "skip_localization": True,
         "options": [
             {
                 "name": "item",

@@ -441,11 +441,6 @@
     },
     {
         "name": "universalis",
-        "name_localizations": {
-            "de": "universal_ist",
-            "fr": "universalis",
-            "ja": "普遍的だ"
-        },
         "description": "Get Final Fantasy XIV market board listings",
         "description_localizations": {
             "de": "Hol dir die Angebote auf dem Final Fantasy XIV Market Board",

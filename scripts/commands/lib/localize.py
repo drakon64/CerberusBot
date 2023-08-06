@@ -22,16 +22,17 @@ def translate_text(text: str, target_language_code: str) -> str:
 
 def translate_command(command: dict, slash_command=True):
     for target_language in discord_to_aws:
-        command["name_localizations"][target_language["discord"]] = translate_text(
-            command["name"], target_language["aws"]
-        )
-
-        if slash_command:
-            command["name_localizations"][target_language["discord"]] = (
-                command["name_localizations"][target_language["discord"]]
-                .replace(" ", "_")
-                .lower()
+        if "skip_localization" not in command or not command["skip_localization"]:
+            command["name_localizations"][target_language["discord"]] = translate_text(
+                command["name"], target_language["aws"]
             )
+
+            if slash_command:
+                command["name_localizations"][target_language["discord"]] = (
+                    command["name_localizations"][target_language["discord"]]
+                    .replace(" ", "_")
+                    .lower()
+                )
 
         if "description" in command:
             command["description_localizations"][target_language["discord"]] = (
@@ -83,6 +84,10 @@ def translate_command(command: dict, slash_command=True):
                 option_or_subcommand["name"] = (
                     option_or_subcommand["name"].replace(" ", "_").lower()
                 )
+
+    if "skip_localization" in command and command["skip_localization"]:
+        del command["skip_localization"]
+        del command["name_localizations"]
 
     if slash_command:
         command["name"] = command["name"].replace(" ", "_").lower()
