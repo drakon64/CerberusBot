@@ -13,7 +13,10 @@ translate_client = boto3.client(
 
 def translate_text(text: str, target_language_code: str) -> str:
     return translate_client.translate_text(
-        Text=text, SourceLanguageCode="en", TargetLanguageCode=target_language_code
+        Text=text,
+        SourceLanguageCode="en",
+        TargetLanguageCode=target_language_code,
+        Settings={"Formality": "INFORMAL"},
     ).get("TranslatedText")
 
 
