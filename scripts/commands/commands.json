@@ -3,13 +3,13 @@
         "name": "eorzea_database",
         "name_localizations": {
             "de": "eorzea-datenbank",
-            "fr": "base_de_données_éorzéa",
+            "fr": "base_de_données_d'éorzéa",
             "ja": "エオルゼアデータベース"
         },
         "description": "Search the Eorzea Database",
         "description_localizations": {
             "de": "Durchsuche die Eorzea-Datenbank",
-            "fr": "Rechercher dans la base de données Éorzéa",
+            "fr": "Rechercher dans la base de données d'Éorzéa",
             "ja": "エオルゼアのデータベースを検索する"
         },
         "type": 1,
@@ -143,11 +143,11 @@
             "fr": "lodestone",
             "ja": "lodestone"
         },
-        "description": "Final Fantasy XIV, The Lodestone",
+        "description": "FINAL FANTASY XIV, The Lodestone",
         "description_localizations": {
-            "de": "Final Fantasy XIV, Der Lodestone",
-            "fr": "Final Fantasy XIV, The Lodestone",
-            "ja": "ファイナルファンタジーXIV、ロードストーン"
+            "de": "FINAL FANTASY XIV - Der Lodestone",
+            "fr": "FINAL FANTASY XIV, The Lodestone",
+            "ja": "FINAL FANTASY XIV, The Lodestone"
         },
         "dm_permission": false,
         "type": 1,

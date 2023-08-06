@@ -6,7 +6,7 @@ async def create_lodestone_command():
     command = {
         "name": "Lodestone",
         "name_localizations": {},
-        "description": "Final Fantasy XIV, The Lodestone",
+        "description": "FINAL FANTASY XIV, The Lodestone",
         "description_localizations": {},
         "dm_permission": False,
         "type": 1,

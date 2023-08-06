@@ -10,10 +10,24 @@ translate_client = boto3.client(
     service_name="translate", region_name="eu-west-2", use_ssl=True
 )
 
+with open("terminology.csv", "rb") as terminology_csv:
+    terminology = terminology_csv.read()
+
+translate_client.import_terminology(
+    Name="DynamisBot",
+    MergeStrategy="OVERWRITE",
+    TerminologyData={
+        "File": terminology,
+        "Format": "CSV",
+        "Directionality": "UNI",
+    },
+)
+
 
 def translate_text(text: str, target_language_code: str) -> str:
     return translate_client.translate_text(
         Text=text,
+        TerminologyNames=("DynamisBot",),
         SourceLanguageCode="en",
         TargetLanguageCode=target_language_code,
         Settings={"Formality": "INFORMAL"},
