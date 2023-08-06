@@ -13,12 +13,15 @@ import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.interactiondata.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
+import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
+
+const val gil = "<:gil:235457032616935424>"
 
 suspend fun universalisCommand(
     event: Interaction<ApplicationCommandData>,
@@ -81,7 +84,6 @@ suspend fun universalisCommand(
 
         val marketBoardListings = marketBoardCurrentData.listings
         val listings = mutableListOf<String>()
-        val gil = "<:gil:235457032616935424>"
 
         if (marketBoardListings.isNullOrEmpty()) {
             listings.add("None")
@@ -118,34 +120,16 @@ suspend fun universalisCommand(
             "Historic average price"
         }
 
-        val currentAveragePrice = if (highQuality == true && canBeHq) {
-            String.format("%,f", marketBoardCurrentData.currentAveragePriceHq)
-                .trimEnd('0') + " $gil"
-        } else if (highQuality == false) {
-            String.format("%,f", marketBoardCurrentData.currentAveragePriceNq)
-                .trimEnd('0') + " $gil"
-        } else {
-            String.format("%,f", marketBoardCurrentData.currentAveragePrice)
-                .trimEnd('0') + " $gil"
-        }
-
-        val currentAveragePriceEmbed = EmbedField(
-            currentAveragePriceField, currentAveragePrice, true
+        val currentAveragePrice = EmbedField(
+            currentAveragePriceField,
+            getAveragePrice(highQuality, canBeHq, marketBoardCurrentData),
+            true
         )
 
-        val historicAveragePrice = if (highQuality == true && canBeHq) {
-            String.format("%,f", marketBoardCurrentData.averagePriceHq)
-                .trimEnd('0') + " $gil"
-        } else if (highQuality == false) {
-            String.format("%,f", marketBoardCurrentData.averagePriceNq)
-                .trimEnd('0') + " $gil"
-        } else {
-            String.format("%,f", marketBoardCurrentData.averagePrice)
-                .trimEnd('0') + " $gil"
-        }
-
-        val historicAveragePriceEmbed = EmbedField(
-            historicAveragePriceField, historicAveragePrice, true
+        val historicAveragePrice = EmbedField(
+            historicAveragePriceField,
+            getAveragePrice(highQuality, canBeHq, marketBoardCurrentData, false),
+            true
         )
 
         return@coroutineScope ktDiscord.editOriginalInteractionResponse(
@@ -157,8 +141,8 @@ suspend fun universalisCommand(
                         url = "https://universalis.app/market/$xivApiItem.id",
                         thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
                         fields = listOf(
-                            currentAveragePriceEmbed,
-                            historicAveragePriceEmbed,
+                            currentAveragePrice,
+                            historicAveragePrice,
                             EmbedField(
                                 name = "Listings",
                                 value = listings.joinToString("\n")
@@ -174,4 +158,33 @@ suspend fun universalisCommand(
             event.token
         )
     }
+}
+
+fun getAveragePrice(
+    highQuality: Boolean?,
+    canBeHq: Boolean,
+    marketBoardCurrentData: CurrentlyShown,
+    current: Boolean = true
+): String {
+    val averagePrice = if (highQuality == true && canBeHq) {
+        if (current) {
+            marketBoardCurrentData.currentAveragePriceHq
+        } else {
+            marketBoardCurrentData.averagePriceHq
+        }
+    } else if (highQuality == false) {
+        if (current) {
+            marketBoardCurrentData.currentAveragePriceNq
+        } else {
+            marketBoardCurrentData.averagePriceNq
+        }
+    } else {
+        if (current) {
+            marketBoardCurrentData.currentAveragePrice
+        } else {
+            marketBoardCurrentData.averagePrice
+        }
+    }
+
+    return String.format("%,f", averagePrice).trimEnd('0') + " $gil"
 }
