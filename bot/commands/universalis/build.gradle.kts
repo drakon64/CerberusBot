@@ -47,7 +47,7 @@ dependencies {
 
     implementation("cloud.drakon:ktdiscord:7.0.0-SNAPSHOT")
     implementation("cloud.drakon:ktxivapi:0.0.1-SNAPSHOT")
-    implementation("cloud.drakon:ktuniversalis:3.0.0")
+    implementation("cloud.drakon:ktuniversalis:4.0.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
