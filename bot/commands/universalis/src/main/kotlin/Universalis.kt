@@ -103,12 +103,10 @@ suspend fun universalisCommand(
             }
         }
 
-        val currentAveragePriceField = if (highQuality == true && canBeHq) {
-            "Current average price (HQ)"
-        } else if (highQuality == false) {
-            "Current average price (NQ)"
-        } else {
-            "Current average price"
+        val currentAveragePriceField = when {
+            highQuality == true && canBeHq -> "Current average price (HQ)"
+            highQuality == false -> "Current average price (NQ)"
+            else -> "Current average price"
         }
 
         val currentAveragePrice = when {
