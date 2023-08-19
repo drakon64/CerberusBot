@@ -113,9 +113,7 @@ suspend fun universalisCommand(
             highQuality == true && canBeHq -> marketBoardCurrentData.currentAveragePriceHq
             highQuality == false -> marketBoardCurrentData.currentAveragePriceNq
             else -> marketBoardCurrentData.currentAveragePrice
-        }.let { averagePrice ->
-            String.format("%,f", averagePrice).trimEnd('0') + " $gil"
-        }
+        }.let { String.format("%,f", this).trimEnd('0') + " $gil" }
 
         return@coroutineScope ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
