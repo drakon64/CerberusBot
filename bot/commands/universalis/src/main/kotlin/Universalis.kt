@@ -13,7 +13,6 @@ import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.interactiondata.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
-import cloud.drakon.ktuniversalis.entities.CurrentlyShown
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.coroutines.coroutineScope
@@ -112,10 +111,13 @@ suspend fun universalisCommand(
             "Current average price"
         }
 
-        val currentAveragePrice = EmbedField(
-            currentAveragePriceField,
-            getAveragePrice(highQuality, canBeHq, marketBoardCurrentData)
-        )
+        val currentAveragePrice = when {
+            highQuality == true && canBeHq -> marketBoardCurrentData.currentAveragePriceHq
+            highQuality == false -> marketBoardCurrentData.currentAveragePriceNq
+            else -> marketBoardCurrentData.currentAveragePrice
+        }.let { averagePrice ->
+            String.format("%,f", averagePrice).trimEnd('0') + " $gil"
+        }
 
         return@coroutineScope ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
@@ -126,7 +128,9 @@ suspend fun universalisCommand(
                         url = "https://universalis.app/market/$xivApiItem.id",
                         thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
                         fields = listOf(
-                            currentAveragePrice,
+                            EmbedField(
+                                currentAveragePriceField, currentAveragePrice
+                            ),
                             EmbedField(
                                 name = "Listings",
                                 value = listings.joinToString("\n")
@@ -142,20 +146,4 @@ suspend fun universalisCommand(
             event.token
         )
     }
-}
-
-fun getAveragePrice(
-    highQuality: Boolean?,
-    canBeHq: Boolean,
-    marketBoardCurrentData: CurrentlyShown,
-): String {
-    val averagePrice = if (highQuality == true && canBeHq) {
-        marketBoardCurrentData.currentAveragePriceHq
-    } else if (highQuality == false) {
-        marketBoardCurrentData.currentAveragePriceNq
-    } else {
-        marketBoardCurrentData.currentAveragePrice
-    }
-
-    return String.format("%,f", averagePrice).trimEnd('0') + " $gil"
 }
