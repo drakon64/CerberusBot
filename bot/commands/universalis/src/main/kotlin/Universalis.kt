@@ -112,24 +112,9 @@ suspend fun universalisCommand(
             "Current average price"
         }
 
-        val historicAveragePriceField = if (highQuality == true && canBeHq) {
-            "Historic average price (HQ)"
-        } else if (highQuality == false) {
-            "Historic average price (NQ)"
-        } else {
-            "Historic average price"
-        }
-
         val currentAveragePrice = EmbedField(
             currentAveragePriceField,
-            getAveragePrice(highQuality, canBeHq, marketBoardCurrentData),
-            true
-        )
-
-        val historicAveragePrice = EmbedField(
-            historicAveragePriceField,
-            getAveragePrice(highQuality, canBeHq, marketBoardCurrentData, false),
-            true
+            getAveragePrice(highQuality, canBeHq, marketBoardCurrentData)
         )
 
         return@coroutineScope ktDiscord.editOriginalInteractionResponse(
@@ -142,7 +127,6 @@ suspend fun universalisCommand(
                         thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
                         fields = listOf(
                             currentAveragePrice,
-                            historicAveragePrice,
                             EmbedField(
                                 name = "Listings",
                                 value = listings.joinToString("\n")
@@ -164,26 +148,13 @@ fun getAveragePrice(
     highQuality: Boolean?,
     canBeHq: Boolean,
     marketBoardCurrentData: CurrentlyShown,
-    current: Boolean = true
 ): String {
     val averagePrice = if (highQuality == true && canBeHq) {
-        if (current) {
-            marketBoardCurrentData.currentAveragePriceHq
-        } else {
-            marketBoardCurrentData.averagePriceHq
-        }
+        marketBoardCurrentData.currentAveragePriceHq
     } else if (highQuality == false) {
-        if (current) {
-            marketBoardCurrentData.currentAveragePriceNq
-        } else {
-            marketBoardCurrentData.averagePriceNq
-        }
+        marketBoardCurrentData.currentAveragePriceNq
     } else {
-        if (current) {
-            marketBoardCurrentData.currentAveragePrice
-        } else {
-            marketBoardCurrentData.averagePrice
-        }
+        marketBoardCurrentData.currentAveragePrice
     }
 
     return String.format("%,f", averagePrice).trimEnd('0') + " $gil"
