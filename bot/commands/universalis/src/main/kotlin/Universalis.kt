@@ -2,20 +2,18 @@ package cloud.drakon.dynamisbot.universalis
 
 import cloud.drakon.dynamisbot.universalis.Handler.Companion.json
 import cloud.drakon.dynamisbot.universalis.Handler.Companion.ktDiscord
-import cloud.drakon.dynamisbot.universalis.Handler.Companion.ktUniversalis
 import cloud.drakon.dynamisbot.universalis.Handler.Companion.ktXivApi
 import cloud.drakon.dynamisbot.universalis.Handler.Companion.newLineRegex
 import cloud.drakon.dynamisbot.universalis.Handler.Companion.spanRegex
 import cloud.drakon.ktdiscord.channel.embed.Embed
 import cloud.drakon.ktdiscord.channel.embed.EmbedField
 import cloud.drakon.ktdiscord.channel.embed.EmbedThumbnail
-import cloud.drakon.ktdiscord.channel.message.Message
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.interactiondata.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
+import cloud.drakon.ktuniversalis.getMarketBoardCurrentData
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
-import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -25,7 +23,7 @@ const val gil = "<:gil:235457032616935424>"
 suspend fun universalisCommand(
     event: Interaction<ApplicationCommandData>,
     logger: LambdaLogger,
-): Message = coroutineScope {
+) {
     logger.log("Responding to Universalis command")
 
     lateinit var item: String
@@ -60,24 +58,24 @@ suspend fun universalisCommand(
             .replace(newLineRegex, "\n\n")
 
         val marketBoardCurrentData = if (highQuality == true && canBeHq) {
-            ktUniversalis.getMarketBoardCurrentData(
+            getMarketBoardCurrentData(
                 world,
-                listOf(xivApiItem.id),
+                xivApiItem.id,
                 entries = 5,
                 listings = 5,
                 hq = true
             )
         } else if (highQuality == false) {
-            ktUniversalis.getMarketBoardCurrentData(
+            getMarketBoardCurrentData(
                 world,
-                listOf(xivApiItem.id),
+                xivApiItem.id,
                 entries = 5,
                 listings = 5,
                 hq = false
             )
         } else {
-            ktUniversalis.getMarketBoardCurrentData(
-                world, listOf(xivApiItem.id), entries = 5, listings = 5
+            getMarketBoardCurrentData(
+                world, xivApiItem.id, entries = 5, listings = 5
             )
         }
 
@@ -113,9 +111,9 @@ suspend fun universalisCommand(
             highQuality == true && canBeHq -> marketBoardCurrentData.currentAveragePriceHq
             highQuality == false -> marketBoardCurrentData.currentAveragePriceNq
             else -> marketBoardCurrentData.currentAveragePrice
-        }.let { String.format("%,f", this).trimEnd('0') + " $gil" }
+        }.let { String.format("%,f", it).trimEnd('0') + " $gil" }
 
-        return@coroutineScope ktDiscord.editOriginalInteractionResponse(
+        ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(
                 embeds = listOf(
                     Embed(
@@ -137,7 +135,7 @@ suspend fun universalisCommand(
             ), event.token
         )
     } else {
-        return@coroutineScope ktDiscord.editOriginalInteractionResponse(
+        ktDiscord.editOriginalInteractionResponse(
             EditWebhookMessage(content = "Could not find item \"$item\""),
             event.token
         )

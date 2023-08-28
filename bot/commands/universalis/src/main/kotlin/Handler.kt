@@ -3,7 +3,6 @@ package cloud.drakon.dynamisbot.universalis
 import cloud.drakon.ktdiscord.KtDiscord
 import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.interactiondata.ApplicationCommandData
-import cloud.drakon.ktuniversalis.KtUniversalis
 import cloud.drakon.ktxivapi.KtXivApi
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler
@@ -27,7 +26,6 @@ class Handler: RequestStreamHandler {
         ).Interaction(System.getenv("PUBLIC_KEY"))
 
         val ktXivApi = KtXivApi
-        val ktUniversalis = KtUniversalis
 
         val spanRegex = """<span.*?>|</span>""".toRegex()
         val newLineRegex = """\n{3,}""".toRegex()
@@ -38,8 +36,9 @@ class Handler: RequestStreamHandler {
         outputStream: OutputStream,
         context: Context,
     ): Unit = runBlocking {
-        val event: Interaction<ApplicationCommandData> =
-            json.decodeFromString(inputStream.readAllBytes().decodeToString())
+        val event: Interaction<ApplicationCommandData> = json.decodeFromString(
+            inputStream.readAllBytes().decodeToString()
+        )
 
         universalisCommand(event, context.logger)
     }
