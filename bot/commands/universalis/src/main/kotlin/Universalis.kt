@@ -59,23 +59,15 @@ suspend fun universalisCommand(
 
         val marketBoardCurrentData = if (highQuality == true && canBeHq) {
             getMarketBoardCurrentData(
-                world,
-                xivApiItem.id,
-                entries = 5,
-                listings = 5,
-                hq = true
+                world, xivApiItem.id, 5, 0, hq = true
             )
         } else if (highQuality == false) {
             getMarketBoardCurrentData(
-                world,
-                xivApiItem.id,
-                entries = 5,
-                listings = 5,
-                hq = false
+                world, xivApiItem.id, 5, 0, hq = false
             )
         } else {
             getMarketBoardCurrentData(
-                world, xivApiItem.id, entries = 5, listings = 5
+                world, xivApiItem.id, 5, 0
             )
         }
 
