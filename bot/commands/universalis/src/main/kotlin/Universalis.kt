@@ -114,13 +114,8 @@ suspend fun universalisCommand(
                         url = "https://universalis.app/market/$xivApiItem.id",
                         thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
                         fields = listOf(
-                            EmbedField(
-                                currentAveragePriceField, currentAveragePrice
-                            ),
-                            EmbedField(
-                                name = "Listings",
-                                value = listings.joinToString("\n")
-                            )
+                            EmbedField(currentAveragePriceField, currentAveragePrice),
+                            EmbedField("Listings", listings.joinToString("\n"))
                         )
                     )
                 )
@@ -128,8 +123,7 @@ suspend fun universalisCommand(
         )
     } else {
         ktDiscord.editOriginalInteractionResponse(
-            EditWebhookMessage(content = "Could not find item \"$item\""),
-            event.token
+            EditWebhookMessage("Could not find item \"$item\""), event.token
         )
     }
 }
