@@ -131,7 +131,7 @@ async def create_universalis_command():
                             },
                             {
                                 "name": "Oceania",
-                                "value": "Aether",
+                                "value": "Oceania",
                                 "name_localizations": {},
                             },
                         ),
