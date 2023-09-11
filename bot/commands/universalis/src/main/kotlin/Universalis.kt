@@ -12,6 +12,7 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.interactiondata.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktuniversalis.getMarketBoardCurrentData
+import cloud.drakon.ktuniversalis.world.World
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import kotlinx.serialization.json.decodeFromJsonElement
@@ -27,14 +28,14 @@ suspend fun universalisCommand(
     logger.log("Responding to Universalis command")
 
     lateinit var item: String
-    lateinit var world: String
+    lateinit var world: World
     var highQuality: Boolean? = null
 
     when (event.data!!.type) {
         1 -> for (i in event.data!!.options!!) {
             when (i.name) {
                 "item" -> item = i.value!!
-                "world" -> world = i.value!!
+                "world" -> world = World.valueOf(i.value!!)
                 "high_quality" -> highQuality = i.value!!.toBooleanStrict()
             }
         }
