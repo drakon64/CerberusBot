@@ -147,7 +147,7 @@ suspend fun universalisCommand(
                     Embed(
                         title = "Current prices for ${xivApiItem.name}",
                         description = description,
-                        url = "https://universalis.app/market/$xivApiItem.id",
+                        url = "https://universalis.app/market/${xivApiItem.id}",
                         thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
                         fields = listOf(
                             EmbedField(
