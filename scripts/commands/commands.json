@@ -9,8 +9,8 @@
         "description": "Search the Eorzea Database",
         "description_localizations": {
             "de": "Durchsuche die Eorzea-Datenbank",
-            "fr": "Rechercher dans la base de données d'Éorzéa",
-            "ja": "エオルゼアのデータベースを検索する"
+            "fr": "Recherche dans la Base de données d'Éorzéa",
+            "ja": "エオルゼアデータベースを検索する"
         },
         "type": 1,
         "options": [
@@ -18,12 +18,12 @@
                 "name": "index",
                 "name_localizations": {
                     "de": "index",
-                    "fr": "index",
+                    "fr": "indice",
                     "ja": "インデックス"
                 },
                 "description": "The index to search in",
                 "description_localizations": {
-                    "de": "Der Index, in dem gesucht werden soll.",
+                    "de": "Der Index, in dem gesucht werden soll",
                     "fr": "L'index dans lequel effectuer une recherche",
                     "ja": "検索するインデックス"
                 },
@@ -41,7 +41,7 @@
                     {
                         "name": "Quest",
                         "name_localizations": {
-                            "de": "Suche",
+                            "de": "Quest",
                             "fr": "Quête",
                             "ja": "クエスト"
                         },
@@ -59,7 +59,7 @@
                 },
                 "description": "The search query",
                 "description_localizations": {
-                    "de": "Die Suchabfrage",
+                    "de": "Die Suchanfrage",
                     "fr": "La requête de recherche",
                     "ja": "検索クエリ"
                 },
@@ -75,7 +75,7 @@
                 },
                 "description": "The language to search in",
                 "description_localizations": {
-                    "de": "Die Sprache, in der gesucht werden soll",
+                    "de": "Die Sprache, in der gesucht werden soll.",
                     "fr": "La langue dans laquelle effectuer la recherche",
                     "ja": "検索する言語"
                 },
@@ -93,7 +93,7 @@
                         "name": "Japanese",
                         "name_localizations": {
                             "de": "Japanisch",
-                            "fr": "Japonais",
+                            "fr": "Japonaise",
                             "ja": "日本人"
                         },
                         "value": "ja"
@@ -122,7 +122,7 @@
             {
                 "name": "ephemeral",
                 "name_localizations": {
-                    "de": "kurzlebig",
+                    "de": "vergänglich",
                     "fr": "éphémère",
                     "ja": "一時的だ"
                 },
@@ -130,7 +130,7 @@
                 "description_localizations": {
                     "de": "Mache die Bot-Antwort nur für dich sichtbar",
                     "fr": "Rendre la réponse du bot visible uniquement pour toi",
-                    "ja": "ボットの応答を自分だけに見えるようにする"
+                    "ja": "ボットの応答を自分だけが見えるようにする"
                 },
                 "type": 5
             }
@@ -146,7 +146,7 @@
         "description": "FINAL FANTASY XIV, The Lodestone",
         "description_localizations": {
             "de": "FINAL FANTASY XIV - Der Lodestone",
-            "fr": "FINAL FANTASY XIV, The Lodestone",
+            "fr": "FINAL FANTASY XIV, The Lodestone : The Lodestone",
             "ja": "FINAL FANTASY XIV, The Lodestone"
         },
         "dm_permission": false,
@@ -161,8 +161,8 @@
                 },
                 "description": "Get a character card of a users Final Fantasy XIV character",
                 "description_localizations": {
-                    "de": "Hol dir eine Charakterkarte eines Final Fantasy XIV-Charakters eines Nutzers",
-                    "fr": "Obtenir une carte de personnage représentant un personnage de Final Fantasy XIV",
+                    "de": "Besorge dir eine Charakterkarte eines Final Fantasy XIV-Charakters eines Nutzers.",
+                    "fr": "Obtenir la carte de personnage de Final Fantasy XIV d'un utilisateur",
                     "ja": "ユーザーのファイナルファンタジーXIVキャラクターのキャラクターカードを入手する"
                 },
                 "options": [
@@ -171,12 +171,12 @@
                         "name_localizations": {
                             "de": "nutzer",
                             "fr": "utilisateur",
-                            "ja": "ユーザ"
+                            "ja": "ユーザー"
                         },
                         "description": "The user to get a Lodestone character card from",
                         "description_localizations": {
-                            "de": "Der Nutzer, von dem du eine Lodestone-Charakterkarte erhalten hast.",
-                            "fr": "L'utilisateur à qui l'on doit obtenir une carte de personnage de Lodestone",
+                            "de": "Der Nutzer, von dem du eine Lodestone-Charakterkarte bekommen solltest",
+                            "fr": "L'utilisateur auprès duquel se procurer une carte de personnage Lodestone",
                             "ja": "Lodestoneのキャラクターカードを入手するユーザー"
                         },
                         "required": true,
@@ -185,7 +185,7 @@
                     {
                         "name": "ephemeral",
                         "name_localizations": {
-                            "de": "kurzlebig",
+                            "de": "vergänglich",
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
@@ -193,7 +193,7 @@
                         "description_localizations": {
                             "de": "Mache die Bot-Antwort nur für dich sichtbar",
                             "fr": "Rendre la réponse du bot visible uniquement pour toi",
-                            "ja": "ボットの応答を自分だけに見えるようにする"
+                            "ja": "ボットの応答を自分だけが見えるようにする"
                         },
                         "type": 5
                     }
@@ -210,7 +210,7 @@
                 "description": "Link your Discord account to a Final Fantasy XIV character",
                 "description_localizations": {
                     "de": "Verbinde dein Discord-Konto mit einem Charakter aus Final Fantasy XIV",
-                    "fr": "Associer ton compte Discord à un personnage de Final Fantasy XIV",
+                    "fr": "Associe ton compte Discord à un personnage de Final Fantasy XIV",
                     "ja": "DiscordアカウントをファイナルファンタジーXIVのキャラクターにリンクする"
                 },
                 "type": 1,
@@ -225,7 +225,7 @@
                         "description": "The name of the character to link to",
                         "description_localizations": {
                             "de": "Der Name des Charakters, auf den verlinkt werden soll",
-                            "fr": "Le nom du personnage vers lequel créer un lien",
+                            "fr": "Le nom du personnage vers lequel créer le lien",
                             "ja": "リンクするキャラクターの名前"
                         },
                         "required": true,
@@ -240,9 +240,9 @@
                         },
                         "description": "The world of the character to link to",
                         "description_localizations": {
-                            "de": "Die Welt des Charakters, zu dem du verlinken möchtest",
-                            "fr": "L'univers du personnage vers lequel créer un lien",
-                            "ja": "リンク先のキャラクターの世界"
+                            "de": "Die Welt des Charakters, auf den verlinkt werden soll",
+                            "fr": "L'univers du personnage vers lequel créer le lien",
+                            "ja": "リンクするキャラクターの世界"
                         },
                         "required": true,
                         "type": 3
@@ -250,7 +250,7 @@
                     {
                         "name": "ephemeral",
                         "name_localizations": {
-                            "de": "kurzlebig",
+                            "de": "vergänglich",
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
@@ -258,7 +258,7 @@
                         "description_localizations": {
                             "de": "Mache die Bot-Antwort nur für dich sichtbar",
                             "fr": "Rendre la réponse du bot visible uniquement pour toi",
-                            "ja": "ボットの応答を自分だけに見えるようにする"
+                            "ja": "ボットの応答を自分だけが見えるようにする"
                         },
                         "type": 5
                     }
@@ -267,15 +267,15 @@
             {
                 "name": "unlink",
                 "name_localizations": {
-                    "de": "verknüpfung_aufheben",
+                    "de": "link_aufheben",
                     "fr": "dissocier",
                     "ja": "リンクを解除する"
                 },
                 "description": "Unlink your Discord account from a Final Fantasy XIV character",
                 "description_localizations": {
-                    "de": "Verbinde deinen Discord-Account mit einem Charakter aus Final Fantasy XIV",
+                    "de": "Verbinde dein Discord-Konto mit einem Charakter aus Final Fantasy XIV",
                     "fr": "Dissocier ton compte Discord d'un personnage de Final Fantasy XIV",
-                    "ja": "DiscordアカウントをファイナルファンタジーXIVのキャラクターとリンク解除する"
+                    "ja": "DiscordアカウントをファイナルファンタジーXIVのキャラクターからリンク解除する"
                 },
                 "options": [
                     {
@@ -287,16 +287,16 @@
                         },
                         "description": "Unlink from all Discord guilds",
                         "description_localizations": {
-                            "de": "Verbindung zu allen Discord-Gilden aufheben",
+                            "de": "Von allen Discord-Gilden abmelden",
                             "fr": "Dissocier de toutes les guildes Discord",
-                            "ja": "すべてのDiscordギルドとのリンクを解除する"
+                            "ja": "すべてのDiscordギルドからリンクを解除する"
                         },
                         "type": 5
                     },
                     {
                         "name": "ephemeral",
                         "name_localizations": {
-                            "de": "kurzlebig",
+                            "de": "vergänglich",
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
@@ -304,7 +304,7 @@
                         "description_localizations": {
                             "de": "Mache die Bot-Antwort nur für dich sichtbar",
                             "fr": "Rendre la réponse du bot visible uniquement pour toi",
-                            "ja": "ボットの応答を自分だけに見えるようにする"
+                            "ja": "ボットの応答を自分だけが見えるようにする"
                         },
                         "type": 5
                     }
@@ -316,13 +316,13 @@
                 "name_localizations": {
                     "de": "porträt",
                     "fr": "portrait",
-                    "ja": "肖像画"
+                    "ja": "ポートレート"
                 },
                 "description": "Get a portrait of a users Final Fantasy XIV character",
                 "description_localizations": {
-                    "de": "Hol dir ein Portrait eines Final Fantasy XIV-Charakters eines Nutzers.",
-                    "fr": "Prendre le portrait d'un personnage de Final Fantasy XIV d'un utilisateur",
-                    "ja": "ユーザーのファイナルファンタジーXIVのキャラクターの肖像画をもらう"
+                    "de": "Mach ein Portrait eines Final Fantasy XIV-Charakters eines Benutzers",
+                    "fr": "Prends le portrait d'un personnage de Final Fantasy XIV d'un utilisateur",
+                    "ja": "ユーザーのファイナルファンタジーXIVのキャラクターのポートレートをゲットする"
                 },
                 "type": 1,
                 "options": [
@@ -331,13 +331,13 @@
                         "name_localizations": {
                             "de": "nutzer",
                             "fr": "utilisateur",
-                            "ja": "ユーザ"
+                            "ja": "ユーザー"
                         },
                         "description": "The user to get a Lodestone portrait from",
                         "description_localizations": {
-                            "de": "Der Nutzer, von dem du ein Lodestone-Portrait bekommen hast",
-                            "fr": "L'utilisateur qui va obtenir un portrait de Lodestone",
-                            "ja": "ロードストーンのポートレートをもらうためのユーザー"
+                            "de": "Der Nutzer, von dem du ein Lodestone-Portrait erhalten möchtest",
+                            "fr": "L'utilisateur dont on doit obtenir le portrait de Lodestone",
+                            "ja": "Lodestoneのポートレートを入手したいユーザー"
                         },
                         "required": true,
                         "type": 6
@@ -345,7 +345,7 @@
                     {
                         "name": "ephemeral",
                         "name_localizations": {
-                            "de": "kurzlebig",
+                            "de": "vergänglich",
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
@@ -353,7 +353,7 @@
                         "description_localizations": {
                             "de": "Mache die Bot-Antwort nur für dich sichtbar",
                             "fr": "Rendre la réponse du bot visible uniquement pour toi",
-                            "ja": "ボットの応答を自分だけに見えるようにする"
+                            "ja": "ボットの応答を自分だけが見えるようにする"
                         },
                         "type": 5
                     }
@@ -368,9 +368,9 @@
                 },
                 "description": "Generate an embed of a users Final Fantasy XIV character",
                 "description_localizations": {
-                    "de": "Generiere eine Einbettung eines Final Fantasy XIV-Charakters eines Nutzers.",
-                    "fr": "Générer une intégration du personnage de Final Fantasy XIV d'un utilisateur",
-                    "ja": "ユーザーのファイナルファンタジーXIVキャラクターの埋め込みを生成する"
+                    "de": "Generieren Sie eine Einbettung eines Final Fantasy XIV-Charakters eines Benutzers.",
+                    "fr": "Générer une version intégrée du personnage de Final Fantasy XIV d'un utilisateur",
+                    "ja": "ユーザーのファイナルファンタジーXIVキャラクターの埋め込みを作成する"
                 },
                 "type": 1,
                 "options": [
@@ -379,7 +379,7 @@
                         "name_localizations": {
                             "de": "nutzer",
                             "fr": "utilisateur",
-                            "ja": "ユーザ"
+                            "ja": "ユーザー"
                         },
                         "description": "The user to generate an embed from",
                         "description_localizations": {
@@ -393,7 +393,7 @@
                     {
                         "name": "ephemeral",
                         "name_localizations": {
-                            "de": "kurzlebig",
+                            "de": "vergänglich",
                             "fr": "éphémère",
                             "ja": "一時的だ"
                         },
@@ -401,7 +401,7 @@
                         "description_localizations": {
                             "de": "Mache die Bot-Antwort nur für dich sichtbar",
                             "fr": "Rendre la réponse du bot visible uniquement pour toi",
-                            "ja": "ボットの応答を自分だけに見えるようにする"
+                            "ja": "ボットの応答を自分だけが見えるようにする"
                         },
                         "type": 5
                     }
@@ -423,7 +423,7 @@
         "name": "Character portrait",
         "name_localizations": {
             "de": "Charakterporträt",
-            "fr": "Portrait de personnage",
+            "fr": "Portrait du personnage",
             "ja": "キャラクターポートレート"
         },
         "dm_permission": false,
@@ -443,8 +443,8 @@
         "name": "universalis",
         "description": "Get Final Fantasy XIV market board listings",
         "description_localizations": {
-            "de": "Hol dir die Angebote auf dem Final Fantasy XIV Market Board",
-            "fr": "Obtenir les listes de marché de Final Fantasy XIV",
+            "de": "Hol dir die Angebote der Final Fantasy XIV Market Board",
+            "fr": "Obtenir les inscriptions sur le marché de Final Fantasy XIV",
             "ja": "ファイナルファンタジーXIVのマーケットボードのリストを取得"
         },
         "type": 1,
@@ -458,8 +458,8 @@
                 },
                 "description": "The item to search for",
                 "description_localizations": {
-                    "de": "Der Artikel, nach dem gesucht werden soll",
-                    "fr": "L'article à rechercher",
+                    "de": "Der Gegenstand, nach dem gesucht werden soll",
+                    "fr": "L'objet à rechercher",
                     "ja": "検索するアイテム"
                 },
                 "required": true,
@@ -472,11 +472,11 @@
                     "fr": "monde",
                     "ja": "世界"
                 },
-                "description": "The World/Data Center/Region to search",
+                "description": "The World to search",
                 "description_localizations": {
-                    "de": "Die Welt/Rechenzentrum/Region, in der gesucht werden soll",
-                    "fr": "Le monde/le centre de données/la région à rechercher",
-                    "ja": "検索する世界/データセンター/地域"
+                    "de": "Die Welt zum Suchen",
+                    "fr": "Le monde dans lequel faire des recherches",
+                    "ja": "検索する世界"
                 },
                 "required": true,
                 "type": 3
@@ -490,16 +490,16 @@
                 },
                 "description": "Only show high quality market board listings or vice versa",
                 "description_localizations": {
-                    "de": "Nur qualitativ hochwertige Market Board-Angebote anzeigen oder umgekehrt",
-                    "fr": "Afficher uniquement des listes de marché de haute qualité ou vice versa",
-                    "ja": "質の高いマーケットボードのリストのみを表示する、またはその逆だ"
+                    "de": "Zeige nur hochwertige Markt-Board-Angebote oder umgekehrt",
+                    "fr": "Afficher uniquement des listes de haute qualité sur les marchés ou vice versa",
+                    "ja": "高品質のマーケットボードリストのみを表示する、またはその逆も同様だ"
                 },
                 "type": 5
             },
             {
                 "name": "ephemeral",
                 "name_localizations": {
-                    "de": "kurzlebig",
+                    "de": "vergänglich",
                     "fr": "éphémère",
                     "ja": "一時的だ"
                 },
@@ -507,7 +507,7 @@
                 "description_localizations": {
                     "de": "Mache die Bot-Antwort nur für dich sichtbar",
                     "fr": "Rendre la réponse du bot visible uniquement pour toi",
-                    "ja": "ボットの応答を自分だけに見えるようにする"
+                    "ja": "ボットの応答を自分だけが見えるようにする"
                 },
                 "type": 5
             }

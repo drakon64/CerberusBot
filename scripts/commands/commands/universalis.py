@@ -22,7 +22,7 @@ async def create_universalis_command():
             {
                 "name": "world",
                 "name_localizations": {},
-                "description": "The World/Data Center/Region to search",
+                "description": "The World to search",
                 "description_localizations": {},
                 "required": True,
                 "type": 3,
