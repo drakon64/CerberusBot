@@ -96,6 +96,8 @@ def translate_command(command: dict, slash_command=True):
                                     choice["name"], target_language["aws"]
                                 )
 
+                        option["name"] = option["name"].replace(" ", "_").lower()
+
                 option_or_subcommand["name"] = (
                     option_or_subcommand["name"].replace(" ", "_").lower()
                 )

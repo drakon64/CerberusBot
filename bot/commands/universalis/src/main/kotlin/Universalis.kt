@@ -12,6 +12,8 @@ import cloud.drakon.ktdiscord.interaction.Interaction
 import cloud.drakon.ktdiscord.interaction.interactiondata.ApplicationCommandData
 import cloud.drakon.ktdiscord.webhook.EditWebhookMessage
 import cloud.drakon.ktuniversalis.getMarketBoardCurrentData
+import cloud.drakon.ktuniversalis.world.DataCenter
+import cloud.drakon.ktuniversalis.world.Region
 import cloud.drakon.ktuniversalis.world.World
 import cloud.drakon.ktxivapi.search.StringAlgo
 import com.amazonaws.services.lambda.runtime.LambdaLogger
@@ -27,20 +29,21 @@ suspend fun universalisCommand(
 ) {
     logger.log("Responding to Universalis command")
 
+    var world: World? = null
+    var dataCenter: DataCenter? = null
+    var region: Region? = null
+
     lateinit var item: String
-    lateinit var world: World
     var highQuality: Boolean? = null
 
-    when (event.data!!.type) {
-        1 -> for (i in event.data!!.options!!) {
-            when (i.name) {
-                "item" -> item = i.value!!
-                "world" -> world = World.valueOf(i.value!!)
-                "high_quality" -> highQuality = i.value!!.toBooleanStrict()
-            }
+    for (i in event.data!!.options!![0].options!!) {
+        when (i.name) {
+            "world" -> world = World.valueOf(i.value!!)
+            "datacenter" -> dataCenter = DataCenter.valueOf(i.value!!)
+            "region" -> region = Region.valueOf(i.value!!)
+            "item" -> item = i.value!!
+            "high_quality" -> highQuality = i.value!!.toBooleanStrict()
         }
-
-        else -> logger.log("Unknown application command type: " + event.data!!.type)
     }
 
     val result = ktXivApi.search(
@@ -59,17 +62,47 @@ suspend fun universalisCommand(
             .replace(newLineRegex, "\n\n")
 
         val marketBoardCurrentData = if (highQuality == true && canBeHq) {
-            getMarketBoardCurrentData(
-                world, xivApiItem.id, 5, 0, hq = true
-            )
+            if (world != null) {
+                getMarketBoardCurrentData(
+                    world, xivApiItem.id, 5, 0, hq = true
+                )
+            } else if (dataCenter != null) {
+                getMarketBoardCurrentData(
+                    dataCenter, xivApiItem.id, 5, 0, hq = true
+                )
+            } else {
+                getMarketBoardCurrentData(
+                    region!!, xivApiItem.id, 5, 0, hq = true
+                )
+            }
         } else if (highQuality == false) {
-            getMarketBoardCurrentData(
-                world, xivApiItem.id, 5, 0, hq = false
-            )
+            if (world != null) {
+                getMarketBoardCurrentData(
+                    world, xivApiItem.id, 5, 0, hq = false
+                )
+            } else if (dataCenter != null) {
+                getMarketBoardCurrentData(
+                    dataCenter, xivApiItem.id, 5, 0, hq = false
+                )
+            } else {
+                getMarketBoardCurrentData(
+                    region!!, xivApiItem.id, 5, 0, hq = false
+                )
+            }
         } else {
-            getMarketBoardCurrentData(
-                world, xivApiItem.id, 5, 0
-            )
+            if (world != null) {
+                getMarketBoardCurrentData(
+                    world, xivApiItem.id, 5, 0
+                )
+            } else if (dataCenter != null) {
+                getMarketBoardCurrentData(
+                    dataCenter, xivApiItem.id, 5, 0
+                )
+            } else {
+                getMarketBoardCurrentData(
+                    region!!, xivApiItem.id, 5, 0
+                )
+            }
         }
 
         val marketBoardListings = marketBoardCurrentData.listings
@@ -117,7 +150,10 @@ suspend fun universalisCommand(
                         url = "https://universalis.app/market/$xivApiItem.id",
                         thumbnail = EmbedThumbnail("https://xivapi.com${xivApiItem.iconHd}"),
                         fields = listOf(
-                            EmbedField(currentAveragePriceField, currentAveragePrice),
+                            EmbedField(
+                                currentAveragePriceField,
+                                currentAveragePrice
+                            ),
                             EmbedField("Listings", listings.joinToString("\n"))
                         )
                     )
