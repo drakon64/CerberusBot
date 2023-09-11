@@ -84,8 +84,10 @@ suspend fun universalisCommand(
                     "%,d", listing.pricePerUnit * listing.quantity
                 )
 
+                val worldName = listing.worldName ?: world
+
                 var listingString =
-                    "$pricePerUnit $gil x ${listing.quantity} ($totalPrice) [${listing.worldName}]"
+                    "$pricePerUnit $gil x ${listing.quantity} ($totalPrice) [${worldName}]"
                 if (highQuality == true) {
                     listingString += " <:hq:916051971063054406>"
                 }
