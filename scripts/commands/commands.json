@@ -556,7 +556,53 @@
                             "ja": "検索するデータセンター"
                         },
                         "required": true,
-                        "type": 3
+                        "type": 3,
+                        "choices": [
+                            {
+                                "name": "Elemental",
+                                "value": "Elemental"
+                            },
+                            {
+                                "name": "Gaia",
+                                "value": "Gaia"
+                            },
+                            {
+                                "name": "Mana",
+                                "value": "Mana"
+                            },
+                            {
+                                "name": "Aether",
+                                "value": "Aether"
+                            },
+                            {
+                                "name": "Primal",
+                                "value": "Primal"
+                            },
+                            {
+                                "name": "Chaos",
+                                "value": "Chaos"
+                            },
+                            {
+                                "name": "Light",
+                                "value": "Light"
+                            },
+                            {
+                                "name": "Crystal",
+                                "value": "Crystal"
+                            },
+                            {
+                                "name": "Materia",
+                                "value": "Materia"
+                            },
+                            {
+                                "name": "Meteor",
+                                "value": "Meteor"
+                            },
+                            {
+                                "name": "Dynamis",
+                                "value": "Dynamis"
+                            }
+                        ]
                     },
                     {
                         "name": "item",
@@ -635,7 +681,45 @@
                             "ja": "検索する地域"
                         },
                         "required": true,
-                        "type": 3
+                        "type": 3,
+                        "choices": [
+                            {
+                                "name": "Japan",
+                                "value": "Japan",
+                                "name_localizations": {
+                                    "de": "Japan",
+                                    "fr": "Japon",
+                                    "ja": "日本"
+                                }
+                            },
+                            {
+                                "name": "North America",
+                                "value": "NorthAmerica",
+                                "name_localizations": {
+                                    "de": "Nordamerika",
+                                    "fr": "Amérique du Nord",
+                                    "ja": "北米"
+                                }
+                            },
+                            {
+                                "name": "Europe",
+                                "value": "Europe",
+                                "name_localizations": {
+                                    "de": "Europa",
+                                    "fr": "Europe",
+                                    "ja": "ヨーロッパ"
+                                }
+                            },
+                            {
+                                "name": "Oceania",
+                                "value": "Aether",
+                                "name_localizations": {
+                                    "de": "Ozeanien",
+                                    "fr": "Océanie",
+                                    "ja": "オセアニア"
+                                }
+                            }
+                        ]
                     },
                     {
                         "name": "item",

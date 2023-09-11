@@ -90,11 +90,12 @@ def translate_command(command: dict, slash_command=True):
 
                         if "choices" in option:
                             for choice in option["choices"]:
-                                choice["name_localizations"][
-                                    target_language["discord"]
-                                ] = translate_text(
-                                    choice["name"], target_language["aws"]
-                                )
+                                if "name_localizations" in choice:
+                                    choice["name_localizations"][
+                                        target_language["discord"]
+                                    ] = translate_text(
+                                        choice["name"], target_language["aws"]
+                                    )
 
                         option["name"] = option["name"].replace(" ", "_").lower()
 

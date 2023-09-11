@@ -63,6 +63,19 @@ async def create_universalis_command():
                         "description_localizations": {},
                         "required": True,
                         "type": 3,
+                        "choices": (
+                            {"name": "Elemental", "value": "Elemental"},
+                            {"name": "Gaia", "value": "Gaia"},
+                            {"name": "Mana", "value": "Mana"},
+                            {"name": "Aether", "value": "Aether"},
+                            {"name": "Primal", "value": "Primal"},
+                            {"name": "Chaos", "value": "Chaos"},
+                            {"name": "Light", "value": "Light"},
+                            {"name": "Crystal", "value": "Crystal"},
+                            {"name": "Materia", "value": "Materia"},
+                            {"name": "Meteor", "value": "Meteor"},
+                            {"name": "Dynamis", "value": "Dynamis"},
+                        ),
                     },
                     {
                         "name": "item",
@@ -100,6 +113,28 @@ async def create_universalis_command():
                         "description_localizations": {},
                         "required": True,
                         "type": 3,
+                        "choices": (
+                            {
+                                "name": "Japan",
+                                "value": "Japan",
+                                "name_localizations": {},
+                            },
+                            {
+                                "name": "North America",
+                                "value": "NorthAmerica",
+                                "name_localizations": {},
+                            },
+                            {
+                                "name": "Europe",
+                                "value": "Europe",
+                                "name_localizations": {},
+                            },
+                            {
+                                "name": "Oceania",
+                                "value": "Aether",
+                                "name_localizations": {},
+                            },
+                        ),
                     },
                     {
                         "name": "item",
