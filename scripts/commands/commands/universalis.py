@@ -49,17 +49,17 @@ async def create_universalis_command():
                 "type": 1,
             },
             {
-                "name": "datacenter",
+                "name": "data center",
                 "name_localizations": {},
                 "description": (
-                    "Get Final Fantasy XIV market board listings for a datacenter"
+                    "Get Final Fantasy XIV market board listings for a data center"
                 ),
                 "description_localizations": {},
                 "options": (
                     {
-                        "name": "datacenter",
+                        "name": "data center",
                         "name_localizations": {},
-                        "description": "The datacenter to search in",
+                        "description": "The data center to search in",
                         "description_localizations": {},
                         "required": True,
                         "type": 3,

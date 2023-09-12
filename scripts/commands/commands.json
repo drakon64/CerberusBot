@@ -529,27 +529,27 @@
                 "type": 1
             },
             {
-                "name": "datacenter",
+                "name": "data_center",
                 "name_localizations": {
                     "de": "rechenzentrum",
                     "fr": "centre_de_données",
                     "ja": "データセンター"
                 },
-                "description": "Get Final Fantasy XIV market board listings for a datacenter",
+                "description": "Get Final Fantasy XIV market board listings for a data center",
                 "description_localizations": {
                     "de": "Hol dir Final Fantasy XIV Marketboard-Angebote für ein Rechenzentrum",
-                    "fr": "Obtenir les listes de Final Fantasy XIV pour un centre de données",
-                    "ja": "データセンターのファイナルファンタジーXIVマーケットボードのリストを取得"
+                    "fr": "Obtenir des inscriptions sur le marché de Final Fantasy XIV pour un centre de données",
+                    "ja": "データセンターのファイナルファンタジーXIVのマーケットボードリストを取得"
                 },
                 "options": [
                     {
-                        "name": "datacenter",
+                        "name": "data_center",
                         "name_localizations": {
                             "de": "rechenzentrum",
                             "fr": "centre_de_données",
                             "ja": "データセンター"
                         },
-                        "description": "The datacenter to search in",
+                        "description": "The data center to search in",
                         "description_localizations": {
                             "de": "Das Rechenzentrum, in dem gesucht werden soll",
                             "fr": "Le centre de données dans lequel effectuer des recherches",

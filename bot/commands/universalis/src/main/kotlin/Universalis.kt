@@ -39,7 +39,7 @@ suspend fun universalisCommand(
     for (i in event.data!!.options!![0].options!!) {
         when (i.name) {
             "world" -> world = World.valueOf(i.value!!)
-            "datacenter" -> dataCenter = DataCenter.valueOf(i.value!!)
+            "data_center" -> dataCenter = DataCenter.valueOf(i.value!!)
             "region" -> region = Region.valueOf(i.value!!)
             "item" -> item = i.value!!
             "high_quality" -> highQuality = i.value!!.toBooleanStrict()
