@@ -117,7 +117,7 @@ suspend fun universalisCommand(
                     "%,d", listing.pricePerUnit * listing.quantity
                 )
 
-                val worldName = listing.worldName ?: world
+                val worldName = listing.world ?: world
 
                 var listingString =
                     "$pricePerUnit $gil x ${listing.quantity} ($totalPrice) [${worldName}]"
