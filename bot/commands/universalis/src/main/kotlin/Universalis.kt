@@ -105,27 +105,26 @@ suspend fun universalisCommand(
             }
         }
 
-        val marketBoardListings = marketBoardCurrentData.listings
-        val listings = mutableListOf<String>()
+        val listings: List<String>
 
-        if (marketBoardListings.isNullOrEmpty()) {
-            listings.add("None")
+        if (marketBoardCurrentData.listings.isNullOrEmpty()) {
+            listings = listOf("None")
         } else {
-            for (listing in marketBoardListings) {
-                val pricePerUnit = String.format("%,d", listing.pricePerUnit)
-                val totalPrice = String.format(
-                    "%,d", listing.pricePerUnit * listing.quantity
+            listings = mutableListOf()
+
+            marketBoardCurrentData.listings!!.forEach {
+                val pricePerUnit = String.format("%,d", it.pricePerUnit)
+                val totalPrice = String.format("%,d", it.pricePerUnit * it.quantity)
+
+                val worldName = it.world ?: world
+
+                listings.add(
+                    if (highQuality == true) {
+                        "$pricePerUnit $gil x ${it.quantity} ($totalPrice) [${worldName}] <:hq:916051971063054406>"
+                    } else {
+                        "$pricePerUnit $gil x ${it.quantity} ($totalPrice) [${worldName}]"
+                    }
                 )
-
-                val worldName = listing.world ?: world
-
-                var listingString =
-                    "$pricePerUnit $gil x ${listing.quantity} ($totalPrice) [${worldName}]"
-                if (highQuality == true) {
-                    listingString += " <:hq:916051971063054406>"
-                }
-
-                listings.add(listingString)
             }
         }
 
