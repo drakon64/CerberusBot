@@ -1,6 +1,8 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    val kotlinVersion = "1.9.10"
+
+    kotlin("jvm") version kotlinVersion
+    id("org.jetbrains.kotlin.plugin.serialization") version kotlinVersion
 }
 
 group = "cloud.drakon"
