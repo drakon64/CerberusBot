@@ -7,6 +7,14 @@ internal object Localisation {
         "fr" to "Attaque auto."
     ).withDefault { "Auto-attack" }
 
+    val baseItemLevel = mapOf(
+        "baseItem" to mapOf(
+            "ja" to "装着可能な装備", "de" to "Einsetzbar in", "fr" to "Sertissable"
+        ).withDefault { "Base Item:" }, "itemLevel" to mapOf(
+            "ja" to "ITEM LEVEL", "de" to "Gegenstände ab Stufe", "fr" to "Niveau d'objet"
+        ).withDefault { "Item Level" }
+    )
+
     val block = mapOf(
         "Strength" to mapOf(
             "ja" to "ブロック性能",
@@ -136,6 +144,10 @@ internal object Localisation {
         "fr" to "Délai"
     ).withDefault { "Delay" }
 
+    val effects = mapOf(
+        "de" to "Effekt", "fr" to "Effets"
+    ).withDefault { "Effects" }
+
     val itemLevel = mapOf(
         "ja" to "ITEM LEVEL",
         "de" to "G.-Stufe",
@@ -145,4 +157,8 @@ internal object Localisation {
     val level = mapOf(
         "ja" to "Lv", "de" to "Ab St.", "fr" to "Nv"
     ).withDefault { "Lv." }
+
+    val requirements = mapOf(
+        "ja" to "マテリア装着", "de" to "Materia einsetzen", "fr" to "Sertissage"
+    ).withDefault { "Requirements" }
 }

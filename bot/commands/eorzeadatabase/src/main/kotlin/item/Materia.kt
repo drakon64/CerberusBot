@@ -13,7 +13,7 @@ class Materia(
 
     @SerialName("Materia") val materiaParam: MateriaParam,
     @SerialName("LevelItem") val levelItem: Short,
-): Item {
+) : Item {
     @Serializable
     class MateriaParam(
         @SerialName("BaseParam") val baseParam: BaseParam,
@@ -24,28 +24,33 @@ class Materia(
             @SerialName("Name_en") val en: String,
             @SerialName("Name_ja") val ja: String,
             @SerialName("Name_de") val de: String,
-            @SerialName("Name_fr") val fr: String
+            @SerialName("Name_fr") val fr: String,
         )
     }
 
-    override suspend fun createEmbedFields(language: String): Array<EmbedField> =
-        when (language) {
+    override suspend fun createEmbedFields(language: String): Array<EmbedField> {
+        val effects = when (language) {
             "en" -> this.materiaParam.baseParam.en
             "ja" -> this.materiaParam.baseParam.ja
             "de" -> this.materiaParam.baseParam.de
             "fr" -> this.materiaParam.baseParam.fr
             else -> throw Throwable("Unknown language: `$language`")
-        }.let {
-            arrayOf(
-                EmbedField(
-                    name = "Effects",
-                    value = "$it +${this.materiaParam.value}",
-                    inline = true
-                ), EmbedField(
-                    name = "Requirements",
-                    value = "Base Item: Item Level $levelItem",
-                    inline = true
-                )
-            )
         }
+
+        return arrayOf(
+            EmbedField(
+                name = Localisation.effects.getValue(language),
+                value = "$effects +${this.materiaParam.value}",
+                inline = true
+            ), EmbedField(
+                name = Localisation.requirements.getValue(language),
+                value = "${
+                    Localisation.baseItemLevel.getValue("baseItem").getValue(language)
+                } ${
+                    Localisation.baseItemLevel.getValue("itemLevel").getValue(language)
+                } $levelItem" + if (language == "ja") "～" else "",
+                inline = true
+            )
+        )
+    }
 }
