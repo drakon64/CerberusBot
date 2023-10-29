@@ -25,9 +25,9 @@ class MedicineMeal(
     )
 
     override suspend fun createEmbedFields(language: String) = buildList {
-        for (i in bonuses.keys) {
-            val key = Localisation.bonuses[i]?.getValue(language) ?: i
-            val bonus = bonuses.getValue(i)
+        bonuses.keys.forEach {
+            val key = Localisation.bonuses[it]?.getValue(language) ?: it
+            val bonus = bonuses.getValue(it)
 
             if (bonus.relative) {
                 if (this@MedicineMeal.canBeHq == 1) {
