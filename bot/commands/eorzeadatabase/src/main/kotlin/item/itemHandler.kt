@@ -21,6 +21,8 @@ suspend fun itemHandler(item: JsonObject, language: String, lodestone: String) =
 
         4 -> json.decodeFromJsonElement<Accessories>(item)
 
+        7 -> json.decodeFromJsonElement<Materia>(item)
+
         else -> when (item["ItemUICategory"]!!.jsonObject["ID"]!!.jsonPrimitive.int) {
             44, 46 -> json.decodeFromJsonElement<MedicineMeal>(item)
 
