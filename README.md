@@ -14,6 +14,7 @@ _DynamisBot_ is a Discord bot that runs on AWS Lambda.
   - Provides rich results for:
     - Arms/Tools
     - Armor/Accessories
+    - Materia
     - Medicines & Meals
   - Supports English, Japanese, German, and French
 - Lodestone: Link your Discord account to a Final Fantasy XIV character and display your characters
