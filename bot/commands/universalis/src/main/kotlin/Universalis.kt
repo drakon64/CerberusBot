@@ -120,7 +120,7 @@ suspend fun universalisCommand(
 
                 listings.add(
                     if (highQuality == true) {
-                        "$pricePerUnit $gil x ${it.quantity} ($totalPrice) [${worldName}] <:hq:916051971063054406>"
+                        "$pricePerUnit $gil x ${it.quantity} ($totalPrice) [${worldName}] HQ"
                     } else {
                         "$pricePerUnit $gil x ${it.quantity} ($totalPrice) [${worldName}]"
                     }

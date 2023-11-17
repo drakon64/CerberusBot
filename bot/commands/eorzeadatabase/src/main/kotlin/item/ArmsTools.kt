@@ -73,7 +73,7 @@ import kotlinx.serialization.Serializable
             }
 
             val damage = if (hqDamage != null && hqDamage != nqDamage) {
-                "$nqDamage / $hqDamage <:hqlight:673889304359206923>"
+                "$nqDamage / $hqDamage HQ"
             } else {
                 nqDamage.toString()
             }
@@ -89,7 +89,7 @@ import kotlinx.serialization.Serializable
             }
 
             val autoAttack = if (hqAutoAttack != null && hqAutoAttack != nqAutoAttack) {
-                "$nqAutoAttack / $hqAutoAttack <:hqlight:673889304359206923>"
+                "$nqAutoAttack / $hqAutoAttack HQ"
             } else {
                 nqAutoAttack
             }

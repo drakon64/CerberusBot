@@ -54,13 +54,13 @@ import kotlinx.serialization.Serializable
             }
 
             val block = if (hqBlock != null && hqBlock != nqBlock) {
-                "$nqBlock / $hqBlock <:hqlight:673889304359206923>"
+                "$nqBlock / $hqBlock HQ"
             } else {
                 "$nqBlock"
             }
 
             val blockRate = if (hqBlockRate != null && hqBlockRate != nqBlockRate) {
-                "$nqBlockRate / $hqBlockRate <:hqlight:673889304359206923>"
+                "$nqBlockRate / $hqBlockRate HQ"
             } else {
                 "$nqBlockRate"
             }

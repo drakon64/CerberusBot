@@ -32,7 +32,7 @@ class MedicineMeal(
             if (bonus.relative) {
                 if (this@MedicineMeal.canBeHq == 1) {
                     add(
-                        "$key +${bonus.value}% (Max ${bonus.max}) / +${bonus.valueHq}% (Max ${bonus.maxHq}) <:hqlight:673889304359206923>"
+                        "$key +${bonus.value}% (Max ${bonus.max}) / +${bonus.valueHq}% (Max ${bonus.maxHq}) HQ"
                     )
                 } else add("$key +${bonus.value}% (Max ${bonus.max})")
             }

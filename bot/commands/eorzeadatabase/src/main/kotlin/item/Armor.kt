@@ -52,14 +52,14 @@ import kotlinx.serialization.Serializable
 
             val physicalDefense =
                 if (hqPhysicalDefense != null && hqPhysicalDefense != this@Armor.defensePhys) {
-                    "${this@Armor.defensePhys} / $hqPhysicalDefense <:hqlight:673889304359206923>"
+                    "${this@Armor.defensePhys} / $hqPhysicalDefense HQ"
                 } else {
                     this@Armor.defensePhys.toString()
                 }
 
             val magicDefense =
                 if (hqMagicDefense != null && hqMagicDefense != this@Armor.defenseMag) {
-                    "${this@Armor.defenseMag} / $hqMagicDefense <:hqlight:673889304359206923>"
+                    "${this@Armor.defenseMag} / $hqMagicDefense HQ"
                 } else {
                     this@Armor.defenseMag.toString()
                 }

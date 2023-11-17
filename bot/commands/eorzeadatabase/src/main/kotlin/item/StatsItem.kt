@@ -18,7 +18,7 @@ import kotlinx.serialization.Serializable
 
                 if (valueHq != null) {
                     this.add(
-                        "$key +$value / +$valueHq <:hqlight:673889304359206923>"
+                        "$key +$value / +$valueHq HQ"
                     )
                 } else {
                     this.add("$key +$value")

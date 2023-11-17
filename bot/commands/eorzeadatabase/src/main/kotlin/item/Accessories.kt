@@ -46,14 +46,14 @@ import kotlinx.serialization.Serializable
 
         val physicalDefense =
             if (hqPhysicalDefense != null && hqPhysicalDefense != nqPhysicalDefense) {
-                "$nqPhysicalDefense / $hqPhysicalDefense <:hqlight:673889304359206923>"
+                "$nqPhysicalDefense / $hqPhysicalDefense HQ"
             } else {
                 nqPhysicalDefense.toString()
             }
 
         val magicDefense =
             if (hqMagicDefense != null && hqMagicDefense != nqMagicDefense) {
-                "$nqMagicDefense / $hqMagicDefense <:hqlight:673889304359206923>"
+                "$nqMagicDefense / $hqMagicDefense HQ"
             } else {
                 nqMagicDefense.toString()
             }
