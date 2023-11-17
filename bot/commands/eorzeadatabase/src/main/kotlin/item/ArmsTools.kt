@@ -112,7 +112,7 @@ import kotlinx.serialization.Serializable
                     name = "Class/Job", value = classJob
                 ), EmbedField(
                     name = Localisation.bonuses.getValue("Bonuses").getValue(language),
-                    value = stats.joinToString("\n")
+                    value = stats!!.joinToString("\n")
                 )
             )
         } else {
@@ -124,7 +124,7 @@ import kotlinx.serialization.Serializable
                     name = "Class/Job", value = classJob, inline = true
                 ), EmbedField(
                     name = Localisation.bonuses.getValue("Bonuses").getValue(language),
-                    value = stats.joinToString("\n"),
+                    value = stats!!.joinToString("\n"),
                     inline = true
                 )
             )

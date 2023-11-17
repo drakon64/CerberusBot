@@ -27,9 +27,9 @@ import kotlinx.serialization.Serializable
     @SerialName("DefenseMag") val defenseMag: Int,
 
     @SerialName("BaseParamValueSpecial0") val baseParamValueSpecial0: Byte? = null,
-    @SerialName("BaseParamValueSpecial1") val baseParamValueSpecial1: Byte? = null
-): ArmorAccessoriesShield {
-    override suspend fun createEmbedFields(language: String): Array<EmbedField> =
+    @SerialName("BaseParamValueSpecial1") val baseParamValueSpecial1: Byte? = null,
+) : ArmorAccessoriesShield {
+    override suspend fun createEmbedFields(language: String) =
         coroutineScope {
             val stats = getStats(this@Armor, language)
 
@@ -64,27 +64,45 @@ import kotlinx.serialization.Serializable
                     this@Armor.defenseMag.toString()
                 }
 
-            return@coroutineScope arrayOf(
-                EmbedField(
-                    name = Localisation.itemLevel.getValue(language),
-                    value = this@Armor.levelItem,
-                ),
-                EmbedField(
-                    name = Localisation.defense.getValue("Defense").getValue(language),
-                    value = physicalDefense,
-                    inline = true
-                ), EmbedField(
-                    name = Localisation.defense.getValue("Magic Defense")
-                        .getValue(language),
-                    value = magicDefense,
-                    inline = true
-                ),
-                EmbedField(
-                    name = "Class/Job", value = classJob
-                ), EmbedField(
-                    name = Localisation.bonuses.getValue("Bonuses").getValue(language),
-                    value = stats.joinToString("\n"),
+            buildList {
+                this.add(
+                    EmbedField(
+                        name = Localisation.itemLevel.getValue(language),
+                        value = this@Armor.levelItem,
+                    )
                 )
-            )
+
+                this.add(
+                    EmbedField(
+                        name = Localisation.defense.getValue("Defense")
+                            .getValue(language),
+                        value = physicalDefense,
+                        inline = true
+                    )
+                )
+
+                this.add(
+                    EmbedField(
+                        name = Localisation.defense.getValue("Magic Defense")
+                            .getValue(language),
+                        value = magicDefense,
+                        inline = true
+                    )
+                )
+
+                this.add(
+                    EmbedField(
+                        name = "Class/Job", value = classJob
+                    )
+                )
+
+                if (stats != null) this.add(
+                    EmbedField(
+                        name = Localisation.bonuses.getValue("Bonuses")
+                            .getValue(language),
+                        value = stats.joinToString("\n"),
+                    )
+                )
+            }.toTypedArray()
         }
 }

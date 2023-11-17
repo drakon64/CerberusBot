@@ -83,7 +83,7 @@ import kotlinx.serialization.Serializable
                 name = "Class/Job", value = classJob
             ), EmbedField(
                 name = Localisation.bonuses.getValue("Bonuses").getValue(language),
-                value = stats.joinToString("\n"),
+                value = stats!!.joinToString("\n"),
             )
         )
     }

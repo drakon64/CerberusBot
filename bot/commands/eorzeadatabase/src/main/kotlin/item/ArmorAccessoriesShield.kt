@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable sealed interface ArmorAccessoriesShield: StatsItem {
     @SerialName("Name") override val name: String
     @SerialName("IconHD") override val iconHd: String
-    @SerialName("Stats") override val stats: Map<String, Map<String, Int>>
+    @SerialName("Stats") override val stats: Map<String, Map<String, Int>>?
 
     @SerialName("ClassJobCategory") val classJobCategory: ClassJobCategory
     @SerialName("LevelEquip") val levelEquip: String

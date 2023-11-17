@@ -5,29 +5,27 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable sealed interface StatsItem: Item {
-    @SerialName("Stats") val stats: Map<String, Map<String, Int>>
+    @SerialName("Stats") val stats: Map<String, Map<String, Int>>?
 
     suspend fun getStats(item: StatsItem, language: String) = coroutineScope {
-        val stats = mutableListOf<String>()
+        val stats = buildList {
+            item.stats?.keys?.forEach {
+                val key = Localisation.bonuses[it]?.getValue(language) ?: it
 
-        for (i in item.stats.keys) {
-            val key = Localisation.bonuses[i]?.getValue(language) ?: i
+                val bonus = item.stats!!.getValue(it)
+                val value = bonus.getValue("NQ")
+                val valueHq = bonus["HQ"]
 
-            val bonus = item.stats.getValue(i)
-            val value = bonus.getValue("NQ")
-            val valueHq = bonus["HQ"]
-
-            if (valueHq != null) {
-                stats.add(
-                    "$key +$value / +$valueHq <:hqlight:673889304359206923>"
-                )
-            } else {
-                stats.add(
-                    "$key +$value"
-                )
+                if (valueHq != null) {
+                    this.add(
+                        "$key +$value / +$valueHq <:hqlight:673889304359206923>"
+                    )
+                } else {
+                    this.add("$key +$value")
+                }
             }
         }
 
-        return@coroutineScope stats.toList()
+        stats.ifEmpty { null }
     }
 }
