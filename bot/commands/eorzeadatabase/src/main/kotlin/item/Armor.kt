@@ -19,7 +19,7 @@ import kotlinx.serialization.Serializable
 
     @SerialName("IconHD") override val iconHd: String,
 
-    @SerialName("Stats") override val stats: Map<String, Map<String, Int>>,
+    @SerialName("Stats") override val stats: Map<String, Map<String, Int>>? = null,
 
     @SerialName("LevelItem") val levelItem: String,
 
