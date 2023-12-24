@@ -1,7 +1,7 @@
 # DynamisBot
 
 [![Kotlin Beta](https://kotl.in/badges/beta.svg)](https://kotlinlang.org/docs/components-stability.html)
-[![Kotlin](https://img.shields.io/badge/kotlin-1.9.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.9-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![License](https://img.shields.io/github/license/drakon64/DynamisBot)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
 _DynamisBot_ is a Discord bot that runs on AWS Lambda.
