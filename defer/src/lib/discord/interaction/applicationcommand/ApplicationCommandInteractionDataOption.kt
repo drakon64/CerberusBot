@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 internal class ApplicationCommandInteractionDataOption(
     val name: String,
     val type: Byte,
-    val value: String? = null, // TODO: Should be a Union of String, Int, Double, and Bool
+    val value: String? = null, // TODO: Should be a Union of String, Int, Double, and Boolean
     val options: Array<ApplicationCommandInteractionDataOption>,
 )
