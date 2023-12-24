@@ -29,8 +29,12 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
             response.body = Json.encodeToString(InteractionResponse(type = 1))
             response.statusCode = 200
         } else {
+            val body = "invalid request signature"
+
             response.statusCode = 401
-            response.body = "invalid request signature"
+            response.body = body
+
+            context.logger.log(body)
         }
 
         return response
