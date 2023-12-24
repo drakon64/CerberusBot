@@ -15,7 +15,7 @@ resource "aws_lambda_function" "defer" {
     }
   }
 
-  filename    = "../defer/build/libs/defer-SNAPSHOT-1.0-all.jar"
+  filename    = var.defer_filename
   handler     = "cloud.drakon.dynamisbot.Handler"
   memory_size = 512
   publish     = true
@@ -25,6 +25,7 @@ resource "aws_lambda_function" "defer" {
     apply_on = "PublishedVersions"
   }
 
+  source_code_hash = filebase64sha256(var.defer_filename)
   timeout = 3
 }
 
