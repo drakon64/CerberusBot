@@ -5,4 +5,4 @@ import kotlinx.serialization.Serializable
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure
 @Serializable
-class Interaction(val type: Byte, val data: ApplicationCommandData)
+internal class Interaction(val type: Byte, val data: ApplicationCommandData)
