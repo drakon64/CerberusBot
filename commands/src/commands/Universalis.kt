@@ -5,39 +5,24 @@ import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommand
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString
 
-private enum class dcRegion {
-    datacenter, region
-}
-
 internal val universalis = ApplicationCommand(
     type = 1,
     name = "universalis",
     description = "Get Final Fantasy XIV market board listings",
     options = buildList {
-        dcRegion.entries.forEach {
+        arrayOf("datacenter", "region").forEach {
             add(
                 ApplicationCommandOption(
                     type = 1,
-                    name = it.name,
+                    name = it,
                     description = "Get Final Fantasy XIV market board listings for a $it",
                     options = arrayOf(
                         ApplicationCommandOption(
                             type = 3,
-                            name = it.name,
+                            name = it,
                             description = "The $it to search in",
                             choices = when (it) {
-                                dcRegion.region -> buildList {
-                                    arrayOf("Japan", "Europe", "North America", "Oceania").forEach {
-                                        add(
-                                            ApplicationCommandOptionChoiceString(
-                                                name = it,
-                                                value = it.replace(" ", "-")
-                                            )
-                                        )
-                                    }
-                                }.toTypedArray()
-
-                                dcRegion.datacenter -> buildList {
+                                "datacenter" -> buildList {
                                     arrayOf(
                                         "Elemental",
                                         "Gaia",
@@ -55,6 +40,19 @@ internal val universalis = ApplicationCommand(
                                         add(ApplicationCommandOptionChoiceString(name = it, value = it))
                                     }
                                 }.toTypedArray()
+
+                                "region" -> buildList {
+                                    arrayOf("Japan", "Europe", "North America", "Oceania").forEach {
+                                        add(
+                                            ApplicationCommandOptionChoiceString(
+                                                name = it,
+                                                value = it.replace(" ", "-")
+                                            )
+                                        )
+                                    }
+                                }.toTypedArray()
+
+                                else -> null
                             }
                         ),
                         ApplicationCommandOption(
