@@ -5,19 +5,13 @@ import kotlinx.serialization.Serializable
 
 // https://discord.com/developers/docs/reference#locales
 @Serializable
-internal enum class Locale {
+internal enum class Locale(val aws: String) {
     @SerialName("ja")
-    JAPANESE,
-
-    @SerialName("en-GB")
-    ENGLISH_UK,
-
-    @SerialName("en-US")
-    ENGLISH_US,
+    JAPANESE("ja"),
 
     @SerialName("de")
-    GERMAN,
+    GERMAN("de"),
 
     @SerialName("fr")
-    FRENCH,
+    FRENCH("fr"),
 }

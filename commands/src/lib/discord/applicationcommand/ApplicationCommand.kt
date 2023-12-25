@@ -12,6 +12,6 @@ internal class ApplicationCommand(
     @SerialName("name_localizations") val nameLocalizations: Map<Locale, String>? = null,
     val description: String,
     @SerialName("description_localizations") val descriptionLocalizations: Map<Locale, String>? = null,
-    val options: Array<ApplicationCommandOption>? = null,
+    val options: List<ApplicationCommandOption>? = null,
     @SerialName("dm_permission") val dmPermission: Boolean? = null,
 )

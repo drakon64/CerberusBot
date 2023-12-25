@@ -1,0 +1,257 @@
+[
+    {
+        "type": 1,
+        "name": "universalis",
+        "name_localizations": {
+            "ja": "ユニバーサリス",
+            "de": "universalis",
+            "fr": "universalis"
+        },
+        "description": "Get Final Fantasy XIV market board listings",
+        "description_localizations": {
+            "ja": "ファイナルファンタジーXIVのマーケットボードリストを取得",
+            "de": "Holen Sie sich Final Fantasy XIV-Marktplatineneinträge",
+            "fr": "Consultez les listes du market board de Final Fantasy XIV"
+        },
+        "options": [
+            {
+                "type": 1,
+                "name": "datacenter",
+                "name_localizations": {
+                    "ja": "データセンター",
+                    "de": "rechenzentrum",
+                    "fr": "datacenter"
+                },
+                "description": "Get Final Fantasy XIV market board listings for a datacenter",
+                "description_localizations": {
+                    "ja": "データセンターのファイナルファンタジーXIVマーケットボードリストを取得",
+                    "de": "Holen Sie sich Final Fantasy XIV-Marktplatinenlisten für ein Rechenzentrum",
+                    "fr": "Consultez les listes de marché de Final Fantasy XIV pour un centre de données"
+                },
+                "options": [
+                    {
+                        "type": 3,
+                        "name": "datacenter",
+                        "name_localizations": {
+                            "ja": "データセンター",
+                            "de": "rechenzentrum",
+                            "fr": "datacenter"
+                        },
+                        "description": "The datacenter to search in",
+                        "description_localizations": {
+                            "ja": "検索するデータセンター",
+                            "de": "Das Rechenzentrum, in dem gesucht werden soll",
+                            "fr": "Le centre de données dans lequel effectuer la recherche"
+                        },
+                        "choices": [
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Elemental",
+                                "value": "Elemental"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Gaia",
+                                "value": "Gaia"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Mana",
+                                "value": "Mana"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Meteor",
+                                "value": "Meteor"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Chaos",
+                                "value": "Chaos"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Light",
+                                "value": "Light"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Aether",
+                                "value": "Aether"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Crystal",
+                                "value": "Crystal"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Dynamis",
+                                "value": "Dynamis"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Primal",
+                                "value": "Primal"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Materia",
+                                "value": "Materia"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "NA Cloud DC (Beta)",
+                                "value": "NA Cloud DC (Beta)"
+                            }
+                        ]
+                    },
+                    {
+                        "type": 3,
+                        "name": "item",
+                        "name_localizations": {
+                            "ja": "項目",
+                            "de": "artikel",
+                            "fr": "article"
+                        },
+                        "description": "The item to search for",
+                        "description_localizations": {
+                            "ja": "検索するアイテム",
+                            "de": "Das Objekt, nach dem gesucht werden soll",
+                            "fr": "L'élément à rechercher"
+                        }
+                    },
+                    {
+                        "type": 5,
+                        "name": "high_quality",
+                        "name_localizations": {
+                            "ja": "高品質",
+                            "de": "hohe_qualität",
+                            "fr": "haute_qualité"
+                        },
+                        "description": "Show only High Quality market board listings or vice versa",
+                        "description_localizations": {
+                            "ja": "高品質のマーケットボードリストのみを表示、またはその逆",
+                            "de": "Nur hochwertige Marketboard-Angebote anzeigen oder umgekehrt",
+                            "fr": "Afficher uniquement les listes de haute qualité sur les forums de marché ou vice versa"
+                        }
+                    },
+                    {
+                        "type": 5,
+                        "name": "ephemeral",
+                        "name_localizations": {
+                            "ja": "一時的だ",
+                            "de": "ephemer",
+                            "fr": "éphémère"
+                        },
+                        "description": "Make the bot response visible to you only",
+                        "description_localizations": {
+                            "ja": "ボットの応答を自分だけに見えるようにする",
+                            "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous"
+                        }
+                    }
+                ]
+            },
+            {
+                "type": 1,
+                "name": "region",
+                "name_localizations": {
+                    "ja": "領域",
+                    "de": "region",
+                    "fr": "région"
+                },
+                "description": "Get Final Fantasy XIV market board listings for a region",
+                "description_localizations": {
+                    "ja": "地域のファイナルファンタジーXIVマーケットボードリストを取得",
+                    "de": "Hol dir Final Fantasy XIV-Marktplatineneinträge für eine Region",
+                    "fr": "Consultez les listes du market board de Final Fantasy XIV pour une région"
+                },
+                "options": [
+                    {
+                        "type": 3,
+                        "name": "region",
+                        "name_localizations": {
+                            "ja": "領域",
+                            "de": "region",
+                            "fr": "région"
+                        },
+                        "description": "The region to search in",
+                        "description_localizations": {
+                            "ja": "検索する地域",
+                            "de": "Die Region, in der gesucht werden soll",
+                            "fr": "La région dans laquelle effectuer la recherche"
+                        },
+                        "choices": [
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Japan",
+                                "value": "Japan"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Europe",
+                                "value": "Europe"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "North America",
+                                "value": "North-America"
+                            },
+                            {
+                                "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
+                                "name": "Oceania",
+                                "value": "Oceania"
+                            }
+                        ]
+                    },
+                    {
+                        "type": 3,
+                        "name": "item",
+                        "name_localizations": {
+                            "ja": "項目",
+                            "de": "artikel",
+                            "fr": "article"
+                        },
+                        "description": "The item to search for",
+                        "description_localizations": {
+                            "ja": "検索するアイテム",
+                            "de": "Das Objekt, nach dem gesucht werden soll",
+                            "fr": "L'élément à rechercher"
+                        }
+                    },
+                    {
+                        "type": 5,
+                        "name": "high_quality",
+                        "name_localizations": {
+                            "ja": "高品質",
+                            "de": "hohe_qualität",
+                            "fr": "haute_qualité"
+                        },
+                        "description": "Show only High Quality market board listings or vice versa",
+                        "description_localizations": {
+                            "ja": "高品質のマーケットボードリストのみを表示、またはその逆",
+                            "de": "Nur hochwertige Marketboard-Angebote anzeigen oder umgekehrt",
+                            "fr": "Afficher uniquement les listes de haute qualité sur les forums de marché ou vice versa"
+                        }
+                    },
+                    {
+                        "type": 5,
+                        "name": "ephemeral",
+                        "name_localizations": {
+                            "ja": "一時的だ",
+                            "de": "ephemer",
+                            "fr": "éphémère"
+                        },
+                        "description": "Make the bot response visible to you only",
+                        "description_localizations": {
+                            "ja": "ボットの応答を自分だけに見えるようにする",
+                            "de": "Machen Sie die Bot-Antwort nur für Sie sichtbar",
+                            "fr": "Faites en sorte que la réponse du bot ne soit visible que pour vous"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

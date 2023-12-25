@@ -13,6 +13,6 @@ internal class ApplicationCommandOption(
     val description: String,
     @SerialName("description_localizations") val descriptionLocalizations: Map<Locale, String>? = null,
     val required: Boolean? = null,
-    val choices: Array<ApplicationCommandOptionChoice>? = null,
-    val options: Array<ApplicationCommandOption>? = null,
+    val choices: List<ApplicationCommandOptionChoice>? = null,
+    val options: List<ApplicationCommandOption>? = null,
 )
