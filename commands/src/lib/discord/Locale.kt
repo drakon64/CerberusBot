@@ -20,13 +20,4 @@ internal enum class Locale {
 
     @SerialName("fr")
     FRENCH,
-
-    @SerialName("zh-CN")
-    CHINESE_CHINA,
-
-    @SerialName("zh-TW")
-    CHINESE_TAIWAN,
-
-    @SerialName("ko")
-    KOREAN,
 }

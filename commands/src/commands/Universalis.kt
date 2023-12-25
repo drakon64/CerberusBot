@@ -18,16 +18,16 @@ internal val universalis = ApplicationCommand(
             add(
                 ApplicationCommandOption(
                     type = 1,
-                    name = it,
+                    name = it.name,
                     description = "Get Final Fantasy XIV market board listings for a $it",
                     options = arrayOf(
                         ApplicationCommandOption(
                             type = 3,
-                            name = it,
+                            name = it.name,
                             description = "The $it to search in",
                             choices = when (it) {
                                 dcRegion.region -> buildList {
-                                    arrayOf("Japan", "Europe", "North America", "Oceania", "China", "Korea").forEach {
+                                    arrayOf("Japan", "Europe", "North America", "Oceania").forEach {
                                         add(
                                             ApplicationCommandOptionChoiceString(
                                                 name = it,
@@ -51,11 +51,6 @@ internal val universalis = ApplicationCommand(
                                         "Primal",
                                         "Materia",
                                         "NA Cloud DC (Beta)",
-                                        "陆行鸟",
-                                        "莫古力",
-                                        "猫小胖",
-                                        "豆豆柴",
-                                        "한국",
                                     ).forEach {
                                         add(ApplicationCommandOptionChoiceString(name = it, value = it))
                                     }
