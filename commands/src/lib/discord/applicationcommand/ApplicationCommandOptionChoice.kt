@@ -19,24 +19,3 @@ internal class ApplicationCommandOptionChoiceString(
     @SerialName("name_localizations") override val nameLocalizations: Map<Locale, String>? = null,
     val value: String // TODO: Should be a Union of String, Int, Double, and Boolean
 ) : ApplicationCommandOptionChoice
-
-@Serializable
-internal class ApplicationCommandOptionChoiceInt(
-    override val name: String,
-    @SerialName("name_localizations") override val nameLocalizations: Map<Locale, String>? = null,
-    val value: Int // TODO: Should be a Union of String, Int, Double, and Boolean
-) : ApplicationCommandOptionChoice
-
-@Serializable
-internal class ApplicationCommandOptionChoiceDouble(
-    override val name: String,
-    @SerialName("name_localizations") override val nameLocalizations: Map<Locale, String>? = null,
-    val value: Double // TODO: Should be a Union of String, Int, Double, and Boolean
-) : ApplicationCommandOptionChoice
-
-@Serializable
-internal class ApplicationCommandOptionChoiceBoolean(
-    override val name: String,
-    @SerialName("name_localizations") override val nameLocalizations: Map<Locale, String>? = null,
-    val value: Boolean // TODO: Should be a Union of String, Int, Double, and Boolean
-) : ApplicationCommandOptionChoice
