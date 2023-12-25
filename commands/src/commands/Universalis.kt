@@ -3,13 +3,18 @@ package cloud.drakon.dynamisbot.commands
 import cloud.drakon.dynamisbot.ephemeral
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommand
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
+import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString
+
+private enum class dcRegion {
+    datacenter, region
+}
 
 internal val universalis = ApplicationCommand(
     type = 1,
     name = "universalis",
     description = "Get Final Fantasy XIV market board listings",
     options = buildList {
-        arrayOf("world", "datacenter", "region").forEach {
+        dcRegion.entries.forEach {
             add(
                 ApplicationCommandOption(
                     type = 1,
@@ -19,17 +24,53 @@ internal val universalis = ApplicationCommand(
                         ApplicationCommandOption(
                             type = 3,
                             name = it,
-                            description = "The $it to search in"
+                            description = "The $it to search in",
+                            choices = when (it) {
+                                dcRegion.region -> buildList {
+                                    arrayOf("Japan", "Europe", "North America", "Oceania", "China", "Korea").forEach {
+                                        add(
+                                            ApplicationCommandOptionChoiceString(
+                                                name = it,
+                                                value = it.replace(" ", "-")
+                                            )
+                                        )
+                                    }
+                                }.toTypedArray()
+
+                                dcRegion.datacenter -> buildList {
+                                    arrayOf(
+                                        "Elemental",
+                                        "Gaia",
+                                        "Mana",
+                                        "Meteor",
+                                        "Chaos",
+                                        "Light",
+                                        "Aether",
+                                        "Crystal",
+                                        "Dynamis",
+                                        "Primal",
+                                        "Materia",
+                                        "NA Cloud DC (Beta)",
+                                        "陆行鸟",
+                                        "莫古力",
+                                        "猫小胖",
+                                        "豆豆柴",
+                                        "한국",
+                                    ).forEach {
+                                        add(ApplicationCommandOptionChoiceString(name = it, value = it))
+                                    }
+                                }.toTypedArray()
+                            }
                         ),
                         ApplicationCommandOption(
                             type = 3,
                             name = "item",
-                            description = "The item to search for"
+                            description = "The item to search for",
                         ),
                         ApplicationCommandOption(
                             type = 5,
                             name = "high_quality",
-                            description = "Show only high quality market board listings or vice versa"
+                            description = "Show only high quality market board listings or vice versa",
                         ),
                         ephemeral,
                     )

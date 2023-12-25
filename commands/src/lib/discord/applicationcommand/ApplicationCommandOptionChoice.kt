@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 // https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-choice-structure
 
 @Deprecated("// TODO: `value` should be a Union of String, Int, Double, and Boolean")
+@Serializable
 internal sealed interface ApplicationCommandOptionChoice {
     val name: String
     val nameLocalizations: Map<Locale, String>?
