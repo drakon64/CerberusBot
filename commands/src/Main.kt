@@ -34,7 +34,7 @@ suspend fun main() = println(
         contentType(ContentType.Application.Json)
         setBody(arrayOf(universalis))
     }.let {
-        println(it.body<JsonElement>())
+        println(it.body<String>())
         if (it.status.value != 200) exitProcess(1)
     }
 )
