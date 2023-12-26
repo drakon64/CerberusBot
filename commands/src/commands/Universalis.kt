@@ -6,8 +6,8 @@ import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommand
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString
 
-private const val name = "Universalis"
-private const val description = "Get Final Fantasy XIV market board listings"
+private var name = "Universalis"
+private var description = "Get Final Fantasy XIV market board listings"
 
 internal suspend fun universalisCommand() = ApplicationCommand(
     type = 1,
@@ -16,8 +16,8 @@ internal suspend fun universalisCommand() = ApplicationCommand(
     descriptionLocalizations = description.buildLocalizationMap(),
     options = buildList {
         arrayOf("Data Center", "Region").forEach {
-            val name = it.commandName()
-            val description = "Get Final Fantasy XIV market board listings for a $it"
+            name = it.commandName()
+            description = "Get Final Fantasy XIV market board listings for a $it"
 
             add(
                 ApplicationCommandOption(
@@ -27,7 +27,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                     description = description,
                     descriptionLocalizations = description.buildLocalizationMap(),
                     options = buildList {
-                        var description = "The $it to search in"
+                        description = "The $it to search in"
 
                         add(
                             ApplicationCommandOption(
@@ -73,7 +73,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                             )
                         )
 
-                        var name = "item"
+                        name = "item"
                         description = "The item to search for"
 
                         add(

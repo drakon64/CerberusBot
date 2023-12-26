@@ -29,8 +29,8 @@ internal suspend fun lodestoneCommand() = ApplicationCommand(
                 description = description,
                 descriptionLocalizations = description.buildLocalizationMap(),
                 options = buildList {
-                    var name = "Character"
-                    var description = "The name of the character to link to"
+                    name = "Character"
+                    description = "The name of the character to link to"
 
                     add(
                         ApplicationCommandOption(
@@ -73,8 +73,8 @@ internal suspend fun lodestoneCommand() = ApplicationCommand(
                 description = description,
                 descriptionLocalizations = description.buildLocalizationMap(),
                 options = buildList {
-                    val name = "Global"
-                    val description = "Unlink from all Discord guilds"
+                    name = "Global"
+                    description = "Unlink from all Discord guilds"
 
                     add(
                         ApplicationCommandOption(
@@ -102,8 +102,8 @@ internal suspend fun lodestoneCommand() = ApplicationCommand(
                 description = description,
                 descriptionLocalizations = description.buildLocalizationMap(),
                 options = buildList {
-                    val name = "User"
-                    val description = "The user to get a character card from"
+                    name = "User"
+                    description = "The user to get a character card from"
 
                     add(
                         ApplicationCommandOption(
@@ -132,8 +132,8 @@ internal suspend fun lodestoneCommand() = ApplicationCommand(
                 description = description,
                 descriptionLocalizations = description.buildLocalizationMap(),
                 options = buildList {
-                    val name = "User"
-                    val description = "The user to get a character portrait from"
+                    name = "User"
+                    description = "The user to get a character portrait from"
 
                     add(
                         ApplicationCommandOption(

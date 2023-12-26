@@ -7,7 +7,7 @@ import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommand
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString
 
-private const val description = "Search the Eorzea Database"
+private var description = "Search the Eorzea Database"
 
 internal suspend fun eorzeaDatabaseCommand() = ApplicationCommand(
     type = 1,
@@ -21,7 +21,7 @@ internal suspend fun eorzeaDatabaseCommand() = ApplicationCommand(
     descriptionLocalizations = description.buildLocalizationMap(),
     options = buildList {
         var name = "Index"
-        var description = "The index to search in"
+        description = "The index to search in"
 
         add(
             ApplicationCommandOption(
@@ -32,7 +32,7 @@ internal suspend fun eorzeaDatabaseCommand() = ApplicationCommand(
                 descriptionLocalizations = description.buildLocalizationMap(),
                 required = true,
                 choices = buildList {
-                    var name = "Item"
+                    name = "Item"
 
                     add(
                         ApplicationCommandOptionChoiceString(
