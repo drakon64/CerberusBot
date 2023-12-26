@@ -1,10 +1,12 @@
-package cloud.drakon.dynamisbot
+package cloud.drakon.dynamisbot.commands
 
+import cloud.drakon.dynamisbot.buildLocalizationMap
+import cloud.drakon.dynamisbot.commandName
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
-internal suspend fun ephemeralCommand(): ApplicationCommandOption = coroutineScope {
+internal suspend fun ephemeralOption(): ApplicationCommandOption = coroutineScope {
     val name = "Ephemeral"
     val description = "Make the bot response visible to you only"
 

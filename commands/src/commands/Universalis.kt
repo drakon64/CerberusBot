@@ -2,7 +2,6 @@ package cloud.drakon.dynamisbot.commands
 
 import cloud.drakon.dynamisbot.buildLocalizationMap
 import cloud.drakon.dynamisbot.commandName
-import cloud.drakon.dynamisbot.ephemeralCommand
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommand
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString
@@ -101,7 +100,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                             )
                         )
 
-                        add(ephemeralCommand())
+                        add(ephemeralOption())
                     }
                 )
             )

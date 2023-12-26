@@ -1,0 +1,28 @@
+name: Put application commands (Canary)
+on:
+  push:
+    branches:
+      - canary
+    paths:
+      - commands/src/commands/**.kt
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+          cache: 'gradle'
+      - shell: bash
+        run: ./gradlew :commands:build
+      - shell: bash
+        env:
+          APPLICATION_ID: ${{ secrets.CANARY_APPLICATION_ID }}
+          BOT_TOKEN: ${{ secrets.CANARY_BOT_TOKEN }}
+        working-directory: commands
+        run: |
+          java -jar build/libs/commands-SNAPSHOT-1.0-all.jar
