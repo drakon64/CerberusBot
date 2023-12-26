@@ -2,6 +2,11 @@
     {
         "type": 1,
         "name": "eorzea_database",
+        "name_localizations": {
+            "ja": "エオルゼアデータベース",
+            "de": "eorzea-datenbank",
+            "fr": "base_de_données_d_éorzéa"
+        },
         "description": "Search the Eorzea Database",
         "description_localizations": {
             "ja": "エオルゼアのデータベースを検索する",

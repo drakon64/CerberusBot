@@ -3,17 +3,21 @@ package cloud.drakon.dynamisbot.commands
 import cloud.drakon.dynamisbot.buildLocalizationMap
 import cloud.drakon.dynamisbot.commandName
 import cloud.drakon.dynamisbot.ephemeralCommand
+import cloud.drakon.dynamisbot.lib.discord.Locale
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommand
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString
 
-private const val name = "Eorzea Database"
 private const val description = "Search the Eorzea Database"
 
 internal suspend fun eorzeaDatabaseCommand() = ApplicationCommand(
     type = 1,
-    name = name.commandName(),
-//    nameLocalizations = name.buildLocalizationMap(true),
+    name = "Eorzea Database".commandName(),
+    nameLocalizations = mapOf(
+        Locale.Japanese to "エオルゼアデータベース".commandName(),
+        Locale.German to "Eorzea-Datenbank".commandName(),
+        Locale.French to "Base de données d'Éorzéa".commandName(),
+    ),
     description = description,
     descriptionLocalizations = description.buildLocalizationMap(),
     options = buildList {
