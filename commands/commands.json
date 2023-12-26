@@ -144,6 +144,227 @@
     },
     {
         "type": 1,
+        "name": "the_lodestone",
+        "name_localizations": {
+            "de": "der_lodestone"
+        },
+        "description": "FINAL FANTASY XIV, The Lodestone",
+        "description_localizations": {
+            "de": "FINAL FANTASY XIV - Der Lodestone",
+            "fr": "FINAL FANTASY XIV : The Lodestone"
+        },
+        "options": [
+            {
+                "type": 1,
+                "name": "link",
+                "name_localizations": {
+                    "ja": "リンク",
+                    "de": "verknüpfung",
+                    "fr": "lien"
+                },
+                "description": "Link your Discord account to a Final Fantasy XIV character",
+                "description_localizations": {
+                    "ja": "DiscordアカウントをファイナルファンタジーXIVのキャラクターにリンクする",
+                    "de": "Verknüpfe deinen Discord-Account mit einem Charakter aus Final Fantasy XIV",
+                    "fr": "Associe ton compte Discord à un personnage de Final Fantasy XIV"
+                },
+                "options": [
+                    {
+                        "type": 3,
+                        "name": "character",
+                        "name_localizations": {
+                            "ja": "キャラクター",
+                            "de": "charakter",
+                            "fr": "personnage"
+                        },
+                        "description": "The name of the character to link to",
+                        "description_localizations": {
+                            "ja": "リンク先のキャラクターの名前",
+                            "de": "Der Name des Charakters, zu dem verlinkt werden soll",
+                            "fr": "Le nom du personnage vers lequel créer le lien"
+                        },
+                        "required": true
+                    },
+                    {
+                        "type": 3,
+                        "name": "world",
+                        "name_localizations": {
+                            "ja": "世界",
+                            "de": "welt",
+                            "fr": "monde"
+                        },
+                        "description": "The world of the character to link to",
+                        "description_localizations": {
+                            "ja": "リンクするキャラクターの世界",
+                            "de": "Die Welt des Charakters, zu dem verlinkt werden soll",
+                            "fr": "L'univers du personnage vers lequel créer un lien"
+                        },
+                        "required": true
+                    },
+                    {
+                        "type": 5,
+                        "name": "ephemeral",
+                        "name_localizations": {
+                            "ja": "一時的だ",
+                            "de": "vergänglich",
+                            "fr": "éphémère"
+                        },
+                        "description": "Make the bot response visible to you only",
+                        "description_localizations": {
+                            "ja": "ボットの応答を自分だけに見えるようにする",
+                            "de": "Mache die Bot-Antwort nur für dich sichtbar",
+                            "fr": "Faire en sorte que la réponse du bot ne soit visible que pour toi"
+                        }
+                    }
+                ]
+            },
+            {
+                "type": 1,
+                "name": "unlink",
+                "name_localizations": {
+                    "ja": "リンク解除",
+                    "de": "verknüpfung_aufheben",
+                    "fr": "supprimer_le_lien"
+                },
+                "description": "Unlink your Discord account from a Final Fantasy XIV character",
+                "description_localizations": {
+                    "ja": "ファイナルファンタジーXIVのキャラクターとDiscordアカウントのリンクを解除する",
+                    "de": "Trenne deinen Discord-Account von einem Charakter aus Final Fantasy XIV",
+                    "fr": "Dissocier ton compte Discord d'un personnage de Final Fantasy XIV"
+                },
+                "options": [
+                    {
+                        "type": 5,
+                        "name": "global",
+                        "name_localizations": {
+                            "ja": "グローバル",
+                            "de": "weltweit",
+                            "fr": "dans_le_monde"
+                        },
+                        "description": "Unlink from all Discord guilds",
+                        "description_localizations": {
+                            "ja": "すべてのDiscordギルドからリンクを解除する",
+                            "de": "Link zu allen Discord-Gilden aufheben",
+                            "fr": "Dissocier de toutes les guildes Discord"
+                        }
+                    },
+                    {
+                        "type": 5,
+                        "name": "ephemeral",
+                        "name_localizations": {
+                            "ja": "一時的だ",
+                            "de": "vergänglich",
+                            "fr": "éphémère"
+                        },
+                        "description": "Make the bot response visible to you only",
+                        "description_localizations": {
+                            "ja": "ボットの応答を自分だけに見えるようにする",
+                            "de": "Mache die Bot-Antwort nur für dich sichtbar",
+                            "fr": "Faire en sorte que la réponse du bot ne soit visible que pour toi"
+                        }
+                    }
+                ]
+            },
+            {
+                "type": 1,
+                "name": "card",
+                "name_localizations": {
+                    "ja": "カード",
+                    "de": "karte",
+                    "fr": "carte"
+                },
+                "description": "Get a character card of a users Final Fantasy XIV character",
+                "description_localizations": {
+                    "ja": "ユーザーのファイナルファンタジーXIVキャラクターのキャラクターカードを取得",
+                    "de": "Hol dir eine Charakterkarte des Final Fantasy XIV-Charakters eines Benutzers.",
+                    "fr": "Obtenir la carte de personnage d'un joueur de Final Fantasy XIV"
+                },
+                "options": [
+                    {
+                        "type": 6,
+                        "name": "user",
+                        "name_localizations": {
+                            "ja": "ユーザ",
+                            "de": "nutzer",
+                            "fr": "utilisateur"
+                        },
+                        "description": "The user to get a character card from",
+                        "description_localizations": {
+                            "ja": "キャラクターカードを取得するユーザー",
+                            "de": "Der Benutzer, von dem eine Charakterkarte erhalten wird",
+                            "fr": "L'utilisateur auprès duquel il va obtenir une carte de personnage"
+                        },
+                        "required": true
+                    },
+                    {
+                        "type": 5,
+                        "name": "ephemeral",
+                        "name_localizations": {
+                            "ja": "一時的だ",
+                            "de": "vergänglich",
+                            "fr": "éphémère"
+                        },
+                        "description": "Make the bot response visible to you only",
+                        "description_localizations": {
+                            "ja": "ボットの応答を自分だけに見えるようにする",
+                            "de": "Mache die Bot-Antwort nur für dich sichtbar",
+                            "fr": "Faire en sorte que la réponse du bot ne soit visible que pour toi"
+                        }
+                    }
+                ]
+            },
+            {
+                "type": 1,
+                "name": "portrait",
+                "name_localizations": {
+                    "ja": "ポートレート",
+                    "de": "portrait",
+                    "fr": "portrait"
+                },
+                "description": "Get a portrait of a users Final Fantasy XIV character",
+                "description_localizations": {
+                    "ja": "ユーザーのファイナルファンタジーXIVキャラクターのポートレートを取得",
+                    "de": "Erwirb ein Portrait des Final Fantasy XIV-Charakters eines Benutzers",
+                    "fr": "Fais le portrait d'un personnage de Final Fantasy XIV"
+                },
+                "options": [
+                    {
+                        "type": 6,
+                        "name": "user",
+                        "name_localizations": {
+                            "ja": "ユーザ",
+                            "de": "nutzer",
+                            "fr": "utilisateur"
+                        },
+                        "description": "The user to get a character portrait from",
+                        "description_localizations": {
+                            "ja": "キャラクターのポートレートを取得するユーザー",
+                            "de": "Der Benutzer, von dem ein Charakterporträt abgerufen werden soll",
+                            "fr": "L'utilisateur dont le portrait du personnage doit être obtenu"
+                        },
+                        "required": true
+                    },
+                    {
+                        "type": 5,
+                        "name": "ephemeral",
+                        "name_localizations": {
+                            "ja": "一時的だ",
+                            "de": "vergänglich",
+                            "fr": "éphémère"
+                        },
+                        "description": "Make the bot response visible to you only",
+                        "description_localizations": {
+                            "ja": "ボットの応答を自分だけに見えるようにする",
+                            "de": "Mache die Bot-Antwort nur für dich sichtbar",
+                            "fr": "Faire en sorte que la réponse du bot ne soit visible que pour toi"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": 1,
         "name": "universalis",
         "description": "Get Final Fantasy XIV market board listings",
         "description_localizations": {
