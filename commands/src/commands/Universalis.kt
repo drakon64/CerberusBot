@@ -13,9 +13,9 @@ private const val description = "Get Final Fantasy XIV market board listings"
 internal suspend fun universalisCommand() = ApplicationCommand(
     type = 1,
     name = name.commandName(),
-    nameLocalizations = buildLocalizationMap(name, true),
+    nameLocalizations = name.buildLocalizationMap(true),
     description = description,
-    descriptionLocalizations = buildLocalizationMap(description),
+    descriptionLocalizations = description.buildLocalizationMap(),
     options = buildList {
         arrayOf("datacenter", "region").forEach {
             val name = it.commandName()
@@ -25,9 +25,9 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                 ApplicationCommandOption(
                     type = 1,
                     name = name,
-                    nameLocalizations = buildLocalizationMap(it, true),
+                    nameLocalizations = it.buildLocalizationMap(true),
                     description = description,
-                    descriptionLocalizations = buildLocalizationMap(description),
+                    descriptionLocalizations = description.buildLocalizationMap(),
                     options = buildList {
                         var description = "The $it to search in"
 
@@ -35,9 +35,9 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                             ApplicationCommandOption(
                                 type = 3,
                                 name = name,
-                                nameLocalizations = buildLocalizationMap(it, true),
+                                nameLocalizations = it.buildLocalizationMap(true),
                                 description = description,
-                                descriptionLocalizations = buildLocalizationMap(description),
+                                descriptionLocalizations = description.buildLocalizationMap(),
                                 choices = when (it) {
                                     "datacenter" -> buildList {
                                         arrayOf(
@@ -81,9 +81,9 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                             ApplicationCommandOption(
                                 type = 3,
                                 name = name.commandName(),
-                                nameLocalizations = buildLocalizationMap(name, true),
+                                nameLocalizations = name.buildLocalizationMap(true),
                                 description = description,
-                                descriptionLocalizations = buildLocalizationMap(description),
+                                descriptionLocalizations = description.buildLocalizationMap(),
                             )
                         )
 
@@ -94,9 +94,9 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                             ApplicationCommandOption(
                                 type = 5,
                                 name = name.commandName(),
-                                nameLocalizations = buildLocalizationMap(name, true),
+                                nameLocalizations = name.buildLocalizationMap(true),
                                 description = description,
-                                descriptionLocalizations = buildLocalizationMap(description),
+                                descriptionLocalizations = description.buildLocalizationMap(),
                             )
                         )
                         add(ephemeralCommand())

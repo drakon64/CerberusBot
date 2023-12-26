@@ -1,6 +1,10 @@
 package cloud.drakon.dynamisbot
 
+import aws.sdk.kotlin.services.translate.TranslateClient
+import aws.sdk.kotlin.services.translate.model.Formality
+import aws.sdk.kotlin.services.translate.model.TranslateTextRequest
 import cloud.drakon.dynamisbot.commands.universalisCommand
+import cloud.drakon.dynamisbot.lib.discord.Locale
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -54,10 +58,31 @@ internal suspend fun ephemeralCommand(): ApplicationCommandOption {
     return ApplicationCommandOption(
         type = 5,
         name = name,
-        nameLocalizations = buildLocalizationMap(name, true),
+        nameLocalizations = name.buildLocalizationMap(true),
         description = description,
-        descriptionLocalizations = buildLocalizationMap(description),
+        descriptionLocalizations = description.buildLocalizationMap(),
     )
 }
 
 internal fun String.commandName() = this.lowercase().replace(" ", "_")
+
+internal suspend fun String.buildLocalizationMap(isName: Boolean = false) = buildMap {
+    Locale.entries.forEach { locale ->
+        put(locale, TranslateClient.fromEnvironment().use {
+            it.translateText(TranslateTextRequest {
+                sourceLanguageCode = "en"
+                targetLanguageCode = locale.aws
+
+                settings {
+                    formality = Formality.Informal
+                }
+
+                text = this@buildLocalizationMap
+            }).translatedText.let {
+                if (isName) {
+                    it.lowercase().trim().replace(" ", "_")
+                } else it
+            }
+        })
+    }
+}
