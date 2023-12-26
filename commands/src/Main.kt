@@ -3,6 +3,7 @@ package cloud.drakon.dynamisbot
 import aws.sdk.kotlin.services.translate.TranslateClient
 import aws.sdk.kotlin.services.translate.model.Formality
 import aws.sdk.kotlin.services.translate.model.TranslateTextRequest
+import cloud.drakon.dynamisbot.commands.eorzeaDatabaseCommand
 import cloud.drakon.dynamisbot.commands.universalisCommand
 import cloud.drakon.dynamisbot.lib.discord.Locale
 import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
@@ -22,7 +23,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 suspend fun main() {
-    val commands = arrayOf(universalisCommand())
+    val commands = arrayOf(eorzeaDatabaseCommand(), universalisCommand())
 
     File("commands.json").printWriter().use {
         it.println(Json {
