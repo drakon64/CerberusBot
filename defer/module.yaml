@@ -9,4 +9,4 @@ settings:
     languageVersion: 1.9
     serialization: json
   jvm:
-    target: 21
+    target: 17 # https://github.com/johnrengelman/shadow/issues/894
