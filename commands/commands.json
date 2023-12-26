@@ -16,28 +16,28 @@
         "options": [
             {
                 "type": 1,
-                "name": "datacenter",
+                "name": "data_center",
                 "name_localizations": {
                     "ja": "データセンター",
                     "de": "rechenzentrum",
                     "fr": "centre_de_données"
                 },
-                "description": "Get Final Fantasy XIV market board listings for a datacenter",
+                "description": "Get Final Fantasy XIV market board listings for a Data Center",
                 "description_localizations": {
                     "ja": "データセンターのファイナルファンタジーXIVマーケットボードリストを取得",
                     "de": "Hol dir Final Fantasy XIV-Marktplatinenlisten für ein Rechenzentrum",
-                    "fr": "Accéder à la liste des places de marché de Final Fantasy XIV pour un centre de données"
+                    "fr": "Consultez la liste des places de marché de Final Fantasy XIV pour un centre de données"
                 },
                 "options": [
                     {
                         "type": 3,
-                        "name": "datacenter",
+                        "name": "data_center",
                         "name_localizations": {
                             "ja": "データセンター",
                             "de": "rechenzentrum",
                             "fr": "centre_de_données"
                         },
-                        "description": "The datacenter to search in",
+                        "description": "The Data Center to search in",
                         "description_localizations": {
                             "ja": "検索するデータセンター",
                             "de": "Das Rechenzentrum, in dem gesucht werden soll",
@@ -161,11 +161,11 @@
                     "de": "region",
                     "fr": "région"
                 },
-                "description": "Get Final Fantasy XIV market board listings for a region",
+                "description": "Get Final Fantasy XIV market board listings for a Region",
                 "description_localizations": {
                     "ja": "ある地域のファイナルファンタジーXIVのマーケットボードリストを取得",
                     "de": "Hol dir Final Fantasy XIV-Marktplatinenlisten für eine Region",
-                    "fr": "Consultez la liste du market board de Final Fantasy XIV pour une région"
+                    "fr": "Consultez les listes de marché de Final Fantasy XIV pour une région"
                 },
                 "options": [
                     {
@@ -176,7 +176,7 @@
                             "de": "region",
                             "fr": "région"
                         },
-                        "description": "The region to search in",
+                        "description": "The Region to search in",
                         "description_localizations": {
                             "ja": "検索する地域",
                             "de": "Die Region, in der gesucht werden soll",

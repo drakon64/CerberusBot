@@ -17,7 +17,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
     description = description,
     descriptionLocalizations = description.buildLocalizationMap(),
     options = buildList {
-        arrayOf("datacenter", "region").forEach {
+        arrayOf("Data Center", "Region").forEach {
             val name = it.commandName()
             val description = "Get Final Fantasy XIV market board listings for a $it"
 
@@ -39,7 +39,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                                 description = description,
                                 descriptionLocalizations = description.buildLocalizationMap(),
                                 choices = when (it) {
-                                    "datacenter" -> buildList {
+                                    "Data Center" -> buildList {
                                         arrayOf(
                                             "Elemental",
                                             "Gaia",
@@ -58,7 +58,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                                         }
                                     }
 
-                                    "region" -> buildList {
+                                    "Region" -> buildList {
                                         arrayOf("Japan", "Europe", "North America", "Oceania").forEach {
                                             add(
                                                 ApplicationCommandOptionChoiceString(
