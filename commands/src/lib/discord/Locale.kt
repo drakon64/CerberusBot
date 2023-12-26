@@ -7,11 +7,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal enum class Locale(val aws: String) {
     @SerialName("ja")
-    JAPANESE("ja"),
+    Japanese("ja"),
 
     @SerialName("de")
-    GERMAN("de"),
+    German("de"),
 
     @SerialName("fr")
-    FRENCH("fr"),
+    French("fr"),
 }
