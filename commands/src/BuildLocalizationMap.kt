@@ -1,6 +1,7 @@
 package cloud.drakon.dynamisbot
 
 import aws.sdk.kotlin.services.translate.TranslateClient
+import aws.sdk.kotlin.services.translate.model.Formality
 import aws.sdk.kotlin.services.translate.model.TranslateTextRequest
 import cloud.drakon.dynamisbot.lib.discord.Locale
 
@@ -10,6 +11,10 @@ internal suspend fun buildLocalizationMap(translateText: String, isName: Boolean
             it.translateText(TranslateTextRequest {
                 sourceLanguageCode = "en"
                 targetLanguageCode = locale.aws
+
+                settings {
+                    formality = Formality.Informal
+                }
 
                 text = translateText
             }).translatedText.let {
