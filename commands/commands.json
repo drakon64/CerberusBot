@@ -145,11 +145,6 @@
     {
         "type": 1,
         "name": "universalis",
-        "name_localizations": {
-            "ja": "ユニバーサリスだ",
-            "de": "universalis",
-            "fr": "universalis"
-        },
         "description": "Get Final Fantasy XIV market board listings",
         "description_localizations": {
             "ja": "ファイナルファンタジーXIVのマーケットボードリストを取得",

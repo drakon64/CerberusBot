@@ -13,7 +13,6 @@ private const val description = "Get Final Fantasy XIV market board listings"
 internal suspend fun universalisCommand() = ApplicationCommand(
     type = 1,
     name = name.commandName(),
-    nameLocalizations = name.buildLocalizationMap(true),
     description = description,
     descriptionLocalizations = description.buildLocalizationMap(),
     options = buildList {
