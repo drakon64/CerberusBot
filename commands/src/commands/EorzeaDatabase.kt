@@ -80,7 +80,7 @@ internal suspend fun eorzeaDatabaseCommand() = ApplicationCommand(
                     arrayOf("Japanese", "English", "German", "French").forEach {
                         add(
                             ApplicationCommandOptionChoiceString(
-                                name = it.commandName(),
+                                name = it,
                                 nameLocalizations = it.buildLocalizationMap(),
                                 value = it
                             )

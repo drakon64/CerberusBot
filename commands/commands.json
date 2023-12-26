@@ -80,7 +80,7 @@
                 "choices": [
                     {
                         "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
-                        "name": "japanese",
+                        "name": "Japanese",
                         "name_localizations": {
                             "ja": "日本語",
                             "de": "Japanisch",
@@ -90,7 +90,7 @@
                     },
                     {
                         "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
-                        "name": "english",
+                        "name": "English",
                         "name_localizations": {
                             "ja": "英語",
                             "de": "Englisch",
@@ -100,7 +100,7 @@
                     },
                     {
                         "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
-                        "name": "german",
+                        "name": "German",
                         "name_localizations": {
                             "ja": "ドイツ語だ",
                             "de": "Deutsch",
@@ -110,7 +110,7 @@
                     },
                     {
                         "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
-                        "name": "french",
+                        "name": "French",
                         "name_localizations": {
                             "ja": "フランス語",
                             "de": "Französisch",
