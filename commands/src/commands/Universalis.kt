@@ -38,6 +38,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                                 nameLocalizations = it.buildLocalizationMap(true),
                                 description = description,
                                 descriptionLocalizations = description.buildLocalizationMap(),
+                                required = true,
                                 choices = when (it) {
                                     "Data Center" -> buildList {
                                         arrayOf(
@@ -84,6 +85,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                                 nameLocalizations = name.buildLocalizationMap(true),
                                 description = description,
                                 descriptionLocalizations = description.buildLocalizationMap(),
+                                required = true,
                             )
                         )
 
@@ -99,6 +101,7 @@ internal suspend fun universalisCommand() = ApplicationCommand(
                                 descriptionLocalizations = description.buildLocalizationMap(),
                             )
                         )
+
                         add(ephemeralCommand())
                     }
                 )

@@ -119,6 +119,21 @@
                         "value": "French"
                     }
                 ]
+            },
+            {
+                "type": 5,
+                "name": "ephemeral",
+                "name_localizations": {
+                    "ja": "一時的だ",
+                    "de": "kurzlebig",
+                    "fr": "éphémère"
+                },
+                "description": "Make the bot response visible to you only",
+                "description_localizations": {
+                    "ja": "ボットの応答を自分だけに見えるようにする",
+                    "de": "Mache die Bot-Antwort nur für dich sichtbar",
+                    "fr": "Faire en sorte que la réponse du bot ne soit visible que pour toi"
+                }
             }
         ]
     },
@@ -166,6 +181,7 @@
                             "de": "Das Rechenzentrum, in dem gesucht werden soll",
                             "fr": "Le centre de données dans lequel effectuer la recherche"
                         },
+                        "required": true,
                         "choices": [
                             {
                                 "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
@@ -242,7 +258,8 @@
                             "ja": "検索するアイテム",
                             "de": "Der Artikel, nach dem gesucht werden soll",
                             "fr": "L'objet à rechercher"
-                        }
+                        },
+                        "required": true
                     },
                     {
                         "type": 5,
@@ -305,6 +322,7 @@
                             "de": "Die Region, in der gesucht werden soll",
                             "fr": "La région dans laquelle effectuer la recherche"
                         },
+                        "required": true,
                         "choices": [
                             {
                                 "type": "cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString",
@@ -341,7 +359,8 @@
                             "ja": "検索するアイテム",
                             "de": "Der Artikel, nach dem gesucht werden soll",
                             "fr": "L'objet à rechercher"
-                        }
+                        },
+                        "required": true
                     },
                     {
                         "type": 5,
