@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal class ApplicationCommandData(
     val name: String,
-    val options: Array<ApplicationCommandInteractionDataOption>,
+    val options: Array<ApplicationCommandInteractionDataOption>? = null,
 )

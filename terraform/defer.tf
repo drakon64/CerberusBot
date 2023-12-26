@@ -26,7 +26,7 @@ resource "aws_lambda_function" "defer" {
   }
 
   source_code_hash = filebase64sha256(var.defer_filename)
-  timeout = 3
+  timeout          = 3
 }
 
 resource "aws_lambda_permission" "api_gateway" {

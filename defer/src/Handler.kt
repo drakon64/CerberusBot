@@ -2,13 +2,12 @@
 
 package cloud.drakon.dynamisbot
 
+import cloud.drakon.dynamisbot.lib.discord.interaction.Interaction
 import cloud.drakon.dynamisbot.lib.discord.interaction.InteractionResponse
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import java.math.BigInteger
 import java.security.KeyFactory
 import java.security.Signature
@@ -16,6 +15,8 @@ import java.security.spec.EdECPoint
 import java.security.spec.EdECPublicKeySpec
 import java.security.spec.NamedParameterSpec
 import kotlin.experimental.and
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
     private val publicKey = System.getenv("PUBLIC_KEY")
@@ -37,15 +38,26 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
                 input.headers["x-signature-ed25519"]!!.hexToByteArray(),
             )
         ) {
-            response.body = Json.encodeToString(InteractionResponse(type = 1))
+            when (Json {
+                ignoreUnknownKeys = true
+                isLenient = true
+            }.decodeFromString<Interaction>(input.body).type) {
+                1.toByte() -> {
+                    context.logger.log("Pong")
+                    response.body = Json.encodeToString(InteractionResponse(type = 1))
+                }
+
+                else -> {
+                    context.logger.log("Deferring channel message")
+                    response.body = Json.encodeToString(InteractionResponse(type = 5))
+                }
+            }
+
             response.statusCode = 200
+            response.headers = mapOf("Content-Type" to "application/json")
         } else {
-            val body = "invalid request signature"
-
+            context.logger.log("Invalid request signature")
             response.statusCode = 401
-            response.body = body
-
-            context.logger.log(body)
         }
 
         return response
@@ -61,7 +73,8 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
                         NamedParameterSpec.ED25519,
                         EdECPoint(
                             publicKey[publicKey.size - 1].toInt().and(255).shr(7) == 1,
-                            BigInteger(1, publicKey))
+                            BigInteger(1, publicKey)
+                        )
                     )
                 )
             )
