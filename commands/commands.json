@@ -130,7 +130,7 @@
                 "name": "ephemeral",
                 "name_localizations": {
                     "ja": "一時的だ",
-                    "de": "kurzlebig",
+                    "de": "vergänglich",
                     "fr": "éphémère"
                 },
                 "description": "Make the bot response visible to you only",
@@ -281,7 +281,7 @@
                         "name": "ephemeral",
                         "name_localizations": {
                             "ja": "一時的だ",
-                            "de": "kurzlebig",
+                            "de": "vergänglich",
                             "fr": "éphémère"
                         },
                         "description": "Make the bot response visible to you only",
@@ -382,7 +382,7 @@
                         "name": "ephemeral",
                         "name_localizations": {
                             "ja": "一時的だ",
-                            "de": "kurzlebig",
+                            "de": "vergänglich",
                             "fr": "éphémère"
                         },
                         "description": "Make the bot response visible to you only",
