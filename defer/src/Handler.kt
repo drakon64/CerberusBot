@@ -32,11 +32,24 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
     ): APIGatewayV2HTTPResponse {
         val response = APIGatewayV2HTTPResponse()
 
-        if (validateRequest(
-                input.headers["x-signature-timestamp"]!!,
-                input.body,
-                input.headers["x-signature-ed25519"]!!.hexToByteArray(),
-            )
+        // https://stackoverflow.com/questions/65780235/ed25519-in-jdk-15-parse-public-key-from-byte-array-and-verify
+        // https://github.com/myosyn/DiscordInteraKTions/blob/cd22595534f58fa742ad410545cc6c85739df958/requests-verifier/src/main/kotlin/net/perfectdreams/discordinteraktions/verifier/InteractionRequestVerifier.kt
+        if (
+            Signature.getInstance("Ed25519").apply {
+                initVerify(
+                    KeyFactory.getInstance("Ed25519").generatePublic(
+                        EdECPublicKeySpec(
+                            NamedParameterSpec.ED25519,
+                            EdECPoint(
+                                publicKey[publicKey.size - 1].toInt().and(255).shr(7) == 1,
+                                BigInteger(1, publicKey)
+                            )
+                        )
+                    )
+                )
+
+                update((input.headers["x-signature-timestamp"] + input.body).toByteArray())
+            }.verify(input.headers["x-signature-ed25519"]!!.hexToByteArray())
         ) {
             when (Json {
                 ignoreUnknownKeys = true
@@ -62,22 +75,4 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
 
         return response
     }
-
-    // https://stackoverflow.com/questions/65780235/ed25519-in-jdk-15-parse-public-key-from-byte-array-and-verify
-    // https://github.com/myosyn/DiscordInteraKTions/blob/cd22595534f58fa742ad410545cc6c85739df958/requests-verifier/src/main/kotlin/net/perfectdreams/discordinteraktions/verifier/InteractionRequestVerifier.kt
-    private fun validateRequest(timestamp: String, body: String, signature: ByteArray) =
-        Signature.getInstance("Ed25519").apply {
-            initVerify(
-                KeyFactory.getInstance("Ed25519").generatePublic(
-                    EdECPublicKeySpec(
-                        NamedParameterSpec.ED25519,
-                        EdECPoint(
-                            publicKey[publicKey.size - 1].toInt().and(255).shr(7) == 1,
-                            BigInteger(1, publicKey)
-                        )
-                    )
-                )
-            )
-            update((timestamp + body).toByteArray())
-        }.verify(signature)
 }
