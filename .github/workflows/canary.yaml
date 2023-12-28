@@ -1,0 +1,27 @@
+name: Build and deploy (Canary)
+on:
+  push:
+    branches:
+      - canary
+    paths:
+      - terraform/*.tf
+      - defer/src/**.kt
+      - interact/src/**.kt
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TF_TOKEN_app_terraform_io: "${secrets.CANARY_TERRAFORM_CLOUD_TOKEN}"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+          cache: 'gradle'
+      - run: ./gradlew :defer:shadowJar :interact:shadowJar
+      - run: apt -y install terraform
+      - run: terraform init
+      - run: terraform apply
