@@ -5,6 +5,8 @@ on:
       - canary
     paths:
       - commands/src/commands/**.kt
+      - commands/src/commands/build.gradle.kts
+      - commands/src/commands/module.yaml
   workflow_dispatch:
 
 jobs:
@@ -18,7 +20,7 @@ jobs:
           java-version: '21'
           cache: 'gradle'
       - shell: bash
-        run: ./gradlew :commands:build
+        run: ./gradlew :commands:shadowJar
       - shell: bash
         env:
           APPLICATION_ID: ${{ secrets.CANARY_APPLICATION_ID }}
