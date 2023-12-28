@@ -23,8 +23,15 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
         .hexToByteArray()
         .apply {
             this[size - 1] = this[size - 1].and(127)
-        }
-        .reversedArray()
+        }.reversedArray()
+
+    private val xOdd = publicKey[publicKey.size - 1].toInt().and(255).shr(7) == 1
+    private val y = BigInteger(1, publicKey)
+
+    private val json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }
 
     override fun handleRequest(
         input: APIGatewayV2HTTPEvent,
@@ -40,10 +47,7 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
                     KeyFactory.getInstance("Ed25519").generatePublic(
                         EdECPublicKeySpec(
                             NamedParameterSpec.ED25519,
-                            EdECPoint(
-                                publicKey[publicKey.size - 1].toInt().and(255).shr(7) == 1,
-                                BigInteger(1, publicKey)
-                            )
+                            EdECPoint(xOdd, y)
                         )
                     )
                 )
@@ -51,10 +55,7 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
                 update((input.headers["x-signature-timestamp"] + input.body).toByteArray())
             }.verify(input.headers["x-signature-ed25519"]!!.hexToByteArray())
         ) {
-            when (Json {
-                ignoreUnknownKeys = true
-                isLenient = true
-            }.decodeFromString<Interaction>(input.body).type) {
+            when (json.decodeFromString<Interaction>(input.body).type) {
                 1.toByte() -> {
                     context.logger.log("Pong")
                     response.body = Json.encodeToString(InteractionResponse(type = 1))
