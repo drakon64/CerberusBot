@@ -6,6 +6,7 @@ dependencies:
   - io.ktor:ktor-client-content-negotiation:2.3.7
   - io.ktor:ktor-serialization-kotlinx-json:2.3.7
   - aws.sdk.kotlin:translate:1.0.23
+  - ../discord
 
 settings:
   kotlin:

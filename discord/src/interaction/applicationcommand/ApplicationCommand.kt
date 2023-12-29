@@ -1,12 +1,12 @@
-package cloud.drakon.dynamisbot.lib.discord.applicationcommand
+package cloud.drakon.dynamisbot.discord.interaction.applicationcommand
 
-import cloud.drakon.dynamisbot.lib.discord.Locale
+import cloud.drakon.dynamisbot.discord.Locale
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 // https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure
 @Serializable
-internal class ApplicationCommand(
+class ApplicationCommand(
     val type: Byte? = null,
     val name: String,
     @SerialName("name_localizations") val nameLocalizations: Map<Locale, String>? = null,

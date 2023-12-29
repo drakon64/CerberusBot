@@ -2,8 +2,8 @@
 
 package cloud.drakon.dynamisbot
 
-import cloud.drakon.dynamisbot.lib.discord.interaction.Interaction
-import cloud.drakon.dynamisbot.lib.discord.interaction.InteractionResponse
+import cloud.drakon.dynamisbot.discord.interaction.Interaction
+import cloud.drakon.dynamisbot.discord.interaction.InteractionResponse
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent

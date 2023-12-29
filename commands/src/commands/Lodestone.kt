@@ -2,9 +2,9 @@ package cloud.drakon.dynamisbot.commands
 
 import cloud.drakon.dynamisbot.buildLocalizationMap
 import cloud.drakon.dynamisbot.commandName
-import cloud.drakon.dynamisbot.lib.discord.Locale
-import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommand
-import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
+import cloud.drakon.dynamisbot.discord.Locale
+import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommand
+import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommandOption
 
 internal suspend fun lodestoneCommand() = ApplicationCommand(
     type = 1,

@@ -1,11 +1,11 @@
-package cloud.drakon.dynamisbot.lib.discord
+package cloud.drakon.dynamisbot.discord
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 // https://discord.com/developers/docs/reference#locales
 @Serializable
-internal enum class Locale(val aws: String) {
+enum class Locale(val aws: String) {
     @SerialName("ja")
     Japanese("ja"),
 

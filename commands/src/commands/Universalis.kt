@@ -2,9 +2,9 @@ package cloud.drakon.dynamisbot.commands
 
 import cloud.drakon.dynamisbot.buildLocalizationMap
 import cloud.drakon.dynamisbot.commandName
-import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommand
-import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOption
-import cloud.drakon.dynamisbot.lib.discord.applicationcommand.ApplicationCommandOptionChoiceString
+import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommand
+import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommandOption
+import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommandOptionChoiceString
 
 private var name = "Universalis"
 private var description = "Get Final Fantasy XIV market board listings"
