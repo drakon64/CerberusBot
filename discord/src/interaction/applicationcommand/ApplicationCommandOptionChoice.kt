@@ -14,7 +14,7 @@ sealed interface ApplicationCommandOptionChoice {
 }
 
 @Serializable
-class ApplicationCommandOptionChoiceString(
+data class ApplicationCommandOptionChoiceString(
     override val name: String,
     @SerialName("name_localizations") override val nameLocalizations: Map<Locale, String>? = null,
     val value: String, // TODO: Should be a Union of String, Int, Double, and Boolean

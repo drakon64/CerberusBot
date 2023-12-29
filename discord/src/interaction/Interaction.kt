@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 // https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure
 @Serializable
-class Interaction(
+data class Interaction(
     @SerialName("application_id") val applicationId: Long,
     val type: Byte,
     val data: ApplicationCommandData? = null,

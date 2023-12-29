@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 // https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure
 @Serializable
-class ApplicationCommand(
+data class ApplicationCommand(
     val type: Byte? = null,
     val name: String,
     @SerialName("name_localizations") val nameLocalizations: Map<Locale, String>? = null,
