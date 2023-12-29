@@ -19,7 +19,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
-    private val publicKey = System.getenv("PUBLIC_KEY")
+    private val publicKey = System.getenv("DISCORD_PUBLIC_KEY")
         .hexToByteArray()
         .apply {
             this[size - 1] = this[size - 1].and(127)

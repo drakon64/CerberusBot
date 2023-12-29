@@ -11,7 +11,7 @@ resource "aws_lambda_function" "defer" {
 
   environment {
     variables = {
-      PUBLIC_KEY = var.discord_public_key
+      DISCORD_PUBLIC_KEY = var.discord_public_key
     }
   }
 
