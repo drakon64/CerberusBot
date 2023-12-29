@@ -3,6 +3,7 @@ product: jvm/app
 dependencies:
   - com.amazonaws:aws-lambda-java-core:1.2.3
   - com.amazonaws:aws-lambda-java-events:3.11.4
+  - aws.sdk.kotlin:lambda:1.0.26
   - ../discord
 
 settings:
