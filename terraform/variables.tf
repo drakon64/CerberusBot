@@ -10,7 +10,6 @@ variable "aws_secret_access_key" {
 
 variable "discord_public_key" {
   type = string
-  sensitive = true
 }
 
 variable "defer_filename" {

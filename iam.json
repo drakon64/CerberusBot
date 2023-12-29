@@ -1,0 +1,56 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": [
+        "iam:AttachRolePolicy",
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:DetachRolePolicy",
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies",
+        "iam:ListInstanceProfilesForRole",
+        "iam:PassRole"
+      ],
+      "Resource": "arn:aws:iam::*:role/DynamisBot"
+    },
+    {
+      "Sid": "VisualEditor1",
+      "Effect": "Allow",
+      "Action": "iam:ListRolePolicies",
+      "Resource": "*"
+    },
+    {
+      "Sid": "VisualEditor2",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:AddPermission",
+        "lambda:CreateFunction",
+        "lambda:DeleteFunction",
+        "lambda:GetFunction",
+        "lambda:GetFunctionCodeSigningConfig",
+        "lambda:GetPolicy",
+        "lambda:ListVersionsByFunction",
+        "lambda:RemovePermission"
+      ],
+      "Resource": "arn:aws:lambda:eu-west-2:*:function:DynamisBot_defer"
+    },
+    {
+      "Sid": "VisualEditor3",
+      "Effect": "Allow",
+      "Action": "apigateway:POST",
+      "Resource": "arn:aws:apigateway:eu-west-2::/apis"
+    },
+    {
+      "Sid": "VisualEditor4",
+      "Effect": "Allow",
+      "Action": [
+        "apigateway:GET",
+        "apigateway:DELETE"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

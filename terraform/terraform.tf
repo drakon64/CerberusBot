@@ -1,6 +1,7 @@
 terraform {
   cloud {
     organization = "drakon"
+
     workspaces {
       name = "DynamisBot-Canary"
     }
