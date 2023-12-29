@@ -1,3 +1,4 @@
 **
 !defer/build/libs/defer-SNAPSHOT-1.0-all.jar
+!interact/build/libs/interact-SNAPSHOT-1.0-all.jar
 !terraform/*.tf

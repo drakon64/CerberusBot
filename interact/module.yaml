@@ -2,10 +2,11 @@ product: jvm/app
 
 dependencies:
   - com.amazonaws:aws-lambda-java-core:1.2.3
+  - ../discord
 
 settings:
   kotlin:
     languageVersion: 1.9
     serialization: json
   jvm:
-    target: 21
+    target: 17
