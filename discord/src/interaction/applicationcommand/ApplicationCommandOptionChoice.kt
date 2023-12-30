@@ -1,6 +1,6 @@
 package cloud.drakon.dynamisbot.discord.interaction.applicationcommand
 
-import cloud.drakon.dynamisbot.discord.Locale
+import cloud.drakon.ktdiscord.Locale
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

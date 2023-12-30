@@ -2,7 +2,7 @@ package cloud.drakon.dynamisbot.commands
 
 import cloud.drakon.dynamisbot.buildLocalizationMap
 import cloud.drakon.dynamisbot.commandName
-import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommandOption
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandOption
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 

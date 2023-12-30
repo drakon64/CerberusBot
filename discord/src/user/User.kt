@@ -1,4 +1,4 @@
-package cloud.drakon.dynamisbot.discord.user
+package cloud.drakon.ktdiscord.user
 
 import kotlinx.serialization.Serializable
 

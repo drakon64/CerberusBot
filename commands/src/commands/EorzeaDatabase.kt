@@ -2,10 +2,10 @@ package cloud.drakon.dynamisbot.commands
 
 import cloud.drakon.dynamisbot.buildLocalizationMap
 import cloud.drakon.dynamisbot.commandName
-import cloud.drakon.dynamisbot.discord.Locale
-import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommand
-import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommandOption
 import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommandOptionChoiceString
+import cloud.drakon.ktdiscord.Locale
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommand
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandOption
 
 private var description = "Search the Eorzea Database"
 

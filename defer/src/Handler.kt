@@ -5,8 +5,8 @@ package cloud.drakon.dynamisbot
 import aws.sdk.kotlin.services.lambda.LambdaClient
 import aws.sdk.kotlin.services.lambda.model.InvocationType
 import aws.sdk.kotlin.services.lambda.model.InvokeRequest
-import cloud.drakon.dynamisbot.discord.interaction.Interaction
-import cloud.drakon.dynamisbot.discord.interaction.InteractionResponse
+import cloud.drakon.ktdiscord.interaction.Interaction
+import cloud.drakon.ktdiscord.interaction.InteractionResponse
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent

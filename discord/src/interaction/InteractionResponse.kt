@@ -1,4 +1,4 @@
-package cloud.drakon.dynamisbot.discord.interaction
+package cloud.drakon.ktdiscord.interaction
 
 import kotlinx.serialization.Serializable
 

@@ -1,6 +1,6 @@
-package cloud.drakon.dynamisbot.discord.guild
+package cloud.drakon.ktdiscord.guild
 
-import cloud.drakon.dynamisbot.discord.user.User
+import cloud.drakon.ktdiscord.user.User
 import kotlinx.serialization.Serializable
 
 @JvmInline

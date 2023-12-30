@@ -1,9 +1,9 @@
-package cloud.drakon.dynamisbot.discord.interaction
+package cloud.drakon.ktdiscord.interaction
 
-import cloud.drakon.dynamisbot.discord.Locale
-import cloud.drakon.dynamisbot.discord.guild.Member
-import cloud.drakon.dynamisbot.discord.interaction.applicationcommand.ApplicationCommandData
-import cloud.drakon.dynamisbot.discord.user.User
+import cloud.drakon.ktdiscord.guild.Member
+import cloud.drakon.ktdiscord.interaction.applicationcommand.ApplicationCommandData
+import cloud.drakon.ktdiscord.Locale
+import cloud.drakon.ktdiscord.user.User
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

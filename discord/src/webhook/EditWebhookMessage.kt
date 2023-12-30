@@ -1,4 +1,4 @@
-package cloud.drakon.dynamisbot.discord.webhook
+package cloud.drakon.ktdiscord.webhook
 
 import kotlinx.serialization.Serializable
 
