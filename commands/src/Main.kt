@@ -1,7 +1,6 @@
 package cloud.drakon.dynamisbot
 
 import cloud.drakon.dynamisbot.commands.eorzeaDatabaseCommand
-import cloud.drakon.dynamisbot.commands.lodestoneCommand
 import cloud.drakon.dynamisbot.commands.universalisCommand
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -19,7 +18,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 suspend fun main() {
-    val commands = arrayOf(eorzeaDatabaseCommand(), lodestoneCommand(), universalisCommand())
+    val commands = arrayOf(eorzeaDatabaseCommand(), universalisCommand())
 
     File("commands.json").printWriter().use {
         it.println(Json {
