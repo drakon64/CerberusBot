@@ -18,6 +18,7 @@ import java.security.spec.EdECPoint
 import java.security.spec.EdECPublicKeySpec
 import java.security.spec.NamedParameterSpec
 import kotlin.experimental.and
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -70,14 +71,16 @@ class Handler : RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> 
                 }
 
                 else -> {
-                    lambdaClient.invoke(InvokeRequest {
-                        functionName = "DynamisBot_interact"
-                        invocationType = InvocationType.Event
-                        payload = input.body.toByteArray()
-                    })
+                    launch {
+                        lambdaClient.invoke(InvokeRequest {
+                            functionName = "DynamisBot_interact"
+                            invocationType = InvocationType.Event
+                            payload = input.body.toByteArray()
+                        })
+                    }
 
                     context.logger.log("Deferring channel message")
-                    response.body = Json.encodeToString(InteractionResponse(type = 5))
+                    response.body = json.encodeToString(InteractionResponse(type = 5))
                 }
             }
 
